@@ -1,0 +1,70 @@
+# BMAD 项目配置 - MyPersonalWebsite
+# 自动化开发配置文件
+
+project:
+  name: "MyPersonalWebsite"
+  type: "personal-portfolio"
+  version: "1.0.0"
+  root: "{project-root}"
+  
+# 智能开发配置
+automation:
+  enabled: true
+  language: "中文"
+  auto_commit: false
+  auto_deploy: false
+  
+# 输出路径配置
+paths:
+  docs: "{project-root}/docs"
+  stories: "{project-root}/docs/stories"
+  output: "{project-root}/docs"
+  logs: "{project-root}/logs"
+  
+# Agent 配置
+agents:
+  primary:
+    - "bmad:analyst"      # 需求分析
+    - "bmad:architect"    # 架构设计
+    - "bmad:ux-expert"    # 用户体验
+    - "bmad:dev"          # 开发实现
+    - "bmad:tea"          # 测试验证
+  
+  specialized:
+    - "frontend-design-claude2"  # 前端设计
+    - "javascript-pro"          # JavaScript 专家
+    - "frontend-tester"         # 前端测试
+
+# 工作流配置
+workflows:
+  default: "frontend-project-development"
+  available:
+    - "brainstorm-project"
+    - "product-brief"
+    - "prd"
+    - "tech-spec"
+    - "dev-story"
+    - "testarch-framework"
+
+# 技术栈约束
+tech_stack:
+  framework: "Vue 3"
+  language: "TypeScript"
+  build_tool: "Vite"
+  state_management: "Pinia"
+  router: "Vue Router 4"
+  styling: "Tailwind CSS"
+  
+# 质量标准
+quality:
+  eslint: true
+  prettier: true
+  test_coverage: 80
+  lighthouse_score: 90
+  
+# 自动化规则
+automation_rules:
+  - "需求分析 → 架构设计 → UX 设计 → 代码实现 → 测试验证"
+  - "每个阶段必须生成文档"
+  - "代码变更必须通过 Lint 检查"
+  - "前端变更必须通过 frontend-tester 验证"
