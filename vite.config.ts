@@ -4,8 +4,8 @@ import { resolve } from 'path'
 import viteCompression from 'vite-plugin-compression'
 
 export default defineConfig({
-  // Gitee Pages base 路径
-  base: '/my-personal-website/',
+  // Vercel base 路径（根路径）
+  base: '/',
 
   plugins: [
     vue(),
