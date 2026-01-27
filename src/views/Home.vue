@@ -1,15 +1,15 @@
 <template>
   <div class="pt-16">
-    <PixelHeroSection />
-    <PixelTechStack />
-    <PixelFeaturedProjects />
-    <PixelCTASection />
+    <HeroSection />
+    <TechStack />
+    <FeaturedProjects />
+    <CTASection />
   </div>
 </template>
 
 <script setup lang="ts">
-import PixelHeroSection from '@/components/home/PixelHeroSection.vue'
-import PixelTechStack from '@/components/home/PixelTechStack.vue'
-import PixelFeaturedProjects from '@/components/home/PixelFeaturedProjects.vue'
-import PixelCTASection from '@/components/home/PixelCTASection.vue'
+import HeroSection from '@/components/home/HeroSection.vue'
+import TechStack from '@/components/home/TechStack.vue'
+import FeaturedProjects from '@/components/home/FeaturedProjects.vue'
+import CTASection from '@/components/home/CTASection.vue'
 </script>
