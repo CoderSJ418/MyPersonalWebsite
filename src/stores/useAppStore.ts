@@ -1,6 +1,32 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import type { Theme, Language } from '@/types/app'
+
+/**
+ * 节流函数 - 优化高频事件处理
+ */
+function throttle<T extends (...args: any[]) => any>(fn: T, delay: number): T {
+  let lastCall = 0
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+  return ((...args: Parameters<T>) => {
+    const now = Date.now()
+
+    if (now - lastCall >= delay) {
+      lastCall = now
+      fn(...args)
+    } else if (!timeoutId) {
+      timeoutId = setTimeout(
+        () => {
+          lastCall = Date.now()
+          timeoutId = null
+          fn(...args)
+        },
+        delay - (now - lastCall)
+      )
+    }
+  }) as T
+}
 
 export const useAppStore = defineStore('app', () => {
   const theme = ref<Theme>('light')
@@ -43,12 +69,20 @@ export const useAppStore = defineStore('app', () => {
     menuOpen.value = false
   }
 
-  const handleScroll = () => {
+  // 使用节流函数优化 scroll 事件处理
+  const throttledHandleScroll = throttle(() => {
     scrollToTop.value = window.scrollY > 500
-  }
+  }, 100) // 100ms 节流间隔
 
   initTheme()
-  window.addEventListener('scroll', handleScroll)
+
+  // 添加事件监听器
+  window.addEventListener('scroll', throttledHandleScroll, { passive: true })
+
+  // 清理事件监听器，防止内存泄漏
+  onUnmounted(() => {
+    window.removeEventListener('scroll', throttledHandleScroll)
+  })
 
   return {
     theme,
@@ -60,7 +94,6 @@ export const useAppStore = defineStore('app', () => {
     toggleTheme,
     setLoading,
     toggleMenu,
-    closeMenu,
-    handleScroll
+    closeMenu
   }
 })

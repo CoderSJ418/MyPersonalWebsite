@@ -156,10 +156,7 @@ export function useTouchGestures(
 }
 
 // 下拉刷新 Hook
-export function usePullToRefresh(
-  onRefresh: () => Promise<void>,
-  threshold = 80
-) {
+export function usePullToRefresh(onRefresh: () => Promise<void>, threshold = 80) {
   const isPulling = ref(false)
   const pullDistance = ref(0)
   const isRefreshing = ref(false)

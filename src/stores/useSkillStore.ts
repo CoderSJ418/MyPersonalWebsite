@@ -11,7 +11,7 @@ export const useSkillStore = defineStore('skill', () => {
   const skillCategories = computed<SkillCategory[]>(() => {
     const categories = new Map<string, Skill[]>()
 
-    skills.value.forEach(skill => {
+    skills.value.forEach((skill) => {
       if (!categories.has(skill.category)) {
         categories.set(skill.category, [])
       }
@@ -25,7 +25,7 @@ export const useSkillStore = defineStore('skill', () => {
   })
 
   const skillRadarData = computed<SkillRadarData[]>(() => {
-    return skillCategories.value.map(category => ({
+    return skillCategories.value.map((category) => ({
       name: category.name,
       value: Math.round(
         category.skills.reduce((sum, skill) => sum + skill.level, 0) / category.skills.length
@@ -34,14 +34,14 @@ export const useSkillStore = defineStore('skill', () => {
   })
 
   const allCategories = computed(() => {
-    return [...new Set(skills.value.map(skill => skill.category))]
+    return [...new Set(skills.value.map((skill) => skill.category))]
   })
 
   const loadSkills = async () => {
     try {
       loading.value = true
       error.value = null
-      await new Promise(resolve => setTimeout(resolve, 300))
+      await new Promise((resolve) => setTimeout(resolve, 300))
       skills.value = skillsData
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to load skills'
@@ -52,11 +52,11 @@ export const useSkillStore = defineStore('skill', () => {
   }
 
   const getSkillsByCategory = (category: string) => {
-    return skills.value.filter(skill => skill.category === category)
+    return skills.value.filter((skill) => skill.category === category)
   }
 
   const getSkillById = (id: string) => {
-    return skills.value.find(skill => skill.id === id)
+    return skills.value.find((skill) => skill.id === id)
   }
 
   return {

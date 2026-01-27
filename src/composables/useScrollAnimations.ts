@@ -84,7 +84,7 @@ export function useScrollAnimations() {
       duration = 0.8,
       delay = 0,
       ease = 'power3.out',
-      once = true,
+      once = true
     } = config
 
     let fromProps: gsap.TweenVars = {}
@@ -133,8 +133,8 @@ export function useScrollAnimations() {
         end,
         scrub,
         toggleActions,
-        once,
-      },
+        once
+      }
     })
 
     const trigger = tween.scrollTrigger
@@ -161,7 +161,7 @@ export function useScrollAnimations() {
     elements.forEach((element, index) => {
       const tween = createScrollAnimation(element, type, {
         ...config,
-        delay: (config.delay || 0) + index * 0.1,
+        delay: (config.delay || 0) + index * 0.1
       })
       if (tween) tweens.push(tween)
     })
@@ -172,17 +172,10 @@ export function useScrollAnimations() {
   /**
    * 视差滚动效果
    */
-  const createParallax = (
-    element: Element | string,
-    config: ParallaxConfig = {}
-  ) => {
+  const createParallax = (element: Element | string, config: ParallaxConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      speed = 0.5,
-      start = 'top bottom',
-      end = 'bottom top',
-    } = config
+    const { speed = 0.5, start = 'top bottom', end = 'bottom top' } = config
 
     const tween = gsap.to(element, {
       y: () => window.innerHeight * speed,
@@ -191,8 +184,8 @@ export function useScrollAnimations() {
         trigger: config.trigger || element,
         start,
         end,
-        scrub: true,
-      },
+        scrub: true
+      }
     })
 
     const trigger = tween.scrollTrigger
@@ -206,9 +199,7 @@ export function useScrollAnimations() {
   /**
    * 创建滚动进度指示器
    */
-  const createScrollProgressIndicator = (
-    element: Element | string
-  ) => {
+  const createScrollProgressIndicator = (element: Element | string) => {
     if (prefersReducedMotion()) return null
 
     const tween = gsap.to(element, {
@@ -221,8 +212,8 @@ export function useScrollAnimations() {
         scrub: 0.3,
         onUpdate: (self) => {
           scrollProgress.value = self.progress
-        },
-      },
+        }
+      }
     })
 
     const trigger = tween.scrollTrigger
@@ -245,7 +236,7 @@ export function useScrollAnimations() {
       root: null,
       rootMargin: '0px',
       threshold: 0.1,
-      ...options,
+      ...options
     }
 
     const observer = new IntersectionObserver(callback, defaultOptions)
@@ -260,10 +251,7 @@ export function useScrollAnimations() {
   /**
    * 添加动画类名（使用 Intersection Observer）
    */
-  const animateOnScroll = (
-    selector: string,
-    animationClass: string = 'animate-in'
-  ) => {
+  const animateOnScroll = (selector: string, animationClass: string = 'animate-in') => {
     const observer = observeElements(
       selector,
       (entries) => {
@@ -282,14 +270,8 @@ export function useScrollAnimations() {
   /**
    * 平滑滚动到元素
    */
-  const scrollToElement = (
-    element: Element | string,
-    offset: number = 0,
-    duration: number = 1
-  ) => {
-    const target = typeof element === 'string' 
-      ? document.querySelector(element) 
-      : element
+  const scrollToElement = (element: Element | string, offset: number = 0, duration: number = 1) => {
+    const target = typeof element === 'string' ? document.querySelector(element) : element
 
     if (!target) return
 
@@ -298,7 +280,7 @@ export function useScrollAnimations() {
     gsap.to(window, {
       scrollTo: targetPosition,
       duration,
-      ease: 'power3.inOut',
+      ease: 'power3.inOut'
     })
   }
 
@@ -309,7 +291,7 @@ export function useScrollAnimations() {
     gsap.to(window, {
       scrollTo: 0,
       duration,
-      ease: 'power3.inOut',
+      ease: 'power3.inOut'
     })
   }
 
@@ -364,6 +346,6 @@ export function useScrollAnimations() {
     scrollToElement,
     scrollToTop,
     clearScrollTriggers,
-    prefersReducedMotion,
+    prefersReducedMotion
   }
 }

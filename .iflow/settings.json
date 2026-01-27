@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "auth": "Bearer ${GITHUB_TOKEN}",
+      "enabled": true
+    },
+    "filesystem": {
+      "command": "npx -y modelcontextprotocol/server-filesystem",
+      "allow": ["E:\\work\\AI"],
+      "enabled": true
+    },
+    "figma": {
+      "command": "npx -y modelcontextprotocol/server-figma",
+      "auth": "FIGMA_ACCESS_TOKEN",
+      "enabled": true
+    }
+  },
+  "workflows": {
+    "bmad-analyst": {
+      "description": "分析师 - 需求分析和问题诊断",
+      "type": "general-purpose",
+      "prompt": "你是一个专业的 BA（业务分析师）。请帮我分析需求、梳理问题、制定解决方案。"
+    },
+    "bmad-architect": {
+      "description": "架构师 - 系统架构设计",
+      "type": "general-purpose",
+      "prompt": "你是一个资深架构师。请帮我设计系统架构、技术选型、模块划分。"
+    },
+    "bmad-dev": {
+      "description": "开发者 - 代码实现",
+      "type": "general-purpose",
+      "prompt": "你是一个全栈开发者。请帮我实现功能、编写代码、解决技术问题。"
+    },
+    "bmad-ux-expert": {
+      "description": "UX 专家 - 用户体验设计",
+      "type": "general-purpose",
+      "prompt": "你是一个 UX 专家。请帮我设计用户界面、用户体验、交互流程。"
+    },
+    "bmad-pm": {
+      "description": "产品经理 - 产品管理",
+      "type": "general-purpose",
+      "prompt": "你是一个产品经理。请帮我管理产品需求、优先级、发布计划。"
+    },
+    "bmad-tea": {
+      "description": "技术架构师 - 技术架构",
+      "type": "general-purpose",
+      "prompt": "你是一个技术架构师。请帮我设计技术架构、系统设计、技术方案。"
+    }
+  }
+}

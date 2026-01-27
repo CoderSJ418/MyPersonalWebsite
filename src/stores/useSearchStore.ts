@@ -5,7 +5,12 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
-import type { SearchState, SearchResults, SearchHistoryItem, SearchResultItem } from '@/types/search'
+import type {
+  SearchState,
+  SearchResults,
+  SearchHistoryItem,
+  SearchResultItem
+} from '@/types/search'
 import { globalSearch, getSearchResultsTotal, flattenSearchResults, debounce } from '@/utils/search'
 
 export const useSearchStore = defineStore('search', () => {
@@ -48,7 +53,7 @@ export const useSearchStore = defineStore('search', () => {
     if (!searchQuery.trim()) return
 
     // 移除已存在的相同查询
-    history.value = history.value.filter(item => item.query !== searchQuery)
+    history.value = history.value.filter((item) => item.query !== searchQuery)
 
     // 添加到开头
     history.value.unshift({
@@ -88,39 +93,43 @@ export const useSearchStore = defineStore('search', () => {
   }
 
   // 执行搜索
-  const performSearch = debounce((searchQuery: string, projects: any[], skills: any[], posts: any[]) => {
-    if (!searchQuery.trim()) {
-      results.value = {
-        projects: [],
-        skills: [],
-        blogs: [],
-        total: 0
-      }
-      return
-    }
-
-    loading.value = true
-
-    // 模拟异步搜索（实际项目中可能是API调用）
-    setTimeout(() => {
-      results.value = globalSearch(projects, skills, posts, searchQuery)
-      results.value.total = getSearchResultsTotal(results.value)
-
-      // 添加到搜索历史
-      if (results.value.total > 0) {
-        addToHistory(searchQuery)
+  const performSearch = debounce(
+    (searchQuery: string, projects: any[], skills: any[], posts: any[]) => {
+      if (!searchQuery.trim()) {
+        results.value = {
+          projects: [],
+          skills: [],
+          blogs: [],
+          total: 0
+        }
+        return
       }
 
-      loading.value = false
-    }, 100)
-  }, 300)
+      loading.value = true
+
+      // 模拟异步搜索（实际项目中可能是API调用）
+      setTimeout(() => {
+        results.value = globalSearch(projects, skills, posts, searchQuery)
+        results.value.total = getSearchResultsTotal(results.value)
+
+        // 添加到搜索历史
+        if (results.value.total > 0) {
+          addToHistory(searchQuery)
+        }
+
+        loading.value = false
+      }, 100)
+    },
+    300
+  )
 
   // 选择上一个结果
   const selectPrevious = () => {
     const flatResults = flattenSearchResults(results.value)
     if (flatResults.length === 0) return
 
-    selectedIndex.value = selectedIndex.value <= 0 ? flatResults.length - 1 : selectedIndex.value - 1
+    selectedIndex.value =
+      selectedIndex.value <= 0 ? flatResults.length - 1 : selectedIndex.value - 1
   }
 
   // 选择下一个结果
@@ -128,7 +137,8 @@ export const useSearchStore = defineStore('search', () => {
     const flatResults = flattenSearchResults(results.value)
     if (flatResults.length === 0) return
 
-    selectedIndex.value = selectedIndex.value >= flatResults.length - 1 ? 0 : selectedIndex.value + 1
+    selectedIndex.value =
+      selectedIndex.value >= flatResults.length - 1 ? 0 : selectedIndex.value + 1
   }
 
   // 获取选中的结果

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<story-context id="story-1.2-context" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>1.2</storyId>
+    <title>博客文章详情页</title>
+    <status>ContextReadyDraft</status>
+    <generatedAt>2026-01-22</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>E:\work\AI\MyPersonalWebsite\docs\stories\story-1.2.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>读者</asA>
+    <iWant>看到完整的文章内容，包括标题、作者、发布时间、分类、标签、正文和相关文章推荐</iWant>
+    <soThat>深入了解技术细节</soThat>
+    <tasks>
+      <task id="1.2.1">创建 BlogDetail 组件</task>
+      <task id="1.2.2">实现 Markdown 渲染</task>
+      <task id="1.2.3">实现代码高亮</task>
+      <task id="1.2.4">实现代码版本标注</task>
+      <task id="1.2.5">实现代码复制功能</task>
+      <task id="1.2.6">实现目录导航（TOC）</task>
+      <task id="1.2.7">实现相关文章推荐</task>
+      <task id="1.2.8">实现上一篇/下一篇导航</task>
+      <task id="1.2.9">更新 useBlogStore</task>
+      <task id="1.2.10">创建 BlogDetail 页面</task>
+      <task id="1.2.11">配置路由</task>
+      <task id="1.2.12">性能优化</task>
+      <task id="1.2.13">编写测试</task>
+      <task id="1.2.14">代码审查和优化</task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="SC-1">文章完整信息展示（标题、作者、发布时间、分类、标签、阅读时长）</criterion>
+    <criterion id="SC-2">文章正文内容展示（Markdown 渲染）</criterion>
+    <criterion id="SC-3">代码块语法高亮（支持 Vue3、TS、JS、CSS 等）</criterion>
+    <criterion id="SC-4">代码版本标注（显示代码对应的库版本）</criterion>
+    <criterion id="SC-5">目录导航（TOC）自动生成</criterion>
+    <criterion id="SC-6">相关文章推荐（基于分类）</criterion>
+    <criterion id="SC-7">上一篇/下一篇导航</criterion>
+    <criterion id="SC-8">返回列表按钮</criterion>
+    <criterion id="SC-9">分享功能（可选）</criterion>
+    <criterion id="SC-10">加载状态和错误处理</criterion>
+    <criterion id="SC-11">Context7 官方文档引用</criterion>
+    <criterion id="PC-1">文章详情页加载时间 ≤500ms</criterion>
+    <criterion id="PC-2">Markdown 渲染时间 ≤200ms</criterion>
+    <criterion id="PC-3">代码高亮渲染时间 ≤100ms</criterion>
+    <criterion id="PC-4">目录生成时间 ≤50ms</criterion>
+    <criterion id="PC-5">页面滚动流畅（帧率 ≥60fps）</criterion>
+    <criterion id="PC-6">内存占用 ≤30MB</criterion>
+    <criterion id="QC-1">单元测试覆盖率 ≥80%</criterion>
+    <criterion id="QC-2">所有组件通过 ESLint 检查</criterion>
+    <criterion id="QC-3">所有组件通过 TypeScript 类型检查</criterion>
+    <criterion id="QC-4">组件代码符合 Prettier 格式规范</criterion>
+    <criterion id="QC-5">Markdown 渲染正确性测试通过</criterion>
+    <criterion id="QC-6">代码高亮功能测试通过</criterion>
+    <criterion id="AC-1">文章内容支持键盘导航</criterion>
+    <criterion id="AC-2">所有链接和按钮有清晰的 Focus 状态</criterion>
+    <criterion id="AC-3">图片有 alt 属性</criterion>
+    <criterion id="AC-4">代码块有适当的 ARIA 标签</criterion>
+    <criterion id="AC-5">颜色对比度符合 WCAG AA 标准</criterion>
+    <criterion id="AC-6">目录导航支持键盘操作</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc path="E:\work\AI\MyPersonalWebsite\docs\PRD.md" title="产品需求文档" section="3.1.1 博客模块 - 文章详情">
+        <snippet>
+        - **文章详情**
+          - 代码块高亮展示（支持 Vue3、TS、JS、CSS 等前端语言）
+          - 标注代码对应库版本（如 Vue 3.4.15）
+          - 段落排版优化（行高 1.5，字号 16px）
+          - 目录导航（长文自动生成）
+          - 嵌入 Context7 拉取的官方文档引用链接
+          - 支持代码复制功能
+          - 支持文章分享（复制链接）
+        </snippet>
+      </doc>
+      <doc path="E:\work\AI\MyPersonalWebsite\docs\PRD.md" title="产品需求文档" section="4.1.1 核心性能指标">
+        <snippet>
+        | 指标 | 目标值 | 说明 |
+        |-----|-------|------|
+        | 首屏加载时间 (LCP) | ≤1.8s | 最大内容绘制 |
+        | 交互到下一次绘制 (INP) | ≤200ms | 交互响应速度 |
+        | Lighthouse 评分 | ≥90 分 | 综合性能评分 |
+        </snippet>
+      </doc>
+      <doc path="E:\work\AI\MyPersonalWebsite\docs\PRD.md" title="产品需求文档" section="6.3.1 博客文章数据结构">
+        <snippet>
+        interface BlogPost {
+          id: string;
+          title: string;
+          summary: string;
+          content: string;
+          category: string;
+          tags: string[];
+          publishDate: string;
+          readingTime: number;
+          codeVersion?: {
+            vue?: string;
+            typescript?: string;
+            [key: string]: string | undefined;
+          };
+        }
+        </snippet>
+      </doc>
+      <doc path="E:\work\AI\MyPersonalWebsite\docs\solution-architecture.md" title="解决方案架构文档" section="ADR-001: 技术栈选择">
+        <snippet>
+        选择 Vue 3 + TypeScript + Vite + Pinia + Tailwind CSS 作为核心技术栈。
+        - **Vue 3.4.15**：Composition API 提供更好的代码组织和复用
+        - **TypeScript 5.3.3**：类型安全，提升代码质量
+        - **Vite 5.0.12**：快速开发服务器，优化的构建
+        - **Pinia 2.1.7**：轻量级状态管理
+        - **Tailwind CSS 3.4.1**：实用优先的 CSS 框架
+        </snippet>
+      </doc>
+      <doc path="E:\work\AI\MyPersonalWebsite\docs\Epics.md" title="Epic 列表" section="Story 1.2: 博客文章详情页">
+        <snippet>
+        **用户故事**:
+        作为前端开发者，我希望在文章详情页看到完整的内容，包括代码块高亮、目录导航、代码复制功能，以便深入学习技术细节。
+
+        **验收标准**:
+        - [ ] 文章内容完整展示
+        - [ ] 代码块高亮（支持 Vue3、TS、JS、CSS）
+        - [ ] 标注代码对应库版本
+        - [ ] 自动生成目录导航（长文）
+        - [ ] 代码块支持一键复制
+        - [ ] 段落排版优化（行高 1.5，字号 16px）
+        - [ ] 嵌入 Context7 官方文档引用链接
+        - [ ] 文章详情加载时间 ≤500ms
+        - [ ] 单元测试覆盖率 ≥80%
+        </snippet>
+      </doc>
+      <doc path="E:\work\AI\MyPersonalWebsite\docs\stories\story-1.1.md" title="Story 1.1: 博客文章列表展示" section="Task 1.1.3: 实现 useBlogStore">
+        <snippet>
+        **数据结构示例**:
+        interface BlogPost {
+          id: string
+          title: string
+          summary: string
+          content: string
+          category: string
+          tags: string[]
+          publishDate: string
+          readingTime: number
+          codeVersion?: {
+            vue?: string
+            typescript?: string
+            [key: string]: string | undefined
+          }
+        }
+        </snippet>
+      </doc>
+    </docs>
+
+    <code>
+      <file path="E:\work\AI\MyPersonalWebsite\src\stores\useBlogStore.ts" kind="store" symbol="useBlogStore" lines="1-100" reason="现有的博客状态管理，需要扩展以支持文章详情页功能">
+        <snippet>
+        import { defineStore } from 'pinia'
+        import { ref, computed } from 'vue'
+        import type { BlogPost, BlogFilter } from '@/types/blog'
+        import blogIndex from '@/assets/data/blog-index.json'
+
+        export const useBlogStore = defineStore('blog', () => {
+          const posts = ref&lt;BlogPost[]&gt;(blogIndex)
+          const selectedTag = ref&lt;string | null&gt;(null)
+          const searchQuery = ref('')
+          const loading = ref(false)
+          const error = ref&lt;string | null&gt;(null)
+          
+          // 分页状态
+          const currentPage = ref(1)
+          const itemsPerPage = ref(10)
+
+          const getPostById = (id: string) => {
+            return posts.value.find(p =&gt; p.id === id)
+          }
+
+          return {
+            posts,
+            getPostById,
+            // ... 其他导出
+          }
+        })
+        </snippet>
+      </file>
+      <file path="E:\work\AI\MyPersonalWebsite\src\components\blog\BlogList.vue" kind="component" symbol="BlogList" lines="1-100" reason="参考博客列表组件的实现模式">
+        <snippet>
+        &lt;template&gt;
+          &lt;div class="blog-list"&gt;
+            &lt;!-- 加载状态 --&gt;
+            &lt;div v-if="loading" class="blog-list__loading"&gt;
+              &lt;SkeletonLoader type="card" :count="itemsPerPage" /&gt;
+            &lt;/div&gt;
+
+            &lt;!-- 文章列表 --&gt;
+            &lt;div v-else&gt;
+              &lt;div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+                role="list"
+                aria-label="文章列表"
+              &gt;
+                &lt;BlogCard
+                  v-for="post in posts"
+                  :key="post.id"
+                  :post="post"
+                  role="listitem"
+                  @click="handlePostClick"
+                  @tag-click="handleTagClick"
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/template&gt;
+        </snippet>
+      </file>
+    </code>
+
+    <dependencies>
+      <node>
+        <package name="vue" version="^3.4.15" />
+        <package name="typescript" version="^5.3.3" />
+        <package name="pinia" version="^2.1.7" />
+        <package name="vue-router" version="^4.2.5" />
+        <package name="tailwindcss" version="^3.4.1" />
+        <package name="gsap" version="^3.14.2" />
+        <package name="lucide-vue-next" version="^0.312.0" />
+        <package name="markdown-it" version="^14.0.0" reason="Markdown 渲染（需要安装）" />
+        <package name="highlight.js" version="^11.9.0" reason="代码高亮（需要安装）" />
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <interfaces>
+    <interface name="BlogPost" kind="type" signature="interface BlogPost { id: string; title: string; summary: string; content: string; category: string; tags: string[]; publishDate: string; readingTime: number; codeVersion?: { vue?: string; typescript?: string; [key: string]: string | undefined; } }" path="E:\work\AI\MyPersonalWebsite\src\types\blog.ts" />
+    <interface name="useBlogStore" kind="store" signature="export const useBlogStore = defineStore('blog', () => { const posts = ref&lt;BlogPost[]&gt;(); const getPostById = (id: string) =&gt; BlogPost | undefined; return { posts, getPostById } })" path="E:\work\AI\MyPersonalWebsite\src\stores\useBlogStore.ts" />
+  </interfaces>
+
+  <constraints>
+    <constraint>必须使用 Vue 3.4.15 Composition API</constraint>
+    <constraint>必须使用 TypeScript 5.3.3 严格模式</constraint>
+    <constraint>必须使用 Pinia 2.1.7 状态管理</constraint>
+    <constraint>必须使用 Tailwind CSS 3.4.1 样式</constraint>
+    <constraint>必须支持主题系统（colorScheme, uiStyle, darkMode）</constraint>
+    <constraint>必须响应式设计（移动优先）</constraint>
+    <constraint>文章详情页加载时间 ≤500ms</constraint>
+    <constraint>Markdown 渲染时间 ≤200ms</constraint>
+    <constraint>代码高亮渲染时间 ≤100ms</constraint>
+    <constraint>目录生成时间 ≤50ms</constraint>
+    <constraint>页面滚动流畅（帧率 ≥60fps）</constraint>
+    <constraint>内存占用 ≤30MB</constraint>
+    <constraint>单元测试覆盖率 ≥80%</constraint>
+    <constraint>必须符合 WCAG 2.1 可访问性标准</constraint>
+    <constraint>颜色对比度符合 WCAG AA 标准（4.5:1）</constraint>
+  </constraints>
+
+  <tests>
+    <standards>
+      <standard>单元测试：Vitest</standard>
+      <standard>E2E 测试：Playwright</standard>
+      <standard>测试覆盖率：≥80%</standard>
+      <standard>测试位置：tests/unit/ 和 tests/e2e/</standard>
+    </standards>
+    <locations>
+      <location>tests/unit/components/blog/BlogDetail.spec.ts</location>
+      <location>tests/unit/components/blog/CodeBlock.spec.ts</location>
+      <location>tests/unit/components/blog/TableOfContents.spec.ts</location>
+      <location>tests/unit/components/blog/RelatedPosts.spec.ts</location>
+      <location>tests/unit/components/blog/PostNavigation.spec.ts</location>
+      <location>tests/unit/utils/markdown.spec.ts</location>
+      <location>tests/unit/utils/highlight.spec.ts</location>
+      <location>tests/unit/stores/useBlogStore.spec.ts</location>
+      <location>tests/e2e/blog-detail.spec.ts</location>
+    </locations>
+    <ideas>
+      <idea ac="SC-1">测试文章完整信息展示（标题、作者、发布时间、分类、标签、阅读时长）</idea>
+      <idea ac="SC-2">测试 Markdown 渲染正确性（标题、段落、列表、引用、代码块、链接、图片）</idea>
+      <idea ac="SC-3">测试代码块语法高亮（Vue3、TypeScript、JavaScript、CSS、HTML、JSON）</idea>
+      <idea ac="SC-4">测试代码版本标注显示</idea>
+      <idea ac="SC-5">测试目录导航自动生成和点击跳转</idea>
+      <idea ac="SC-6">测试相关文章推荐（基于分类筛选）</idea>
+      <idea ac="SC-7">测试上一篇/下一篇导航（边界处理）</idea>
+      <idea ac="SC-8">测试返回列表按钮功能</idea>
+      <idea ac="SC-9">测试代码复制功能</idea>
+      <idea ac="SC-10">测试加载状态和错误处理</idea>
+      <idea ac="PC-1">性能测试：文章详情页加载时间 ≤500ms</idea>
+      <idea ac="PC-2">性能测试：Markdown 渲染时间 ≤200ms</idea>
+      <idea ac="PC-3">性能测试：代码高亮渲染时间 ≤100ms</idea>
+      <idea ac="PC-4">性能测试：目录生成时间 ≤50ms</idea>
+      <idea ac="PC-5">性能测试：页面滚动流畅（帧率 ≥60fps）</idea>
+      <idea ac="PC-6">性能测试：内存占用 ≤30MB</idea>
+      <idea ac="AC-1">可访问性测试：键盘导航</idea>
+      <idea ac="AC-2">可访问性测试：Focus 状态</idea>
+      <idea ac="AC-3">可访问性测试：图片 alt 属性</idea>
+      <idea ac="AC-4">可访问性测试：代码块 ARIA 标签</idea>
+      <idea ac="AC-5">可访问性测试：颜色对比度</idea>
+      <idea ac="AC-6">可访问性测试：目录导航键盘操作</idea>
+    </ideas>
+  </tests>
+</story-context>

@@ -8,14 +8,7 @@
 /**
  * 骨架屏变体
  */
-export type SkeletonVariant =
-  | 'text'
-  | 'title'
-  | 'avatar'
-  | 'card'
-  | 'image'
-  | 'button'
-  | 'custom'
+export type SkeletonVariant = 'text' | 'title' | 'avatar' | 'card' | 'image' | 'button' | 'custom'
 
 interface Props {
   variant?: SkeletonVariant
@@ -30,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   width: '100%',
   height: 'auto',
   borderRadius: '4px',
-  lines: 1,
+  lines: 1
 })
 </script>
 
@@ -53,22 +46,12 @@ const props = withDefaults(defineProps<Props>(), {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   animation: shimmer 1.5s infinite;
 }
 
 .dark .skeleton-loader__shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 @keyframes shimmer {

@@ -1,6 +1,9 @@
 <template>
   <Teleport to="head">
     <!-- 基础 Meta 标签 -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta v-if="config.title" :content="fullTitle" property="og:title" />
     <meta v-if="config.description" :content="config.description" name="description" />
     <meta v-if="config.description" :content="config.description" property="og:description" />
@@ -24,13 +27,23 @@
 
     <!-- 额外的 SEO 标签 -->
     <meta v-if="config.author" :content="config.author" name="author" />
-    <meta v-if="config.publishDate" :content="config.publishDate" property="article:published_time" />
-    <meta v-if="config.modifiedDate" :content="config.modifiedDate" property="article:modified_time" />
+    <meta
+      v-if="config.publishDate"
+      :content="config.publishDate"
+      property="article:published_time"
+    />
+    <meta
+      v-if="config.modifiedDate"
+      :content="config.modifiedDate"
+      property="article:modified_time"
+    />
     <meta v-if="config.category" :content="config.category" property="article:section" />
     <meta v-for="tag in config.tags" :key="tag" :content="tag" property="article:tag" />
 
     <!-- 结构化数据 -->
-    <script v-if="structuredData" type="application/ld+json">{{ structuredData }}</script>
+    <script v-if="structuredData" type="application/ld+json">
+      {{ structuredData }}
+    </script>
   </Teleport>
 </template>
 

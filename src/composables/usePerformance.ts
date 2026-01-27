@@ -3,19 +3,19 @@
  * 用于监控 Core Web Vitals 和其他性能指标
  */
 
-import { onMounted, onUnmounted, ref } from 'vue'
+import { ref, getCurrentInstance, onMounted, onUnmounted } from 'vue'
 
 export interface PerformanceMetrics {
   // Core Web Vitals
-  LCP: number | null // Largest Contentful Paint (最大内容绘制)
+  LCP: number | null // Largest Contentful Paint (最大内容绘�?
   FID: number | null // First Input Delay (首次输入延迟)
   CLS: number | null // Cumulative Layout Shift (累积布局偏移)
 
   // 其他性能指标
   FCP: number | null // First Contentful Paint (首次内容绘制)
-  TTI: number | null // Time to Interactive (可交互时间)
-  TBT: number | null // Total Blocking Time (总阻塞时间)
-  FMP: number | null // First Meaningful Paint (首次有意义绘制)
+  TTI: number | null // Time to Interactive (可交互时�?
+  TBT: number | null // Total Blocking Time (总阻塞时�?
+  FMP: number | null // First Meaningful Paint (首次有意义绘�?
 
   // 资源加载
   domContentLoaded: number | null
@@ -132,27 +132,50 @@ export function usePerformance() {
   }
 
   /**
-   * 测量页面加载时间
+   * 测量页面加载时间 - 使用 PerformanceNavigationTiming API（替代已废弃�?performance.timing�?
    */
   const measurePageLoad = () => {
     if (typeof window !== 'undefined' && window.performance) {
-      const perfData = window.performance.timing
-      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart
-      const domReadyTime = perfData.domContentLoadedEventEnd - perfData.navigationStart
+      // 优先使用 PerformanceNavigationTiming API
+      const navEntry = window.performance.getEntriesByType(
+        'navigation'
+      )[0] as PerformanceNavigationTiming
 
-      metrics.value.domContentLoaded = Math.round(domReadyTime)
-      metrics.value.loadComplete = Math.round(pageLoadTime)
+      if (navEntry) {
+        metrics.value.domContentLoaded = Math.round(
+          navEntry.domContentLoadedEventEnd - navEntry.fetchStart
+        )
+        metrics.value.loadComplete = Math.round(navEntry.loadEventEnd - navEntry.fetchStart)
+      } else {
+        // 降级�?performance.timing（已废弃但仍有兼容性）
+        const perfData = window.performance.timing
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart
+        const domReadyTime = perfData.domContentLoadedEventEnd - perfData.navigationStart
+
+        metrics.value.domContentLoaded = Math.round(domReadyTime)
+        metrics.value.loadComplete = Math.round(pageLoadTime)
+      }
     }
   }
 
   /**
-   * 估算 TTI (Time to Interactive)
+   * 估算 TTI (Time to Interactive) - 使用 PerformanceNavigationTiming API
    */
   const estimateTTI = () => {
     if (typeof window !== 'undefined' && window.performance) {
-      const perfData = window.performance.timing
-      const tti = perfData.domInteractive - perfData.navigationStart
-      metrics.value.TTI = Math.round(tti)
+      // 优先使用 PerformanceNavigationTiming API
+      const navEntry = window.performance.getEntriesByType(
+        'navigation'
+      )[0] as PerformanceNavigationTiming
+
+      if (navEntry) {
+        metrics.value.TTI = Math.round(navEntry.domInteractive - navEntry.fetchStart)
+      } else {
+        // 降级�?performance.timing（已废弃但仍有兼容性）
+        const perfData = window.performance.timing
+        const tti = perfData.domInteractive - perfData.navigationStart
+        metrics.value.TTI = Math.round(tti)
+      }
     }
   }
 
@@ -170,7 +193,7 @@ export function usePerformance() {
       if (LCP <= 2.5) score += 33
       else if (LCP <= 4) {
         score += 20
-        issues.push('LCP 需要优化 (当前: ' + LCP + 'ms)')
+        issues.push('LCP 需要优�?(当前: ' + LCP + 'ms)')
       } else {
         score += 10
         issues.push('LCP 较差 (当前: ' + LCP + 'ms)')
@@ -182,7 +205,7 @@ export function usePerformance() {
       if (FID <= 100) score += 33
       else if (FID <= 300) {
         score += 20
-        issues.push('FID 需要优化 (当前: ' + FID + 'ms)')
+        issues.push('FID 需要优�?(当前: ' + FID + 'ms)')
       } else {
         score += 10
         issues.push('FID 较差 (当前: ' + FID + 'ms)')
@@ -194,7 +217,7 @@ export function usePerformance() {
       if (CLS <= 0.1) score += 34
       else if (CLS <= 0.25) {
         score += 20
-        issues.push('CLS 需要优化 (当前: ' + CLS + ')')
+        issues.push('CLS 需要优�?(当前: ' + CLS + ')')
       } else {
         score += 10
         issues.push('CLS 较差 (当前: ' + CLS + ')')
@@ -223,7 +246,7 @@ export function usePerformance() {
   }
 
   /**
-   * 上报性能指标（可用于发送到分析服务）
+   * 上报性能指标（可用于发送到分析服务�?
    */
   const reportMetrics = (endpoint?: string) => {
     const data = {
@@ -252,14 +275,18 @@ export function usePerformance() {
     if (typeof window === 'undefined') return
 
     // 等待页面加载完成
-    if (document.readyState === 'complete') {
+    const handleLoad = () => {
       measurePageLoad()
       estimateTTI()
+
+      // 清理事件监听�?
+      window.removeEventListener('load', handleLoad)
+    }
+
+    if (document.readyState === 'complete') {
+      handleLoad()
     } else {
-      window.addEventListener('load', () => {
-        measurePageLoad()
-        estimateTTI()
-      })
+      window.addEventListener('load', handleLoad, { passive: true })
     }
 
     // 测量 Core Web Vitals
@@ -269,24 +296,41 @@ export function usePerformance() {
     measureFCP()
     measureTBT()
 
-    // 页面卸载时记录最终指标
-    window.addEventListener('beforeunload', () => {
+    // 页面卸载时记录最终指�?
+    const handleBeforeUnload = () => {
       if (lcpEntry) {
         metrics.value.LCP = Math.round(lcpEntry.startTime)
       }
       logMetrics()
-    })
+
+      // 清理事件监听�?
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload, { passive: true })
   }
 
-  onMounted(() => {
-    init()
-  })
+  // 检查是否在组件上下文中
+  const instance = getCurrentInstance()
+  if (instance) {
+    onMounted(() => {
+      init()
+    })
 
-  onUnmounted(() => {
-    if (observer) {
-      observer.disconnect()
-    }
-  })
+    onUnmounted(() => {
+      // 清理 PerformanceObserver
+      if (observer) {
+        observer.disconnect()
+      }
+
+      // 清理事件监听器
+      window.removeEventListener('load', () => {})
+      window.removeEventListener('beforeunload', () => {})
+    })
+  } else {
+    // 如果不在组件上下文中，直接初始化
+    init()
+  }
 
   return {
     metrics,

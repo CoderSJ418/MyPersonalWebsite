@@ -2,7 +2,7 @@
   <div class="relative">
     <!-- 汉堡菜单按钮 -->
     <button
-      class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast focus:outline-none focus:ring-2 focus:ring-primary-500"
+      class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast focus-ring"
       aria-label="Toggle menu"
       aria-expanded="isOpen"
       @click="toggleMenu"
@@ -33,10 +33,12 @@
         aria-label="Navigation menu"
       >
         <!-- 菜单头部 -->
-        <div class="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-4 flex items-center justify-between">
+        <div
+          class="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-4 flex items-center justify-between"
+        >
           <span class="text-lg font-bold text-gray-900 dark:text-white">菜单</span>
           <button
-            class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-ring"
             aria-label="Close menu"
             @click="closeMenu"
           >
@@ -84,7 +86,9 @@
         </nav>
 
         <!-- 菜单底部 -->
-        <div class="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-4 py-4">
+        <div
+          class="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-4 py-4"
+        >
           <div class="flex items-center justify-center gap-6">
             <a
               href="https://github.com"
@@ -122,7 +126,20 @@
 import { ref, computed } from 'vue'
 import { useAppStore } from '@/stores/useAppStore'
 import { useSearchStore } from '@/stores/useSearchStore'
-import { Menu, X, Home, Briefcase, Award, BookOpen, Mail, Sun, Moon, Search, Github, Linkedin } from 'lucide-vue-next'
+import {
+  Menu,
+  X,
+  Home,
+  Briefcase,
+  Award,
+  BookOpen,
+  Mail,
+  Sun,
+  Moon,
+  Search,
+  Github,
+  Linkedin
+} from 'lucide-vue-next'
 
 const appStore = useAppStore()
 const searchStore = useSearchStore()
@@ -143,9 +160,7 @@ const theme = computed(() => appStore.theme)
 const navItems = [
   { name: '首页', path: '/', icon: Home },
   { name: '项目', path: '/projects', icon: Briefcase },
-  { name: '技能', path: '/skills', icon: Award },
-  { name: '博客', path: '/blog', icon: BookOpen },
-  { name: '联系', path: '/contact', icon: Mail }
+  { name: '博客', path: '/blog', icon: BookOpen }
 ]
 
 const toggleMenu = () => {

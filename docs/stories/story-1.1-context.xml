@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StoryContext xmlns="http://bmad.dev/context/2026">
+  <!-- ============================================
+       Story 元数据
+       ============================================ -->
+  <StoryMetadata>
+    <StoryID>1.1</StoryID>
+    <Epic>Epic 1: 核心功能实现</Epic>
+    <Title>博客文章列表展示</Title>
+    <Status>Draft</Status>
+    <Priority>P0</Priority>
+    <EstimatedEffort>1-2 天</EstimatedEffort>
+    <Author>BMAD Scrum Master (Bob)</Author>
+    <Assignee>BMAD Developer</Assignee>
+    <CreatedDate>2026-01-22</CreatedDate>
+    <LastUpdated>2026-01-22</LastUpdated>
+  </StoryMetadata>
+
+  <!-- ============================================
+       用户故事
+       ============================================ -->
+  <UserStory>
+    <Role>前端开发者</Role>
+    <Action>看到一个按时间倒序排列的文章列表，包含标题、摘要、发布时间、分类和标签</Action>
+    <Benefit>快速浏览最新的技术文章</Benefit>
+  </UserStory>
+
+  <!-- ============================================
+       技术指导
+       ============================================ -->
+  <TechnicalGuidance>
+    <TechnologyStack>
+      <Framework>Vue 3.4.15</Framework>
+      <Language>TypeScript 5.3.3</Language>
+      <StateManagement>Pinia 2.1.7</StateManagement>
+      <Routing>Vue Router 4.2.5</Routing>
+      <Styling>Tailwind CSS 3.4.1</Styling>
+      <Animation>GSAP 3.14.2</Animation>
+      <Icons>Lucide Vue Next 0.312.0</Icons>
+      <VirtualScroll>vue-virtual-scroller</VirtualScroll>
+    </TechnologyStack>
+
+    <ComponentArchitecture>
+      <Component name="BlogList" path="src/components/blog/BlogList.vue">
+        <Purpose>文章列表容器组件，负责布局和分页</Purpose>
+        <Props>
+          <Prop name="posts" type="BlogPost[]" required="true" />
+          <Prop name="currentPage" type="number" required="true" />
+          <Prop name="totalPages" type="number" required="true" />
+          <Prop name="loading" type="boolean" default="false" />
+          <Prop name="error" type="string | null" default="null" />
+        </Props>
+        <Events>
+          <Event name="page-change" type="(page: number) => void" />
+          <Event name="post-click" type="(postId: string) => void" />
+        </Events>
+        <CompositionAPI>
+          <Hook>ref</Hook>
+          <Hook>computed</Hook>
+          <Hook>watch</Hook>
+          <Hook>onMounted</Hook>
+        </CompositionAPI>
+        <ResponsiveDesign>
+          <Breakpoint device="desktop" minWidth="1024" columns="3" />
+          <Breakpoint device="tablet" minWidth="768" maxWidth="1023" columns="2" />
+          <Breakpoint device="mobile" maxWidth="767" columns="1" />
+        </ResponsiveDesign>
+      </Component>
+
+      <Component name="BlogCard" path="src/components/blog/BlogCard.vue">
+        <Purpose>单个文章卡片组件，负责文章信息展示</Purpose>
+        <Props>
+          <Prop name="post" type="BlogPost" required="true" />
+          <Prop name="lazy" type="boolean" default="true" />
+          <Prop name="showTags" type="boolean" default="true" />
+        </Props>
+        <Events>
+          <Event name="click" type="() => void" />
+          <Event name="tag-click" type="(tag: string) => void" />
+        </Events>
+        <Features>
+          <Feature>悬浮效果（阴影加深、轻微上移）</Feature>
+          <Feature>点击跳转到文章详情页</Feature>
+          <Feature>标签点击事件</Feature>
+          <Feature>分类显示</Feature>
+          <Feature>阅读时长显示</Feature>
+        </Features>
+        <ThemeSupport>
+          <ColorScheme>professional-minimal</ColorScheme>
+          <UIStyle>glass-morphism</UIStyle>
+          <DarkMode>true</DarkMode>
+        </ThemeSupport>
+      </Component>
+
+      <Component name="Pagination" path="src/components/common/Pagination.vue">
+        <Purpose>分页组件，负责页码切换</Purpose>
+        <Props>
+          <Prop name="currentPage" type="number" required="true" />
+          <Prop name="totalPages" type="number" required="true" />
+          <Prop name="maxVisible" type="number" default="7" />
+        </Props>
+        <Events>
+          <Event name="page-change" type="(page: number) => void" />
+        </Events>
+        <Features>
+          <Feature>上一页/下一页按钮</Feature>
+          <Feature>页码点击跳转</Feature>
+          <Feature>禁用状态（第一页禁用"上一页"，最后一页禁用"下一页"）</Feature>
+          <Feature>省略号显示（页码过多时）</Feature>
+        </Features>
+      </Component>
+
+      <Component name="VirtualBlogList" path="src/components/blog/VirtualBlogList.vue">
+        <Purpose>虚拟列表组件，用于长列表优化</Purpose>
+        <Props>
+          <Prop name="items" type="BlogPost[]" required="true" />
+          <Prop name="itemSize" type="number" default="200" />
+          <Prop name="buffer" type="number" default="5" />
+        </Props>
+        <Conditions>
+          <Condition>posts.length >= 50 时启用</Condition>
+        </Conditions>
+        <Performance>
+          <Metric>滚动帧率 >= 60fps</Metric>
+          <Metric>只渲染可见区域</Metric>
+          <Metric>内存占用 <= 50MB</Metric>
+        </Performance>
+      </Component>
+
+      <Component name="SkeletonLoader" path="src/components/common/SkeletonLoader.vue">
+        <Purpose>骨架屏加载组件</Purpose>
+        <Props>
+          <Prop name="type" type="'card' | 'list' | 'text'" default="card" />
+          <Prop name="count" type="number" default="3" />
+        </Props>
+        <Usage>
+          <Scenario>初始加载时显示骨架屏</Scenario>
+          <Scenario>分页切换时显示加载状态</Scenario>
+        </Usage>
+      </Component>
+    </ComponentArchitecture>
+
+    <StateManagement>
+      <Store name="useBlogStore" path="src/stores/useBlogStore.ts">
+        <State>
+          <Property name="posts" type="BlogPost[]" />
+          <Property name="filteredPosts" type="ComputedRef&lt;BlogPost[]&gt;" />
+          <Property name="selectedTag" type="string | null" />
+          <Property name="searchQuery" type="string" />
+          <Property name="loading" type="boolean" />
+          <Property name="error" type="string | null" />
+          <Property name="currentPage" type="number" />
+          <Property name="totalPages" type="number" />
+          <Property name="itemsPerPage" type="number" />
+        </State>
+        <Actions>
+          <Action name="loadPosts" async="true" />
+          <Action name="loadPost" async="true" params="id: string" />
+          <Action name="filterByTag" params="tag: string | null" />
+          <Action name="searchPosts" params="query: string" />
+          <Action name="setPage" params="page: number" />
+          <Action name="getPostById" params="id: string" returnType="BlogPost | undefined" />
+        </Actions>
+        <Getters>
+          <Getter name="sortedPosts" description="按发布时间倒序排列" />
+          <Getter name="paginatedPosts" description="当前页的文章列表" />
+          <Getter name="allTags" description="所有标签列表" />
+          <Getter name="recentPosts" description="最近5篇文章" />
+        </Getters>
+      </Store>
+    </StateManagement>
+
+    <DataModels>
+      <Interface name="BlogPost">
+        <Property name="id" type="string" />
+        <Property name="title" type="string" />
+        <Property name="summary" type="string" />
+        <Property name="content" type="string" />
+        <Property name="excerpt" type="string" />
+        <Property name="author" type="string" />
+        <Property name="publishedAt" type="string" format="YYYY-MM-DD" />
+        <Property name="updatedAt" type="string" format="YYYY-MM-DD" />
+        <Property name="tags" type="string[]" />
+        <Property name="category" type="string" />
+        <Property name="readTime" type="number" unit="minutes" />
+        <Property name="coverImage" type="string" optional="true" />
+        <Property name="featured" type="boolean" optional="true" />
+        <Property name="codeVersion" type="CodeVersion" optional="true" />
+      </Interface>
+
+      <Interface name="CodeVersion">
+        <Property name="vue" type="string" optional="true" />
+        <Property name="typescript" type="string" optional="true" />
+        <Property name="vite" type="string" optional="true" />
+        <Property name="tailwindcss" type="string" optional="true" />
+      </Interface>
+    </DataModels>
+
+    <Patterns>
+      <Pattern name="Composition API">
+        <Description>使用 Vue 3 Composition API 组织组件逻辑</Description>
+        <Example>
+          <Code language="typescript">
+            import { ref, computed, onMounted } from 'vue'
+            
+            const posts = ref&lt;BlogPost[]&gt;([])
+            const loading = ref(false)
+            
+            const sortedPosts = computed(() => {
+              return [...posts.value].sort((a, b) => 
+                new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+              )
+            })
+            
+            onMounted(() => {
+              loadPosts()
+            })
+          </Code>
+        </Example>
+      </Pattern>
+
+      <Pattern name="Virtual Scrolling">
+        <Description>长列表使用虚拟滚动优化性能</Description>
+        <Condition>文章数量 >= 50 时启用</Condition>
+        <Library>vue-virtual-scroller</Library>
+        <Example>
+          <Code language="vue">
+            &lt;RecycleScroller
+              :items="posts"
+              :item-size="200"
+              key-field="id"
+              v-slot="{ item }"
+            &gt;
+              &lt;BlogCard :post="item" /&gt;
+            &lt;/RecycleScroller&gt;
+          </Code>
+        </Example>
+      </Pattern>
+
+      <Pattern name="Responsive Grid">
+        <Description>使用 Tailwind CSS Grid 实现响应式布局</Description>
+        <Example>
+          <Code language="vue">
+            &lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"&gt;
+              &lt;BlogCard v-for="post in posts" :key="post.id" :post="post" /&gt;
+            &lt;/div&gt;
+          </Code>
+        </Example>
+      </Pattern>
+
+      <Pattern name="Lazy Loading">
+        <Description>图片和组件懒加载优化性能</Description>
+        <Example>
+          <Code language="vue">
+            &lt;img :src="post.coverImage" loading="lazy" decoding="async" /&gt;
+          </Code>
+        </Example>
+      </Pattern>
+
+      <Pattern name="Theme System">
+        <Description>支持主题系统（colorScheme, uiStyle, darkMode）</Description>
+        <Example>
+          <Code language="vue">
+            &lt;article
+              class="blog-card"
+              :class="[
+                `blog-card--${uiStyle}`,
+                `blog-card--${colorScheme}`,
+                { 'blog-card--dark': darkMode }
+              ]"
+            &gt;
+              <!-- 内容 -->
+            &lt;/article&gt;
+          </Code>
+        </Example>
+      </Pattern>
+    </Patterns>
+  </TechnicalGuidance>
+
+  <!-- ============================================
+       代码引用
+       ============================================ -->
+  <CodeReferences>
+    <ExistingFiles>
+      <File path="src/views/Blog.vue" type="page" status="existing">
+        <Description>现有博客页面，需要重构为使用 BlogList 组件</Description>
+        <Issues>
+          <Issue>缺少分页功能</Issue>
+          <Issue>缺少虚拟列表优化</Issue>
+          <Issue>缺少骨架屏加载</Issue>
+          <Issue>缺少错误处理</Issue>
+        </Issues>
+      </File>
+
+      <File path="src/stores/useBlogStore.ts" type="store" status="existing">
+        <Description>现有博客 Store，需要添加分页逻辑</Description>
+        <MissingFeatures>
+          <Feature>分页状态（currentPage, totalPages, itemsPerPage）</Feature>
+          <Feature>setPage Action</Feature>
+          <Feature>paginatedPosts Getter</Feature>
+        </MissingFeatures>
+      </File>
+
+      <File path="src/router/index.ts" type="router" status="existing">
+        <Description>现有路由配置，已包含 Blog 路由</Description>
+        <Route path="/blog" name="Blog" component="Blog.vue" />
+      </File>
+
+      <File path="src/assets/data/blog-index.json" type="data" status="existing">
+        <Description>现有博客数据文件，包含 257 行数据</Description>
+        <RecordCount>20+</RecordCount>
+        <Fields>
+          <Field>id</Field>
+          <Field>title</Field>
+          <Field>excerpt</Field>
+          <Field>content</Field>
+          <Field>author</Field>
+          <Field>publishedAt</Field>
+          <Field>tags</Field>
+          <Field>readTime</Field>
+          <Field>coverImage</Field>
+        </Fields>
+      </File>
+
+      <File path="src/design-system/themes/professionalMinimal.ts" type="theme" status="existing">
+        <Description>专业极简主题配置</Description>
+        <Colors>
+          <Color name="primary" value="#6366F1" />
+          <Color name="secondary" value="#8B5CF6" />
+          <Color name="accent" value="#F59E0B" />
+          <Color name="background" value="#0F172A" />
+          <Color name="text" value="#FFFFFF" />
+        </Colors>
+      </File>
+
+      <File path="src/assets/styles/design-tokens.css" type="style" status="existing">
+        <Description>设计令牌系统</Description>
+        <Tokens>
+          <Token name="--brand-500" value="#6366F1" />
+          <Token name="--gray-900" value="#111827" />
+          <Token name="--space-4" value="32px" />
+          <Token name="--radius-md" value="12px" />
+          <Token name="--shadow-md" value="0 4px 6px rgba(0, 0, 0, 0.1)" />
+          <Token name="--duration-normal" value="300ms" />
+        </Tokens>
+      </File>
+    </ExistingFiles>
+
+    <FilesToCreate>
+      <File path="src/components/blog/BlogList.vue" type="component" priority="high" />
+      <File path="src/components/blog/BlogCard.vue" type="component" priority="high" />
+      <File path="src/components/blog/VirtualBlogList.vue" type="component" priority="medium" />
+      <File path="src/components/common/Pagination.vue" type="component" priority="high" />
+    </FilesToCreate>
+
+    <FilesToUpdate>
+      <File path="src/stores/useBlogStore.ts" type="store" priority="high">
+        <Changes>
+          <Change>添加分页状态</Change>
+          <Change>添加 setPage Action</Change>
+          <Change>添加 paginatedPosts Getter</Change>
+        </Changes>
+      </File>
+      <File path="src/views/Blog.vue" type="page" priority="high">
+        <Changes>
+          <Change>集成 BlogList 组件</Change>
+          <Change>集成 Pagination 组件</Change>
+          <Change>添加加载状态和错误处理</Change>
+        </Changes>
+      </File>
+    </FilesToUpdate>
+  </CodeReferences>
+
+  <!-- ============================================
+       验收标准
+       ============================================ -->
+  <AcceptanceCriteria>
+    <FunctionalCriteria>
+      <Criterion id="SC-1" status="pending">
+        <Description>文章列表按发布时间倒序排列（最新文章在顶部）</Description>
+        <Priority>high</Priority>
+        <TestMethod>单元测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="SC-2" status="pending">
+        <Description>每篇文章卡片显示以下信息</Description>
+        <Details>
+          <Detail>文章标题</Detail>
+          <Detail>文章摘要（截取前 150 字符）</Detail>
+          <Detail>发布时间（格式：YYYY-MM-DD）</Detail>
+          <Detail>文章分类（如：Vue3、TypeScript、工程化、设计等）</Detail>
+          <Detail>文章标签（如：提示词工程、性能优化、调试技巧等）</Detail>
+          <Detail>阅读时长（分钟）</Detail>
+        </Details>
+        <Priority>high</Priority>
+        <TestMethod>视觉测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="SC-3" status="pending">
+        <Description>支持分页加载功能</Description>
+        <Details>
+          <Detail>每页显示 10 篇文章</Detail>
+          <Detail>显示当前页码和总页数</Detail>
+          <Detail>提供"上一页"、"下一页"按钮</Detail>
+          <Detail>支持点击页码直接跳转</Detail>
+        </Details>
+        <Priority>high</Priority>
+        <TestMethod>E2E 测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="SC-4" status="pending">
+        <Description>虚拟列表优化</Description>
+        <Details>
+          <Detail>当文章数量 ≥50 篇时自动启用虚拟滚动</Detail>
+          <Detail>只渲染可见区域的文章卡片</Detail>
+          <Detail>滚动流畅，无卡顿</Detail>
+        </Details>
+        <Priority>medium</Priority>
+        <TestMethod>性能测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="SC-5" status="pending">
+        <Description>响应式布局</Description>
+        <Details>
+          <Detail>桌面端（≥1024px）：3 列网格布局</Detail>
+          <Detail>平板端（768px-1023px）：2 列网格布局</Detail>
+          <Detail>移动端（<768px）：1 列布局</Detail>
+        </Details>
+        <Priority>high</Priority>
+        <TestMethod>响应式测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="SC-6" status="pending">
+        <Description>文章卡片交互</Description>
+        <Details>
+          <Detail>鼠标悬停时显示悬浮效果（阴影加深、轻微上移）</Detail>
+          <Detail>点击卡片跳转到文章详情页</Detail>
+          <Detail>点击标签跳转到标签筛选页面</Detail>
+          <Detail>点击分类跳转到分类筛选页面</Detail>
+        </Details>
+        <Priority>high</Priority>
+        <TestMethod>E2E 测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="SC-7" status="pending">
+        <Description>加载状态</Description>
+        <Details>
+          <Detail>初始加载时显示骨架屏或加载动画</Detail>
+          <Detail>分页切换时显示加载状态</Detail>
+          <Detail>加载失败时显示错误提示</Detail>
+        </Details>
+        <Priority>high</Priority>
+        <TestMethod>E2E 测试</TestMethod>
+      </Criterion>
+    </FunctionalCriteria>
+
+    <PerformanceCriteria>
+      <Criterion id="PC-1" status="pending">
+        <Description>列表加载时间 ≤300ms（首次加载 10 篇文章）</Description>
+        <Priority>high</Priority>
+        <TestMethod>性能测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="PC-2" status="pending">
+        <Description>分页切换响应时间 ≤100ms</Description>
+        <Priority>high</Priority>
+        <TestMethod>性能测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="PC-3" status="pending">
+        <Description>虚拟列表滚动帧率 ≥60fps</Description>
+        <Priority>high</Priority>
+        <TestMethod>性能测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="PC-4" status="pending">
+        <Description>图片懒加载触发延迟 ≤50ms（如果有封面图）</Description>
+        <Priority>medium</Priority>
+        <TestMethod>性能测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="PC-5" status="pending">
+        <Description>内存占用 ≤50MB（加载 100 篇文章后）</Description>
+        <Priority>medium</Priority>
+        <TestMethod>性能测试</TestMethod>
+      </Criterion>
+    </PerformanceCriteria>
+
+    <QualityCriteria>
+      <Criterion id="QC-1" status="pending">
+        <Description>单元测试覆盖率 ≥80%</Description>
+        <Priority>high</Priority>
+        <TestMethod>测试覆盖率报告</TestMethod>
+      </Criterion>
+
+      <Criterion id="QC-2" status="pending">
+        <Description>所有组件通过 ESLint 检查</Description>
+        <Priority>high</Priority>
+        <TestMethod>代码检查</TestMethod>
+      </Criterion>
+
+      <Criterion id="QC-3" status="pending">
+        <Description>所有组件通过 TypeScript 类型检查</Description>
+        <Priority>high</Priority>
+        <TestMethod>类型检查</TestMethod>
+      </Criterion>
+
+      <Criterion id="QC-4" status="pending">
+        <Description>组件代码符合 Prettier 格式规范</Description>
+        <Priority>high</Priority>
+        <TestMethod>代码格式化</TestMethod>
+      </Criterion>
+    </QualityCriteria>
+
+    <AccessibilityCriteria>
+      <Criterion id="AC-1" status="pending">
+        <Description>文章卡片支持键盘导航（Tab 键）</Description>
+        <Priority>medium</Priority>
+        <TestMethod>可访问性测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="AC-2" status="pending">
+        <Description>所有链接和按钮有清晰的 Focus 状态</Description>
+        <Priority>medium</Priority>
+        <TestMethod>可访问性测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="AC-3" status="pending">
+        <Description>图片有 alt 属性（如果有封面图）</Description>
+        <Priority>medium</Priority>
+        <TestMethod>可访问性测试</TestMethod>
+      </Criterion>
+
+      <Criterion id="AC-4" status="pending">
+        <Description>颜色对比度符合 WCAG AA 标准（4.5:1）</Description>
+        <Priority>medium</Priority>
+        <TestMethod>可访问性测试</TestMethod>
+      </Criterion>
+    </AccessibilityCriteria>
+  </AcceptanceCriteria>
+
+  <!-- ============================================
+       依赖信息
+       ============================================ -->
+  <Dependencies>
+    <PrecedingStories>
+      <Story id="none" description="无前置依赖" />
+    </PrecedingStories>
+
+    <FollowingStories>
+      <Story id="1.2" description="博客文章详情页" />
+      <Story id="1.3" description="博客分类与标签筛选" />
+      <Story id="1.4" description="博客文章搜索功能" />
+    </FollowingStories>
+
+    <ExternalDependencies>
+      <Dependency name="vue" version="3.4.15" type="peer" />
+      <Dependency name="vue-router" version="4.2.5" type="peer" />
+      <Dependency name="pinia" version="2.1.7" type="peer" />
+      <Dependency name="vue-virtual-scroller" version="2.0.0-beta.8" type="optional" />
+      <Dependency name="gsap" version="3.14.2" type="optional" />
+      <Dependency name="lucide-vue-next" version="0.312.0" type="optional" />
+    </ExternalDependencies>
+  </Dependencies>
+
+  <!-- ============================================
+       API 接口
+       ============================================ -->
+  <APIInterfaces>
+    <DataAPI>
+      <Endpoint method="GET" path="/src/assets/data/blog-index.json">
+        <Description>加载博客文章列表</Description>
+        <Response type="BlogPost[]" />
+        <Performance>
+          <Metric>加载时间 &lt; 100ms</Metric>
+        </Performance>
+      </Endpoint>
+    </DataAPI>
+
+    <StoreAPI>
+      <Method name="loadPosts" async="true">
+        <Description>加载博客文章列表</Description>
+        <Parameters />
+        <Returns>Promise&lt;void&gt;</Returns>
+      </Method>
+
+      <Method name="loadPost" async="true">
+        <Description>加载单篇文章</Description>
+        <Parameters>
+          <Parameter name="id" type="string" />
+        </Parameters>
+        <Returns>Promise&lt;void&gt;</Returns>
+      </Method>
+
+      <Method name="setPage">
+        <Description>设置当前页码</Description>
+        <Parameters>
+          <Parameter name="page" type="number" />
+        </Parameters>
+        <Returns>void</Returns>
+      </Method>
+
+      <Method name="getPostById">
+        <Description>根据 ID 获取文章</Description>
+        <Parameters>
+          <Parameter name="id" type="string" />
+        </Parameters>
+        <Returns>BlogPost | undefined</Returns>
+      </Method>
+    </StoreAPI>
+  </APIInterfaces>
+
+  <!-- ============================================
+       测试策略
+       ============================================ -->
+  <TestingStrategy>
+    <UnitTests>
+      <Component name="BlogCard">
+        <Test>渲染文章标题</Test>
+        <Test>渲染文章摘要</Test>
+        <Test>渲染文章标签</Test>
+        <Test>点击事件触发</Test>
+        <Test>标签点击事件触发</Test>
+        <Test>悬浮效果应用</Test>
+        <Test>主题切换支持</Test>
+      </Component>
+
+      <Component name="BlogList">
+        <Test>渲染文章列表</Test>
+        <Test>分页状态显示</Test>
+        <Test>页码切换功能</Test>
+        <Test>加载状态显示</Test>
+        <Test>错误状态显示</Test>
+        <Test>响应式布局</Test>
+      </Component>
+
+      <Component name="Pagination">
+        <Test>渲染页码</Test>
+        <Test>上一页按钮禁用状态</Test>
+        <Test>下一页按钮禁用状态</Test>
+        <Test>页码点击事件</Test>
+        <Test>省略号显示</Test>
+      </Component>
+
+      <Store name="useBlogStore">
+        <Test>loadPosts 加载文章</Test>
+        <Test>sortedPosts 按时间倒序</Test>
+        <Test>paginatedPosts 分页逻辑</Test>
+        <Test>setPage 设置页码</Test>
+        <Test>getPostById 获取文章</Test>
+        <Test>filterByTag 标签筛选</Test>
+        <Test>searchPosts 搜索功能</Test>
+      </Store>
+    </UnitTests>
+
+    <IntegrationTests>
+      <Test>Blog 页面集成测试</Test>
+      <Test>分页切换流程测试</Test>
+      <Test>文章点击跳转测试</Test>
+      <Test>标签筛选流程测试</Test>
+    </IntegrationTests>
+
+    <E2ETests>
+      <Test>用户浏览博客列表</Test>
+      <Test>用户切换分页</Test>
+      <Test>用户点击文章查看详情</Test>
+      <Test>用户点击标签筛选</Test>
+      <Test>用户在移动端浏览博客</Test>
+    </E2ETests>
+
+    <PerformanceTests>
+      <Test>列表加载性能测试（&lt; 300ms）</Test>
+      <Test>分页切换性能测试（&lt; 100ms）</Test>
+      <Test>虚拟列表滚动性能测试（≥60fps）</Test>
+      <Test>内存占用测试（&lt; 50MB）</Test>
+    </PerformanceTests>
+
+    <AccessibilityTests>
+      <Test>键盘导航测试</Test>
+      <Test>屏幕阅读器测试</Test>
+      <Test>颜色对比度测试</Test>
+      <Test>Focus 状态测试</Test>
+    </AccessibilityTests>
+
+    <Coverage>
+      <Target>80%</Target>
+      <Lines>80%</Lines>
+      <Functions>80%</Functions>
+      <Branches>80%</Branches>
+      <Statements>80%</Statements>
+    </Coverage>
+  </TestingStrategy>
+
+  <!-- ============================================
+       性能要求
+       ============================================ -->
+  <PerformanceRequirements>
+    <LoadingPerformance>
+      <Metric name="首屏加载时间" target="≤2s" priority="high" />
+      <Metric name="列表加载时间" target="≤300ms" priority="high" />
+      <Metric name="分页切换时间" target="≤100ms" priority="high" />
+      <Metric name="图片懒加载延迟" target="≤50ms" priority="medium" />
+    </LoadingPerformance>
+
+    <RenderingPerformance>
+      <Metric name="虚拟列表滚动帧率" target="≥60fps" priority="high" />
+      <Metric name="动画流畅度" target="≥60fps" priority="medium" />
+      <Metric name="页面切换时间" target="≤100ms" priority="medium" />
+    </RenderingPerformance>
+
+    <MemoryPerformance>
+      <Metric name="内存占用（100篇文章）" target="≤50MB" priority="medium" />
+      <Metric name="虚拟列表内存占用" target="≤30MB" priority="medium" />
+    </MemoryPerformance>
+
+    <BundleSize>
+      <Metric name="BlogList 组件大小" target="≤10KB" priority="low" />
+      <Metric name="BlogCard 组件大小" target="≤5KB" priority="low" />
+      <Metric name="Pagination 组件大小" target="≤3KB" priority="low" />
+    </BundleSize>
+  </PerformanceRequirements>
+
+  <!-- ============================================
+       开发备注
+       ============================================ -->
+  <DevelopmentNotes>
+    <TechnicalDecisions>
+      <Decision id="TD-001">
+        <Topic>数据存储</Topic>
+        <Choice>使用 JSON 文件存储博客数据</Choice>
+        <Reason>简单直接，易于版本控制，便于内容管理和更新</Reason>
+        <Alternative>Headless CMS（如 Notion、Contentful）</Alternative>
+      </Decision>
+
+      <Decision id="TD-002">
+        <Topic>虚拟列表</Topic>
+        <Choice>使用 vue-virtual-scroller 库</Choice>
+        <Reason>性能优秀，API 简洁，社区支持好</Reason>
+        <Alternative>vue-virtual-list</Alternative>
+      </Decision>
+
+      <Decision id="TD-003">
+        <Topic>分页逻辑</Topic>
+        <Choice>在 Store 中实现分页逻辑</Choice>
+        <Reason>便于复用和管理，统一状态管理</Reason>
+        <Alternative>在组件中实现</Alternative>
+      </Decision>
+
+      <Decision id="TD-004">
+        <Topic>主题系统</Topic>
+        <Choice>所有组件支持主题系统（colorScheme, uiStyle）</Choice>
+        <Reason>与 UI-UX-Pro-Max 深度集成，提供个性化定制体验</Reason>
+        <Alternative>固定主题</Alternative>
+      </Decision>
+    </TechnicalDecisions>
+
+    <PerformanceOptimizationStrategies>
+      <Strategy>
+        <Name>代码分割</Name>
+        <Description>路由级懒加载，减少首屏加载大小</Description>
+        <Implementation>
+          <Code language="typescript">
+            component: () => import('@/views/Blog.vue')
+          </Code>
+        </Implementation>
+      </Strategy>
+
+      <Strategy>
+        <Name>虚拟列表</Name>
+        <Description>≥50 篇时启用虚拟滚动，只渲染可见区域</Description>
+        <Condition>posts.length >= 50</Condition>
+      </Strategy>
+
+      <Strategy>
+        <Name>图片优化</Name>
+        <Description>使用 WebP 格式，懒加载</Description>
+        <Implementation>
+          <Code language="vue">
+            &lt;img :src="post.coverImage" loading="lazy" decoding="async" /&gt;
+          </Code>
+        </Implementation>
+      </Strategy>
+
+      <Strategy>
+        <Name>缓存优化</Name>
+        <Description>使用浏览器缓存，减少重复加载</Description>
+        <Implementation>
+          <Code language="typescript">
+            const cachedPosts = localStorage.getItem('blogPosts')
+            if (cachedPosts) {
+              posts.value = JSON.parse(cachedPosts)
+            }
+          </Code>
+        </Implementation>
+      </Strategy>
+
+      <Strategy>
+        <Name>渲染优化</Name>
+        <Description>使用 v-memo、key 优化渲染性能</Description>
+        <Implementation>
+          <Code language="vue">
+            &lt;BlogCard v-for="post in paginatedPosts" :key="post.id" :post="post" /&gt;
+          </Code>
+        </Implementation>
+      </Strategy>
+    </PerformanceOptimizationStrategies>
+
+    <AccessibilityGuidelines>
+      <Guideline>支持键盘导航（Tab 键）</Guideline>
+      <Guideline>清晰的 Focus 状态</Guideline>
+      <Guideline>语义化 HTML</Guideline>
+      <Guideline>ARIA 标签（如需要）</Guideline>
+      <Guideline>颜色对比度符合 WCAG AA 标准（4.5:1）</Guideline>
+      <Guideline>图片有 alt 属性</Guideline>
+    </AccessibilityGuidelines>
+
+    <Risks>
+      <Risk>
+        <Description>虚拟列表兼容性问题</Description>
+        <Impact>中</Impact>
+        <Probability>低</Probability>
+        <Mitigation>提前测试，准备降级方案</Mitigation>
+      </Risk>
+
+      <Risk>
+        <Description>性能指标不达标</Description>
+        <Impact>高</Impact>
+        <Probability>中</Probability>
+        <Mitigation>早期性能基准测试，持续优化</Mitigation>
+      </Risk>
+
+      <Risk>
+        <Description>测试覆盖率不足</Description>
+        <Impact>中</Impact>
+        <Probability>中</Probability>
+        <Mitigation>编写完整测试用例，定期检查</Mitigation>
+      </Risk>
+
+      <Risk>
+        <Description>主题系统兼容性</Description>
+        <Impact>低</Impact>
+        <Probability>低</Probability>
+        <Mitigation>提前设计主题系统架构</Mitigation>
+      </Risk>
+    </Risks>
+
+    <References>
+      <Reference>
+        <Title>Vue 3 官方文档</Title>
+        <URL>https://vuejs.org/</URL>
+      </Reference>
+      <Reference>
+        <Title>Pinia 官方文档</Title>
+        <URL>https://pinia.vuejs.org/</URL>
+      </Reference>
+      <Reference>
+        <Title>vue-virtual-scroller 文档</Title>
+        <URL>https://github.com/Akryum/vue-virtual-scroller</URL>
+      </Reference>
+      <Reference>
+        <Title>Tailwind CSS 文档</Title>
+        <URL>https://tailwindcss.com/</URL>
+      </Reference>
+      <Reference>
+        <Title>Web Vitals</Title>
+        <URL>https://web.dev/vitals/</URL>
+      </Reference>
+      <Reference>
+        <Title>WCAG 2.1</Title>
+        <URL>https://www.w3.org/WAI/WCAG21/quickref/</URL>
+      </Reference>
+    </References>
+  </DevelopmentNotes>
+
+  <!-- ============================================
+       任务分解
+       ============================================ -->
+  <TaskBreakdown>
+    <Task id="1.1.1" name="创建 BlogList 组件" estimatedHours="2-3" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.1.1">创建 src/components/blog/BlogList.vue 组件文件</Subtask>
+        <Subtask id="1.1.1.2">定义组件 Props 接口（posts, currentPage, totalPages 等）</Subtask>
+        <Subtask id="1.1.1.3">实现基础布局结构（Grid 布局）</Subtask>
+        <Subtask id="1.1.1.4">集成 BlogCard 组件</Subtask>
+        <Subtask id="1.1.1.5">实现响应式布局（Tailwind CSS）</Subtask>
+        <Subtask id="1.1.1.6">添加加载状态和错误状态</Subtask>
+        <Subtask id="1.1.1.7">编写组件单元测试</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.2" name="创建 BlogCard 组件" estimatedHours="2-3" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.2.1">创建 src/components/blog/BlogCard.vue 组件文件</Subtask>
+        <Subtask id="1.1.2.2">定义组件 Props 接口（BlogPost 类型）</Subtask>
+        <Subtask id="1.1.2.3">实现卡片布局（标题、摘要、元数据、标签）</Subtask>
+        <Subtask id="1.1.2.4">实现悬浮效果（CSS hover 或 GSAP 动画）</Subtask>
+        <Subtask id="1.1.2.5">实现点击事件（跳转到详情页）</Subtask>
+        <Subtask id="1.1.2.6">实现标签和分类点击事件</Subtask>
+        <Subtask id="1.1.2.7">添加主题系统支持</Subtask>
+        <Subtask id="1.1.2.8">编写组件单元测试</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.3" name="实现 useBlogStore 分页逻辑" estimatedHours="2-3" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.3.1">添加分页状态（currentPage, totalPages, itemsPerPage）</Subtask>
+        <Subtask id="1.1.3.2">实现 setPage() Action</Subtask>
+        <Subtask id="1.1.3.3">实现 paginatedPosts Getter</Subtask>
+        <Subtask id="1.1.3.4">实现 sortedPosts Getter（按发布时间倒序）</Subtask>
+        <Subtask id="1.1.3.5">添加 TypeScript 类型定义</Subtask>
+        <Subtask id="1.1.3.6">编写 Store 单元测试</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.4" name="实现分页组件" estimatedHours="1-2" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.4.1">创建 src/components/common/Pagination.vue 组件文件</Subtask>
+        <Subtask id="1.1.4.2">定义组件 Props 接口（currentPage, totalPages, onPageChange）</Subtask>
+        <Subtask id="1.1.4.3">实现分页按钮布局（上一页、页码、下一页）</Subtask>
+        <Subtask id="1.1.4.4">实现页码点击事件</Subtask>
+        <Subtask id="1.1.4.5">实现禁用状态</Subtask>
+        <Subtask id="1.1.4.6">添加主题系统支持</Subtask>
+        <Subtask id="1.1.4.7">编写组件单元测试</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.5" name="实现虚拟列表优化" estimatedHours="2-3" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.5.1">安装 vue-virtual-scroller 库</Subtask>
+        <Subtask id="1.1.5.2">创建 VirtualBlogList 组件</Subtask>
+        <Subtask id="1.1.5.3">实现虚拟列表逻辑（只渲染可见区域）</Subtask>
+        <Subtask id="1.1.5.4">添加条件判断（≥50 篇时启用）</Subtask>
+        <Subtask id="1.1.5.5">优化滚动性能（防抖、节流）</Subtask>
+        <Subtask id="1.1.5.6">编写虚拟列表单元测试</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.6" name="创建博客数据文件" estimatedHours="1" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.6.1">验证现有 blog-index.json 数据格式</Subtask>
+        <Subtask id="1.1.6.2">添加更多测试数据（≥50 篇，用于测试虚拟列表）</Subtask>
+        <Subtask id="1.1.6.3">验证数据格式符合 BlogPost 接口</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.7" name="创建 Blog 页面" estimatedHours="1-2" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.7.1">重构 src/views/Blog.vue 页面文件</Subtask>
+        <Subtask id="1.1.7.2">集成 BlogList 组件</Subtask>
+        <Subtask id="1.1.7.3">集成 Pagination 组件</Subtask>
+        <Subtask id="1.1.7.4">连接 useBlogStore</Subtask>
+        <Subtask id="1.1.7.5">实现页面标题和描述（SEO 优化）</Subtask>
+        <Subtask id="1.1.7.6">添加页面过渡动画（可选）</Subtask>
+        <Subtask id="1.1.7.7">编写页面 E2E 测试</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.8" name="配置路由" estimatedHours="0.5" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.8.1">验证 Blog 路由配置</Subtask>
+        <Subtask id="1.1.8.2">配置路由元信息（title, description）</Subtask>
+        <Subtask id="1.1.8.3">测试路由跳转功能</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.9" name="性能优化" estimatedHours="1-2" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.9.1">实现组件懒加载（路由级懒加载）</Subtask>
+        <Subtask id="1.1.9.2">优化图片加载（WebP 格式、懒加载）</Subtask>
+        <Subtask id="1.1.9.3">优化渲染性能（使用 v-memo、key）</Subtask>
+        <Subtask id="1.1.9.4">优化数据加载（使用缓存）</Subtask>
+        <Subtask id="1.1.9.5">使用 Chrome DevTools Performance 分析性能</Subtask>
+        <Subtask id="1.1.9.6">验证性能指标达标</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.10" name="编写测试" estimatedHours="2-3" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.10.1">编写 BlogList 组件单元测试</Subtask>
+        <Subtask id="1.1.10.2">编写 BlogCard 组件单元测试</Subtask>
+        <Subtask id="1.1.10.3">编写 Pagination 组件单元测试</Subtask>
+        <Subtask id="1.1.10.4">编写 useBlogStore 单元测试</Subtask>
+        <Subtask id="1.1.10.5">编写 Blog 页面 E2E 测试（Playwright）</Subtask>
+        <Subtask id="1.1.10.6">运行测试并验证覆盖率 ≥80%</Subtask>
+        <Subtask id="1.1.10.7">修复测试失败的问题</Subtask>
+      </Subtasks>
+    </Task>
+
+    <Task id="1.1.11" name="代码审查和优化" estimatedHours="1" status="pending">
+      <Subtasks>
+        <Subtask id="1.1.11.1">运行 ESLint 检查并修复问题</Subtask>
+        <Subtask id="1.1.11.2">运行 Prettier 格式化代码</Subtask>
+        <Subtask id="1.1.11.3">运行 TypeScript 类型检查</Subtask>
+        <Subtask id="1.1.11.4">代码审查（自我审查或同行审查）</Subtask>
+        <Subtask id="1.1.11.5">优化代码质量和可读性</Subtask>
+        <Subtask id="1.1.11.6">添加必要的注释</Subtask>
+      </Subtasks>
+    </Task>
+  </TaskBreakdown>
+
+  <!-- ============================================
+       进度跟踪
+       ============================================ -->
+  <ProgressTracking>
+    <OverallProgress>
+      <TotalTasks>11</TotalTasks>
+      <CompletedTasks>0</CompletedTasks>
+      <InProgressTasks>0</InProgressTasks>
+      <PendingTasks>11</PendingTasks>
+      <CompletionPercentage>0%</CompletionPercentage>
+    </OverallProgress>
+
+    <AcceptanceCriteriaProgress>
+      <FunctionalCriteria>
+        <Total>7</Total>
+        <Completed>0</Completed>
+        <CompletionPercentage>0%</CompletionPercentage>
+      </FunctionalCriteria>
+      <PerformanceCriteria>
+        <Total>5</Total>
+        <Completed>0</Completed>
+        <CompletionPercentage>0%</CompletionPercentage>
+      </PerformanceCriteria>
+      <QualityCriteria>
+        <Total>4</Total>
+        <Completed>0</Completed>
+        <CompletionPercentage>0%</CompletionPercentage>
+      </QualityCriteria>
+      <AccessibilityCriteria>
+        <Total>4</Total>
+        <Completed>0</Completed>
+        <CompletionPercentage>0%</CompletionPercentage>
+      </AccessibilityCriteria>
+      <TotalCriteria>20</TotalCriteria>
+      <TotalCompleted>0</TotalCompleted>
+      <TotalCompletionPercentage>0%</TotalCompletionPercentage>
+    </AcceptanceCriteriaProgress>
+  </ProgressTracking>
+
+  <!-- ============================================
+       相关文档
+       ============================================ -->
+  <RelatedDocuments>
+    <Document path="docs/PRD.md" type="PRD" />
+    <Document path="docs/Epics.md" type="Epic" />
+    <Document path="docs/solution-architecture.md" type="Architecture" />
+    <Document path="docs/technical-architecture.md" type="Technical" />
+    <Document path="docs/ui-design-system.md" type="UI/UX" />
+    <Document path="docs/stories/story-1.1.md" type="Story" />
+    <Document path="bmad/docs/iflow-instructions.md" type="Methodology" />
+  </RelatedDocuments>
+
+  <!-- ============================================
+       变更记录
+       ============================================ -->
+  <ChangeLog>
+    <Change version="1.0.0" date="2026-01-22" author="Bob (BMAD Scrum Master)">
+      <Description>初始版本创建</Description>
+    </Change>
+  </ChangeLog>
+</StoryContext>

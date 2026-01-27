@@ -28,7 +28,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'fade',
-  duration: 0.5,
+  duration: 0.5
 })
 
 const transitionName = ref(`page-${props.type}`)
@@ -52,7 +52,7 @@ const enter = (el: Element, done: () => void) => {
         opacity: 1,
         duration,
         ease: 'power2.out',
-        onComplete: done,
+        onComplete: done
       })
       break
 
@@ -65,7 +65,7 @@ const enter = (el: Element, done: () => void) => {
           x: 0,
           duration,
           ease: 'power3.out',
-          onComplete: done,
+          onComplete: done
         }
       )
       break
@@ -79,7 +79,7 @@ const enter = (el: Element, done: () => void) => {
           x: 0,
           duration,
           ease: 'power3.out',
-          onComplete: done,
+          onComplete: done
         }
       )
       break
@@ -93,7 +93,7 @@ const enter = (el: Element, done: () => void) => {
           scale: 1,
           duration,
           ease: 'back.out(1.7)',
-          onComplete: done,
+          onComplete: done
         }
       )
       break
@@ -107,7 +107,7 @@ const enter = (el: Element, done: () => void) => {
           rotationY: 0,
           duration,
           ease: 'power2.out',
-          onComplete: done,
+          onComplete: done
         }
       )
       break
@@ -140,7 +140,7 @@ const leave = (el: Element, done: () => void) => {
         opacity: 0,
         duration,
         ease: 'power2.in',
-        onComplete: done,
+        onComplete: done
       })
       break
 
@@ -150,7 +150,7 @@ const leave = (el: Element, done: () => void) => {
         x: -50,
         duration,
         ease: 'power3.in',
-        onComplete: done,
+        onComplete: done
       })
       break
 
@@ -160,7 +160,7 @@ const leave = (el: Element, done: () => void) => {
         x: 50,
         duration,
         ease: 'power3.in',
-        onComplete: done,
+        onComplete: done
       })
       break
 
@@ -170,7 +170,7 @@ const leave = (el: Element, done: () => void) => {
         scale: 1.1,
         duration,
         ease: 'power2.in',
-        onComplete: done,
+        onComplete: done
       })
       break
 
@@ -180,7 +180,7 @@ const leave = (el: Element, done: () => void) => {
         rotationY: 90,
         duration,
         ease: 'power2.in',
-        onComplete: done,
+        onComplete: done
       })
       break
   }

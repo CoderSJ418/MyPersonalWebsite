@@ -26,15 +26,21 @@
               @keydown="handleKeydown"
             />
             <div class="flex items-center gap-2 pr-4">
-              <kbd class="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-700 rounded">
+              <kbd
+                class="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-700 rounded"
+              >
                 <span class="text-xs">↑↓</span>
                 选择
               </kbd>
-              <kbd class="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-700 rounded">
+              <kbd
+                class="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-700 rounded"
+              >
                 <span class="text-xs">↵</span>
                 跳转
               </kbd>
-              <kbd class="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-700 rounded">
+              <kbd
+                class="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-700 rounded"
+              >
                 <span class="text-xs">ESC</span>
                 关闭
               </kbd>
@@ -83,7 +89,9 @@
             <div v-else-if="hasResults" class="p-4 space-y-6">
               <!-- 项目结果 -->
               <div v-if="searchStore.results.projects.length > 0">
-                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2">
+                <h3
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2"
+                >
                   <FolderKanban class="w-4 h-4" />
                   项目 ({{ searchStore.results.projects.length }})
                 </h3>
@@ -93,16 +101,24 @@
                     :key="item.id"
                     :class="[
                       'p-3 rounded-lg cursor-pointer transition-all',
-                      isSelected(item) ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                      isSelected(item)
+                        ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
                     ]"
                     @click="navigateTo(item.url)"
                     @mouseenter="selectItem(item)"
                   >
                     <div class="flex items-start gap-3">
                       <div class="flex-1 min-w-0">
-                        <h4 class="font-medium text-gray-900 dark:text-gray-100 mb-1" v-html="item.highlight?.title || item.title" />
-                        <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2" v-html="item.highlight?.description || item.description" />
-                        <div v-if="item.metadata?.tags" class="flex flex-wrap gap-1 mt-2">
+                        <h4
+                          class="font-medium text-gray-900 dark:text-gray-100 mb-1"
+                          v-html="item.highlight?.title || item.title"
+                        />
+                        <p
+                          class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
+                          v-html="item.highlight?.description || item.description"
+                        />
+                        <div v-if="item.metadata?.tags && item.metadata.tags.length > 0" class="flex flex-wrap gap-1 mt-2">
                           <span
                             v-for="tag in item.metadata.tags.slice(0, 3)"
                             :key="tag"
@@ -120,7 +136,9 @@
 
               <!-- 技能结果 -->
               <div v-if="searchStore.results.skills.length > 0">
-                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2">
+                <h3
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2"
+                >
                   <Zap class="w-4 h-4" />
                   技能 ({{ searchStore.results.skills.length }})
                 </h3>
@@ -130,15 +148,23 @@
                     :key="item.id"
                     :class="[
                       'p-3 rounded-lg cursor-pointer transition-all',
-                      isSelected(item) ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                      isSelected(item)
+                        ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
                     ]"
                     @click="navigateTo(item.url)"
                     @mouseenter="selectItem(item)"
                   >
                     <div class="flex items-start gap-3">
                       <div class="flex-1 min-w-0">
-                        <h4 class="font-medium text-gray-900 dark:text-gray-100 mb-1" v-html="item.highlight?.title || item.title" />
-                        <p class="text-sm text-gray-600 dark:text-gray-400" v-html="item.highlight?.description || item.description" />
+                        <h4
+                          class="font-medium text-gray-900 dark:text-gray-100 mb-1"
+                          v-html="item.highlight?.title || item.title"
+                        />
+                        <p
+                          class="text-sm text-gray-600 dark:text-gray-400"
+                          v-html="item.highlight?.description || item.description"
+                        />
                       </div>
                       <ArrowUpRight class="w-5 h-5 text-gray-400 flex-shrink-0" />
                     </div>
@@ -148,7 +174,9 @@
 
               <!-- 博客结果 -->
               <div v-if="searchStore.results.blogs.length > 0">
-                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2">
+                <h3
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2"
+                >
                   <FileText class="w-4 h-4" />
                   博客 ({{ searchStore.results.blogs.length }})
                 </h3>
@@ -158,15 +186,23 @@
                     :key="item.id"
                     :class="[
                       'p-3 rounded-lg cursor-pointer transition-all',
-                      isSelected(item) ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                      isSelected(item)
+                        ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
                     ]"
                     @click="navigateTo(item.url)"
                     @mouseenter="selectItem(item)"
                   >
                     <div class="flex items-start gap-3">
                       <div class="flex-1 min-w-0">
-                        <h4 class="font-medium text-gray-900 dark:text-gray-100 mb-1" v-html="item.highlight?.title || item.title" />
-                        <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2" v-html="item.highlight?.description || item.description" />
+                        <h4
+                          class="font-medium text-gray-900 dark:text-gray-100 mb-1"
+                          v-html="item.highlight?.title || item.title"
+                        />
+                        <p
+                          class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
+                          v-html="item.highlight?.description || item.description"
+                        />
                         <div class="flex items-center gap-2 mt-2 text-xs text-gray-500">
                           <span>{{ item.metadata?.author }}</span>
                           <span>•</span>
@@ -191,7 +227,10 @@
           </div>
 
           <!-- 底部快捷键提示 -->
-          <div v-if="hasResults" class="px-4 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+          <div
+            v-if="hasResults"
+            class="px-4 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50"
+          >
             <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
               <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1">
@@ -221,14 +260,7 @@ import { useProjectStore } from '@/stores/useProjectStore'
 import { useSkillStore } from '@/stores/useSkillStore'
 import { useBlogStore } from '@/stores/useBlogStore'
 import { flattenSearchResults } from '@/utils/search'
-import {
-  Search,
-  SearchX,
-  ArrowUpRight,
-  FolderKanban,
-  Zap,
-  FileText
-} from 'lucide-vue-next'
+import { Search, SearchX, ArrowUpRight, FolderKanban, Zap, FileText } from 'lucide-vue-next'
 
 const router = useRouter()
 const searchStore = useSearchStore()
@@ -257,7 +289,7 @@ const isSelected = (item: any) => {
 // 选择项目
 const selectItem = (item: any) => {
   const flatResults = flattenSearchResults(searchStore.results)
-  const index = flatResults.findIndex(r => r.id === item.id)
+  const index = flatResults.findIndex((r) => r.id === item.id)
   if (index !== -1) {
     searchStore.selectedIndex = index
   }
@@ -299,31 +331,32 @@ const handleKeydown = (e: KeyboardEvent) => {
 }
 
 // 监听搜索框打开，自动聚焦
-watch(() => searchStore.isOpen, async (isOpen) => {
-  if (isOpen) {
-    await nextTick()
-    searchInput.value?.focus()
-  }
-})
-
-// 监听查询变化，执行搜索
-watch(() => searchStore.query, (newQuery) => {
-  if (newQuery.trim()) {
-    searchStore.performSearch(
-      newQuery,
-      projectStore.projects,
-      skillStore.skills,
-      blogStore.posts
-    )
-  } else {
-    searchStore.results = {
-      projects: [],
-      skills: [],
-      blogs: [],
-      total: 0
+watch(
+  () => searchStore.isOpen,
+  async (isOpen) => {
+    if (isOpen) {
+      await nextTick()
+      searchInput.value?.focus()
     }
   }
-})
+)
+
+// 监听查询变化，执行搜索
+watch(
+  () => searchStore.query,
+  (newQuery) => {
+    if (newQuery.trim()) {
+      searchStore.performSearch(newQuery, projectStore.projects, skillStore.skills, blogStore.posts)
+    } else {
+      searchStore.results = {
+        projects: [],
+        skills: [],
+        blogs: [],
+        total: 0
+      }
+    }
+  }
+)
 </script>
 
 <style scoped>
@@ -339,7 +372,9 @@ watch(() => searchStore.query, (newQuery) => {
 
 .modal-enter-active .relative,
 .modal-leave-active .relative {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .modal-enter-from .relative,

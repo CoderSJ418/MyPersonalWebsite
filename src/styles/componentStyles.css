@@ -1,0 +1,396 @@
+/**
+ * UI 风格样式
+ * @description 现代顶级设计风格的样式规则，参考 Linear、Vercel、Stripe、Apple 等顶级设计语言
+ */
+
+/* 基础卡片样式 */
+.card,
+[class*='-card'] {
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== 1. Linear Glass - Linear 风格玻璃拟态 ========== */
+[data-component-style='linear-glass'] .card,
+[data-component-style='linear-glass'] [class*='-card'] {
+  background: linear-gradient(135deg, rgba(94, 106, 210, 0.1), rgba(139, 92, 246, 0.05));
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-component-style='linear-glass'] .card::before,
+[data-component-style='linear-glass'] [class*='-card']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+[data-component-style='linear-glass'] .card:hover::before,
+[data-component-style='linear-glass'] [class*='-card']:hover::before {
+  left: 100%;
+}
+
+[data-component-style='linear-glass'] button {
+  background: linear-gradient(135deg, rgba(94, 106, 210, 0.8), rgba(139, 92, 246, 0.8));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 16px rgba(94, 106, 210, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-component-style='linear-glass'] button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(94, 106, 210, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+[data-component-style='linear-glass'] input {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+[data-component-style='linear-glass'] input:focus {
+  border-color: rgba(94, 106, 210, 0.8);
+  box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.2);
+  outline: none;
+}
+
+/* ========== 2. Apple Bento - Apple 风格 Bento Grid ========== */
+[data-component-style='apple-bento'] .card,
+[data-component-style='apple-bento'] [class*='-card'] {
+  background: var(--bg-card);
+  border-radius: 20px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-component-style='apple-bento'] .card:hover,
+[data-component-style='apple-bento'] [class*='-card']:hover {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+[data-component-style='apple-bento'] button {
+  background: var(--primary-color);
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  padding: 0.75rem 1.5rem;
+}
+
+[data-component-style='apple-bento'] button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-component-style='apple-bento'] input {
+  background: var(--bg-surface);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.75rem 1rem;
+}
+
+[data-component-style='apple-bento'] input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  outline: none;
+}
+
+/* ========== 3. Vercel Minimal - Vercel 风格极简主义 ========== */
+[data-component-style='vercel-minimal'] .card,
+[data-component-style='vercel-minimal'] [class*='-card'] {
+  background: var(--bg-card);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-component-style='vercel-minimal'] .card:hover,
+[data-component-style='vercel-minimal'] [class*='-card']:hover {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.16),
+    0 12px 24px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+[data-component-style='vercel-minimal'] button {
+  background: #000000;
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease;
+  border: none;
+  padding: 0.75rem 1.5rem;
+}
+
+[data-component-style='vercel-minimal'] button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+[data-component-style='vercel-minimal'] input {
+  background: var(--bg-surface);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: none;
+  transition: all 0.15s ease;
+  padding: 0.75rem 1rem;
+}
+
+[data-component-style='vercel-minimal'] input:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+  outline: none;
+}
+
+/* ========== 4. Stripe Gradient - Stripe 风格优雅渐变 ========== */
+[data-component-style='stripe-gradient'] .card,
+[data-component-style='stripe-gradient'] [class*='-card'] {
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.03), rgba(0, 212, 255, 0.03));
+  border-radius: 16px;
+  box-shadow:
+    0 4px 16px rgba(99, 91, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(99, 91, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-component-style='stripe-gradient'] .card::after,
+[data-component-style='stripe-gradient'] [class*='-card']::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 91, 255, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[data-component-style='stripe-gradient'] .card:hover::after,
+[data-component-style='stripe-gradient'] [class*='-card']:hover::after {
+  opacity: 1;
+}
+
+[data-component-style='stripe-gradient'] .card:hover,
+[data-component-style='stripe-gradient'] [class*='-card']:hover {
+  box-shadow:
+    0 8px 24px rgba(99, 91, 255, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+[data-component-style='stripe-gradient'] button {
+  background: linear-gradient(135deg, #635bff, #00d4ff);
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow:
+    0 4px 12px rgba(99, 91, 255, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  padding: 0.75rem 1.5rem;
+}
+
+[data-component-style='stripe-gradient'] button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 16px rgba(99, 91, 255, 0.35),
+    0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-component-style='stripe-gradient'] input {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(99, 91, 255, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(99, 91, 255, 0.06);
+  transition: all 0.2s ease;
+  padding: 0.75rem 1rem;
+}
+
+[data-component-style='stripe-gradient'] input:focus {
+  border-color: #635bff;
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.15);
+  outline: none;
+}
+
+/* ========== 暗黑模式适配 ========== */
+[data-dark='true'] [data-component-style='linear-glass'] .card,
+[data-dark='true'] [data-component-style='linear-glass'] [class*='-card'] {
+  background: linear-gradient(135deg, rgba(94, 106, 210, 0.15), rgba(139, 92, 246, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+[data-dark='true'] [data-component-style='apple-bento'] .card,
+[data-dark='true'] [data-component-style='apple-bento'] [class*='-card'] {
+  background: rgba(28, 28, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-dark='true'] [data-component-style='vercel-minimal'] .card,
+[data-dark='true'] [data-component-style='vercel-minimal'] [class*='-card'] {
+  background: rgba(28, 28, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+[data-dark='true'] [data-component-style='stripe-gradient'] .card,
+[data-dark='true'] [data-component-style='stripe-gradient'] [class*='-card'] {
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.08), rgba(0, 212, 255, 0.05));
+  border: 1px solid rgba(99, 91, 255, 0.15);
+  box-shadow:
+    0 4px 16px rgba(99, 91, 255, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-dark='true'] [data-component-style='vercel-minimal'] button {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* ========== 通用悬停效果 ========== */
+.card:hover,
+[class*='-card']:hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-component-style='linear-glass'] .card:hover,
+[data-component-style='linear-glass'] [class*='-card']:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+[data-component-style='apple-bento'] .card:hover,
+[data-component-style='apple-bento'] [class*='-card']:hover {
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.08),
+    0 3px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-3px);
+}
+
+[data-component-style='vercel-minimal'] .card:hover,
+[data-component-style='vercel-minimal'] [class*='-card']:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+[data-component-style='stripe-gradient'] .card:hover,
+[data-component-style='stripe-gradient'] [class*='-card']:hover {
+  box-shadow:
+    0 12px 32px rgba(99, 91, 255, 0.15),
+    0 6px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+/* ========== 按钮通用样式 ========== */
+button {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: translateY(0);
+  transition: all 0.15s ease;
+}
+
+/* ========== 输入框通用样式 ========== */
+input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+input:focus {
+  transition: all 0.2s ease;
+}
+
+/* ========== 响应式调整 ========== */
+@media (max-width: 768px) {
+  .card,
+  [class*='-card'] {
+    padding: 1rem;
+  }
+
+  button {
+    padding: 0.625rem 1.25rem;
+  }
+
+  input {
+    padding: 0.625rem 0.875rem;
+  }
+
+  [data-component-style='linear-glass'] .card:hover,
+  [data-component-style='linear-glass'] [class*='-card']:hover {
+    transform: translateY(-2px);
+  }
+
+  [data-component-style='apple-bento'] .card:hover,
+  [data-component-style='apple-bento'] [class*='-card']:hover {
+    transform: translateY(-2px);
+  }
+
+  [data-component-style='stripe-gradient'] .card:hover,
+  [data-component-style='stripe-gradient'] [class*='-card']:hover {
+    transform: translateY(-2px);
+  }
+}

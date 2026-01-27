@@ -9,6 +9,12 @@ export interface BlogPost {
   tags: string[]
   readTime: number
   coverImage?: string
+  category?: string
+  codeVersion?: {
+    vue?: string
+    typescript?: string
+    [key: string]: string | undefined
+  }
 }
 
 export interface BlogFilter {

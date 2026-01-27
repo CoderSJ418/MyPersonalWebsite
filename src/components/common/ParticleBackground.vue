@@ -1,9 +1,5 @@
 <template>
-  <canvas
-    ref="canvasRef"
-    class="particle-canvas"
-    :class="{ 'dark': isDark }"
-  ></canvas>
+  <canvas ref="canvasRef" class="particle-canvas" :class="{ dark: isDark }"></canvas>
 </template>
 
 <script setup lang="ts">
@@ -79,13 +75,13 @@ const drawParticles = (canvas: HTMLCanvasElement) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
   // Draw particles
-  particles.forEach(particle => {
+  particles.forEach((particle) => {
     particle.draw(ctx)
   })
 
   // Draw connections
   particles.forEach((p1, i) => {
-    particles.slice(i + 1).forEach(p2 => {
+    particles.slice(i + 1).forEach((p2) => {
       const dx = p1.x - p2.x
       const dy = p1.y - p2.y
       const distance = Math.sqrt(dx * dx + dy * dy)
@@ -119,7 +115,7 @@ const drawParticles = (canvas: HTMLCanvasElement) => {
 }
 
 const updateParticles = (canvas: HTMLCanvasElement) => {
-  particles.forEach(particle => {
+  particles.forEach((particle) => {
     particle.update(canvas)
   })
 }

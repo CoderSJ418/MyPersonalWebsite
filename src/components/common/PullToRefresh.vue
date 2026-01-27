@@ -1,8 +1,5 @@
 <template>
-  <div
-    ref="containerRef"
-    class="relative"
-  >
+  <div ref="containerRef" class="relative">
     <!-- 下拉刷新指示器 -->
     <div
       class="fixed top-0 left-0 right-0 z-40 flex items-center justify-center transition-transform duration-300 pointer-events-none"
@@ -42,8 +39,5 @@ const props = withDefaults(defineProps<Props>(), {
 
 const containerRef = ref<HTMLElement | null>(null)
 
-const { isPulling, pullDistance, isRefreshing } = usePullToRefresh(
-  props.onRefresh,
-  props.threshold
-)
+const { isPulling, pullDistance, isRefreshing } = usePullToRefresh(props.onRefresh, props.threshold)
 </script>

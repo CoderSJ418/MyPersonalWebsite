@@ -1,1 +1,120 @@
-[{"id": "1", "company": "某知名互联网公司", "logo": "/images/companies/company1.png", "position": "高级前端工程师", "startDate": "2021-06", "endDate": "2024-01", "duration": "2年7个月", "location": "北京", "description": "负责公司核心产品的前端架构设计和开发，带领5人团队完成多个重要项目。主导技术选型和架构设计，推动团队技术能力提升。", "responsibilities": ["负责前端架构设计和技术选型", "带领5人前端团队，负责项目交付", "制定前端开发规范和最佳实践", "推动技术升级和性能优化", "指导初级工程师，提升团队整体能力"], "achievements": [{"title": "系统重构", "description": "主导重构旧系统，采用Vue 3 + TypeScript技术栈，性能提升50%，开发效率提升30%"}, {"title": "工程化建设", "description": "搭建前端工程化体系，包括CI/CD、代码规范、自动化测试，开发效率提升30%"}, {"title": "团队建设", "description": "培养3名中级工程师，建立技术分享机制，团队技术能力显著提升"}, {"title": "性能优化", "description": "优化核心页面性能，首屏加载时间从3s降低到1s以内，用户体验显著改善"}], "techStack": ["Vue 3", "TypeScript", "Vite", "Pinia", "Node.js", "Docker"], "projects": ["Vue 3企业级管理系统", "数据可视化大屏", "在线协作白板"]}, {"id": "2", "company": "某科技公司", "logo": "/images/companies/company2.png", "position": "中级前端工程师", "startDate": "2019-03", "endDate": "2021-05", "duration": "2年2个月", "location": "上海", "description": "负责多个项目的前端开发工作，参与技术选型和架构设计。独立完成核心功能开发，推动团队技术升级。", "responsibilities": ["独立负责项目前端开发", "参与技术选型和架构设计", "优化应用性能和用户体验", "编写技术文档和最佳实践", "协助解决团队技术难题"], "achievements": [{"title": "独立交付项目", "description": "独立完成3个重要项目的前端开发，按时高质量交付"}, {"title": "技术升级", "description": "推动团队从Vue 2升级到Vue 3，提升开发效率和代码质量"}, {"title": "性能优化", "description": "优化项目性能，页面加载速度提升40%，用户体验显著改善"}, {"title": "技术分享", "description": "组织技术分享会，分享Vue 3和TypeScript最佳实践"}], "techStack": ["Vue 2", "Vue 3", "TypeScript", "Webpack", "Element UI"], "projects": ["React 18电商后台", "Next.js 14博客平台"]}, {"id": "3", "company": "某创业公司", "logo": "/images/companies/company3.png", "position": "初级前端工程师", "startDate": "2017-07", "endDate": "2019-02", "duration": "1年7个月", "location": "杭州", "description": "作为初级前端工程师，参与多个项目的开发工作。快速学习Vue技术栈，建立前端开发规范。", "responsibilities": ["参与项目前端开发", "学习和掌握Vue技术栈", "编写和优化前端代码", "参与代码审查", "协助解决技术问题"], "achievements": [{"title": "快速成长", "description": "从零开始学习Vue技术栈，在3个月内能够独立完成功能开发"}, {"title": "项目交付", "description": "参与完成5个项目的前端开发，积累丰富的项目经验"}, {"title": "规范建立", "description": "协助建立前端开发规范，提升代码质量和团队协作效率"}], "techStack": ["Vue 2", "JavaScript", "HTML/CSS", "Webpack"], "projects": ["微信小程序商城", "AI智能客服系统"]}]
+[
+  {
+    "id": "1",
+    "company": "上海潘哆呐科技有限公司",
+    "logo": "/images/companies/pan-duo-na.png",
+    "position": "前端开发工程师",
+    "startDate": "2023-04",
+    "endDate": "2025-11",
+    "duration": "2年7个月",
+    "location": "上海",
+    "description": "主导前端技术架构演进，牵头完成从 Vue 2/Webpack 到 Vue 3 + TypeScript + Vite 的技术栈升级，带领 5 人前端团队平稳过渡，无业务中断。",
+    "responsibilities": [
+      "主导前端技术架构演进，制定技术升级路线图",
+      "解决 Vue 2 到 Vue 3 的兼容性问题，封装通用组件库和工具函数",
+      "制定迁移指南和培训计划，带领 5 人前端团队平稳过渡",
+      "建立前端代码规范、Code Review 机制，提升代码质量",
+      "优化构建性能，提升开发体验"
+    ],
+    "achievements": [
+      {
+        "title": "技术栈升级",
+        "description": "成功完成从 Vue 2/Webpack 到 Vue 3 + TypeScript + Vite 的技术栈升级，新项目初始构建速度提升 65%，热更新从 10 秒优化到秒级"
+      },
+      {
+        "title": "团队建设",
+        "description": "带领 5 人前端团队完成技术栈迁移，制定迁移指南和培训计划，实现无业务中断的平滑过渡"
+      },
+      {
+        "title": "工程化建设",
+        "description": "建立前端代码规范、Code Review 机制，代码质量明显改善，开发效率显著提升"
+      },
+      {
+        "title": "性能优化",
+        "description": "优化构建性能，新项目初始构建速度提升 65%，热更新从 10 秒优化到秒级，开发体验显著提升"
+      }
+    ],
+    "techStack": [
+      "Vue 3",
+      "TypeScript",
+      "Vite",
+      "Pinia",
+      "Vue Router",
+      "ESLint",
+      "Prettier",
+      "Husky"
+    ],
+    "projects": ["Vue 3 企业级管理系统", "组件库封装", "工程化体系建设"]
+  },
+  {
+    "id": "2",
+    "company": "上海聪容科技有限公司",
+    "logo": "/images/companies/cong-rong.png",
+    "position": "前端开发工程师",
+    "startDate": "2020-04",
+    "endDate": "2023-03",
+    "duration": "2年11个月",
+    "location": "上海",
+    "description": "独立负责公司电商 SaaS 平台的核心业务模块，设计了基于角色的权限控制系统，优化移动端体验，提升系统性能。",
+    "responsibilities": [
+      "独立负责电商 SaaS 平台的商品管理、订单流程、库存管理等核心业务模块",
+      "设计并实现基于角色的前端动态路由与按钮级权限控制系统",
+      "优化移动端复杂数据表格性能，使用虚拟滚动技术",
+      "优化表单验证、数据校验机制，减少用户操作错误",
+      "处理复杂的数据联动、状态同步、异常处理等业务逻辑"
+    ],
+    "achievements": [
+      {
+        "title": "权限系统设计",
+        "description": "设计了灵活的 RBAC 权限系统，支持动态路由和按钮级权限控制，解决了权限缓存、权限更新同步等技术难点，被公司多个产品线复用"
+      },
+      {
+        "title": "移动端优化",
+        "description": "针对移动端复杂数据表格进行性能优化，使用虚拟滚动技术，通过分页加载、数据预加载、缓存策略提升万级数据列表的滚动流畅度"
+      },
+      {
+        "title": "核心模块开发",
+        "description": "独立负责电商 SaaS 平台的核心业务模块，处理了复杂的数据联动、状态同步、异常处理等业务逻辑"
+      },
+      {
+        "title": "用户体验优化",
+        "description": "优化了表单验证、数据校验机制，减少了用户操作错误，优化了触摸交互、手势操作，提升了移动端用户体验"
+      }
+    ],
+    "techStack": ["Vue 2", "Vue 3", "TypeScript", "Element Plus", "ECharts", "Pinia", "Vuex"],
+    "projects": ["电商 SaaS 平台", "权限管理系统", "数据可视化看板"]
+  },
+  {
+    "id": "3",
+    "company": "上海鹏翔网络科技有限公司",
+    "logo": "/images/companies/peng-xiang.png",
+    "position": "前端开发工程师",
+    "startDate": "2019-06",
+    "endDate": "2020-03",
+    "duration": "9个月",
+    "location": "上海",
+    "description": "参与企业内部管理系统开发，协助团队建立代码工作流，提升团队协作效率与代码可维护性。",
+    "responsibilities": [
+      "参与企业内部管理系统开发，负责数据展示、流程审批等模块的实现",
+      "协助团队建立并推行 Git + ESLint + Prettier 的代码工作流",
+      "参与代码审查，提升代码质量和可维护性",
+      "学习和掌握 Vue 技术栈，快速成长"
+    ],
+    "achievements": [
+      {
+        "title": "系统开发",
+        "description": "参与企业内部管理系统开发，负责数据展示、流程审批等模块的实现，按时高质量交付"
+      },
+      {
+        "title": "规范建设",
+        "description": "协助团队建立并推行 Git + ESLint + Prettier 的代码工作流，提升团队协作效率与代码可维护性"
+      },
+      {
+        "title": "快速成长",
+        "description": "从零开始学习 Vue 技术栈，快速掌握前端开发技能，能够独立完成功能开发"
+      }
+    ],
+    "techStack": ["Vue 2", "JavaScript", "ESLint", "Prettier", "Git"],
+    "projects": ["企业内部管理系统", "代码工作流建设"]
+  }
+]

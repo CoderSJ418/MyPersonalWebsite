@@ -4,6 +4,7 @@
  */
 
 import { ref, onMounted, onUnmounted } from 'vue'
+import { logger } from '@/utils/logger'
 
 export interface ServiceWorkerStatus {
   isSupported: boolean
@@ -41,12 +42,12 @@ export function useServiceWorker() {
   const register = async (scriptUrl = '/sw.js') => {
     if (!checkSupport()) {
       status.value.error = 'Service Worker 不被支持'
-      console.warn('[Service Worker] Not supported')
+      logger.warn('[Service Worker] Not supported')
       return null
     }
 
     try {
-      console.log('[Service Worker] Registering...', scriptUrl)
+      logger.info('[Service Worker] Registering...', scriptUrl)
 
       const reg = await navigator.serviceWorker.register(scriptUrl, {
         scope: '/'
@@ -55,7 +56,7 @@ export function useServiceWorker() {
       registration.value = reg
       status.value.isRegistered = true
 
-      console.log('[Service Worker] Registered:', reg)
+      logger.info('[Service Worker] Registered:', reg)
 
       // 监听更新
       reg.addEventListener('updatefound', handleUpdateFound)
@@ -68,7 +69,7 @@ export function useServiceWorker() {
       return reg
     } catch (error) {
       status.value.error = `注册失败: ${error}`
-      console.error('[Service Worker] Registration failed:', error)
+      logger.error('[Service Worker] Registration failed:', error)
       return null
     }
   }
@@ -83,16 +84,16 @@ export function useServiceWorker() {
 
     if (!newWorker) return
 
-    console.log('[Service Worker] New worker installing')
+    logger.info('[Service Worker] New worker installing')
 
     newWorker.addEventListener('statechange', () => {
-      console.log('[Service Worker] State:', newWorker.state)
+      logger.debug('[Service Worker] State:', newWorker.state)
 
       switch (newWorker.state) {
         case 'installed':
           if (navigator.serviceWorker.controller) {
             // 有新的 Service Worker 可用
-            console.log('[Service Worker] Update available')
+            logger.info('[Service Worker] Update available')
             status.value.updateAvailable = true
 
             // 调用更新回调
@@ -101,18 +102,18 @@ export function useServiceWorker() {
             }
           } else {
             // 首次安装
-            console.log('[Service Worker] First install')
+            logger.info('[Service Worker] First install')
             status.value.isActivated = true
           }
           break
 
         case 'activated':
           status.value.isActivated = true
-          console.log('[Service Worker] Activated')
+          logger.info('[Service Worker] Activated')
           break
 
         case 'redundant':
-          console.log('[Service Worker] Redundant')
+          logger.warn('[Service Worker] Redundant')
           break
       }
     })
@@ -123,11 +124,11 @@ export function useServiceWorker() {
    */
   const skipWaiting = () => {
     if (!registration.value || !registration.value.waiting) {
-      console.warn('[Service Worker] No waiting worker to skip')
+      logger.warn('[Service Worker] No waiting worker to skip')
       return
     }
 
-    console.log('[Service Worker] Skipping waiting')
+    logger.info('[Service Worker] Skipping waiting')
     registration.value.waiting.postMessage({ type: 'SKIP_WAITING' })
   }
 
@@ -144,18 +145,18 @@ export function useServiceWorker() {
    */
   const clearCache = async () => {
     if (!registration.value) {
-      console.warn('[Service Worker] No registration')
+      logger.warn('[Service Worker] No registration')
       return
     }
 
-    console.log('[Service Worker] Clearing cache')
+    logger.info('[Service Worker] Clearing cache')
     registration.value.active?.postMessage({ type: 'CLEAR_CACHE' })
 
     // 清除所有缓存
     const cacheNames = await caches.keys()
     await Promise.all(cacheNames.map((name) => caches.delete(name)))
 
-    console.log('[Service Worker] Cache cleared')
+    logger.info('[Service Worker] Cache cleared')
   }
 
   /**
@@ -163,20 +164,20 @@ export function useServiceWorker() {
    */
   const unregister = async () => {
     if (!registration.value) {
-      console.warn('[Service Worker] No registration to unregister')
+      logger.warn('[Service Worker] No registration to unregister')
       return
     }
 
-    console.log('[Service Worker] Unregistering')
+    logger.info('[Service Worker] Unregistering')
     const success = await registration.value.unregister()
 
     if (success) {
-      console.log('[Service Worker] Unregistered successfully')
+      logger.info('[Service Worker] Unregistered successfully')
       status.value.isRegistered = false
       status.value.isActivated = false
       status.value.isControlling = false
     } else {
-      console.warn('[Service Worker] Unregister failed')
+      logger.warn('[Service Worker] Unregister failed')
     }
   }
 
@@ -193,26 +194,34 @@ export function useServiceWorker() {
   }
 
   /**
-   * 获取缓存大小
+   * 获取缓存大小 - 使用 Promise.all 并行处理优化性能
    */
   const getCacheSize = async () => {
     const cacheNames = await caches.keys()
-    let totalSize = 0
 
-    for (const name of cacheNames) {
-      const cache = await caches.open(name)
-      const keys = await cache.keys()
+    // 使用 Promise.all 并行处理所有缓存
+    const cacheSizes = await Promise.all(
+      cacheNames.map(async (name) => {
+        const cache = await caches.open(name)
+        const keys = await cache.keys()
 
-      for (const request of keys) {
-        const response = await cache.match(request)
-        if (response) {
-          const blob = await response.blob()
-          totalSize += blob.size
-        }
-      }
-    }
+        // 并行处理每个缓存中的所有请求
+        const responseSizes = await Promise.all(
+          keys.map(async (request) => {
+            const response = await cache.match(request)
+            if (response) {
+              const blob = await response.blob()
+              return blob.size
+            }
+            return 0
+          })
+        )
 
-    return totalSize
+        return responseSizes.reduce((sum, size) => sum + size, 0)
+      })
+    )
+
+    return cacheSizes.reduce((sum, size) => sum + size, 0)
   }
 
   /**
@@ -233,7 +242,7 @@ export function useServiceWorker() {
 
   // 监听 Service Worker 控制变化
   const handleControllerChange = () => {
-    console.log('[Service Worker] Controller changed')
+    logger.info('[Service Worker] Controller changed')
     status.value.isControlling = !!navigator.serviceWorker.controller
   }
 

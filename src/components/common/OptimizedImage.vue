@@ -55,6 +55,7 @@ interface Props {
   srcset?: string
   aspectRatio?: number
   backgroundColor?: string
+  isCritical?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -64,7 +65,8 @@ const props = withDefaults(defineProps<Props>(), {
   placeholderColor: '#e5e7eb',
   objectFit: 'cover',
   aspectRatio: 16 / 9,
-  backgroundColor: 'transparent'
+  backgroundColor: 'transparent',
+  isCritical: false
 })
 
 const emit = defineEmits<{
@@ -78,6 +80,26 @@ const isLoaded = ref(false)
 const hasError = ref(false)
 const supportsWebP = ref(false)
 const currentSrc = ref(props.src)
+
+// 预加载关键图片
+const preloadCriticalImage = (src: string) => {
+  if (typeof document !== 'undefined') {
+    const link = document.createElement('link')
+    link.rel = 'preload'
+    link.as = 'image'
+    link.href = src
+    link.crossOrigin = 'anonymous'
+    document.head.appendChild(link)
+    
+    // 添加 noscript 回退
+    const noscript = document.createElement('noscript')
+    const fallbackImg = document.createElement('img')
+    fallbackImg.src = src
+    fallbackImg.style.display = 'none'
+    noscript.appendChild(fallbackImg)
+    document.head.appendChild(noscript)
+  }
+}
 
 // 容器样式
 const containerStyle = computed(() => ({
@@ -119,6 +141,11 @@ onMounted(async () => {
     if (['jpg', 'jpeg', 'png'].includes(ext || '')) {
       currentSrc.value = props.src.replace(/\.(jpg|jpeg|png)$/i, '.webp')
     }
+  }
+
+  // 预加载关键图片
+  if (props.isCritical) {
+    preloadCriticalImage(props.src)
   }
 })
 

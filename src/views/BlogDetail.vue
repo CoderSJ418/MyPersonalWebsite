@@ -1,68 +1,208 @@
 <template>
-  <div class="pt-24 min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-    <div class="container mx-auto px-4 py-12">
-      <div v-if="post" class="max-w-4xl mx-auto">
-        <button
-          class="mb-8 flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-          @click="$router.back()"
-        >
-          <ArrowLeft class="w-5 h-5 mr-2" />
-          返回
-        </button>
-
-        <article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-          <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {{ post.title }}
-          </h1>
-
-          <div class="flex items-center gap-4 mb-8">
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{ formatDate(post.publishedAt) }}</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{ post.readTime }} 分钟阅读</span>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mb-8">
-            <span
-              v-for="tag in post.tags"
-              :key="tag"
-              class="px-4 py-2 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded-full"
-            >
-              {{ tag }}
-            </span>
-          </div>
-
-          <div class="prose dark:prose-invert max-w-none">
-            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ post.excerpt }}</p>
-            <p class="text-gray-600 dark:text-gray-400">{{ post.content }}</p>
-          </div>
-        </article>
-      </div>
-      <div v-else class="text-center text-gray-600 dark:text-gray-400">
-        文章未找到
-      </div>
+  <div class="blog-detail-page">
+    <!-- 加载状态 -->
+    <div v-if="loading" class="blog-detail-page__loading">
+      <div class="skeleton skeleton--header"></div>
+      <div class="skeleton skeleton--content"></div>
     </div>
+
+    <!-- 错误状态 -->
+    <div v-else-if="error" class="blog-detail-page__error">
+      <h2 class="blog-detail-page__error-title">加载失败</h2>
+      <p class="blog-detail-page__error-message">{{ error }}</p>
+      <button class="blog-detail-page__error-button" @click="$router.push({ name: 'Blog' })">
+        返回博客列表
+      </button>
+    </div>
+
+    <!-- 文章未找到 -->
+    <div v-else-if="!post" class="blog-detail-page__not-found">
+      <h2 class="blog-detail-page__not-found-title">文章未找到</h2>
+      <p class="blog-detail-page__not-found-message">您访问的文章不存在或已被删除</p>
+      <button class="blog-detail-page__not-found-button" @click="$router.push({ name: 'Blog' })">
+        返回博客列表
+      </button>
+    </div>
+
+    <!-- 文章内容 -->
+    <BlogDetail v-else :post="post" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
-import { ArrowLeft } from 'lucide-vue-next'
+import BlogDetail from '@/components/blog/BlogDetail.vue'
 
 const route = useRoute()
 const blogStore = useBlogStore()
 
+const loading = ref(false)
+const error = ref<string | null>(null)
+
 const post = computed(() => blogStore.getPostById(route.params.id as string))
 
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+// 加载文章数据
+const loadPost = async () => {
+  try {
+    loading.value = true
+    error.value = null
+    await blogStore.loadPosts()
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Failed to load post'
+    console.error('Error loading post:', err)
+  } finally {
+    loading.value = false
+  }
 }
 
+// 监听路由参数变化
+watch(
+  () => route.params.id,
+  () => {
+    loadPost()
+  },
+  { immediate: true }
+)
+
 onMounted(() => {
-  blogStore.loadPosts()
+  loadPost()
 })
 </script>
+
+<style scoped>
+.blog-detail-page {
+  min-height: 100vh;
+  padding-top: 6rem;
+}
+
+/* 加载状态 */
+.blog-detail-page__loading {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-bg-tertiary) 50%,
+    var(--color-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+.skeleton--header {
+  height: 200px;
+  margin-bottom: 2rem;
+}
+
+.skeleton--content {
+  height: 400px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 错误状态 */
+.blog-detail-page__error {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 3rem;
+  text-align: center;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-error);
+  border-radius: 0.5rem;
+}
+
+.blog-detail-page__error-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-error);
+}
+
+.blog-detail-page__error-message {
+  margin: 0 0 2rem 0;
+  color: var(--color-text-secondary);
+}
+
+.blog-detail-page__error-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.blog-detail-page__error-button:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+}
+
+/* 文章未找到 */
+.blog-detail-page__not-found {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 3rem;
+  text-align: center;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+}
+
+.blog-detail-page__not-found-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.blog-detail-page__not-found-message {
+  margin: 0 0 2rem 0;
+  color: var(--color-text-secondary);
+}
+
+.blog-detail-page__not-found-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.blog-detail-page__not-found-button:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .blog-detail-page {
+    padding-top: 5rem;
+  }
+
+  .blog-detail-page__loading,
+  .blog-detail-page__error,
+  .blog-detail-page__not-found {
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
+  }
+}
+</style>

@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted, Ref } from 'vue'
+import { ref, onUnmounted, Ref } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -46,26 +46,32 @@ export function useGSAPAnimations() {
   }
 
   /**
+   * 验证元素是否存在
+   */
+  const validateElement = (element: Element | string | null): Element | null => {
+    if (!element) return null
+    if (typeof element === 'string') {
+      const el = document.querySelector(element)
+      return el
+    }
+    return element
+  }
+
+  /**
    * 淡入动画
    */
-  const fadeIn = (
-    element: Element | string | null,
-    config: GSAPAnimationConfig = {}
-  ) => {
+  const fadeIn = (element: Element | string | null, config: GSAPAnimationConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.6,
-      delay = 0,
-      ease = 'power2.out',
-      opacity = 1,
-    } = config
+    const validElement = validateElement(element)
+    if (!validElement) {
+      console.warn('[GSAP] Element not found for fadeIn animation:', element)
+      return null
+    }
 
-    const tween = gsap.fromTo(
-      element,
-      { opacity: 0 },
-      { opacity, duration, delay, ease }
-    )
+    const { duration = 0.6, delay = 0, ease = 'power2.out', opacity = 1 } = config
+
+    const tween = gsap.fromTo(validElement, { opacity: 0 }, { opacity, duration, delay, ease })
 
     animations.value.push(tween)
     return tween
@@ -74,25 +80,18 @@ export function useGSAPAnimations() {
   /**
    * 淡入上移动画
    */
-  const fadeInUp = (
-    element: Element | string | null,
-    config: GSAPAnimationConfig = {}
-  ) => {
+  const fadeInUp = (element: Element | string | null, config: GSAPAnimationConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.8,
-      delay = 0,
-      ease = 'power3.out',
-      opacity = 1,
-      y = 0,
-    } = config
+    const validElement = validateElement(element)
+    if (!validElement) {
+      console.warn('[GSAP] Element not found for fadeInUp animation:', element)
+      return null
+    }
 
-    const tween = gsap.fromTo(
-      element,
-      { opacity: 0, y: 50 },
-      { opacity, y, duration, delay, ease }
-    )
+    const { duration = 0.8, delay = 0, ease = 'power3.out', opacity = 1, y = 0 } = config
+
+    const tween = gsap.fromTo(validElement, { opacity: 0, y: 50 }, { opacity, y, duration, delay, ease })
 
     animations.value.push(tween)
     return tween
@@ -101,22 +100,19 @@ export function useGSAPAnimations() {
   /**
    * 淡入左移动画
    */
-  const fadeInLeft = (
-    element: Element | string | null,
-    config: GSAPAnimationConfig = {}
-  ) => {
+  const fadeInLeft = (element: Element | string | null, config: GSAPAnimationConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.8,
-      delay = 0,
-      ease = 'power3.out',
-      opacity = 1,
-      x = 0,
-    } = config
+    const validElement = validateElement(element)
+    if (!validElement) {
+      console.warn('[GSAP] Element not found for fadeInLeft animation:', element)
+      return null
+    }
+
+    const { duration = 0.8, delay = 0, ease = 'power3.out', opacity = 1, x = 0 } = config
 
     const tween = gsap.fromTo(
-      element,
+      validElement,
       { opacity: 0, x: -50 },
       { opacity, x, duration, delay, ease }
     )
@@ -128,25 +124,18 @@ export function useGSAPAnimations() {
   /**
    * 淡入右移动画
    */
-  const fadeInRight = (
-    element: Element | string | null,
-    config: GSAPAnimationConfig = {}
-  ) => {
+  const fadeInRight = (element: Element | string | null, config: GSAPAnimationConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.8,
-      delay = 0,
-      ease = 'power3.out',
-      opacity = 1,
-      x = 0,
-    } = config
+    const validElement = validateElement(element)
+    if (!validElement) {
+      console.warn('[GSAP] Element not found for fadeInRight animation:', element)
+      return null
+    }
 
-    const tween = gsap.fromTo(
-      element,
-      { opacity: 0, x: 50 },
-      { opacity, x, duration, delay, ease }
-    )
+    const { duration = 0.8, delay = 0, ease = 'power3.out', opacity = 1, x = 0 } = config
+
+    const tween = gsap.fromTo(validElement, { opacity: 0, x: 50 }, { opacity, x, duration, delay, ease })
 
     animations.value.push(tween)
     return tween
@@ -155,22 +144,19 @@ export function useGSAPAnimations() {
   /**
    * 缩放弹出动画
    */
-  const scaleIn = (
-    element: Element | string | null,
-    config: GSAPAnimationConfig = {}
-  ) => {
+  const scaleIn = (element: Element | string | null, config: GSAPAnimationConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.5,
-      delay = 0,
-      ease = 'back.out(1.7)',
-      opacity = 1,
-      scale = 1,
-    } = config
+    const validElement = validateElement(element)
+    if (!validElement) {
+      console.warn('[GSAP] Element not found for scaleIn animation:', element)
+      return null
+    }
+
+    const { duration = 0.5, delay = 0, ease = 'back.out(1.7)', opacity = 1, scale = 1 } = config
 
     const tween = gsap.fromTo(
-      element,
+      validElement,
       { opacity: 0, scale: 0.5 },
       { opacity, scale, duration, delay, ease }
     )
@@ -182,22 +168,19 @@ export function useGSAPAnimations() {
   /**
    * 旋转进入动画
    */
-  const rotateIn = (
-    element: Element | string | null,
-    config: GSAPAnimationConfig = {}
-  ) => {
+  const rotateIn = (element: Element | string | null, config: GSAPAnimationConfig = {}) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.6,
-      delay = 0,
-      ease = 'power2.out',
-      opacity = 1,
-      rotation = 0,
-    } = config
+    const validElement = validateElement(element)
+    if (!validElement) {
+      console.warn('[GSAP] Element not found for rotateIn animation:', element)
+      return null
+    }
+
+    const { duration = 0.6, delay = 0, ease = 'power2.out', opacity = 1, rotation = 0 } = config
 
     const tween = gsap.fromTo(
-      element,
+      validElement,
       { opacity: 0, scale: 0, rotation: -180 },
       { opacity, scale: 1, rotation, duration, delay, ease }
     )
@@ -209,12 +192,14 @@ export function useGSAPAnimations() {
   /**
    * 打字机效果
    */
-  const typewriter = (
-    element: Element,
-    config: TypewriterConfig
-  ) => {
+  const typewriter = (element: Element, config: TypewriterConfig) => {
     if (prefersReducedMotion()) {
       element.textContent = config.text
+      return null
+    }
+
+    if (!element) {
+      console.warn('[GSAP] Element not found for typewriter animation:', element)
       return null
     }
 
@@ -226,14 +211,14 @@ export function useGSAPAnimations() {
     if (cursor) {
       element.innerHTML = `<span class="cursor">${cursorChar}</span>`
       const cursorElement = element.querySelector('.cursor')
-      
+
       // 光标闪烁动画
       gsap.to(cursorElement, {
         opacity: 0,
         duration: 0.5,
         repeat: -1,
         yoyo: true,
-        ease: 'none',
+        ease: 'none'
       })
     }
 
@@ -241,13 +226,13 @@ export function useGSAPAnimations() {
       if (index < text.length) {
         currentText += text[index]
         index++
-        
+
         if (cursor) {
           element.innerHTML = `${currentText}<span class="cursor">${cursorChar}</span>`
         } else {
           element.textContent = currentText
         }
-        
+
         gsap.delayedCall(speed, typeNext)
       } else {
         if (onComplete) onComplete()
@@ -266,16 +251,17 @@ export function useGSAPAnimations() {
   ) => {
     if (prefersReducedMotion()) return null
 
-    const {
-      duration = 0.6,
-      delay = 0,
-      ease = 'power2.out',
-      opacity = 1,
-      y = 0,
-    } = config
+    // 验证元素数组
+    const validElements = Array.from(elements).filter(el => el !== null)
+    if (validElements.length === 0) {
+      console.warn('[GSAP] No valid elements found for staggerIn animation')
+      return null
+    }
+
+    const { duration = 0.6, delay = 0, ease = 'power2.out', opacity = 1, y = 0 } = config
 
     const tween = gsap.fromTo(
-      elements,
+      validElements,
       { opacity: 0, y: 30 },
       {
         opacity,
@@ -283,7 +269,7 @@ export function useGSAPAnimations() {
         duration,
         delay,
         ease,
-        stagger: 0.1,
+        stagger: 0.1
       }
     )
 
@@ -320,6 +306,6 @@ export function useGSAPAnimations() {
     clearAnimations,
     prefersReducedMotion,
     gsap,
-    ScrollTrigger,
+    ScrollTrigger
   }
 }

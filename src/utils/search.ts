@@ -37,7 +37,10 @@ export function highlightText(text: string, query: string): string {
   if (!query || !text) return text
 
   const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi')
-  return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-700 px-0.5 rounded font-semibold">$1</mark>')
+  return text.replace(
+    regex,
+    '<mark class="bg-yellow-200 dark:bg-yellow-700 px-0.5 rounded font-semibold">$1</mark>'
+  )
 }
 
 /**
@@ -69,7 +72,7 @@ function calculateRelevanceScore(
 
   // 标签包含查询
   if (item.tags) {
-    const tagMatch = item.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+    const tagMatch = item.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
     if (tagMatch) score += 30
   }
 
@@ -84,7 +87,7 @@ function searchProjects(projects: Project[], query: string): SearchResultItem[] 
 
   const lowerQuery = query.toLowerCase()
   return projects
-    .map(project => ({
+    .map((project) => ({
       id: project.id,
       type: 'project' as const,
       title: project.title,
@@ -94,12 +97,13 @@ function searchProjects(projects: Project[], query: string): SearchResultItem[] 
         tags: project.tags
       }
     }))
-    .filter(item =>
-      item.title.toLowerCase().includes(lowerQuery) ||
-      item.description.toLowerCase().includes(lowerQuery) ||
-      item.metadata?.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
+    .filter(
+      (item) =>
+        item.title.toLowerCase().includes(lowerQuery) ||
+        item.description.toLowerCase().includes(lowerQuery) ||
+        item.metadata?.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
     )
-    .map(item => ({
+    .map((item) => ({
       ...item,
       highlight: {
         title: highlightText(item.title, query),
@@ -117,7 +121,7 @@ function searchSkills(skills: Skill[], query: string): SearchResultItem[] {
 
   const lowerQuery = query.toLowerCase()
   return skills
-    .map(skill => ({
+    .map((skill) => ({
       id: skill.id,
       type: 'skill' as const,
       title: skill.name,
@@ -128,12 +132,13 @@ function searchSkills(skills: Skill[], query: string): SearchResultItem[] {
         level: skill.level
       }
     }))
-    .filter(item =>
-      item.title.toLowerCase().includes(lowerQuery) ||
-      item.description.toLowerCase().includes(lowerQuery) ||
-      item.metadata?.category?.toLowerCase().includes(lowerQuery)
+    .filter(
+      (item) =>
+        item.title.toLowerCase().includes(lowerQuery) ||
+        item.description.toLowerCase().includes(lowerQuery) ||
+        item.metadata?.category?.toLowerCase().includes(lowerQuery)
     )
-    .map(item => ({
+    .map((item) => ({
       ...item,
       highlight: {
         title: highlightText(item.title, query),
@@ -151,7 +156,7 @@ function searchBlogs(posts: BlogPost[], query: string): SearchResultItem[] {
 
   const lowerQuery = query.toLowerCase()
   return posts
-    .map(post => ({
+    .map((post) => ({
       id: post.id,
       type: 'blog' as const,
       title: post.title,
@@ -163,12 +168,13 @@ function searchBlogs(posts: BlogPost[], query: string): SearchResultItem[] {
         publishedAt: post.publishedAt
       }
     }))
-    .filter(item =>
-      item.title.toLowerCase().includes(lowerQuery) ||
-      item.description.toLowerCase().includes(lowerQuery) ||
-      item.metadata?.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
+    .filter(
+      (item) =>
+        item.title.toLowerCase().includes(lowerQuery) ||
+        item.description.toLowerCase().includes(lowerQuery) ||
+        item.metadata?.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
     )
-    .map(item => ({
+    .map((item) => ({
       ...item,
       highlight: {
         title: highlightText(item.title, query),

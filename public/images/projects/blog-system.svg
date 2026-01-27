@@ -1,0 +1,13 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#gradient3)" />
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">个人博客系统</text>
+  <text x="400" y="250" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">Personal Blog System</text>
+  <rect x="300" y="300" width="200" height="2" fill="white" opacity="0.5" />
+  <text x="400" y="330" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">Vue 3 + TypeScript + Pinia</text>
+</svg>

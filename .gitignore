@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env.local
+.env.*.local
+.env.development
+.env.staging
+.env.production
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +29,29 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Testing
+coverage
+playwright-report
+test-results
+.nyc_output
+
+# Build artifacts
+*.tsbuildinfo
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IDE
+*.swp
+*.swo
+*~
+
+# Husky
+.husky/_

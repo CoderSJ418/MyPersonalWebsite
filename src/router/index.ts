@@ -12,6 +12,15 @@ const routes: RouteRecordRaw[] = [
     }
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import('@/views/About.vue'),
+    meta: {
+      title: '关于我',
+      description: '我的个人信息、工作经历、教育背景和技能'
+    }
+  },
+  {
     path: '/projects',
     name: 'Projects',
     component: () => import('@/views/Projects.vue'),
@@ -37,6 +46,42 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '技能展示',
       description: '我的技术栈和技能'
+    }
+  },
+  {
+    path: '/pixel-demo',
+    name: 'PixelDemo',
+    component: () => import('@/views/PixelDemo.vue'),
+    meta: {
+      title: '像素风格演示',
+      description: '像素风格组件演示'
+    }
+  },
+  {
+    path: '/experience',
+    name: 'Experience',
+    component: () => import('@/views/Experience.vue'),
+    meta: {
+      title: '工作经历',
+      description: '我的工作经历和职业发展'
+    }
+  },
+  {
+    path: '/interactive-demo',
+    name: 'InteractiveDemo',
+    component: () => import('@/views/InteractiveDemo.vue'),
+    meta: {
+      title: '交互式效果演示',
+      description: '交互式效果演示页面'
+    }
+  },
+  {
+    path: '/education',
+    name: 'Education',
+    component: () => import('@/views/Education.vue'),
+    meta: {
+      title: '教育背景',
+      description: '我的教育背景和学习经历'
     }
   },
   {
@@ -92,29 +137,62 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const appStore = useAppStore()
-  document.title = `${to.meta.title as string} - 佘杰`
-  updateMetaTags(to.meta as any)
+  const title = to.meta.title as string
+  const description = to.meta.description as string
+  
+  // 更新页面标题
+  document.title = `${title} - 佘杰`
+  
+  // 更新 Meta 标签
+  updateMetaTags({
+    title,
+    description,
+    url: window.location.href
+  })
+  
   appStore.closeMenu()
   next()
 })
 
-function updateMetaTags(meta: any) {
-  const description = meta.description as string
-  if (description) {
-    const metaTag = document.querySelector('meta[name="description"]')
-    if (metaTag) {
-      metaTag.setAttribute('content', description)
-    }
+function updateMetaTags(meta: { title: string; description: string; url: string }) {
+  // 更新 description
+  const descriptionTag = document.querySelector('meta[name="description"]')
+  if (descriptionTag && meta.description) {
+    descriptionTag.setAttribute('content', meta.description)
   }
 
+  // 更新 keywords
+  const keywordsTag = document.querySelector('meta[name="keywords"]')
+  if (keywordsTag) {
+    const baseKeywords = '前端开发工程师, Vue.js, TypeScript, JavaScript, 前端工程化, 性能优化, 佘杰'
+    keywordsTag.setAttribute('content', `${baseKeywords}, ${meta.title}`)
+  }
+
+  // 更新 Open Graph 标签
   const ogTitle = document.querySelector('meta[property="og:title"]')
   if (ogTitle) {
-    ogTitle.setAttribute('content', `${meta.title as string} - 佘杰`)
+    ogTitle.setAttribute('content', `${meta.title} - 佘杰`)
   }
 
   const ogDescription = document.querySelector('meta[property="og:description"]')
-  if (ogDescription && description) {
-    ogDescription.setAttribute('content', description)
+  if (ogDescription && meta.description) {
+    ogDescription.setAttribute('content', meta.description)
+  }
+
+  const ogUrl = document.querySelector('meta[property="og:url"]')
+  if (ogUrl) {
+    ogUrl.setAttribute('content', meta.url)
+  }
+
+  // 更新 Twitter Card 标签
+  const twitterTitle = document.querySelector('meta[name="twitter:title"]')
+  if (twitterTitle) {
+    twitterTitle.setAttribute('content', `${meta.title} - 佘杰`)
+  }
+
+  const twitterDescription = document.querySelector('meta[name="twitter:description"]')
+  if (twitterDescription && meta.description) {
+    twitterDescription.setAttribute('content', meta.description)
   }
 }
 

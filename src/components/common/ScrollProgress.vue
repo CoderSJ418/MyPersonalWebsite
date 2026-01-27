@@ -1,12 +1,6 @@
 <template>
-  <div
-    class="scroll-progress"
-    :class="{ 'scroll-progress--visible': isVisible }"
-  >
-    <div
-      class="scroll-progress__bar"
-      :style="{ width: `${progress * 100}%` }"
-    />
+  <div class="scroll-progress" :class="{ 'scroll-progress--visible': isVisible }">
+    <div class="scroll-progress__bar" :style="{ width: `${progress * 100}%` }" />
   </div>
 </template>
 
@@ -25,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
   position: 'top',
   color: '#3b82f6',
   height: 3,
-  showAfter: 100,
+  showAfter: 100
 })
 
 const { scrollProgress, createScrollProgressIndicator } = useScrollAnimations()
@@ -69,7 +63,7 @@ onMounted(() => {
   createScrollProgressIndicator(progressRef)
 
   // 监听滚动进度变化
-  const unwatch = scrollProgress.value = 0
+  const unwatch = (scrollProgress.value = 0)
   const interval = setInterval(() => {
     updateProgress(scrollProgress.value)
   }, 16)
@@ -105,12 +99,12 @@ onMounted(() => {
 }
 
 /* 顶部位置 */
-.scroll-progress[data-position="top"] {
+.scroll-progress[data-position='top'] {
   top: 0;
 }
 
 /* 底部位置 */
-.scroll-progress[data-position="bottom"] {
+.scroll-progress[data-position='bottom'] {
   bottom: 0;
 }
 </style>

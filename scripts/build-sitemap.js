@@ -6,7 +6,7 @@
 import { writeFileSync } from 'fs'
 import { resolve } from 'path'
 
-const baseUrl = 'https://shejie.dev'
+const baseUrl = 'https://shejie1995.gitee.io/my-personal-website'
 const today = new Date().toISOString().split('T')[0]
 
 // 网站路由配置
@@ -15,6 +15,11 @@ const routes = [
     path: '/',
     priority: 1.0,
     changefreq: 'weekly'
+  },
+  {
+    path: '/about',
+    priority: 0.9,
+    changefreq: 'monthly'
   },
   {
     path: '/projects',
@@ -27,6 +32,16 @@ const routes = [
     changefreq: 'monthly'
   },
   {
+    path: '/experience',
+    priority: 0.8,
+    changefreq: 'monthly'
+  },
+  {
+    path: '/education',
+    priority: 0.7,
+    changefreq: 'monthly'
+  },
+  {
     path: '/blog',
     priority: 0.9,
     changefreq: 'weekly'
@@ -34,6 +49,16 @@ const routes = [
   {
     path: '/contact',
     priority: 0.7,
+    changefreq: 'monthly'
+  },
+  {
+    path: '/pixel-demo',
+    priority: 0.5,
+    changefreq: 'monthly'
+  },
+  {
+    path: '/interactive-demo',
+    priority: 0.5,
     changefreq: 'monthly'
   }
 ]

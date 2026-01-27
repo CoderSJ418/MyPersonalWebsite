@@ -208,7 +208,9 @@ export const generateArticleData = (article: {
 /**
  * 生成 BreadcrumbList 结构化数据
  */
-export const generateBreadcrumbData = (items: Array<{ name: string; url: string }>): StructuredData => {
+export const generateBreadcrumbData = (
+  items: Array<{ name: string; url: string }>
+): StructuredData => {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -315,8 +317,13 @@ export const dnsPrefetch = (href: string) => {
 /**
  * 生成 sitemap XML
  */
-export const generateSitemapXML = (urls: Array<{ url: string; lastmod?: string; changefreq?: string; priority?: number }>) => {
-  const xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+export const generateSitemapXML = (
+  urls: Array<{ url: string; lastmod?: string; changefreq?: string; priority?: number }>
+) => {
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+  ]
 
   urls.forEach((item) => {
     xml.push('  <url>')

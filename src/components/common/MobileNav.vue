@@ -10,7 +10,11 @@
         :key="item.path"
         :to="item.path"
         class="flex flex-col items-center justify-center min-h-[56px] min-w-[56px] px-2 py-1 rounded-lg transition-all duration-mobile-fast"
-        :class="isActive(item.path) ? 'text-primary-600 dark:text-primary-400' : 'text-gray-500 dark:text-gray-400'"
+        :class="
+          isActive(item.path)
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-500 dark:text-gray-400'
+        "
         :aria-label="item.name"
         :aria-current="isActive(item.path) ? 'page' : undefined"
       >

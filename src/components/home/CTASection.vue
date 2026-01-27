@@ -1,38 +1,106 @@
 <template>
-  <section 
+  <section
     ref="sectionRef"
-    class="py-20 bg-primary-600 dark:bg-primary-800 transition-colors duration-300"
+    class="py-16 md:py-24 relative overflow-hidden"
+    style="background-color: #f8fafc"
   >
-    <div class="container mx-auto px-4 text-center">
-      <h2 
-        ref="titleRef"
-        class="text-4xl font-bold text-white mb-6"
-      >
-        准备好开始合作了吗？
-      </h2>
-      <p 
-        ref="descriptionRef"
-        class="text-xl text-primary-100 mb-12 max-w-2xl mx-auto"
-      >
-        如果您对我的技能感兴趣，或者有任何项目需要合作，欢迎随时联系我。
-      </p>
-      <div 
-        ref="ctaRef"
-        class="flex flex-col sm:flex-row gap-4 justify-center"
-      >
-        <RouterLink
-          to="/contact"
-          class="cta-button px-8 py-4 bg-white text-primary-600 rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-semibold"
+    <!-- 背景装饰 - 纯色块 -->
+    <div class="absolute inset-0">
+      <!-- 左上角橙色块 -->
+      <div class="absolute top-0 left-0 w-96 h-96 opacity-5" style="background-color: #f97316"></div>
+      <!-- 右下角青色块 -->
+      <div class="absolute bottom-0 right-0 w-64 h-64 opacity-5" style="background-color: #06b6d4"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- 个性化文案 -->
+        <h2
+          ref="titleRef"
+          class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+          style="color: #0f172a"
         >
-          联系我
-        </RouterLink>
-        <a
-          href="/resume.pdf"
-          download
-          class="cta-button px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-primary-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-semibold"
+          有项目想法？<br />
+          <span style="color: #f97316">让我们聊聊</span>
+        </h2>
+
+        <p
+          ref="descriptionRef"
+          class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
+          style="color: #64748b"
         >
-          下载简历
-        </a>
+          从企业官网到 SaaS 平台，从微信小程序到数据可视化，我都能提供专业的技术方案。
+          如果您有项目想法，或者想了解更多，欢迎随时联系。
+        </p>
+
+        <!-- CTA 按钮 - 纯色背景 -->
+        <div ref="ctaRef" class="flex flex-col sm:flex-row gap-4 justify-center">
+          <RouterLink
+            to="/contact"
+            class="cta-button inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            style="background-color: #f97316; color: #ffffff"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+            联系我
+          </RouterLink>
+          <a
+            href="/resume.pdf"
+            download
+            class="cta-button inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            style="background-color: #06b6d4; color: #ffffff"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+            下载简历
+          </a>
+        </div>
+
+        <!-- 联系方式 -->
+        <div ref="contactRef" class="mt-12 flex flex-wrap justify-center gap-6">
+          <a
+            href="mailto:912999051@qq.com"
+            class="flex items-center transition-colors duration-300"
+            style="color: #64748b"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+            912999051@qq.com
+          </a>
+          <a
+            href="tel:13469422826"
+            class="flex items-center transition-colors duration-300"
+            style="color: #64748b"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              ></path>
+            </svg>
+            134-6942-2826
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -46,24 +114,31 @@ const sectionRef = ref<HTMLElement | null>(null)
 const titleRef = ref<HTMLElement | null>(null)
 const descriptionRef = ref<HTMLElement | null>(null)
 const ctaRef = ref<HTMLElement | null>(null)
+const contactRef = ref<HTMLElement | null>(null)
 
 const { fadeInUp, staggerIn } = useGSAPAnimations()
 
 onMounted(() => {
   // 标题动画
   if (titleRef.value) {
-    fadeInUp(titleRef.value, { duration: 0.8 })
+    fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
   }
-  
+
   // 描述动画
   if (descriptionRef.value) {
     fadeInUp(descriptionRef.value, { duration: 0.8, delay: 0.2 })
   }
-  
+
   // CTA 按钮动画
   if (ctaRef.value) {
     const buttons = ctaRef.value.querySelectorAll('.cta-button')
-    staggerIn(buttons, { duration: 0.6, delay: 0.4 })
+    staggerIn(buttons, { duration: 0.6, delay: 0.3 })
+  }
+
+  // 联系方式动画
+  if (contactRef.value) {
+    const contacts = contactRef.value.querySelectorAll('a')
+    staggerIn(contacts, { duration: 0.6, delay: 0.5 })
   }
 })
 </script>

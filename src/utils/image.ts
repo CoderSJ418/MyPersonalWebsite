@@ -66,9 +66,7 @@ export const generateSizes = (
     { width: 1280, size: '1000px' }
   ]
 ): string => {
-  return breakpoints
-    .map((bp) => `(max-width: ${bp.width}px) ${bp.size}`)
-    .join(', ')
+  return breakpoints.map((bp) => `(max-width: ${bp.width}px) ${bp.size}`).join(', ')
 }
 
 /**
@@ -101,11 +99,7 @@ export const getOptimalImageFormat = async (originalFormat: string): Promise<str
 /**
  * 生成图片占位符（模糊效果）
  */
-export const generatePlaceholder = (
-  width: number,
-  height: number,
-  color = '#e5e7eb'
-): string => {
+export const generatePlaceholder = (width: number, height: number, color = '#e5e7eb'): string => {
   const canvas = document.createElement('canvas')
   canvas.width = width
   canvas.height = height
@@ -231,10 +225,7 @@ export const compressImage = (
 /**
  * 生成图片的渐进式加载 URL
  */
-export const generateProgressiveURL = (
-  baseUrl: string,
-  quality: number
-): string => {
+export const generateProgressiveURL = (baseUrl: string, quality: number): string => {
   // 这里可以根据实际的图片服务进行调整
   // 例如：使用 Cloudinary、Imgix 等服务
   return baseUrl

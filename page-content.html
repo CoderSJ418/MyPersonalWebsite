@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- åºç¡ SEO Meta æ ç­¾ -->
+    <meta name="description" content="ä½æ° - 7å¹´åç«¯å¼åå·¥ç¨å¸ï¼Vueä¸å®¶ï¼ä¸æ³¨äºåç«¯ææ¯æ åå·¥ç¨åãå±ç¤ºä¸ªäººé¡¹ç®ãææ¯åå®¢åæè½ç»éªã" />
+    <meta name="keywords" content="ä½æ°, åç«¯å¼å, Vue.js, JavaScript, TypeScript, åç«¯å·¥ç¨å¸, ä¸ªäººç½ç«, ä½åé" />
+    <meta name="author" content="ä½æ°" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#3b82f6" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Content Security Policy (CSP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://fonts.gstatic.font.im; connect-src 'self' https:; frame-src 'none'; object-src 'none';">
+
+    <!-- Open Graph æ ç­¾ -->
+    <meta property="og:title" content="ä½æ° - åç«¯å¼åå·¥ç¨å¸" />
+    <meta property="og:description" content="7å¹´åç«¯å¼åç»éªï¼Vueä¸å®¶ï¼ä¸æ³¨äºåç«¯ææ¯æ åå·¥ç¨å" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shejie1995.gitee.io/my-personal-website/" />
+    <meta property="og:image" content="https://shejie1995.gitee.io/my-personal-website/og-image.png" />
+    <meta property="og:image:alt" content="ä½æ° - åç«¯å¼åå·¥ç¨å¸" />
+    <meta property="og:site_name" content="ä½æ° - åç«¯å¼åå·¥ç¨å¸" />
+    <meta property="og:locale" content="zh_CN" />
+
+    <!-- Twitter Card æ ç­¾ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ä½æ° - åç«¯å¼åå·¥ç¨å¸" />
+    <meta name="twitter:description" content="7å¹´åç«¯å¼åç»éªï¼Vueä¸å®¶ï¼ä¸æ³¨äºåç«¯ææ¯æ åå·¥ç¨å" />
+    <meta name="twitter:image" content="https://shejie1995.gitee.io/my-personal-website/og-image.png" />
+    <meta name="twitter:creator" content="@shejie" />
+
+    <!-- é¢è¿æ¥å DNS é¢è§£æ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- æ§è½ä¼åï¼é¢å è½½å³é®èµæº -->
+    <link rel="preload" href="/src/main.ts" as="script" crossorigin />
+    <link rel="preload" href="/src/assets/styles/main.css" as="style" crossorigin />
+
+    <!-- é¢åéå³é®èµæº -->
+    <link rel="prefetch" href="/images/projects/" />
+
+    <!-- ä¼åå­ä½å è½½ -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+
+    <!-- ç»æåæ°æ®ï¼Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "ä½æ°",
+      "jobTitle": "åç«¯å¼åå·¥ç¨å¸",
+      "url": "https://shejie1995.gitee.io/my-personal-website/",
+      "image": "https://shejie1995.gitee.io/my-personal-website/avatar.png",
+      "email": "shejie@example.com",
+      "sameAs": [
+        "https://github.com/shejie",
+        "https://linkedin.com/in/shejie"
+      ],
+      "knowsAbout": [
+        "Vue.js",
+        "JavaScript",
+        "TypeScript",
+        "Frontend Development",
+        "Web Development",
+        "Vite",
+        "Pinia",
+        "Vue Router"
+      ],
+      "description": "7å¹´åç«¯å¼åç»éªï¼Vueä¸å®¶ï¼ä¸æ³¨äºåç«¯ææ¯æ åå·¥ç¨å"
+    }
+    </script>
+
+    <!-- ç»æåæ°æ®ï¼WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ä½æ° - åç«¯å¼åå·¥ç¨å¸",
+      "url": "https://shejie1995.gitee.io/my-personal-website/",
+      "description": "ä½æ°çä¸ªäººç½ç«ï¼å±ç¤ºåç«¯é¡¹ç®ãææ¯åå®¢åæè½ç»éª",
+      "author": {
+        "@type": "Person",
+        "name": "ä½æ°"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://shejie1995.gitee.io/my-personal-website/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- ç»æåæ°æ®ï¼BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "é¦é¡µ",
+          "item": "https://shejie1995.gitee.io/my-personal-website/"
+        }
+      ]
+    }
+    </script>
+
+    <title>ä½æ° - åç«¯å¼åå·¥ç¨å¸</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts?t=1769008467089"></script>
+  </body>
+</html>
