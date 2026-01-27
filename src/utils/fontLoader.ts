@@ -1,162 +1,120 @@
 /**
  * 字体渐进式加载优化
  * 解决 FOIT (Flash of Invisible Text) 问题
+ * 使用 Google Fonts 加载策略
  */
-
-interface FontConfig {
-  family: string
-  weight: number
-  display?: 'swap' | 'fallback' | 'optional'
-}
-
-const DEFAULT_FONT_DISPLAY = 'swap'
 
 /**
- * 加载单个字体
+ * 添加字体加载样式
+ * 在字体加载期间使用系统字体，加载完成后切换到 Web 字体
  */
-const loadFont = async (config: FontConfig): Promise<boolean> => {
-  try {
-    const { family, weight, display = DEFAULT_FONT_DISPLAY } = config
-    
-    // 检查字体是否已加载
-    if (document.fonts.check(`16px ${family}`)) {
-      return true
+export const addFontLoadingStyles = (): void => {
+  const style = document.createElement('style')
+  style.textContent = `
+    /* 字体加载期间的样式 */
+    .font-loading {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     }
-
-    // 创建字体加载器
-    const fontFace = new FontFace(family, `url(/fonts/${family}-${weight}.woff2)`, {
-      weight,
-      display,
-      style: 'normal'
-    })
-
-    // 加载字体
-    await fontFace.load()
-    document.fonts.add(fontFace)
-
-    // 触发字体加载事件
-    window.dispatchEvent(new CustomEvent('font:loaded', { detail: { family, weight } }))
     
-    return true
-  } catch (error) {
-    console.warn(`Failed to load font ${config.family}:`, error)
-    return false
-  }
-}
-
-/**
- * 加载所有字体
- */
-export const loadAllFonts = async (): Promise<void> => {
-  const fonts = [
-    { family: 'Press Start 2P', weight: 400, display: 'swap' },
-    { family: 'Inter', weight: 400, display: 'swap' },
-    { family: 'Inter', weight: 500, display: 'swap' },
-    { family: 'Inter', weight: 600, display: 'swap' },
-    { family: 'Inter', weight: 700, display: 'swap' },
-    { family: 'JetBrains Mono', weight: 400, display: 'swap' },
-    { family: 'JetBrains Mono', weight: 500, display: 'swap' },
-    { family: 'JetBrains Mono', weight: 600, display: 'swap' }
-  ]
-
-  // 并行加载字体
-  const results = await Promise.allSettled(
-    fonts.map(config => loadFont(config))
-  )
-
-  // 统计加载结果
-  const successful = results.filter(result => result.status === 'fulfilled' && result.value).length
-  const failed = results.filter(result => result.status === 'rejected' || !result.value).length
-
-  console.log(`Font loading completed: ${successful} successful, ${failed} failed`)
-
-  // 触发字体加载完成事件
-  window.dispatchEvent(new CustomEvent('fonts:loaded', { detail: { successful, failed } }))
-}
-
-/**
- * 监听字体加载事件
- */
-export const onFontLoaded = (callback: (event: CustomEvent) => void): void => {
-  window.addEventListener('font:loaded', callback)
-}
-
-export const onFontsLoaded = (callback: (event: CustomEvent) => void): void => {
-  window.addEventListener('fonts:loaded', callback)
-}
-
-/**
- * 移除字体加载监听器
- */
-export const offFontLoaded = (callback: (event: CustomEvent) => void): void => {
-  window.removeEventListener('font:loaded', callback)
-}
-
-export const offFontsLoaded = (callback: (event: CustomEvent) => void): void => {
-  window.removeEventListener('fonts:loaded', callback)
+    .font-loading::before {
+      content: 'Loading fonts...';
+      display: none;
+    }
+    
+    /* 字体加载完成后 */
+    .fonts-loaded .font-loading {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
+    /* 字体加载失败的降级处理 */
+    @font-face {
+      font-family: 'Inter';
+      src: local('Inter'), local('Inter-Regular');
+      font-display: swap;
+    }
+  `
+  document.head.appendChild(style)
 }
 
 /**
  * 预加载关键字体
  */
 export const preloadCriticalFonts = (): void => {
-  const criticalFonts = [
-    { family: 'Press Start 2P', weight: 400 },
-    { family: 'Inter', weight: 400 }
-  ]
+  // Google Fonts 已经在 index.html 中预加载
+  // 这里可以添加额外的优化逻辑
+  
+  // 标记开始加载
+  document.documentElement.classList.add('font-loading')
+}
 
-  criticalFonts.forEach(config => {
-    const link = document.createElement('link')
-    link.rel = 'preload'
-    link.as = 'font'
-    link.type = 'font/woff2'
-    link.crossOrigin = 'anonymous'
-    link.href = `/fonts/${config.family}-${config.weight}.woff2`
-    document.head.appendChild(link)
+/**
+ * 检查字体是否已加载
+ */
+const checkFontsLoaded = (): boolean => {
+  // 检查 Google Fonts 是否加载完成
+  if (document.fonts) {
+    try {
+      return document.fonts.check('16px Inter')
+    } catch (e) {
+      // 如果无法检查字体，假设字体已加载
+      return true
+    }
+  }
+  return true
+}
+
+/**
+ * 监听字体加载
+ */
+export const onFontLoaded = (callback: () => void): void => {
+  if (checkFontsLoaded()) {
+    callback()
+    return
+  }
+
+  // 监听 Web 字体加载完成事件
+  document.addEventListener('DOMContentLoaded', () => {
+    if (checkFontsLoaded()) {
+      callback()
+    }
+  })
+  
+  // 使用 requestAnimationFrame 作为后备
+  const checkWithTimeout = () => {
+    if (checkFontsLoaded()) {
+      callback()
+    } else {
+      setTimeout(checkWithTimeout, 100)
+    }
+  }
+  
+  requestAnimationFrame(checkWithTimeout)
+}
+
+/**
+ * 加载所有字体
+ * 由于使用 Google Fonts，这个函数主要是为了兼容性
+ */
+export const loadAllFonts = async (): Promise<void> => {
+  // 等待字体加载
+  return new Promise((resolve) => {
+    onFontLoaded(() => {
+      // 标记字体加载完成
+      document.documentElement.classList.add('fonts-loaded')
+      document.documentElement.classList.remove('font-loading')
+      
+      // 触发字体加载完成事件
+      window.dispatchEvent(new CustomEvent('fonts:loaded', { detail: { successful: true, failed: 0 } }))
+      
+      console.log('All fonts loaded successfully')
+      resolve()
+    })
   })
 }
 
 /**
- * 添加字体加载样式
+ * 字体加载状态
  */
-export const addFontLoadingStyles = (): void => {
-  const style = document.createElement('style')
-  style.textContent = `
-    /* 防止 FOIT */
-    @font-face {
-      font-family: 'Press Start 2P';
-      font-display: swap;
-    }
-    
-    @font-face {
-      font-family: 'Inter';
-      font-display: swap;
-    }
-    
-    @font-face {
-      font-family: 'JetBrains Mono';
-      font-display: swap;
-    }
-    
-    /* 为关键元素添加字体加载指示器 */
-    .font-loading {
-      opacity: 0.5;
-      transition: opacity 0.2s ease-in-out;
-    }
-    
-    .font-loading::before {
-      content: 'Loading fonts...';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #888888;
-    }
-    
-    /* 字体加载完成后移除指示器 */
-    .fonts-loaded .font-loading {
-      opacity: 1;
-    }
-  `
-  document.head.appendChild(style)
+export const getFontStatus = (): 'loading' | 'loaded' => {
+  return document.documentElement.classList.contains('fonts-loaded') ? 'loaded' : 'loading'
 }
