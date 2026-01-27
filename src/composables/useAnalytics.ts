@@ -4,7 +4,7 @@
  */
 
 import { onMounted, onUnmounted } from 'vue'
-import { useAnalyticsStore } from '@/stores/analyticsStore'
+import { useAnalyticsStore } from '@/stores/useAnalyticsStore'
 import {
   initGoogleAnalytics,
   trackPageView as trackGAPageView,

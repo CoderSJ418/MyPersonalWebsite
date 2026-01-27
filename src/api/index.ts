@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import { useAnalyticsStore } from '@/stores/analytics'
+import { useAnalyticsStore } from '@/stores/useAnalyticsStore'
 
 /**
  * API 客户端配置
