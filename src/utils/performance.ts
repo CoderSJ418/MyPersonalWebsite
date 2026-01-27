@@ -448,3 +448,10 @@ export function generatePerformanceReport(): string {
   
   return report
 }
+
+/**
+ * 创建性能监控器实例
+ */
+export function createPerformanceMonitor() {
+  return new PerformanceMonitor()
+}
