@@ -18,14 +18,56 @@ const props = defineProps<Props>()
 const router = useRouter()
 const blogStore = useBlogStore()
 
-// 渲染后的 Markdown 内容
-const renderedContent = computed(() => {
-  return renderMarkdown(props.post.content)
-})
+// 渲染后的 Markdown 内容（异步加载）
+const renderedContent = ref('')
+const isLoading = ref(true)
 
 // 提取的标题（用于目录）
 const headings = computed(() => {
   return extractHeadings(props.post.content)
+})
+
+// 异步渲染 Markdown 内容
+onMounted(async () => {
+  // 滚动到顶部
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  // 异步渲染 Markdown
+  try {
+    renderedContent.value = await renderMarkdown(props.post.content)
+  } catch (error) {
+    console.error('Failed to render markdown:', error)
+    renderedContent.value = renderMarkdownSync(props.post.content)
+  } finally {
+    isLoading.value = false
+  }
+
+  // 添加复制按钮事件监听（延迟执行，等待内容渲染完成）
+  setTimeout(() => {
+    const copyButtons = document.querySelectorAll('.code-copy')
+    copyButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const code = button.getAttribute('data-code')
+        if (code) {
+          try {
+            await navigator.clipboard.writeText(code)
+            const span = button.querySelector('span')
+            if (span) {
+              const originalText = span.textContent
+              span.textContent = '已复制'
+              button.classList.add('copied')
+              setTimeout(() => {
+                span.textContent = originalText
+                button.classList.remove('copied')
+              }, 2000)
+            }
+          } catch (err) {
+            console.error('Failed to copy code:', err)
+          }
+        }
+      })
+    })
+  }, 100)
 })
 
 // 上一篇文章
@@ -61,36 +103,6 @@ const goBack = () => {
 const handleTagClick = (tag: string) => {
   router.push({ name: 'Blog', query: { tag } })
 }
-
-// 组件挂载后，滚动到顶部
-onMounted(() => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-
-  // 添加复制按钮事件监听
-  const copyButtons = document.querySelectorAll('.code-copy')
-  copyButtons.forEach((button) => {
-    button.addEventListener('click', async () => {
-      const code = button.getAttribute('data-code')
-      if (code) {
-        try {
-          await navigator.clipboard.writeText(code)
-          const span = button.querySelector('span')
-          if (span) {
-            const originalText = span.textContent
-            span.textContent = '已复制'
-            button.classList.add('copied')
-            setTimeout(() => {
-              span.textContent = originalText
-              button.classList.remove('copied')
-            }, 2000)
-          }
-        } catch (err) {
-          console.error('Failed to copy code:', err)
-        }
-      }
-    })
-  })
-})
 </script>
 
 <template>
@@ -156,7 +168,18 @@ onMounted(() => {
 
       <!-- 文章正文 -->
       <article class="blog-detail__content">
-        <div class="blog-detail__markdown" v-html="renderedContent"></div>
+        <!-- 加载状态 -->
+        <div v-if="isLoading" class="blog-detail__loading">
+          <div class="loading-spinner"></div>
+          <p>正在加载内容...</p>
+        </div>
+        
+        <!-- 渲染后的内容 -->
+        <div 
+          v-else 
+          class="blog-detail__markdown" 
+          v-html="renderedContent"
+        ></div>
       </article>
     </div>
 
@@ -281,6 +304,32 @@ onMounted(() => {
 
 .blog-detail__content {
   min-width: 0;
+}
+
+/* 加载状态样式 */
+.blog-detail__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Markdown 内容样式 */

@@ -1,18 +1,41 @@
 import MarkdownIt from 'markdown-it'
-import hljs from 'highlight.js'
 import anchor from 'markdown-it-anchor'
 import toc from 'markdown-it-table-of-contents'
 
-// 配置 Markdown 渲染器
+// 动态导入 highlight.js 以减少初始加载体积
+let hljs: any = null
+let hljsLoaded = false
+
+async function loadHighlightJS() {
+  if (hljsLoaded) {
+    return hljs
+  }
+
+  try {
+    // 动态导入 highlight.js
+    const hljsModule = await import('highlight.js')
+    hljs = hljsModule.default
+    hljsLoaded = true
+    return hljs
+  } catch (error) {
+    console.error('Failed to load highlight.js:', error)
+    return null
+  }
+}
+
+// 初始化 Markdown 渲染器
 const md = new MarkdownIt({
   html: true, // 允许 HTML 标签
   linkify: true, // 自动转换 URL 为链接
   typographer: true, // 启用排版优化
-  highlight: function (str, lang) {
+  highlight: async function (str, lang) {
+    // 异步加载 highlight.js
+    const highlighter = await loadHighlightJS()
+    
     // 如果指定了语言且 highlight.js 支持，则进行高亮
-    if (lang && hljs.getLanguage(lang)) {
+    if (highlighter && lang && highlighter.getLanguage(lang)) {
       try {
-        const highlightedCode = hljs.highlight(str, { language: lang }).value
+        const highlightedCode = highlighter.highlight(str, { language: lang }).value
         const escapedCode = md.utils.escapeHtml(str)
         return `<div class="code-wrapper">
           <div class="code-header">
@@ -76,7 +99,15 @@ md.use(toc, {
 })
 
 // Markdown 渲染函数
-export function renderMarkdown(content: string): string {
+export async function renderMarkdown(content: string): Promise<string> {
+  if (!content) {
+    return ''
+  }
+  return md.render(content)
+}
+
+// 同步版本（用于不需要高亮的场景）
+export function renderMarkdownSync(content: string): string {
   if (!content) {
     return ''
   }
