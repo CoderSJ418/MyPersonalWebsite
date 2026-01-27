@@ -125,8 +125,15 @@ onMounted(() => {
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--surface-1);
   border-radius: 0.75rem;
+  box-shadow: var(--shadow-md);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.personal-info:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 .personal-info__avatar {
@@ -135,7 +142,8 @@ onMounted(() => {
   margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid var(--color-primary);
+  border: 4px solid var(--primary-500);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .personal-info__avatar img {
@@ -154,20 +162,23 @@ onMounted(() => {
 .personal-info__name {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-text-primary);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
 }
 
 .personal-info__title {
   font-size: 1.25rem;
-  color: var(--color-primary);
+  color: var(--primary-500);
   font-weight: 600;
   margin: 0;
 }
 
 .personal-info__bio {
   font-size: 1rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
@@ -187,26 +198,26 @@ onMounted(() => {
 
 .personal-info__label {
   font-size: 0.875rem;
-  color: var(--color-text-tertiary);
+  color: var(--text-secondary);
   font-weight: 500;
   min-width: 80px;
 }
 
 .personal-info__value {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .personal-info__link {
   font-size: 0.875rem;
-  color: var(--color-primary);
+  color: var(--primary-500);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .personal-info__link:hover {
-  color: var(--color-primary-dark);
+  color: var(--primary-600);
   text-decoration: underline;
 }
 
@@ -219,13 +230,13 @@ onMounted(() => {
 
 .personal-info__social-link {
   padding: 0.5rem 1rem;
-  background-color: var(--color-primary);
+  background-color: var(--primary-500);
   color: white;
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
   border-radius: 0.375rem;
-  transition: all 0.2s ease;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .personal-info__social-link:hover {
@@ -236,7 +247,7 @@ onMounted(() => {
 .personal-info__section-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   margin: 0 0 0.75rem 0;
 }
 
@@ -249,12 +260,18 @@ onMounted(() => {
 
 .personal-info__tag {
   padding: 0.375rem 0.75rem;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-secondary);
+  background-color: var(--surface-2);
+  color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 500;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border-default);
   border-radius: 0.375rem;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.personal-info__tag:hover {
+  background-color: var(--surface-1);
+  border-color: var(--primary-500);
 }
 
 @media (min-width: 769px) {

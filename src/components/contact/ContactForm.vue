@@ -208,33 +208,37 @@ const handleSubmit = async () => {
 .contact-form__label {
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
 }
 
 .contact-form__input,
 .contact-form__textarea {
   padding: 12px 16px;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--border-default);
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-  background: var(--color-background);
-  color: var(--color-text-primary);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--surface-1);
+  color: var(--text-primary);
 }
 
 .contact-form__input:focus,
 .contact-form__textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary-500);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
 .contact-form__input--error,
 .contact-form__textarea--error {
-  border-color: var(--color-error);
+  border-color: var(--error-500);
+}
+
+.contact-form__input--error:focus,
+.contact-form__textarea--error:focus {
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
 }
 
 .contact-form__textarea {
@@ -244,26 +248,31 @@ const handleSubmit = async () => {
 
 .contact-form__error {
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--error-500);
 }
 
 .contact-form__submit {
   padding: 14px 28px;
-  background: var(--color-primary);
+  background: var(--primary-500);
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   align-self: flex-start;
 }
 
 .contact-form__submit:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background: var(--primary-600);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.contact-form__submit:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
 .contact-form__submit:disabled {
@@ -277,22 +286,24 @@ const handleSubmit = async () => {
 
 .contact-form__success {
   padding: 12px 16px;
-  background: var(--color-success);
+  background: var(--success-500);
   color: white;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   animation: slideIn 0.3s ease;
+  box-shadow: var(--shadow-md);
 }
 
 .contact-form__error-message {
   padding: 12px 16px;
-  background: var(--color-error);
+  background: var(--error-500);
   color: white;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   animation: slideIn 0.3s ease;
+  box-shadow: var(--shadow-md);
 }
 
 @keyframes slideIn {

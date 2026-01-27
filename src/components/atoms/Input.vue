@@ -96,14 +96,14 @@ const inputId = computed(() => props.id || `input-${Date.now()}`)
 .input-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--color-surface-text);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: var(--spacing-1);
 }
 
 .input-required {
-  color: var(--color-error);
+  color: var(--error-500);
   font-size: var(--font-size-xs);
 }
 
@@ -115,28 +115,30 @@ const inputId = computed(() => props.id || `input-${Date.now()}`)
 
 .input {
   padding: var(--spacing-3) var(--spacing-4);
-  border: 1px solid var(--color-surface-border);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
-  transition: all var(--transition-normal);
-  color: var(--color-surface-text);
-  background: var(--color-surface-bg);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-primary);
+  background: var(--surface-1);
   font-family: var(--font-family-primary);
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--primary-500);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transform: translateY(-1px);
 }
 
 .input::placeholder {
-  color: var(--color-surface-text-tertiary);
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 .input--error {
-  border-color: var(--color-error);
+  border-color: var(--error-500);
 }
 
 .input--error:focus {
@@ -144,13 +146,14 @@ const inputId = computed(() => props.id || `input-${Date.now()}`)
 }
 
 .input--disabled {
-  background: var(--color-surface-bg-secondary);
-  color: var(--color-surface-text-tertiary);
+  background: var(--surface-2);
+  color: var(--text-secondary);
   cursor: not-allowed;
 }
 
 .input--disabled::placeholder {
-  color: var(--color-surface-text-tertiary);
+  color: var(--text-secondary);
+  opacity: 0.5;
 }
 
 /* 尺寸 */
@@ -166,12 +169,12 @@ const inputId = computed(() => props.id || `input-${Date.now()}`)
 
 .input-error {
   font-size: var(--font-size-sm);
-  color: var(--color-error);
+  color: var(--error-500);
   margin-top: var(--spacing-1);
 }
 
 .input-help {
   font-size: var(--font-size-sm);
-  color: var(--color-surface-text-secondary);
+  color: var(--text-secondary);
 }
 </style>

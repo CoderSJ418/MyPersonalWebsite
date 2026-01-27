@@ -53,22 +53,22 @@ const handleClick = () => {
 
 <style scoped>
 .card {
-  background: var(--color-surface-card);
-  border: 1px solid var(--color-surface-card-border);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
 }
 
 .card--primary {
-  border-color: var(--color-primary);
-  background: var(--color-primary-50);
+  border-color: var(--primary-500);
+  background: var(--primary-50);
 }
 
 .card--secondary {
-  border-color: var(--color-surface-border-secondary);
-  background: var(--color-surface-bg-secondary);
+  border-color: var(--border-subtle);
+  background: var(--surface-2);
 }
 
 .card--interactive {
@@ -86,7 +86,7 @@ const handleClick = () => {
 
 .card__header {
   padding: var(--spacing-4);
-  border-bottom: 1px solid var(--color-surface-border);
+  border-bottom: 1px solid var(--border-default);
 }
 
 .card__image {
@@ -112,7 +112,7 @@ const handleClick = () => {
 
 .card__footer {
   padding: var(--spacing-4);
-  border-top: 1px solid var(--color-surface-border);
-  background: var(--color-surface-bg-secondary);
+  border-top: 1px solid var(--border-default);
+  background: var(--surface-2);
 }
 </style>

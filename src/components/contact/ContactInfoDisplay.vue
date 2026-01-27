@@ -77,7 +77,7 @@ defineProps<Props>()
 .contact-info-display__title {
   font-size: 20px;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -92,20 +92,21 @@ defineProps<Props>()
   align-items: flex-start;
   gap: 16px;
   padding: 16px;
-  background: var(--color-background);
-  border: 2px solid var(--color-border);
+  background: var(--surface-1);
+  border: 2px solid var(--border-default);
   border-radius: 12px;
-  transition: all 0.2s ease;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-info-display__item:hover {
-  border-color: var(--color-primary);
+  border-color: var(--primary-500);
   transform: translateX(4px);
+  box-shadow: var(--shadow-md);
 }
 
 .contact-info-display__icon {
   flex-shrink: 0;
-  color: var(--color-primary);
+  color: var(--primary-500);
   margin-top: 2px;
 }
 
@@ -127,18 +128,18 @@ defineProps<Props>()
 .contact-info-display__value {
   font-size: 16px;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   line-height: 1.5;
 }
 
 .contact-info-display__value--link {
-  color: var(--color-primary);
+  color: var(--primary-500);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-info-display__value--link:hover {
-  color: var(--color-primary-dark);
+  color: var(--primary-600);
   text-decoration: underline;
 }
 

@@ -149,26 +149,27 @@ const socialLinks = computed<SocialLink[]>(() => {
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  background: var(--color-background);
-  border: 2px solid var(--color-border);
+  background: var(--surface-1);
+  border: 2px solid var(--border-default);
   border-radius: 8px;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 14px;
   font-weight: 500;
 }
 
 .social-links__link:hover {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
+  border-color: var(--primary-500);
+  background: var(--primary-500);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
 }
 
 .social-links__link:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
 .social-links__label {

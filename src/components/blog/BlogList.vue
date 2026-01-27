@@ -7,13 +7,13 @@
 
     <!-- 错误状态 -->
     <div v-else-if="error" class="blog-list__error">
-      <div class="text-center py-12">
-        <AlertCircle :size="48" class="mx-auto mb-4 text-red-500" />
-        <h3 class="text-xl font-bold text-text-primary mb-2">加载失败</h3>
-        <p class="text-text-secondary mb-4">{{ error }}</p>
+      <div class="blog-list__error-content">
+        <AlertCircle :size="48" class="blog-list__error-icon" />
+        <h3 class="blog-list__error-title">加载失败</h3>
+        <p class="blog-list__error-message">{{ error }}</p>
         <button
           type="button"
-          class="px-6 py-2 bg-theme-primary text-white rounded-lg hover:bg-theme-primary/80 transition-colors"
+          class="blog-list__retry-button"
           @click="handleRetry"
         >
           重试
@@ -23,10 +23,10 @@
 
     <!-- 空状态 -->
     <div v-else-if="posts.length === 0" class="blog-list__empty">
-      <div class="text-center py-12">
-        <FileText :size="48" class="mx-auto mb-4 text-text-tertiary" />
-        <h3 class="text-xl font-bold text-text-primary mb-2">暂无文章</h3>
-        <p class="text-text-secondary">还没有发布任何文章</p>
+      <div class="blog-list__empty-content">
+        <FileText :size="48" class="blog-list__empty-icon" />
+        <h3 class="blog-list__empty-title">暂无文章</h3>
+        <p class="blog-list__empty-message">还没有发布任何文章</p>
       </div>
     </div>
 
@@ -130,6 +130,66 @@ const handleRetry = () => {
 .blog-list__error,
 .blog-list__empty {
   min-height: 400px;
+}
+
+.blog-list__error-content,
+.blog-list__empty-content {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.blog-list__error-icon {
+  margin: 0 auto 1rem;
+  color: #ef4444;
+}
+
+.blog-list__error-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.blog-list__error-message {
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.blog-list__retry-button {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: white;
+  background: var(--primary-500);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-list__retry-button:hover {
+  background: var(--primary-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.blog-list__empty-icon {
+  margin: 0 auto 1rem;
+  color: var(--text-tertiary);
+}
+
+.blog-list__empty-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.blog-list__empty-message {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
 }
 
 /* 响应式优化 */

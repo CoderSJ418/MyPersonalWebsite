@@ -66,14 +66,18 @@ const formatDate = (date: string) => {
 <style scoped>
 .education {
   padding: 2rem;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--surface-1);
   border-radius: 0.75rem;
+  box-shadow: var(--shadow-md);
 }
 
 .education__title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 2rem 0;
 }
 
@@ -85,9 +89,16 @@ const formatDate = (date: string) => {
 
 .education__item {
   padding: 1.5rem;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-default);
   border-radius: 0.5rem;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.education__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-500);
 }
 
 .education__header {
@@ -100,7 +111,7 @@ const formatDate = (date: string) => {
 .education__school-name {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -112,23 +123,23 @@ const formatDate = (date: string) => {
 
 .education__degree-text {
   font-size: 1rem;
-  color: var(--color-primary);
+  color: var(--primary-500);
   font-weight: 600;
 }
 
 .education__major {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .education__date {
   font-size: 0.875rem;
-  color: var(--color-text-tertiary);
+  color: var(--text-secondary);
 }
 
 .education__description {
   font-size: 1rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0 0 1rem 0;
 }
@@ -142,20 +153,20 @@ const formatDate = (date: string) => {
 
 .education__label {
   font-size: 0.875rem;
-  color: var(--color-text-tertiary);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .education__value {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 600;
 }
 
 .education__section-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   margin: 0 0 0.75rem 0;
 }
 
@@ -169,7 +180,7 @@ const formatDate = (date: string) => {
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -177,7 +188,7 @@ const formatDate = (date: string) => {
   content: '•';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  color: var(--primary-500);
   font-weight: bold;
 }
 

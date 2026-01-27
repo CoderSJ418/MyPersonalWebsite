@@ -89,14 +89,18 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 <style scoped>
 .work-experience {
   padding: 2rem;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--surface-1);
   border-radius: 0.75rem;
+  box-shadow: var(--shadow-md);
 }
 
 .work-experience__title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 2rem 0;
 }
 
@@ -108,9 +112,16 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 
 .work-experience__item {
   padding: 1.5rem;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-default);
   border-radius: 0.5rem;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-experience__item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-500);
 }
 
 .work-experience__header {
@@ -129,13 +140,13 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 .work-experience__company-name {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   margin: 0;
 }
 
 .work-experience__current {
   padding: 0.25rem 0.5rem;
-  background-color: var(--color-primary);
+  background-color: var(--primary-500);
   color: white;
   font-size: 0.75rem;
   font-weight: 600;
@@ -144,24 +155,24 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 
 .work-experience__position {
   font-size: 1rem;
-  color: var(--color-primary);
+  color: var(--primary-500);
   font-weight: 500;
 }
 
 .work-experience__location {
   font-size: 0.875rem;
-  color: var(--color-text-tertiary);
+  color: var(--text-secondary);
 }
 
 .work-experience__duration {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .work-experience__description {
   font-size: 1rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
 }
@@ -169,7 +180,7 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 .work-experience__section-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   margin: 0 0 0.75rem 0;
 }
 
@@ -183,7 +194,7 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -191,7 +202,7 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
   content: '•';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  color: var(--primary-500);
   font-weight: bold;
 }
 
@@ -203,12 +214,18 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 
 .work-experience__tag {
   padding: 0.375rem 0.75rem;
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-secondary);
+  background-color: var(--surface-1);
+  color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 500;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border-default);
   border-radius: 0.375rem;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-experience__tag:hover {
+  background-color: var(--surface-2);
+  border-color: var(--primary-500);
 }
 
 @media (min-width: 769px) {
