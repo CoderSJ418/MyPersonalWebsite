@@ -85,21 +85,22 @@
 
           <!-- CTA 按钮组 -->
           <div ref="ctaRef" class="flex flex-col sm:flex-row gap-4">
-            <RouterLink
-              to="/projects"
-              class="btn btn-gradient px-8 py-4 text-base font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+            <CTA
+              href="/projects"
+              variant="primary"
+              size="large"
+              label="查看我的作品集"
             >
-              <span class="mr-2">查看作品</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </RouterLink>
-            <RouterLink
-              to="/contact"
-              class="btn bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-2 border-primary-500 dark:border-primary-400 text-primary-600 dark:text-primary-400 px-8 py-4 text-base font-semibold rounded-xl hover:bg-primary-50 dark:hover:bg-slate-800 hover:scale-105 transition-all duration-300 shadow-lg"
+              查看作品
+            </CTA>
+            <CTA
+              href="/contact"
+              variant="outline"
+              size="large"
+              label="联系我"
             >
               联系我
-            </RouterLink>
+            </CTA>
           </div>
 
           <!-- 社交链接 -->
@@ -197,6 +198,7 @@ developer.createAwesome() {
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import CTA from '@/components/ui/CTA.vue'
 
 // 注册 ScrollTrigger 插件
 gsap.registerPlugin(ScrollTrigger)

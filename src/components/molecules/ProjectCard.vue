@@ -75,6 +75,16 @@
             <span>{{ project.category || 'Web应用' }}</span>
           </div>
         </div>
+        
+        <!-- CTA 按钮 -->
+        <CTA
+          :href="`/projects/${project.slug}`"
+          variant="primary"
+          size="small"
+          :label="`查看 ${project.title} 项目详情`"
+        >
+          查看详情
+        </CTA>
       </div>
     </div>
 
@@ -87,6 +97,7 @@
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import { useRouter } from 'vue-router'
+import CTA from '@/components/ui/CTA.vue'
 
 interface Project {
   id: string
@@ -314,11 +325,16 @@ onMounted(() => {
   padding-top: 1rem;
   border-top: 1px solid var(--border-subtle);
   dark:border(var(--border-subtle));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .project-meta {
   display: flex;
   gap: 1rem;
+  flex: 1;
 }
 
 .meta-item {

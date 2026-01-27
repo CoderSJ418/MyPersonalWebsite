@@ -232,6 +232,28 @@ function initAnalytics() {
     .catch((error) => {
       logger.error('[Monitoring] Failed to initialize analytics:', error)
     })
+
+  // 初始化 Google Analytics
+  import('./composables/useAnalytics')
+    .then(({ useAnalytics }) => {
+      const analytics = useAnalytics()
+      
+      // 初始化 Google Analytics
+      analytics.init()
+      
+      // 设置自动追踪
+      analytics.setupAutoTracking({
+        pageTracking: true,
+        scrollDepthTracking: true,
+        linkTracking: true,
+        scrollDepths: [25, 50, 75, 90, 100]
+      })
+      
+      logger.info('[Monitoring] Google Analytics initialized')
+    })
+    .catch((error) => {
+      logger.error('[Monitoring] Failed to initialize Google Analytics:', error)
+    })
 }
 
 /**
