@@ -1,78 +1,101 @@
-# MyPersonalWebsite 文档中心
+# MyPersonalWebsite 文档索引
 
-欢迎使用 MyPersonalWebsite 完整文档中心。本文档提供了项目的技术架构、API 参考、组件使用指南和开发规范。
+> 最后更新：2026年1月31日
 
-## 📚 文档导航
+## 📁 文档结构
+
+```
+docs/
+├── api/                    # API 文档
+├── components/             # 组件文档
+├── guides/                 # 开发指南
+├── site/                   # 站点文档
+├── stories/                # 用户故事
+└── archive/               # 归档文档
+    ├── bmad/              # BMAD 分析报告
+    ├── performance/       # 性能优化报告
+    ├── testing/           # 测试报告
+    ├── design/            # 设计报告
+    ├── completion/        # 项目完成报告
+    └── lighthouse/        # Lighthouse 性能报告
+```
+
+## 📚 核心文档
 
 ### 快速开始
-- [快速开始指南](QUICK_START.md) - 5分钟快速上手
-- [项目概述](PROJECT_SUMMARY.md) - 项目介绍和特性
-- [技术架构](technical-architecture.md) - 系统架构设计
+- `QUICK_START.md` - 快速开始指南
 
-### API 文档
-- [Composables API](api/composables.md) - 可组合函数 API
-- [Stores API](api/stores.md) - Pinia 状态管理 API
-- [Utils API](api/utils.md) - 工具函数 API
+### 设计文档
+- `design-system.md` - 设计系统
 
 ### 组件文档
-- [通用组件](components/common.md) - 通用 UI 组件
-- [页面组件](components/pages.md) - 页面级组件
-- [功能组件](components/features.md) - 功能性组件
+- `components.md` - 组件总览
+- `pixel-components.md` - Pixel 组件
+- `pixel-components-usage.md` - Pixel 组件使用
+- `pixel-components-api.md` - Pixel 组件 API
 
-### 开发指南
-- [开发环境设置](guides/setup.md) - 本地开发环境配置
-- [代码规范](guides/coding-standards.md) - 代码风格和最佳实践
-- [测试指南](guides/testing.md) - 单元测试和 E2E 测试
-- [部署指南](guides/deployment.md) - 生产环境部署
+## 📊 归档报告
 
-### 运维文档
-- [性能优化](performance-optimization.md) - 性能优化指南
-- [监控和日志](monitoring-system-report.md) - 监控系统说明
-- [CI/CD 流程](CI_CD_SETUP_GUIDE.md) - 持续集成和部署
+### BMAD 分析报告
+`archive/bmad/`
+- BMAD 分析师的分析报告和实施计划
+- 架构师修复计划
+- 任务完成报告
+- UI/UX 问题报告和修复报告
 
-### 贡献指南
-- [贡献指南](CONTRIBUTING.md) - 如何贡献代码
-- [问题报告](guides/reporting-issues.md) - 报告 Bug 和功能请求
+### 性能优化报告
+`archive/performance/`
+- 性能优化计划和执行报告
+- 优化进度和结果
+- 性能专家报告
 
-## 🎯 文档完善度
+### 测试报告
+`archive/testing/`
+- 测试修复指南和报告
+- 测试修复总结
 
-| 类别 | 完善度 | 状态 |
-|------|--------|------|
-| API 文档 | 95% | ✅ 优秀 |
-| 组件文档 | 90% | ✅ 良好 |
-| 开发指南 | 95% | ✅ 优秀 |
-| 运维文档 | 95% | ✅ 优秀 |
-| 贡献指南 | 95% | ✅ 优秀 |
-| **总体完善度** | **95%** | ✅ **优秀** |
+### 设计报告
+`archive/design/`
+- 设计问题诊断
+- UI 设计评审
 
-## 🚀 快速链接
+### 项目完成报告
+`archive/completion/`
+- 最终完成报告
+- Pixel 组件完成报告和验证
 
-- [GitHub 仓库](https://github.com/yourusername/MyPersonalWebsite)
-- [在线演示](https://yourwebsite.com)
-- [问题追踪](https://github.com/yourusername/MyPersonalWebsite/issues)
-- [更新日志](CHANGELOG.md)
+### Lighthouse 报告
+`archive/lighthouse/`
+- 性能审计报告
 
-## 📖 文档版本
+### 历史归档
+`archive/`
+- `technical-architecture.md` - 技术架构文档（已归档）
+- `technical-implementation.md` - 技术实现文档（已归档）
+- `solution-architecture.md` - 解决方案架构文档（已归档）
+- `development-log.md` - 开发日志（已归档）
+- `ui-design-system.md` - UI 设计系统规范（已归档）
+- `ux-design.md` - UX 设计文档（已归档）
+- `search-feature-implementation.md` - 搜索功能实现文档（已归档）
 
-- **当前版本**: v1.0.0
-- **最后更新**: 2026年1月21日
-- **维护者**: 佘杰
+### 个人信息
+`archive/`
+- `佘杰-前端开发工程师-优化版-v2.md` - 简历 Markdown 版本
+- `佘杰简历 (1).pdf` - 简历 PDF 版本
+- `个人博客+前端作品集网站需求分析文档.md` - 需求分析
 
-## 🔍 搜索文档
+### 项目归档
+`archive/`
+- `INTEGRATION_ORCHESTRATOR_GUIDE.md` - 集成编排指南
+- `MYPERSONALWEBSITE_CODE_REVIEW_REPORT.md` - 代码审查报告
+- `PROGRESS.md` - 项目进度
+- `REDESIGN_SUMMARY.md` - 重新设计总结
+- `SECURITY_AUDIT_REPORT.md` - 安全审计报告
+- `SSR_SSG_MIGRATION_PLAN.md` - SSR/SSG 迁移计划
 
-使用文档搜索功能快速找到您需要的内容。支持关键词搜索、模糊匹配和高级过滤。
+## 🔍 快速查找
 
-## 💡 文档反馈
-
-如果您发现文档有错误或需要改进，请：
-1. 创建 [Issue](https://github.com/yourusername/MyPersonalWebsite/issues)
-2. 提交 Pull Request
-3. 联系维护者
-
-## 📚 相关资源
-
-- [Vue 3 官方文档](https://vuejs.org/)
-- [TypeScript 官方文档](https://www.typescriptlang.org/)
-- [Vite 官方文档](https://vitejs.dev/)
-- [Pinia 官方文档](https://pinia.vuejs.org/)
-- [Tailwind CSS 官方文档](https://tailwindcss.com/)
+### 按主题查找
+- **快速开始** → `QUICK_START.md`
+- **组件使用** → `components/`
+- **历史报告** → `archive/`

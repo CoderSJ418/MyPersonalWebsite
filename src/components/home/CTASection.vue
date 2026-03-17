@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 import CTA from '@/components/ui/CTA.vue'
 
@@ -106,26 +106,33 @@ const contactRef = ref<HTMLElement | null>(null)
 const { fadeInUp, staggerIn } = useGSAPAnimations()
 
 onMounted(() => {
-  // 标题动画
-  if (titleRef.value) {
-    fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
-  }
+  // 在 DOM 更新后执行动画
+  nextTick(() => {
+    // 标题动画
+    if (titleRef.value) {
+      fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
+    }
 
-  // 描述动画
-  if (descriptionRef.value) {
-    fadeInUp(descriptionRef.value, { duration: 0.8, delay: 0.2 })
-  }
+    // 描述动画
+    if (descriptionRef.value) {
+      fadeInUp(descriptionRef.value, { duration: 0.8, delay: 0.2 })
+    }
 
-  // CTA 按钮动画
-  if (ctaRef.value) {
-    const buttons = ctaRef.value.querySelectorAll('.cta-button')
-    staggerIn(buttons, { duration: 0.6, delay: 0.3 })
-  }
+    // CTA 按钮动画
+    if (ctaRef.value) {
+      const buttons = ctaRef.value.querySelectorAll('.cta-button')
+      if (buttons.length > 0) {
+        staggerIn(buttons, { duration: 0.6, delay: 0.3 })
+      }
+    }
 
-  // 联系方式动画
-  if (contactRef.value) {
-    const contacts = contactRef.value.querySelectorAll('a')
-    staggerIn(contacts, { duration: 0.6, delay: 0.5 })
-  }
+    // 联系方式动画
+    if (contactRef.value) {
+      const contacts = contactRef.value.querySelectorAll('a')
+      if (contacts.length > 0) {
+        staggerIn(contacts, { duration: 0.6, delay: 0.5 })
+      }
+    }
+  })
 })
 </script>

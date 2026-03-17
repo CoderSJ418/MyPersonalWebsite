@@ -116,7 +116,7 @@
               </svg>
             </a>
             <a
-              href="mailto:contact@example.com"
+              href="mailto:912999051@qq.com"
               class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 transition-all duration-300 hover:scale-110"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

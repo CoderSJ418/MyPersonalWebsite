@@ -4,9 +4,15 @@
  */
 
 /**
- * 应用可访问性优化
+ * 清理函数类型
  */
-export function applyAccessibilityOptimizations() {
+export type CleanupFunction = () => void
+
+/**
+ * 应用可访问性优化
+ * @returns 清理函数，用于移除所有事件监听器
+ */
+export function applyAccessibilityOptimizations(): CleanupFunction {
   // 减少运动偏好
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
   if (prefersReducedMotion.matches) {
@@ -14,13 +20,14 @@ export function applyAccessibilityOptimizations() {
   }
 
   // 监听减少运动偏好变化
-  prefersReducedMotion.addEventListener('change', (e) => {
+  const handleReducedMotionChange = (e: MediaQueryListEvent) => {
     if (e.matches) {
       document.documentElement.classList.add('reduced-motion')
     } else {
       document.documentElement.classList.remove('reduced-motion')
     }
-  })
+  }
+  prefersReducedMotion.addEventListener('change', handleReducedMotionChange)
 
   // 高对比度模式
   const prefersHighContrast = window.matchMedia('(prefers-contrast: high)')
@@ -29,13 +36,14 @@ export function applyAccessibilityOptimizations() {
   }
 
   // 监听高对比度模式变化
-  prefersHighContrast.addEventListener('change', (e) => {
+  const handleHighContrastChange = (e: MediaQueryListEvent) => {
     if (e.matches) {
       document.documentElement.classList.add('high-contrast')
     } else {
       document.documentElement.classList.remove('high-contrast')
     }
-  })
+  }
+  prefersHighContrast.addEventListener('change', handleHighContrastChange)
 
   // 添加键盘导航指示器
   let hasKeyboardNav = false
@@ -65,13 +73,16 @@ export function applyAccessibilityOptimizations() {
   document.body.insertBefore(skipLink, document.body.firstChild)
 
   // 确保跳转链接在焦点时显示
-  skipLink.addEventListener('focus', () => {
+  const handleSkipLinkFocus = () => {
     skipLink.classList.remove('sr-only')
-  })
+  }
 
-  skipLink.addEventListener('blur', () => {
+  const handleSkipLinkBlur = () => {
     skipLink.classList.add('sr-only')
-  })
+  }
+
+  skipLink.addEventListener('focus', handleSkipLinkFocus)
+  skipLink.addEventListener('blur', handleSkipLinkBlur)
 
   // 添加焦点指示器样式
   const style = document.createElement('style')
@@ -97,6 +108,34 @@ export function applyAccessibilityOptimizations() {
     }
   `
   document.head.appendChild(style)
+
+  // 返回清理函数
+  return () => {
+    // 移除媒体查询监听器
+    prefersReducedMotion.removeEventListener('change', handleReducedMotionChange)
+    prefersHighContrast.removeEventListener('change', handleHighContrastChange)
+
+    // 移除文档事件监听器
+    document.removeEventListener('keydown', handleKeyDown)
+    document.removeEventListener('mousedown', handleMouseDown)
+
+    // 移除跳转链接事件监听器
+    skipLink.removeEventListener('focus', handleSkipLinkFocus)
+    skipLink.removeEventListener('blur', handleSkipLinkBlur)
+
+    // 移除跳转链接元素
+    if (skipLink.parentNode) {
+      skipLink.parentNode.removeChild(skipLink)
+    }
+
+    // 移除样式元素
+    if (style.parentNode) {
+      style.parentNode.removeChild(style)
+    }
+
+    // 移除添加的类
+    document.documentElement.classList.remove('reduced-motion', 'high-contrast', 'keyboard-nav')
+  }
 }
 
 /**

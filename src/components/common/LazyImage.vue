@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { imageOptimizer, type ImageOptimizationConfig } from '@/utils/imageOptimizer'
 
 interface Props {
@@ -120,23 +120,12 @@ const onLoad = () => {
 }
 
 // 加载失败回调
-const onError = (event: Event) => {
+const onError = () => {
   isLoading.value = false
   hasError.value = true
   
   const error = new Error(`Failed to load image: ${props.src}`)
   emit('error', error)
-}
-
-// 检测是否在视口中
-const isInViewport = (element: Element) => {
-  const rect = element.getBoundingClientRect()
-  return (
-    rect.top < window.innerHeight * 0.8 &&
-    rect.bottom > 0 &&
-    rect.left < window.innerWidth * 0.8 &&
-    rect.right > 0
-  )
 }
 
 // 懒加载观察器

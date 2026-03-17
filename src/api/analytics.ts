@@ -105,13 +105,24 @@ export const trackPageView = (event: PageViewEvent) =>
 export const trackEvent = (event: AnalyticsEvent) =>
   analyticsApi.trackEvent(event)
 
-export const getPageViews = (params?: any) =>
-  analyticsApi.getPageViews(params)
+export const getPageViews = (params?: {
+  startDate?: string
+  endDate?: string
+  page?: string
+}) => analyticsApi.getPageViews(params)
 
-export const getEvents = (params?: any) => analyticsApi.getEvents(params)
+export const getEvents = (params?: {
+  startDate?: string
+  endDate?: string
+  eventName?: string
+}) => analyticsApi.getEvents(params)
 
-export const getRequestStats = (params?: any) =>
-  analyticsApi.getRequestStats(params)
+export const getRequestStats = (params?: {
+  startDate?: string
+  endDate?: string
+  page?: number
+  pageSize?: number
+}) => analyticsApi.getRequestStats(params)
 
 export const trackEvents = (events: AnalyticsEvent[]) =>
   analyticsApi.trackEvents(events)

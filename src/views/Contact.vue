@@ -142,11 +142,14 @@ onMounted(() => {
 /* 英雄区域 */
 .contact-hero {
   position: relative;
-  padding: 6rem 1.5rem 4rem;
+  padding: 6rem 0 3rem;
   text-align: center;
   background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 50%, var(--primary-200) 100%);
-  dark:background(linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%));
   overflow: hidden;
+}
+
+.dark .contact-hero {
+  background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%);
 }
 
 .contact-hero::before {
@@ -170,11 +173,14 @@ onMounted(() => {
   padding: 0.5rem 1rem;
   margin-bottom: 1.5rem;
   background: white;
-  dark:background(var(--surface-2));
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-color);
   border-radius: 9999px;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
+}
+
+.dark .contact-hero__badge {
+  background: var(--bg-secondary);
 }
 
 .contact-hero__badge:hover {
@@ -273,13 +279,16 @@ onMounted(() => {
   height: 3rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify: center;
   background: var(--primary-50);
-  dark:background(var(--primary-950));
   border-radius: 0.75rem;
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   box-shadow: var(--shadow-sm);
+}
+
+.dark .section-icon {
+  background: var(--primary-950);
+  color: var(--primary-400);
 }
 
 .section-title {
@@ -303,8 +312,8 @@ onMounted(() => {
 }
 
 .info-card {
-  background: var(--surface-1);
-  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 1.5rem;
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
@@ -328,7 +337,7 @@ onMounted(() => {
   height: 2.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify: center;
   border-radius: 0.75rem;
   color: white;
 }
@@ -338,11 +347,11 @@ onMounted(() => {
 }
 
 .info-card__icon--secondary {
-  background: var(--gradient-secondary);
+  background: var(--gradient-accent);
 }
 
 .info-card__icon--success {
-  background: var(--gradient-success);
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
 }
 
 .info-card__title {
@@ -364,14 +373,17 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: var(--surface-2);
+  background: var(--bg-tertiary);
   border-radius: 0.5rem;
   transition: all 0.3s ease;
 }
 
 .working-hours__item:hover {
   background: var(--primary-50);
-  dark:background(var(--primary-950));
+}
+
+.dark .working-hours__item:hover {
+  background: var(--primary-950);
 }
 
 .working-hours__item--inactive {

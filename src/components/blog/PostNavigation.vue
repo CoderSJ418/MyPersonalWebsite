@@ -8,7 +8,7 @@ interface Props {
   nextPost: BlogPost | null
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const router = useRouter()
 

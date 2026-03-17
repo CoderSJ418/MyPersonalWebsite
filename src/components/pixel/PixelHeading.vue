@@ -18,7 +18,7 @@ interface Props {
   pixelFont?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   level: 1,
   tag: 'h1',
   pixelFont: false

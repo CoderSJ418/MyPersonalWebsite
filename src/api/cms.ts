@@ -3,7 +3,7 @@
  * 用于从 CMS 获取内容数据
  */
 
-import { get, post, put, del } from './index'
+import { get, post } from './index'
 import type {
   ApiResponse,
   PaginatedResponse,
@@ -12,6 +12,10 @@ import type {
   ContactFormData,
   ContactFormResponse,
   PaginationParams,
+  SiteConfig,
+  Skill,
+  WorkExperience,
+  Education,
 } from './types'
 
 /**
@@ -126,29 +130,29 @@ export class CmsApi {
   /**
    * 获取网站配置
    */
-  async getSiteConfig(): Promise<ApiResponse<any>> {
-    return await get<ApiResponse<any>>('/api/cms/config')
+  async getSiteConfig(): Promise<ApiResponse<SiteConfig>> {
+    return await get<ApiResponse<SiteConfig>>('/api/cms/config')
   }
 
   /**
    * 获取技能列表
    */
-  async getSkills(): Promise<ApiResponse<any[]>> {
-    return await get<ApiResponse<any[]>>('/api/cms/skills')
+  async getSkills(): Promise<ApiResponse<Skill[]>> {
+    return await get<ApiResponse<Skill[]>>('/api/cms/skills')
   }
 
   /**
    * 获取工作经历
    */
-  async getWorkExperience(): Promise<ApiResponse<any[]>> {
-    return await get<ApiResponse<any[]>>('/api/cms/experience')
+  async getWorkExperience(): Promise<ApiResponse<WorkExperience[]>> {
+    return await get<ApiResponse<WorkExperience[]>>('/api/cms/experience')
   }
 
   /**
    * 获取教育背景
    */
-  async getEducation(): Promise<ApiResponse<any[]>> {
-    return await get<ApiResponse<any[]>>('/api/cms/education')
+  async getEducation(): Promise<ApiResponse<Education[]>> {
+    return await get<ApiResponse<Education[]>>('/api/cms/education')
   }
 }
 
@@ -160,7 +164,11 @@ export const cmsApi = CmsApi.getInstance()
 /**
  * 导出便捷方法 - 博客
  */
-export const getBlogPosts = (params?: any) => cmsApi.getBlogPosts(params)
+export const getBlogPosts = (params?: PaginationParams & {
+  category?: string
+  tags?: string[]
+  search?: string
+}) => cmsApi.getBlogPosts(params)
 export const getBlogPostBySlug = (slug: string) => cmsApi.getBlogPostBySlug(slug)
 export const getBlogPostById = (id: string) => cmsApi.getBlogPostById(id)
 export const getRelatedBlogPosts = (postId: string, limit?: number) =>
@@ -169,7 +177,11 @@ export const getRelatedBlogPosts = (postId: string, limit?: number) =>
 /**
  * 导出便捷方法 - 项目
  */
-export const getProjects = (params?: any) => cmsApi.getProjects(params)
+export const getProjects = (params?: PaginationParams & {
+  featured?: boolean
+  technology?: string
+  search?: string
+}) => cmsApi.getProjects(params)
 export const getProjectBySlug = (slug: string) => cmsApi.getProjectBySlug(slug)
 export const getProjectById = (id: string) => cmsApi.getProjectById(id)
 export const getFeaturedProjects = (limit?: number) => cmsApi.getFeaturedProjects(limit)

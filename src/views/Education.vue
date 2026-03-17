@@ -26,13 +26,13 @@
             v-for="(education, index) in educationStore.educations"
             :key="education.id"
             class="education-card group relative rounded-2xl p-8 md:p-12 mb-8 border transition-all duration-500"
-            style="background-color: var(--bg-surface); border-color: var(--bg-card)"
+            style="background-color: var(--bg-secondary); border-color: var(--border-color)"
             :data-index="index"
           >
             <!-- 装饰背景 -->
             <div
               class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl transition-all duration-500"
-              style="background-color: var(--secondary-color); opacity: 0.05"
+              style="background-color: rgba(236, 72, 153, 0.05)"
             ></div>
 
             <div class="relative z-10">
@@ -49,9 +49,9 @@
                     <span
                       class="inline-flex items-center px-4 py-2 rounded-lg font-medium"
                       style="
-                        background-color: rgba(var(--accent-color), 0.1);
-                        border: 1px solid var(--accent-color);
-                        color: var(--accent-color);
+                        background-color: rgba(99, 102, 241, 0.1);
+                        border: 1px solid var(--color-primary);
+                        color: var(--color-primary);
                       "
                     >
                       <svg
@@ -84,9 +84,9 @@
                     <span
                       class="inline-flex items-center px-4 py-2 rounded-lg font-medium"
                       style="
-                        background-color: rgba(var(--secondary-color), 0.1);
-                        border: 1px solid var(--secondary-color);
-                        color: var(--secondary-color);
+                        background-color: rgba(236, 72, 153, 0.1);
+                        border: 1px solid var(--color-accent);
+                        color: var(--color-accent);
                       "
                     >
                       <svg
@@ -157,7 +157,7 @@
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    style="color: var(--accent-color)"
+                    style="color: var(--color-primary)"
                   >
                     <path
                       stroke-linecap="round"
@@ -174,8 +174,8 @@
                     :key="course"
                     class="px-3 py-1.5 rounded-lg text-sm"
                     style="
-                      background-color: var(--bg-surface);
-                      border: 1px solid var(--bg-card);
+                      background-color: var(--bg-secondary);
+                      border: 1px solid var(--border-color);
                       color: var(--text-secondary);
                     "
                   >
@@ -192,7 +192,7 @@
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    style="color: var(--accent-color)"
+                    style="color: var(--color-primary)"
                   >
                     <path
                       stroke-linecap="round"
@@ -210,7 +210,7 @@
                     class="flex items-start"
                     style="color: var(--text-secondary)"
                   >
-                    <span class="mr-3 mt-1" style="color: var(--secondary-color)">✓</span>
+                    <span class="mr-3 mt-1" style="color: var(--color-accent)">✓</span>
                     {{ achievement }}
                   </div>
                 </div>
@@ -224,7 +224,7 @@
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    style="color: var(--accent-color)"
+                    style="color: var(--color-primary)"
                   >
                     <path
                       stroke-linecap="round"
@@ -240,7 +240,7 @@
                     v-for="project in education.projects"
                     :key="project.title"
                     class="rounded-lg p-4 border"
-                    style="background-color: var(--bg-primary); border-color: var(--bg-card)"
+                    style="background-color: var(--bg-primary); border-color: var(--border-color)"
                   >
                     <h4 class="font-semibold mb-2" style="color: var(--text-primary)">
                       {{ project.title }}
@@ -254,9 +254,9 @@
                         :key="tech"
                         class="px-2 py-1 rounded text-xs font-medium"
                         style="
-                          background-color: rgba(var(--accent-color), 0.1);
-                          border: 1px solid var(--accent-color);
-                          color: var(--accent-color);
+                          background-color: rgba(99, 102, 241, 0.1);
+                          border: 1px solid var(--color-primary);
+                          color: var(--color-primary);
                         "
                       >
                         {{ tech }}
@@ -274,18 +274,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, nextTick } from 'vue'
 import { useEducationStore } from '@/stores/useEducationStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 
 const educationStore = useEducationStore()
-const { fadeInUp, staggerIn } = useGSAPAnimations()
+const { staggerIn } = useGSAPAnimations()
 
 onMounted(() => {
   educationStore.loadEducation()
 
-  // 教育卡片动画
-  const cards = document.querySelectorAll('.education-card')
-  staggerIn(cards, { duration: 0.8, delay: 0.2 })
+  // 在 DOM 更新后执行动画
+  nextTick(() => {
+    // 教育卡片动画
+    const cards = document.querySelectorAll('.education-card')
+    if (cards.length > 0) {
+      staggerIn(cards, { duration: 0.8, delay: 0.2 })
+    }
+  })
 })
 </script>

@@ -5,7 +5,7 @@
 
 declare global {
   interface Window {
-    gtag: any
+    gtag: (...args: unknown[]) => void
   }
 }
 
@@ -17,7 +17,10 @@ export function initGoogleAnalytics(measurementId?: string): void {
   const id = measurementId || import.meta.env.VITE_GA_MEASUREMENT_ID
 
   if (!id) {
-    console.warn('Google Analytics measurement ID not provided')
+    // 只在开发环境显示警告
+    if (import.meta.env.DEV) {
+      console.warn('Google Analytics measurement ID not provided')
+    }
     return
   }
 
@@ -30,7 +33,7 @@ export function initGoogleAnalytics(measurementId?: string): void {
 
   // 初始化 gtag
   window.dataLayer = window.dataLayer || []
-  window.gtag = function (...args: any[]) {
+  window.gtag = function (...args: unknown[]) {
     window.dataLayer.push(args)
   }
 
@@ -51,7 +54,9 @@ export function trackPageView(
   userId?: string
 ): void {
   if (!window.gtag) {
-    console.warn('Google Analytics not initialized')
+    if (import.meta.env.DEV) {
+      console.warn('Google Analytics not initialized')
+    }
     return
   }
 
@@ -77,7 +82,9 @@ export function trackEvent(
   eventParameters?: Record<string, string | number | boolean>
 ): void {
   if (!window.gtag) {
-    console.warn('Google Analytics not initialized')
+    if (import.meta.env.DEV) {
+      console.warn('Google Analytics not initialized')
+    }
     return
   }
 
@@ -98,7 +105,9 @@ export function trackCustomEvent(
   value?: number
 ): void {
   if (!window.gtag) {
-    console.warn('Google Analytics not initialized')
+    if (import.meta.env.DEV) {
+      console.warn('Google Analytics not initialized')
+    }
     return
   }
 
@@ -127,7 +136,9 @@ export function setUserProperties(
   userProperties: Record<string, string | number | boolean>
 ): void {
   if (!window.gtag) {
-    console.warn('Google Analytics not initialized')
+    if (import.meta.env.DEV) {
+      console.warn('Google Analytics not initialized')
+    }
     return
   }
 
@@ -144,7 +155,9 @@ export function setUserProperties(
  */
 export function trackException(description: string, fatal: boolean = false): void {
   if (!window.gtag) {
-    console.warn('Google Analytics not initialized')
+    if (import.meta.env.DEV) {
+      console.warn('Google Analytics not initialized')
+    }
     return
   }
 

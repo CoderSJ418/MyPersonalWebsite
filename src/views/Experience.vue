@@ -26,7 +26,7 @@
             <!-- 垂直线 -->
             <div
               class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5"
-              style="background-color: var(--bg-card)"
+              style="background-color: var(--border-color)"
             ></div>
 
             <!-- 工作经历项 -->
@@ -39,7 +39,7 @@
               <!-- 时间点 -->
               <div
                 class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 z-10"
-                style="background-color: var(--accent-color); border-color: var(--bg-primary)"
+                style="background-color: var(--color-primary); border-color: var(--bg-primary)"
               ></div>
 
               <div class="md:grid md:grid-cols-2 md:gap-8 items-start">
@@ -48,18 +48,18 @@
                   <div
                     class="inline-block px-4 py-2 rounded-full mb-3"
                     style="
-                      background-color: rgba(var(--secondary-color), 0.1);
-                      border: 1px solid var(--secondary-color);
+                      background-color: rgba(236, 72, 153, 0.1);
+                      border: 1px solid var(--color-accent);
                     "
                   >
-                    <span class="text-sm font-medium" style="color: var(--secondary-color)">
+                    <span class="text-sm font-medium" style="color: var(--color-accent)">
                       {{ experience.startDate }} - {{ experience.endDate }}
                     </span>
                   </div>
                   <h3 class="text-xl md:text-2xl font-bold mb-2" style="color: var(--text-primary)">
                     {{ experience.position }}
                   </h3>
-                  <p class="font-medium mb-4" style="color: var(--accent-color)">
+                  <p class="font-medium mb-4" style="color: var(--color-primary)">
                     {{ experience.company }}
                   </p>
                   <p class="text-sm mb-4" style="color: var(--text-secondary)">
@@ -124,7 +124,7 @@
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        style="color: var(--accent-color)"
+                        style="color: var(--color-primary)"
                       >
                         <path
                           stroke-linecap="round"
@@ -142,7 +142,7 @@
                         class="text-sm flex items-start"
                         style="color: var(--text-secondary)"
                       >
-                        <span class="mr-2" style="color: var(--secondary-color)">•</span>
+                        <span class="mr-2" style="color: var(--color-accent)">•</span>
                         {{ responsibility }}
                       </li>
                     </ul>
@@ -159,7 +159,7 @@
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        style="color: var(--accent-color)"
+                        style="color: var(--color-primary)"
                       >
                         <path
                           stroke-linecap="round"
@@ -175,9 +175,9 @@
                         v-for="achievement in experience.achievements"
                         :key="achievement.title"
                         class="rounded-lg p-4 border"
-                        style="background-color: var(--bg-surface); border-color: var(--bg-card)"
+                        style="background-color: var(--bg-secondary); border-color: var(--border-color)"
                       >
-                        <h5 class="font-semibold mb-2" style="color: var(--secondary-color)">
+                        <h5 class="font-semibold mb-2" style="color: var(--color-accent)">
                           {{ achievement.title }}
                         </h5>
                         <p class="text-sm" style="color: var(--text-secondary)">
@@ -198,7 +198,7 @@
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        style="color: var(--accent-color)"
+                        style="color: var(--color-primary)"
                       >
                         <path
                           stroke-linecap="round"
@@ -215,9 +215,9 @@
                         :key="tech"
                         class="px-3 py-1 rounded-lg text-sm font-medium"
                         style="
-                          background-color: rgba(var(--accent-color), 0.1);
-                          border: 1px solid var(--accent-color);
-                          color: var(--accent-color);
+                          background-color: rgba(99, 102, 241, 0.1);
+                          border: 1px solid var(--color-primary);
+                          color: var(--color-primary);
                         "
                       >
                         {{ tech }}
@@ -235,18 +235,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, nextTick } from 'vue'
 import { useExperienceStore } from '@/stores/useExperienceStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 
 const experienceStore = useExperienceStore()
-const { fadeInUp, staggerIn } = useGSAPAnimations()
+const { staggerIn } = useGSAPAnimations()
 
 onMounted(() => {
   experienceStore.loadExperiences()
 
-  // 工作经历项动画
-  const items = document.querySelectorAll('.experience-item')
-  staggerIn(items, { duration: 0.8, delay: 0.2 })
+  // 在 DOM 更新后执行动画
+  nextTick(() => {
+    // 工作经历项动画
+    const items = document.querySelectorAll('.experience-item')
+    if (items.length > 0) {
+      staggerIn(items, { duration: 0.8, delay: 0.2 })
+    }
+  })
 })
 </script>

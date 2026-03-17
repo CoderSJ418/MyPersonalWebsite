@@ -128,6 +128,7 @@ import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
 import BlogList from '@/components/blog/BlogList.vue'
+import type { BlogPost } from '@/types/blog'
 
 const router = useRouter()
 const blogStore = useBlogStore()
@@ -136,7 +137,7 @@ const totalReadTime = computed(() => {
   return blogStore.posts.reduce((total, post) => total + post.readTime, 0)
 })
 
-const handlePostClick = (post: any) => {
+const handlePostClick = (post: BlogPost) => {
   router.push(`/blog/${post.id}`)
 }
 
@@ -173,10 +174,13 @@ onMounted(() => {
 /* 英雄区域 */
 .blog-hero {
   position: relative;
-  padding: 6rem 0 4rem;
+  padding: 6rem 0 3rem;
   background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 50%, var(--primary-200) 100%);
-  dark:background(linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%));
   overflow: hidden;
+}
+
+.dark .blog-hero {
+  background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%);
 }
 
 .blog-hero::before {
@@ -208,11 +212,14 @@ onMounted(() => {
   padding: 0.5rem 1rem;
   margin-bottom: 1.5rem;
   background: white;
-  dark:background(var(--surface-2));
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-color);
   border-radius: 9999px;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
+}
+
+.dark .blog-hero__badge {
+  background: var(--bg-secondary);
 }
 
 .blog-hero__badge:hover {
@@ -313,7 +320,7 @@ onMounted(() => {
 .decoration-circle--2 {
   width: 200px;
   height: 200px;
-  background: var(--accent-pink-500);
+  background: var(--accent-500);
   top: 60%;
   right: 15%;
   animation-delay: -5s;
@@ -322,7 +329,7 @@ onMounted(() => {
 .decoration-circle--3 {
   width: 250px;
   height: 250px;
-  background: var(--accent-amber-500);
+  background: var(--warning);
   bottom: 20%;
   left: 20%;
   animation-delay: -10s;
@@ -372,8 +379,8 @@ onMounted(() => {
   padding: 0.875rem 3rem 0.875rem 3.5rem;
   font-size: 1rem;
   color: var(--text-primary);
-  background: var(--surface-1);
-  border: 1px solid var(--border-default);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   transition: all 0.3s ease;
 }
@@ -406,7 +413,7 @@ onMounted(() => {
 }
 
 .search-clear:hover {
-  background: var(--surface-2);
+  background: var(--bg-tertiary);
   color: var(--text-secondary);
 }
 
@@ -419,7 +426,10 @@ onMounted(() => {
 .result-count {
   font-weight: 600;
   color: var(--primary-600);
-  dark:color(var(--primary-400));
+}
+
+.dark .result-count {
+  color: var(--primary-400);
 }
 
 /* 标签部分 */
@@ -440,18 +450,21 @@ onMounted(() => {
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-secondary);
-  background: var(--surface-1);
-  border: 1px solid var(--border-default);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 9999px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .tag-btn:hover {
-  background: var(--surface-2);
+  background: var(--bg-tertiary);
   color: var(--text-primary);
   border-color: var(--primary-300);
-  dark:border(var(--primary-700));
+}
+
+.dark .tag-btn:hover {
+  border-color: var(--primary-700);
 }
 
 .tag-btn--active {

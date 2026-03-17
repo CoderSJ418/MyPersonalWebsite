@@ -51,6 +51,7 @@ export const useThemeStore = defineStore('theme', () => {
 
   /**
    * 应用主题到 DOM
+   * @description 根据 isDark 状态设置 data-theme 属性，让 CSS 文件处理颜色变量
    */
   const applyTheme = () => {
     const theme = getTheme(state.value.currentTheme)
@@ -58,31 +59,23 @@ export const useThemeStore = defineStore('theme', () => {
 
     const root = document.documentElement
 
-    // 设置主题
-    root.setAttribute('data-theme', state.value.currentTheme)
+    // 关键修复：根据 isDark 状态设置正确的 data-theme 值
+    // CSS 文件中使用 [data-theme="dark"] 和 [data-theme="light"] 选择器
+    // 来控制深色/浅色模式的颜色变量
+    const themeMode = state.value.isDark ? 'dark' : 'light'
+    root.setAttribute('data-theme', themeMode)
 
-    // 应用颜色变量 - 使用 design-tokens.css 的变量名
-    root.style.setProperty('--primary-color', theme.colors.primary)
-    root.style.setProperty('--secondary-color', theme.colors.secondary)
-    root.style.setProperty('--accent-color', theme.colors.accent)
+    // 同时设置 class 以兼容 Tailwind 的 darkMode: 'class' 配置
+    if (state.value.isDark) {
+      root.classList.add('dark')
+      root.classList.remove('light')
+    } else {
+      root.classList.add('light')
+      root.classList.remove('dark')
+    }
 
-    // 背景色变量
-    root.style.setProperty('--background-primary', theme.colors.background)
-    root.style.setProperty('--background-secondary', theme.colors.surface)
-    root.style.setProperty('--background-tertiary', theme.colors.background)
-    root.style.setProperty('--background-card', theme.colors.surface)
-
-    // 文字色变量
-    root.style.setProperty('--text-primary', theme.colors.text)
-    root.style.setProperty('--text-secondary', theme.colors.textSecondary)
-    root.style.setProperty('--text-tertiary', theme.colors.textTertiary)
-
-    // 边框色变量
-    root.style.setProperty('--border-color', theme.colors.border)
-    root.style.setProperty('--border-color-light', theme.colors.borderLight)
-    root.style.setProperty('--border-color-dark', theme.colors.borderDark)
-
-    // 应用字体变量
+    // 只设置字体变量，不覆盖颜色变量
+    // 颜色变量由 CSS 文件中的 [data-theme="dark/light"] 选择器控制
     root.style.setProperty('--font-display', theme.fonts.heading.family)
     root.style.setProperty('--font-body', theme.fonts.body.family)
     root.style.setProperty('--font-mono', theme.fonts.code.family)

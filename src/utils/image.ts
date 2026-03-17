@@ -7,7 +7,7 @@
  * 图片懒加载指令
  */
 export const lazyLoadDirective = {
-  mounted(el: HTMLImageElement, binding: any) {
+  mounted(el: HTMLImageElement, binding: { value?: string; oldValue?: string }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

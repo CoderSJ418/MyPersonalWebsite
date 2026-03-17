@@ -64,8 +64,9 @@ export function usePerformance() {
     try {
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value
+          const layoutShiftEntry = entry as unknown as { hadRecentInput?: boolean; value: number }
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value
           }
         }
         metrics.value.CLS = parseFloat(clsValue.toFixed(3))
@@ -83,7 +84,8 @@ export function usePerformance() {
     try {
       const fidObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          fidValue = (entry as any).processingStart - entry.startTime
+          const firstInputEntry = entry as unknown as { processingStart: number; startTime: number }
+          fidValue = firstInputEntry.processingStart - firstInputEntry.startTime
           metrics.value.FID = Math.round(fidValue)
         }
       })

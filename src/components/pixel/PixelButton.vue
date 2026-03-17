@@ -9,10 +9,13 @@
     ]"
     :disabled="disabled || loading"
     :type="type"
+    :aria-label="ariaLabel"
+    :aria-disabled="disabled || loading"
+    :aria-busy="loading"
     @click="handleClick"
   >
     <!-- 加载状态 -->
-    <div v-if="loading" class="pixel-button__spinner">
+    <div v-if="loading" class="pixel-button__spinner" aria-hidden="true">
       <div class="pixel-button__spinner-dot"></div>
       <div class="pixel-button__spinner-dot"></div>
       <div class="pixel-button__spinner-dot"></div>
@@ -24,6 +27,7 @@
       :size="iconSize"
       :color="iconColor"
       class="pixel-button__icon"
+      aria-hidden="true"
     >
       <slot name="icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -52,6 +56,7 @@ interface Props {
   disabled?: boolean
   icon?: boolean
   iconColor?: string
+  ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -62,7 +67,8 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   disabled: false,
   icon: false,
-  iconColor: 'current'
+  iconColor: 'current',
+  ariaLabel: undefined
 })
 
 const emit = defineEmits<{
@@ -73,13 +79,6 @@ const iconSize = computed(() => {
   if (props.size === 'small') return 'small'
   if (props.size === 'large') return 'large'
   return 'medium'
-})
-
-const iconColorClass = computed(() => {
-  if (props.iconColor === 'cyan') return 'text-pixel-cyan'
-  if (props.iconColor === 'purple') return 'text-pixel-purple'
-  if (props.iconColor === 'gray') return 'text-pixel-gray'
-  return ''
 })
 
 const handleClick = () => {
@@ -140,6 +139,12 @@ const handleClick = () => {
   &.pixel-button--disabled {
     @apply opacity-50 cursor-not-allowed;
     background: #2a2a2a;
+  }
+  
+  /* 焦点指示器 - 可访问性修复 */
+  &:focus-visible {
+    @apply outline-none ring-2 ring-pixel-cyan ring-offset-2 ring-offset-pixel-dark;
+    box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.5);
   }
   
   /* 悬停效果 */

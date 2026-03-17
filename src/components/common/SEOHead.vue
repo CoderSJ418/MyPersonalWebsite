@@ -65,7 +65,7 @@ interface Props {
   category?: string
   tags?: string[]
   locale?: string
-  structuredData?: Record<string, any>
+  structuredData?: Record<string, unknown>
   siteName?: string
   titleSuffix?: string
 }

@@ -39,5 +39,5 @@ const props = withDefaults(defineProps<Props>(), {
 
 const containerRef = ref<HTMLElement | null>(null)
 
-const { isPulling, pullDistance, isRefreshing } = usePullToRefresh(props.onRefresh, props.threshold)
+const { pullDistance, isRefreshing } = usePullToRefresh(props.onRefresh, props.threshold)
 </script>

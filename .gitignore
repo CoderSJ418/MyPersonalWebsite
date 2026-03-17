@@ -55,3 +55,48 @@ Thumbs.db
 
 # Husky
 .husky/_
+
+# ========== 项目特定忽略规则 ==========
+# AI生成的分析报告（已归档或不需要版本控制）
+BMAD-*.md
+*分析报告*.md
+*优化报告*.md
+*性能报告*.md
+*代码审查*.md
+*重构计划*.md
+*完成报告*.md
+FINAL_COMPLETION_REPORT.md
+INTEGRATION_*.md
+OPTIMIZATION_*.md
+PERFORMANCE_*.md
+PIXEL_COMPONENTS_*.md
+MYPERSONALWEBSITE_*.md
+STYLE_ISSUES_*.md
+
+# 截图和演示文件
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.svg
+
+# 临时备份文件
+*备份*.md
+*backup*.md
+AGENTS.md.backup*
+
+# iFlow配置（敏感信息）
+.iflow/.env
+.iflow/settings.local.json
+.iflow/state/
+
+# 本地开发配置
+*.local
+*.local.*
+
+# 临时文档
+*.tmp
+*.temp
+.cache/
+.parcel-cache/

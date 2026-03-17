@@ -24,7 +24,7 @@ export const isTouch = (): boolean => {
 export const isLowEnd = (): boolean => {
   if (typeof window === 'undefined') return false
   const cores = navigator.hardwareConcurrency || 4
-  const memory = (navigator as any).deviceMemory || 4
+  const memory = (navigator as unknown as { deviceMemory?: number }).deviceMemory || 4
   return cores < 4 || memory < 4
 }
 

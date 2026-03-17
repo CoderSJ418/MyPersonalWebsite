@@ -43,7 +43,28 @@ export class UptimeMonitor {
   private startTime: number = Date.now()
   private errorCount: number = 0
 
+  // 保存事件处理函数引用，用于正确移除
+  private handleVisibilityChange: () => void
+  private handleOnline: () => void
+  private handleOffline: () => void
+
   constructor() {
+    // 绑定事件处理函数
+    this.handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        // 页面变为可见时立即执行健康检查
+        this.performHealthCheck()
+      }
+    }
+
+    this.handleOnline = () => {
+      this.performHealthCheck()
+    }
+
+    this.handleOffline = () => {
+      this.recordOfflineEvent()
+    }
+
     this.initUptimeMonitoring()
   }
 
@@ -64,21 +85,11 @@ export class UptimeMonitor {
     }, monitoringConfig.uptime.checkInterval)
 
     // 监听页面可见性变化
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        // 页面变为可见时立即执行健康检查
-        this.performHealthCheck()
-      }
-    })
+    document.addEventListener('visibilitychange', this.handleVisibilityChange)
 
     // 监听网络状态变化
-    window.addEventListener('online', () => {
-      this.performHealthCheck()
-    })
-
-    window.addEventListener('offline', () => {
-      this.recordOfflineEvent()
-    })
+    window.addEventListener('online', this.handleOnline)
+    window.addEventListener('offline', this.handleOffline)
   }
 
   /**
@@ -121,8 +132,9 @@ export class UptimeMonitor {
       result.checks.performance = await this.checkPerformance()
 
       // 获取内存使用情况
-      if ((performance as any).memory) {
-        result.metrics.memoryUsage = (performance as any).memory.usedJSHeapSize
+      const perfWithMemory = performance as unknown as { memory?: { usedJSHeapSize: number } }
+      if (perfWithMemory.memory) {
+        result.metrics.memoryUsage = perfWithMemory.memory.usedJSHeapSize
       }
 
       // 计算响应时间
@@ -314,6 +326,11 @@ export class UptimeMonitor {
       clearInterval(this.checkInterval)
       this.checkInterval = null
     }
+
+    // 移除事件监听器
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange)
+    window.removeEventListener('online', this.handleOnline)
+    window.removeEventListener('offline', this.handleOffline)
   }
 
   /**

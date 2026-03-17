@@ -1,63 +1,76 @@
+/**
+ * 项目相关类型定义
+ */
+
+/**
+ * 技术栈项
+ */
 export interface TechStack {
   name: string
   version: string
   icon?: string
 }
 
+/**
+ * 项目信息
+ */
 export interface Project {
   id: string
   title: string
+  slug?: string
   description: string
   coverImage: string
   techStack: TechStack[]
+  technologies?: string[]
+  images?: string[]
   category: string
   featured: boolean
   demoUrl?: string
+  liveUrl?: string
   githubUrl?: string
+  order?: number
   createdAt: string
   updatedAt: string
 }
 
+/**
+ * 项目过滤器
+ */
 export interface ProjectFilter {
   category?: string
   searchQuery?: string
   techStacks?: string[]
 }
 
+/**
+ * 项目详情（扩展项目信息）
+ */
 export interface ProjectDetail extends Project {
-  // 项目背景
   background: string
   goals: string[]
-
-  // 实现功能
   features: string[]
-
-  // 核心技术亮点
   techHighlights: {
     architecture?: string
     keyImplementations?: string[]
     performanceOptimizations?: string[]
     solution?: string
   }
-
-  // 项目成果
   results: {
     performance?: string
     business?: string
     feedback?: string
     highlights?: string[]
   }
-
-  // 项目截图
   screenshots: string[]
-
-  // 相关资源
   resources?: {
     docs?: string[]
     articles?: string[]
   }
 }
 
+/**
+ * 联系信息
+ */
 export interface ContactInfo {
   name: string
   email: string
@@ -73,6 +86,9 @@ export interface ContactInfo {
   responseTime: string
 }
 
+/**
+ * 联系表单数据
+ */
 export interface ContactFormData {
   name: string
   email: string
@@ -80,6 +96,9 @@ export interface ContactFormData {
   message: string
 }
 
+/**
+ * 社交链接
+ */
 export interface SocialLink {
   platform: string
   url: string
@@ -87,6 +106,9 @@ export interface SocialLink {
   label: string
 }
 
+/**
+ * 个人信息
+ */
 export interface PersonalInfo {
   name: string
   title: string
@@ -104,11 +126,14 @@ export interface PersonalInfo {
   interests: string[]
 }
 
+/**
+ * 工作经历
+ */
 export interface WorkExperience {
   id: string
   company: string
   position: string
-  location: string
+  location?: string
   startDate: string
   endDate?: string
   current: boolean
@@ -117,11 +142,16 @@ export interface WorkExperience {
   technologies: string[]
 }
 
+/**
+ * 教育背景
+ */
 export interface Education {
   id: string
   school: string
+  institution?: string
   degree: string
   major: string
+  field?: string
   startDate: string
   endDate: string
   gpa?: string
@@ -129,12 +159,32 @@ export interface Education {
   achievements?: string[]
 }
 
+/**
+ * 技能信息（统一版本）
+ */
 export interface Skill {
   id: string
   name: string
   category: string
   level: number
-  yearsOfExperience: number
+  years?: number
+  yearsOfExperience?: number
   description?: string
   projects?: string[]
+}
+
+/**
+ * 技能分类
+ */
+export interface SkillCategory {
+  name: string
+  skills: Skill[]
+}
+
+/**
+ * 技能雷达数据
+ */
+export interface SkillRadarData {
+  name: string
+  value: number
 }

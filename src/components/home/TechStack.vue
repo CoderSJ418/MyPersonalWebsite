@@ -168,7 +168,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 import { Code2, Zap, Database, Layers, Palette, Smartphone } from 'lucide-vue-next'
 
@@ -189,25 +189,32 @@ const highlightsRef = ref<HTMLElement | null>(null)
 const { fadeInUp, staggerIn } = useGSAPAnimations()
 
 onMounted(() => {
-  // 标题动画
-  if (titleRef.value) {
-    fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
-  }
+  // 在 DOM 更新后执行动画
+  nextTick(() => {
+    // 标题动画
+    if (titleRef.value) {
+      fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
+    }
 
-  if (subtitleRef.value) {
-    fadeInUp(subtitleRef.value, { duration: 0.8, delay: 0.2 })
-  }
+    if (subtitleRef.value) {
+      fadeInUp(subtitleRef.value, { duration: 0.8, delay: 0.2 })
+    }
 
-  // 技术卡片动画
-  if (gridRef.value) {
-    const cards = gridRef.value.querySelectorAll('.tech-card')
-    staggerIn(cards, { duration: 0.6, delay: 0.3 })
-  }
+    // 技术卡片动画
+    if (gridRef.value) {
+      const cards = gridRef.value.querySelectorAll('.tech-card')
+      if (cards.length > 0) {
+        staggerIn(cards, { duration: 0.6, delay: 0.3 })
+      }
+    }
 
-  // 技术亮点动画
-  if (highlightsRef.value) {
-    const highlights = highlightsRef.value.querySelectorAll('.tech-highlight')
-    staggerIn(highlights, { duration: 0.6, delay: 0.5 })
-  }
+    // 技术亮点动画
+    if (highlightsRef.value) {
+      const highlights = highlightsRef.value.querySelectorAll('.tech-highlight')
+      if (highlights.length > 0) {
+        staggerIn(highlights, { duration: 0.6, delay: 0.5 })
+      }
+    }
+  })
 })
 </script>

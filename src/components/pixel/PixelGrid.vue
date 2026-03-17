@@ -11,7 +11,7 @@ interface Props {
   rows?: number
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: 'default',
   columns: 3,
   rows: 1

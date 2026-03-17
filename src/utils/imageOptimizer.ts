@@ -215,7 +215,7 @@ export class ImageOptimizer {
   createVirtualScrollImages(
     imageUrls: string[],
     renderItem: (url: string, index: number) => HTMLElement
-  ): HTMLElement {
+  ): { container: HTMLElement; cleanup: () => void } {
     const container = document.createElement('div');
     container.className = 'virtual-scroll-container';
     
@@ -249,7 +249,14 @@ export class ImageOptimizer {
     container.addEventListener('scroll', handleScroll);
     renderVisibleItems();
 
-    return container;
+    // 返回容器和清理函数
+    return {
+      container,
+      cleanup: () => {
+        container.removeEventListener('scroll', handleScroll);
+        container.innerHTML = '';
+      }
+    };
   }
 
   /**

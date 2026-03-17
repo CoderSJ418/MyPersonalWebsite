@@ -1,5 +1,16 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import NProgress from 'nprogress'
+import '@/assets/styles/nprogress.css'
 import { useAppStore } from '@/stores/useAppStore'
+
+// 配置 NProgress
+NProgress.configure({
+  showSpinner: false, // 隐藏加载旋转器
+  trickleSpeed: 200, // 自动递增间隔
+  minimum: 0.1, // 最小百分比
+  easing: 'ease', // 动画方式
+  speed: 500, // 递增进度条的速度
+})
 
 const routes: RouteRecordRaw[] = [
   {
@@ -136,6 +147,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // 开始进度条
+  NProgress.start()
+  
   const appStore = useAppStore()
   const title = to.meta.title as string
   const description = to.meta.description as string
@@ -152,6 +166,11 @@ router.beforeEach((to, from, next) => {
   
   appStore.closeMenu()
   next()
+})
+
+// 路由加载完成后关闭进度条
+router.afterEach(() => {
+  NProgress.done()
 })
 
 function updateMetaTags(meta: { title: string; description: string; url: string }) {

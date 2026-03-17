@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { checkWebPSupport, generatePlaceholder } from '@/utils/image'
+import { checkWebPSupport } from '@/utils/image'
 
 interface Props {
   src: string

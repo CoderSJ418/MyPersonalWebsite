@@ -75,6 +75,7 @@ onMounted(() => {
 .blog-detail-page {
   min-height: 100vh;
   padding-top: 6rem;
+  background-color: var(--bg-primary);
 }
 
 /* 加载状态 */
@@ -87,9 +88,9 @@ onMounted(() => {
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-bg-secondary) 25%,
-    var(--color-bg-tertiary) 50%,
-    var(--color-bg-secondary) 75%
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s ease-in-out infinite;
@@ -120,8 +121,8 @@ onMounted(() => {
   margin: 4rem auto;
   padding: 3rem;
   text-align: center;
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-error);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--error);
   border-radius: 0.5rem;
 }
 
@@ -129,27 +130,27 @@ onMounted(() => {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-error);
+  color: var(--error);
 }
 
 .blog-detail-page__error-message {
   margin: 0 0 2rem 0;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .blog-detail-page__error-button {
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .blog-detail-page__error-button:hover {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--bg-tertiary);
   border-color: var(--color-primary);
 }
 
@@ -159,8 +160,8 @@ onMounted(() => {
   margin: 4rem auto;
   padding: 3rem;
   text-align: center;
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
 }
 
@@ -168,27 +169,27 @@ onMounted(() => {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
 }
 
 .blog-detail-page__not-found-message {
   margin: 0 0 2rem 0;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .blog-detail-page__not-found-button {
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .blog-detail-page__not-found-button:hover {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--bg-tertiary);
   border-color: var(--color-primary);
 }
 

@@ -1,18 +1,5 @@
-export interface Skill {
-  id: string
-  name: string
-  level: number
-  category: string
-  description?: string
-  years?: number
-}
-
-export interface SkillCategory {
-  name: string
-  skills: Skill[]
-}
-
-export interface SkillRadarData {
-  name: string
-  value: number
-}
+/**
+ * 技能类型定义
+ * 从 project.ts 重新导出，保持向后兼容
+ */
+export type { Skill, SkillCategory, SkillRadarData } from './project'

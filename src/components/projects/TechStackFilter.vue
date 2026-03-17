@@ -128,16 +128,30 @@ const clearFilters = () => {
 
 .tech-stack-filter__category-btn--active,
 .tech-stack-filter__tech-btn--active {
-  background-color: var(--color-primary);
+  background-color: var(--primary-500);
   color: white;
-  border-color: var(--color-primary);
+  border-color: var(--primary-500);
 }
 
 .tech-stack-filter__category-btn--active:hover,
 .tech-stack-filter__tech-btn--active:hover {
-  background-color: var(--color-primary);
+  background-color: var(--primary-600);
   color: white;
-  border-color: var(--color-primary);
+  border-color: var(--primary-600);
+}
+
+.dark .tech-stack-filter__category-btn--active,
+.dark .tech-stack-filter__tech-btn--active {
+  background-color: var(--primary-400);
+  color: #0D0D0D;
+  border-color: var(--primary-400);
+}
+
+.dark .tech-stack-filter__category-btn--active:hover,
+.dark .tech-stack-filter__tech-btn--active:hover {
+  background-color: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
 }
 
 .tech-stack-filter__clear {

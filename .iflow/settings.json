@@ -1,19 +1,35 @@
 {
+  "$schema": "https://iflow.cn/schemas/settings.json",
+  "_comment": "优化后的 MCP 配置 - 保留核心功能，移除冗余（2026-02-28）",
+  "_tokenSavings": "约 25,500 tokens (12.5% 上下文窗口)",
   "mcpServers": {
-    "github": {
-      "url": "https://api.githubcopilot.com/mcp/",
-      "auth": "Bearer ${GITHUB_TOKEN}",
-      "enabled": true
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "enabled": true,
+      "priority": 1,
+      "description": "Context7 - 实时查询编程库/框架官方文档（解决 AI 知识截止日期问题）"
     },
-    "filesystem": {
-      "command": "npx -y modelcontextprotocol/server-filesystem",
-      "allow": ["E:\\work\\AI"],
-      "enabled": true
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "enabled": true,
+      "priority": 2,
+      "description": "Playwright - 浏览器自动化测试（支持 Chrome/Firefox/WebKit）"
     },
-    "figma": {
-      "command": "npx -y modelcontextprotocol/server-figma",
-      "auth": "FIGMA_ACCESS_TOKEN",
-      "enabled": true
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "enabled": false,
+      "reason": "与 AGENTS.md 功能重叠，个人项目不需要知识图谱",
+      "description": "Memory 知识图谱（已禁用）"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "enabled": false,
+      "reason": "与 Playwright 功能重叠，Playwright 已覆盖浏览器调试需求",
+      "description": "Chrome DevTools（已禁用）"
     }
   },
   "workflows": {

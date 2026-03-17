@@ -17,7 +17,7 @@ export interface ErrorInfo {
   userId?: string
   sessionId: string
   tags?: Record<string, string>
-  extra?: Record<string, any>
+  extra?: Record<string, unknown>
 }
 
 /**
@@ -212,7 +212,7 @@ export class ErrorTracker {
   public captureException(
     error: Error,
     tags?: Record<string, string>,
-    extra?: Record<string, any>
+    extra?: Record<string, unknown>
   ) {
     if (!monitoringConfig.error.enabled) return
 
@@ -295,7 +295,7 @@ export function getErrorTracker(): ErrorTracker {
 /**
  * 全局错误捕获助手
  */
-export function captureError(error: Error, context?: Record<string, any>) {
+export function captureError(error: Error, context?: Record<string, unknown>) {
   const tracker = getErrorTracker()
   tracker.captureException(error, undefined, context)
 }

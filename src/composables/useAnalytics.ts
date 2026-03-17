@@ -3,7 +3,7 @@
  * 统一的分析追踪接口，同时支持 Google Analytics 和本地 analyticsStore
  */
 
-import { onMounted, onUnmounted } from 'vue'
+import { getCurrentInstance, onMounted } from 'vue'
 import { useAnalyticsStore } from '@/stores/useAnalyticsStore'
 import {
   initGoogleAnalytics,
@@ -25,6 +25,7 @@ import {
  */
 export function useAnalytics() {
   const analyticsStore = useAnalyticsStore()
+  const instance = getCurrentInstance()
   
   /**
    * 初始化分析系统
@@ -75,7 +76,7 @@ export function useAnalytics() {
    */
   function trackEvent(
     name: string,
-    properties?: Record<string, any>,
+    properties?: Record<string, unknown>,
     options?: {
       category?: string
       label?: string
@@ -364,12 +365,19 @@ export function useAnalytics() {
   }
 
   // 在组件挂载时初始化
-  onMounted(() => {
-    // 检查是否已初始化
+  if (instance) {
+    onMounted(() => {
+      // 检查是否已初始化
+      if (!window.gtag) {
+        init()
+      }
+    })
+  } else {
+    // 如果不在组件上下文中，直接初始化
     if (!window.gtag) {
       init()
     }
-  })
+  }
 
   return {
     // 初始化

@@ -9,7 +9,7 @@ interface Props {
   type?: 'ul' | 'ol' | 'dl'
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   type: 'ul'
 })
 </script>

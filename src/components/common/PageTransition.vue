@@ -117,14 +117,14 @@ const enter = (el: Element, done: () => void) => {
 /**
  * 进入后
  */
-const afterEnter = (el: Element) => {
+const afterEnter = (_el: Element) => {
   // 可以在这里添加进入后的回调
 }
 
 /**
  * 离开前
  */
-const beforeLeave = (el: Element) => {
+const beforeLeave = (_el: Element) => {
   // 可以在这里添加离开前的回调
 }
 
@@ -189,7 +189,7 @@ const leave = (el: Element, done: () => void) => {
 /**
  * 离开后
  */
-const afterLeave = (el: Element) => {
+const afterLeave = (_el: Element) => {
   // 可以在这里添加离开后的回调
 }
 </script>

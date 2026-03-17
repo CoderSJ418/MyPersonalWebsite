@@ -18,7 +18,7 @@ interface Props {
   lines?: number
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: 'text',
   width: '100%',
   height: 'auto',

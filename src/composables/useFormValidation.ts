@@ -8,14 +8,14 @@ import { ref, computed, watch, type Ref } from 'vue'
 /**
  * 验证规则类型
  */
-export type ValidationRule<T = any> = {
+export type ValidationRule<T = unknown> = {
   /**
    * 验证函数
    * @param value 字段值
    * @param formData 整个表单数据
    * @returns 验证结果
    */
-  validator: (value: T, formData?: Record<string, any>) => boolean | string
+  validator: (value: T, formData?: Record<string, unknown>) => boolean | string
   
   /**
    * 错误消息
@@ -44,7 +44,7 @@ export type ValidationRule<T = any> = {
 /**
  * 字段验证状态
  */
-export interface FieldValidation<T = any> {
+export interface FieldValidation<T = unknown> {
   /**
    * 字段值
    */
@@ -133,17 +133,17 @@ export interface FormValidation {
   /**
    * 提交表单
    */
-  submit: (callback: (formData: Record<string, any>) => void | Promise<void>) => Promise<void>
-  
+  submit: (callback: (formData: Record<string, unknown>) => void | Promise<void>) => Promise<void>
+
   /**
    * 获取表单数据
    */
-  getData: () => Record<string, any>
-  
+  getData: () => Record<string, unknown>
+
   /**
    * 设置表单数据
    */
-  setData: (data: Record<string, any>) => void
+  setData: (data: Record<string, unknown>) => void
 }
 
 /**
@@ -286,14 +286,14 @@ export const validationRules = {
    * 自定义验证
    */
   custom: (
-    validator: (value: any, formData?: Record<string, any>) => boolean | string,
+    validator: (value: unknown, formData?: Record<string, unknown>) => boolean | string,
     message?: string
   ): ValidationRule => ({
     validator,
     message,
     validateOnChange: true,
   }),
-  
+
   /**
    * 确认密码
    */
@@ -313,10 +313,10 @@ export const validationRules = {
 /**
  * 创建字段验证
  */
-function createFieldValidation<T = any>(
+function createFieldValidation<T = unknown>(
   initialValue: T,
   rules: ValidationRule<T>[] = [],
-  formData?: Ref<Record<string, any>>
+  formData?: Ref<Record<string, unknown>>
 ): FieldValidation<T> {
   const value = ref(initialValue) as Ref<T>
   const touched = ref(false)
@@ -409,9 +409,9 @@ function createFieldValidation<T = any>(
 /**
  * 使用表单验证
  */
-export function useFormValidation<T extends Record<string, any>>(
+export function useFormValidation<T extends Record<string, unknown>>(
   initialValues: T,
-  validationRules: Record<keyof T, ValidationRule[]> = {} as any
+  validationRules: Partial<Record<keyof T, ValidationRule[]>> = {}
 ): FormValidation {
   const formData = ref<T>({ ...initialValues })
   const submitted = ref(false)
@@ -460,26 +460,26 @@ export function useFormValidation<T extends Record<string, any>>(
    * 提交表单
    */
   async function submit(
-    callback: (formData: Record<string, any>) => void | Promise<void>
+    callback: (formData: Record<string, unknown>) => void | Promise<void>
   ): Promise<void> {
     submitted.value = true
-    
+
     // 验证所有字段
     const isValid = validate()
-    
+
     if (!isValid) {
       throw new Error('表单验证失败')
     }
-    
+
     // 执行回调
     await callback(getData())
   }
-  
+
   /**
    * 获取表单数据
    */
-  function getData(): Record<string, any> {
-    const data: Record<string, any> = {}
+  function getData(): Record<string, unknown> {
+    const data: Record<string, unknown> = {}
     Object.keys(fields).forEach((key) => {
       data[key] = fields[key].value.value
     })
@@ -489,7 +489,7 @@ export function useFormValidation<T extends Record<string, any>>(
   /**
    * 设置表单数据
    */
-  function setData(data: Record<string, any>): void {
+  function setData(data: Record<string, unknown>): void {
     Object.keys(data).forEach((key) => {
       if (fields[key]) {
         fields[key].value.value = data[key]

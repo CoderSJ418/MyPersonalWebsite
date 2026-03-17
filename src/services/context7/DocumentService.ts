@@ -19,34 +19,21 @@ function isDev(): boolean {
 }
 
 /**
- * 环境检测工具
- */
-function isProd(): boolean {
-  return import.meta.env.PROD
-}
-
-/**
  * 文档服务工厂
  * @description 根据环境创建对应的文档服务实例
  * @returns IDocumentService
  */
-export function createDocumentService(): IDocumentService {
+export async function createDocumentService(): Promise<IDocumentService> {
   if (isDev()) {
     // 开发环境：使用 MCP 获取文档
-    const { DevDocumentService } = require('./DevDocumentService')
+    const { DevDocumentService } = await import('./DevDocumentService')
     return new DevDocumentService()
   } else {
     // 生产环境：使用缓存文档
-    const { ProdDocumentService } = require('./ProdDocumentService')
+    const { ProdDocumentService } = await import('./ProdDocumentService')
     return new ProdDocumentService()
   }
 }
-
-/**
- * 文档服务单例
- * @description 导出单例，全局使用
- */
-export const documentService = createDocumentService()
 
 /**
  * 基础文档服务类

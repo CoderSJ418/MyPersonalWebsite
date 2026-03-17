@@ -3,14 +3,31 @@
  * @description 校验代码与文档一致性，检测版本不匹配和废弃 API
  */
 
-import type { ICodeValidator, ValidationResult } from './types'
-import { documentService } from './DocumentService'
+import type { ICodeValidator, ValidationResult, IDocumentService } from './types'
+import { createDocumentService } from './DocumentService'
 
 /**
  * 代码校验器实现
  * @description 提供组件、Store、路由等代码的校验功能
  */
 export class CodeValidator implements ICodeValidator {
+  private documentService: IDocumentService | null = null
+
+  constructor() {
+    this.init()
+  }
+
+  private async init(): Promise<void> {
+    this.documentService = await createDocumentService()
+  }
+
+  private async getService(): Promise<IDocumentService> {
+    if (!this.documentService) {
+      await this.init()
+    }
+    return this.documentService!
+  }
+
   /**
    * 验证组件代码
    * @param componentCode 组件代码
@@ -21,7 +38,8 @@ export class CodeValidator implements ICodeValidator {
     componentCode: string,
     libraryName: string = 'vue'
   ): Promise<ValidationResult> {
-    return documentService.validateCode(libraryName, componentCode)
+    const service = await this.getService()
+    return service.validateCode(libraryName, componentCode)
   }
 
   /**

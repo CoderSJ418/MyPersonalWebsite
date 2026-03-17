@@ -63,7 +63,7 @@
               </svg>
             </a>
             <a
-              href="mailto:shejie@example.com"
+              href="mailto:912999051@qq.com"
               class="social-link"
               aria-label="Email"
             >
@@ -90,11 +90,11 @@
           <h3 class="footer__title">联系我</h3>
           <ul class="footer__list">
             <li>
-              <a href="mailto:shejie@example.com" class="footer__link footer__link--email">
+              <a href="mailto:912999051@qq.com" class="footer__link footer__link--email">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
-                shejie@example.com
+                912999051@qq.com
               </a>
             </li>
             <li>
@@ -103,7 +103,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
-                中国 · 北京
+                中国 · 长沙
               </span>
             </li>
           </ul>
@@ -260,8 +260,11 @@ const currentYear = computed(() => new Date().getFullYear())
 
 .footer__link:hover {
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   transform: translateX(4px);
+}
+
+.dark .footer__link:hover {
+  color: var(--primary-400);
 }
 
 .footer__link--email,
@@ -295,13 +298,16 @@ const currentYear = computed(() => new Date().getFullYear())
 
 .social-link:hover {
   background: var(--primary-50);
-  dark:background(var(--primary-950));
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   border-color: var(--primary-300);
-  dark:border(var(--primary-700));
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+}
+
+.dark .social-link:hover {
+  background: var(--primary-950);
+  color: var(--primary-400);
+  border-color: var(--primary-700);
 }
 
 /* 底部版权 */
@@ -340,11 +346,14 @@ const currentYear = computed(() => new Date().getFullYear())
 
 .tech-badge:hover {
   background: var(--primary-50);
-  dark:background(var(--primary-950));
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   border-color: var(--primary-300);
-  dark:border(var(--primary-700));
+}
+
+.dark .tech-badge:hover {
+  background: var(--primary-950);
+  color: var(--primary-400);
+  border-color: var(--primary-700);
 }
 
 /* 响应式 */

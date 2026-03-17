@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import viteCompression from 'vite-plugin-compression'
-import viteImagemin from 'vite-plugin-imagemin'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import tailwindcssNesting from 'tailwindcss/nesting'
@@ -22,68 +21,6 @@ export default defineConfig({
 
   plugins: [
     vue(),
-    // 图片优化
-    viteImagemin({
-      // PNG 优化
-      pngquant: {
-        quality: [0.8, 0.9],
-        speed: 4
-      },
-      // JPEG 优化
-      mozjpeg: {
-        quality: 80,
-        progressive: true
-      },
-      // GIF 优化
-      gifsicle: {
-        optimizationLevel: 3
-      },
-      // SVGO 优化
-      svgo: {
-        plugins: [
-          {
-            name: 'removeViewBox',
-            active: false
-          },
-          {
-            name: 'removeEmptyAttrs',
-            active: false
-          },
-          {
-            name: 'removeUnusedNS',
-            active: true
-          },
-          {
-            name: 'mergePaths',
-            active: true
-          },
-          {
-            name: 'removeEmptyContainers',
-            active: true
-          },
-          {
-            name: 'removeHiddenElems',
-            active: true
-          },
-          {
-            name: 'cleanupIds',
-            active: true
-          },
-          {
-            name: 'minifyStyles',
-            active: true
-          },
-          {
-            name: 'convertStyleToAttrs',
-            active: true
-          },
-          {
-            name: 'removeComments',
-            active: true
-          }
-        ]
-      }
-    }),
     // 压缩配置
     viteCompression({
       algorithm: 'gzip',
@@ -106,8 +43,12 @@ export default defineConfig({
         assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
         // 代码分割 - 将大型第三方库单独打包
         manualChunks: {
-          // GSAP 动画库单独打包
+          // Vue 生态单独打包（最新最佳实践）
+          'vue-vendor': ['vue', 'vue-router', 'pinia'],
+          // GSAP 动画库单独打包（不包含 React 版本，Vue 项目不需要）
           'gsap': ['gsap'],
+          // 工具库单独打包
+          'utils': ['axios', 'loglevel'],
           // Markdown 相关库单独打包
           'markdown': ['markdown-it', 'markdown-it-table-of-contents', 'markdown-it-anchor'],
           // 代码高亮库单独打包
@@ -119,19 +60,17 @@ export default defineConfig({
     cssCodeSplit: true,
     // 目标浏览器
     target: 'es2015',
-    // 最小化
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // 生产环境移除 console
-        drop_debugger: true,
-        pure_funcs: ['console.log']
-      },
-      format: {
-        comments: false // 移除注释
-      }
+    // 最小化 - 使用 esbuild（支持 drop_console，性能优于 terser）
+    minify: 'esbuild',
+    // esbuild 配置 - 移除生产环境的 console 和 debugger
+    esbuild: {
+      drop: ['console', 'debugger']
     },
     chunkSizeWarningLimit: 1000,
+    // 模块预加载优化
+    modulePreload: {
+      polyfill: true  // 自动注入模块预加载 polyfill
+    },
     // 预构建依赖
     optimizeDeps: {
       include: ['vue', 'vue-router', 'pinia', 'lucide-vue-next', 'gsap'],

@@ -1,45 +1,48 @@
 /**
  * API 类型定义
- * 定义所有 API 相关的 TypeScript 类型
+ * 仅包含 API 相关的通用类型
+ * 业务实体类型请使用 @/types/
  */
 
-/**
- * 通用 API 响应结构
- */
-export interface ApiResponse<T = any> {
-  code: number
-  message: string
-  data: T
-  timestamp: number
-}
+// 重新导出通用类型，方便使用
+export type {
+  ApiResponse,
+  PaginationParams,
+  PaginatedResponse,
+  SiteConfig,
+  UserPreferences,
+  ApiError,
+  RequestOptions,
+  CacheConfig,
+  RetryConfig,
+  ApiClientConfig,
+} from '@/types/common'
 
-/**
- * 分页参数
- */
-export interface PaginationParams {
-  page: number
-  pageSize: number
-  sortBy?: string
-  sortOrder?: 'asc' | 'desc'
-}
+// 重新导出业务实体类型，保持向后兼容
+export type {
+  Project,
+  ProjectDetail,
+  ProjectFilter,
+  TechStack,
+  ContactInfo,
+  ContactFormData,
+  SocialLink,
+  PersonalInfo,
+  WorkExperience,
+  Education,
+  Skill,
+  SkillCategory,
+  SkillRadarData,
+} from '@/types/project'
 
-/**
- * 分页响应
- */
-export interface PaginatedResponse<T> {
-  items: T[]
-  total: number
-  page: number
-  pageSize: number
-  totalPages: number
-}
+export type { BlogPost, BlogFilter } from '@/types/blog'
 
 /**
  * 分析事件
  */
 export interface AnalyticsEvent {
   name: string
-  properties?: Record<string, any>
+  properties?: Record<string, unknown>
   timestamp?: number
 }
 
@@ -65,157 +68,11 @@ export interface UserInfo {
 }
 
 /**
- * 博客文章
- */
-export interface BlogPost {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  content: string
-  author: string
-  publishedAt: string
-  updatedAt: string
-  tags: string[]
-  category: string
-  coverImage?: string
-  readTime?: number
-}
-
-/**
- * 项目信息
- */
-export interface Project {
-  id: string
-  title: string
-  slug: string
-  description: string
-  longDescription?: string
-  technologies: string[]
-  images: string[]
-  liveUrl?: string
-  githubUrl?: string
-  featured: boolean
-  order: number
-  createdAt: string
-  updatedAt: string
-}
-
-/**
- * 联系表单数据
- */
-export interface ContactFormData {
-  name: string
-  email: string
-  subject?: string
-  message: string
-}
-
-/**
  * 联系表单响应
  */
 export interface ContactFormResponse {
   success: boolean
   message: string
-}
-
-/**
- * 工作经历
- */
-export interface WorkExperience {
-  id: string
-  company: string
-  position: string
-  startDate: string
-  endDate?: string
-  current?: boolean
-  description: string[]
-  technologies: string[]
-}
-
-/**
- * 教育背景
- */
-export interface Education {
-  id: string
-  institution: string
-  degree: string
-  field: string
-  startDate: string
-  endDate?: string
-  current?: boolean
-  gpa?: string
-  description?: string
-}
-
-/**
- * 技能信息
- */
-export interface Skill {
-  id: string
-  name: string
-  category: string
-  level: number
-  yearsOfExperience?: number
-}
-
-/**
- * 用户偏好
- */
-export interface UserPreferences {
-  theme: 'light' | 'dark' | 'auto'
-  language: string
-  newsletter: boolean
-}
-
-/**
- * API 错误
- */
-export interface ApiError {
-  code: number
-  message: string
-  details?: any
-  timestamp: number
-}
-
-/**
- * 请求配置选项
- */
-export interface RequestOptions {
-  timeout?: number
-  headers?: Record<string, string>
-  params?: any
-  data?: any
-}
-
-/**
- * 缓存配置
- */
-export interface CacheConfig {
-  enabled: boolean
-  ttl: number // Time to live in milliseconds
-  maxSize: number
-}
-
-/**
- * 重试配置
- */
-export interface RetryConfig {
-  enabled: boolean
-  maxRetries: number
-  retryDelay: number
-  retryCondition?: (error: any) => boolean
-}
-
-/**
- * API 客户端配置
- */
-export interface ApiClientConfig {
-  baseURL?: string
-  timeout?: number
-  headers?: Record<string, string>
-  cache?: CacheConfig
-  retry?: RetryConfig
 }
 
 /**
@@ -239,12 +96,12 @@ export interface RequestQueue {
 }
 
 /**
- * API 模块
+ * API 模块接口
  */
 export interface ApiModule {
   get: <T>(url: string, config?: RequestOptions) => Promise<T>
-  post: <T>(url: string, data?: any, config?: RequestOptions) => Promise<T>
-  put: <T>(url: string, data?: any, config?: RequestOptions) => Promise<T>
+  post: <T>(url: string, data?: unknown, config?: RequestOptions) => Promise<T>
+  put: <T>(url: string, data?: unknown, config?: RequestOptions) => Promise<T>
   delete: <T>(url: string, config?: RequestOptions) => Promise<T>
-  patch: <T>(url: string, data?: any, config?: RequestOptions) => Promise<T>
+  patch: <T>(url: string, data?: unknown, config?: RequestOptions) => Promise<T>
 }

@@ -17,9 +17,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 
-interface VirtualScrollItem {
+interface VirtualScrollItem<T = unknown> {
   key: string | number
-  data: any
+  data: T
   index: number
   height: number
   isVisible: boolean
@@ -61,7 +61,7 @@ const visibleItems = computed(() => {
     Math.floor((scrollTop.value + containerHeight) / props.itemHeight) + props.bufferSize
   )
 
-  return props.items.slice(start, end + 1).map((item, index) => ({
+  return props.items.slice(start, end + 1).map((item) => ({
     ...item,
     isVisible: item.index >= start && item.index <= end
   }))

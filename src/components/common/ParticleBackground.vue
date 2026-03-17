@@ -15,6 +15,12 @@ let particles: Particle[] = []
 let animationId: number | null = null
 let mouse = { x: 0, y: 0 }
 
+// 保存事件处理函数引用，用于正确移除
+const handleMouseMove = (e: MouseEvent) => {
+  mouse.x = e.clientX
+  mouse.y = e.clientY
+}
+
 interface Particle {
   x: number
   y: number
@@ -140,10 +146,7 @@ const init = () => {
 
   createParticles(80, canvas)
 
-  canvas.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX
-    mouse.y = e.clientY
-  })
+  canvas.addEventListener('mousemove', handleMouseMove)
 
   animate()
 }
@@ -165,6 +168,9 @@ onMounted(() => {
 onUnmounted(() => {
   if (animationId) cancelAnimationFrame(animationId)
   window.removeEventListener('resize', handleResize)
+  if (canvasRef.value) {
+    canvasRef.value.removeEventListener('mousemove', handleMouseMove)
+  }
 })
 </script>
 

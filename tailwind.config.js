@@ -16,87 +16,114 @@ export default {
     },
     extend: {
       colors: {
-        /* Modern Portfolio 配色系统 - 专业、现代、有冲击力 */
-        'portfolio': {
-          /* 主色调 - Indigo + Violet 渐变 */
-          primary: {
-            DEFAULT: '#6366F1',
-            50: '#EEF2FF',
-            100: '#E0E7FF',
-            200: '#C7D2FE',
-            300: '#A5B4FC',
-            400: '#818CF8',
-            500: '#6366F1',
-            600: '#4F46E5',
-            700: '#4338CA',
-            800: '#3730A3',
-            900: '#312E81',
-            950: '#1E1B4B',
+        /* ============================================
+           Aurora Bento 配色系统 v3.0
+           ============================================ */
+        
+        /* Aurora 主色系 - Cyan */
+        aurora: {
+          cyan: {
+            DEFAULT: '#00FFFF',
+            50: '#E0FFFF',
+            100: '#B2FFFF',
+            200: '#80FFFF',
+            300: '#4DFFFF',
+            400: '#1AFFFF',
+            500: '#00FFFF',
+            600: '#00CCCC',
+            700: '#009999',
+            800: '#006666',
+            900: '#003333',
           },
-          /* 次色调 - Violet */
-          secondary: {
-            DEFAULT: '#8B5CF6',
-            50: '#F5F3FF',
-            100: '#EDE9FE',
-            200: '#DDD6FE',
-            300: '#C4B5FD',
-            400: '#A78BFA',
-            500: '#8B5CF6',
-            600: '#7C3AED',
-            700: '#6D28D9',
-            800: '#5B21B6',
-            900: '#4C1D95',
-            950: '#2E1065',
+          /* Aurora 主色系 - Purple */
+          purple: {
+            DEFAULT: '#8B00FF',
+            50: '#E8D5FF',
+            100: '#D1ABFF',
+            200: '#B580FF',
+            300: '#9A56FF',
+            400: '#8B00FF',
+            500: '#7700E0',
+            600: '#6300C2',
+            700: '#4F00A3',
+            800: '#3B0085',
+            900: '#270066',
           },
-          /* 强调色 - Pink */
-          accent: {
-            DEFAULT: '#EC4899',
-            50: '#FDF2F8',
-            100: '#FCE7F3',
-            200: '#FBCFE8',
-            300: '#F9A8D4',
-            400: '#F472B6',
-            450: '#F472B6',
-            500: '#EC4899',
-            600: '#DB2777',
-            700: '#BE185D',
-            800: '#9D174D',
-            900: '#701515',
-            950: '#4A044E',
+          /* Electric Blue */
+          electric: {
+            DEFAULT: '#0080FF',
+            light: '#3399FF',
+            dark: '#0066CC',
           },
-          /* 背景色 */
-          background: {
-            DEFAULT: '#0F172A',
-            50: '#F8FAFC',
-            100: '#F1F5F9',
-            200: '#E2E8F0',
-            300: '#CBD5E1',
-            400: '#9CA3AF',
-            500: '#6B7280',
-            600: '#4B5563',
-            700: '#374151',
-            800: '#1F2937',
-            900: '#111827',
-            950: '#0C0A09',
-          },
-          /* 文字色 */
-          text: {
-            DEFAULT: '#F9FAFB',
-            50: '#F8FAFC',
-            100: '#F1F5F9',
-            200: '#E2E8F0',
-            300: '#CBD5E1',
-            400: '#9CA3AF',
-            500: '#6B7280',
-            600: '#4B5563',
-            700: '#374151',
-            800: '#1F293B',
-            900: '#111827',
-            950: '#0C0A09',
+          /* Magenta */
+          magenta: {
+            DEFAULT: '#FF1493',
+            light: '#FF4DA6',
+            dark: '#CC0075',
           },
         },
-        /* 复古像素风格配色 */
-        'pixel': {
+        
+        /* Bento 背景色 - 深色 */
+        dark: {
+          DEFAULT: '#0D0D0D',
+          primary: '#0D0D0D',
+          secondary: '#1A1A1A',
+          tertiary: '#262626',
+          elevated: '#333333',
+          card: '#1F1F1F',
+        },
+        
+        /* Bento 背景色 - 亮色 */
+        light: {
+          DEFAULT: '#FFFFFF',
+          primary: '#FFFFFF',
+          secondary: '#F5F5F5',
+          tertiary: '#EBEBEB',
+          elevated: '#FAFAFA',
+          card: '#FFFFFF',
+        },
+        
+        /* 语义化颜色 */
+        surface: {
+          DEFAULT: 'var(--bg-card)',
+          primary: 'var(--bg-primary)',
+          secondary: 'var(--bg-secondary)',
+          tertiary: 'var(--bg-tertiary)',
+          elevated: 'var(--bg-elevated)',
+        },
+        
+        text: {
+          DEFAULT: 'var(--text-primary)',
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          tertiary: 'var(--text-tertiary)',
+          muted: 'var(--text-muted)',
+        },
+        
+        /* 功能色 */
+        success: {
+          DEFAULT: '#10B981',
+          light: '#34D399',
+          dark: '#059669',
+        },
+        warning: {
+          DEFAULT: '#F59E0B',
+          light: '#FBBF24',
+          dark: '#D97706',
+        },
+        error: {
+          DEFAULT: '#EF4444',
+          light: '#F87171',
+          dark: '#DC2626',
+        },
+        info: {
+          DEFAULT: '#3B82F6',
+          light: '#60A5FA',
+          dark: '#2563EB',
+        },
+        
+        /* 复古像素风格配色（保留用于特定区域） */
+        pixel: {
           cyan: '#00FFFF',
           purple: '#FF00FF',
           dark: '#121212',
@@ -107,140 +134,15 @@ export default {
           'purple-light': '#FF66FF',
           'purple-dark': '#880088',
         },
-        /* 强调色 - Pink */
-        accent: {
-          DEFAULT: '#EC4899',
-          50: '#FDF2F8',
-          100: '#FCE7F3',
-          200: '#FBCFE8',
-          300: '#F9A8D4',
-          400: '#F472B6',
-          500: '#EC4899',
-          600: '#DB2777',
-          700: '#BE185D',
-          800: '#9D174D',
-          900: '#831843',
-          950: '#500724',
-        },
-        /* 背景色 - Slate */
-        background: {
-          DEFAULT: '#0F172A',
-          50: '#F8FAFC',
-          100: '#F1F5F9',
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B',
-          600: '#475569',
-          700: '#334155',
-          800: '#1E293B',
-          900: '#0F172A',
-          950: '#020617',
-        },
-        /* 表面色 - Slate */
-        surface: {
-          DEFAULT: '#1E293B',
-          50: '#FFFFFF',
-          100: '#F8FAFC',
-          200: '#F1F5F9',
-          300: '#E2E8F0',
-          400: '#CBD5E1',
-          500: '#94A3B8',
-          600: '#64748B',
-          700: '#475569',
-          800: '#334155',
-          900: '#1E293B',
-          950: '#020617',
-        },
-        /* 边框色 */
-        border: {
-          DEFAULT: '#334155',
-          50: '#F8FAFC',
-          100: '#F1F5F9',
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B',
-          600: '#475569',
-          700: '#334155',
-          800: '#1E293B',
-          900: '#0F172A',
-        },
-        /* 文字色 */
-        text: {
-          DEFAULT: '#F1F5F9',
-          50: '#F8FAFC',
-          100: '#F1F5F9',
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B',
-          600: '#475569',
-          700: '#334155',
-          800: '#1E293B',
-          900: '#0F172A',
-        },
-        /* 次要文字色 */
-        'text-secondary': '#94A3B8',
-        /* 第三级文字色 */
-        'text-tertiary': '#64748B',
-        /* 渐变色 - 增强视觉冲击力 */
-        gradient: {
-          'primary': 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
-          'primary-subtle': 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-          'accent': 'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)',
-          'secondary': 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)',
-          'dark': 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-        },
-        /* CSS 变量映射 - 支持动态主题切换 */
-        'bg-primary': 'var(--bg-primary)',
-        'bg-surface': 'var(--bg-surface)',
-        'bg-card': 'var(--bg-card)',
-        'text-primary': 'var(--text-primary)',
-        'text-secondary': 'var(--text-secondary)',
-        'text-tertiary': 'var(--text-tertiary)',
-        'theme-primary': 'var(--primary-color)',
-        'theme-secondary': 'var(--secondary-color)',
-        'theme-accent': 'var(--accent-color)',
-        /* Zinc 色系 - 用于中性色 */
-        zinc: {
-          50: '#fafafa',
-          100: '#f4f4f5',
-          200: '#e4e4e7',
-          300: '#d4d4d8',
-          400: '#a1a1aa',
-          500: '#71717a',
-          600: '#52525b',
-          700: '#3f3f46',
-          800: '#27272a',
-          900: '#18181b',
-          950: '#09090b',
-        },
-        /* 语义化颜色 */
-        'success': {
-          DEFAULT: '#10B981',
-          light: '#34D399',
-        },
-        'warning': {
-          DEFAULT: '#F59E0B',
-          light: '#FBBF24',
-        },
-        'error': {
-          DEFAULT: '#EF4444',
-          light: '#F87171',
-        },
-        'info': {
-          DEFAULT: '#3B82F6',
-          light: '#60A5FA',
-        },
       },
+      
       fontFamily: {
-        'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        'mono': ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
-        'display': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        'pixel': ['"Press Start 2P"', 'cursive'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
+        display: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        pixel: ['"Press Start 2P"', 'cursive'],
       },
-      // 字体大小 - 优化视觉层次
+      
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.025em' }],
         'sm': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.025em' }],
@@ -255,28 +157,8 @@ export default {
         '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '0.025em' }],
         '8xl': ['6rem', { lineHeight: '1', letterSpacing: '0.025em' }],
         '9xl': ['8rem', { lineHeight: '1', letterSpacing: '0.025em' }],
-        // 移动端优化字体大小
-        'mobile-xs': ['0.75rem', { lineHeight: '1rem' }],
-        'mobile-sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'mobile-base': ['1rem', { lineHeight: '1.5rem' }],
-        'mobile-lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'mobile-xl': ['1.25rem', { lineHeight: '1.75rem' }],
-        'mobile-2xl': ['1.5rem', { lineHeight: '2rem' }],
-        'mobile-3xl': ['1.875rem', { lineHeight: '2.25rem' }],
       },
-      // 字重
-      fontWeight: {
-        'thin': '100',
-        'extralight': '200',
-        'light': '300',
-        'normal': '400',
-        'medium': '500',
-        'semibold': '600',
-        'bold': '700',
-        'extrabold': '800',
-        'black': '900',
-      },
-      // 间距系统 - 4px 基础网格，增加更大间距
+      
       spacing: {
         'safe-top': 'env(safe-area-inset-top)',
         'safe-bottom': 'env(safe-area-inset-bottom)',
@@ -291,72 +173,124 @@ export default {
         '42': '10.5rem',
         '46': '11.5rem',
         '50': '12.5rem',
-        '54': '13.5rem',
-        '58': '14.5rem',
-        '62': '15.5rem',
-        '66': '16.5rem',
-        '70': '17.5rem',
-        '74': '18.5rem',
-        '78': '19.5rem',
-        '82': '20.5rem',
-        '86': '21.5rem',
-        '90': '22.5rem',
-        '94': '23.5rem',
-        '98': '24.5rem',
-        '102': '25.5rem',
-        '106': '26.5rem',
-        '110': '27.5rem',
-        '114': '28.5rem',
-        '118': '29.5rem',
-        '122': '30.5rem',
-        '126': '31.5rem',
-        '130': '32.5rem',
-        '134': '33.5rem',
-        '138': '34.5rem',
-        '142': '35.5rem',
-        '146': '36.5rem',
-        '150': '37.5rem',
       },
-      // 圆角 - 现代化圆角系统
+      
       borderRadius: {
         'none': '0',
-        'sm': '0.25rem',
-        'DEFAULT': '0.375rem',
-        'md': '0.5rem',
-        'lg': '0.75rem',
-        'xl': '1rem',
-        '2xl': '1.5rem',
-        '3xl': '2rem',
+        'sm': '4px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        '2xl': '32px',
+        '3xl': '40px',
         'full': '9999px',
+        /* Bento 风格圆角 */
+        'bento': '16px',
+        'bento-sm': '12px',
+        'bento-lg': '24px',
         /* 复古像素风格圆角 */
         'pixel': '2px',
         'pixel-sm': '1px',
         'pixel-lg': '4px',
       },
-      // 阴影系统 - 增强层次感
+      
       boxShadow: {
         'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'DEFAULT': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
-        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
-        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        'DEFAULT': '0 2px 4px rgba(0, 0, 0, 0.1)',
+        'md': '0 4px 8px rgba(0, 0, 0, 0.1)',
+        'lg': '0 8px 16px rgba(0, 0, 0, 0.1)',
+        'xl': '0 16px 32px rgba(0, 0, 0, 0.15)',
+        '2xl': '0 24px 48px rgba(0, 0, 0, 0.2)',
         'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
-        'glow': '0 0 20px rgba(99, 102, 241, 0.5)',
-        'glow-lg': '0 0 40px rgba(99, 102, 241, 0.6)',
-        'glow-accent': '0 0 20px rgba(236, 72, 153, 0.5)',
-        // 渐变阴影
-        'gradient-sm': '0 1px 2px 0 rgba(99, 102, 241, 0.1), 0 1px 2px 0 rgba(139, 92, 246, 0.1)',
-        'gradient-md': '0 4px 6px -1px rgba(99, 102, 241, 0.15), 0 2px 4px -2px rgba(139, 92, 246, 0.15)',
-        'gradient-lg': '0 10px 15px -3px rgba(99, 102, 241, 0.2), 0 4px 6px -4px rgba(139, 92, 246, 0.2)',
-        'gradient-xl': '0 20px 25px -5px rgba(99, 102, 241, 0.25), 0 8px 10px -6px rgba(236, 72, 153, 0.25)',
+        
+        /* Aurora 光晕效果 */
+        'aurora-cyan': '0 0 40px rgba(0, 255, 255, 0.4)',
+        'aurora-purple': '0 0 40px rgba(139, 0, 255, 0.4)',
+        'aurora-electric': '0 0 40px rgba(0, 128, 255, 0.4)',
+        'aurora-magenta': '0 0 40px rgba(255, 20, 147, 0.4)',
+        
+        /* Bento 阴影 */
+        'bento': '0 4px 24px rgba(0, 0, 0, 0.1)',
+        'bento-hover': '0 8px 32px rgba(0, 0, 0, 0.15)',
+        'bento-glow': '0 0 24px rgba(0, 255, 255, 0.15)',
+        
+        /* 内发光 */
+        'inner-glow-cyan': 'inset 0 0 24px rgba(0, 255, 255, 0.1)',
+        'inner-glow-purple': 'inset 0 0 24px rgba(139, 0, 255, 0.1)',
+        
         /* 复古像素风格阴影 */
         'pixel': '0 2px 0 0 #00FFFF',
         'pixel-lg': '0 4px 0 0 #00FFFF',
         'pixel-xl': '0 6px 0 0 #00FFFF',
-        'pixel-xxl': '0 8px 0 0 #00FFFF',
       },
-      // 动画时间 - 优化微交互
+      
+      backgroundImage: {
+        /* Aurora 渐变 */
+        'aurora-primary': 'linear-gradient(135deg, #0080FF 0%, #FF1493 100%)',
+        'aurora-primary-reverse': 'linear-gradient(135deg, #FF1493 0%, #0080FF 100%)',
+        'aurora-cyan-purple': 'linear-gradient(135deg, #00FFFF 0%, #8B00FF 100%)',
+        'aurora-purple-cyan': 'linear-gradient(135deg, #8B00FF 0%, #00FFFF 100%)',
+        'aurora-flow': 'linear-gradient(135deg, #00FFFF 0%, #0080FF 25%, #8B00FF 50%, #FF1493 75%, #00FFFF 100%)',
+        'aurora-bg': 'linear-gradient(180deg, rgba(0, 255, 255, 0.1) 0%, rgba(139, 0, 255, 0.1) 50%, rgba(255, 20, 147, 0.05) 100%)',
+        'aurora-border': 'linear-gradient(90deg, #00FFFF, #0080FF, #8B00FF, #FF1493)',
+        
+        /* 通用渐变 */
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      
+      animation: {
+        /* Aurora 动画 */
+        'aurora-flow': 'aurora-flow 8s ease infinite',
+        'aurora-float': 'aurora-float 6s ease-in-out infinite',
+        'aurora-pulse': 'aurora-pulse 4s ease-in-out infinite',
+        'aurora-glow': 'aurora-glow 2s ease-in-out infinite',
+        
+        /* Bento 动画 */
+        'bento-hover': 'bento-hover 0.25s ease-out',
+        
+        /* 基础动画 */
+        'fade-in': 'fade-in 0.25s ease-out',
+        'slide-up': 'slide-up 0.25s ease-out',
+        'slide-down': 'slide-down 0.25s ease-out',
+      },
+      
+      keyframes: {
+        'aurora-flow': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        'aurora-float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'aurora-pulse': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.7' },
+        },
+        'aurora-glow': {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(0, 255, 255, 0.4)' },
+          '50%': { boxShadow: '0 0 40px rgba(139, 0, 255, 0.4)' },
+        },
+        'bento-hover': {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.02)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'slide-down': {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      
       transitionDuration: {
         '75': '75ms',
         '100': '100ms',
@@ -366,43 +300,35 @@ export default {
         '500': '500ms',
         '700': '700ms',
         '1000': '1000ms',
+        'aurora': '8000ms',
       },
-      // 缓动函数 - 更流畅的动画
+      
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
         'bounce-in': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         'ease-out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
         'ease-in-out-expo': 'cubic-bezier(0.87, 0, 0.13, 1)',
+        'aurora': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       },
-      // 触摸友好的最小点击区域
+      
       minHeight: {
         'touch': '44px',
       },
       minWidth: {
         'touch': '44px',
       },
-      // 移动端手势相关
-      touchAction: {
-        'pan-x': 'pan-x',
-        'pan-y': 'pan-y',
-        'none': 'none',
-      },
-      // 背景图片 - 用于渐变和纹理
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
-        'gradient-dark': 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-      },
-      // Z-index 层级
+      
       zIndex: {
-        '0': '0',
-        '10': '10',
-        '20': '20',
-        '30': '30',
-        '40': '40',
-        '50': '50',
-        'auto': 'auto',
+        'base': '0',
+        'dropdown': '100',
+        'sticky': '200',
+        'fixed': '300',
+        'modal-backdrop': '400',
+        'modal': '500',
+        'popover': '600',
+        'tooltip': '700',
+        'toast': '800',
+        'max': '9999',
       },
     },
   },

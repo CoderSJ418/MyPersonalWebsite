@@ -9,7 +9,7 @@ interface Props {
   variant?: 'default' | 'dashed' | 'dotted'
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: 'default'
 })
 </script>

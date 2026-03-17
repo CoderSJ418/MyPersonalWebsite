@@ -44,13 +44,6 @@ const sizePx = {
   large: 24,
   xlarge: 32
 }[props.size]
-
-const colorClass = {
-  current: '',
-  cyan: 'text-pixel-cyan',
-  purple: 'text-pixel-purple',
-  gray: 'text-pixel-gray'
-}[props.color]
 </script>
 
 <style scoped>

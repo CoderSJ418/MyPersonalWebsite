@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Copy, Check } from 'lucide-vue-next'
+import { sanitizeCode } from '@/utils/xss'
 
 interface Props {
   code: string
@@ -69,7 +70,7 @@ const copyCode = async () => {
     <!-- 代码内容 -->
     <pre
       class="code-block__content"
-    ><code :class="`language-${language}`" v-html="code"></code></pre>
+    ><code :class="`language-${language}`" v-html="sanitizeCode(code)"></code></pre>
   </div>
 </template>
 

@@ -3,98 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- 基础 Meta 标签 -->
-    <title>佘杰 - 7年前端开发工程师 | Vue专家 | 个人作品集</title>
-    <meta name="description" content="佘杰 - 7年前端开发工程师，Vue专家。展示个人技能、项目作品和技术博客。精通 Vue.js、TypeScript、前端工程化和性能优化。" />
-    <meta name="keywords" content="前端开发工程师, Vue.js, TypeScript, JavaScript, 前端工程化, 性能优化, 佘杰, 个人作品集" />
+    <meta name="description" content="佘杰的个人网站 - 7年前端开发经验，Vue 专家，专注于构建高性能、可维护的前端应用" />
+    <meta name="keywords" content="佘杰,前端开发,Vue.js,TypeScript,JavaScript,Web开发" />
     <meta name="author" content="佘杰" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index,follow" />
     
-    <!-- Open Graph 标签 -->
-    <meta property="og:title" content="佘杰 - 7年前端开发工程师 | Vue专家" />
-    <meta property="og:description" content="7年前端开发工程师，Vue专家。展示个人技能、项目作品和技术博客。" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="佘杰 - 前端开发工程师" />
+    <meta property="og:description" content="7年前端开发经验，Vue 专家，专注于构建高性能、可维护的前端应用" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://shejie1995.gitee.io/my-personal-website/" />
-    <meta property="og:image" content="https://shejie1995.gitee.io/my-personal-website/images/avatar.svg" />
-    <meta property="og:locale" content="zh_CN" />
-    <meta property="og:site_name" content="佘杰的个人网站" />
     
-    <!-- Twitter Card 标签 -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="佘杰 - 7年前端开发工程师 | Vue专家" />
-    <meta name="twitter:description" content="7年前端开发工程师，Vue专家。展示个人技能、项目作品和技术博客。" />
-    <meta name="twitter:image" content="https://shejie1995.gitee.io/my-personal-website/images/avatar.svg" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/avatar.svg" />
+    <link rel="apple-touch-icon" href="/images/avatar.svg" />
     
-    <!-- 其他 Meta 标签 -->
-    <meta name="theme-color" content="#4A90E2" />
-    <meta name="msapplication-TileColor" content="#4A90E2" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-
-<!-- Preconnect to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" /></noscript>
-
-    <!-- Schema.org 用于 SEO - 个人信息 -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "佘杰",
-      "jobTitle": "前端开发工程师",
-      "url": "https://shejie1995.gitee.io/my-personal-website/",
-      "image": "https://shejie1995.gitee.io/my-personal-website/images/avatar.svg",
-      "sameAs": [
-        "https://github.com/shejie1995"
-      ],
-      "description": "7年前端开发工程师，Vue专家，专注于前端技术栈和工程化",
-      "knowsAbout": [
-        "Vue.js",
-        "TypeScript",
-        "JavaScript",
-        "前端工程化",
-        "性能优化",
-        "响应式设计"
-      ]
-    }
-    </script>
-
-    <!-- Schema.org 用于 SEO - 网站信息 -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "佘杰的个人网站",
-      "url": "https://shejie1995.gitee.io/my-personal-website/",
-      "description": "个人品牌展示平台，展示技能、项目和联系方式",
-      "inLanguage": "zh-CN",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://shejie1995.gitee.io/my-personal-website/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-
-    <!-- Schema.org 用于 SEO - 面包屑导航 -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "首页",
-          "item": "https://shejie1995.gitee.io/my-personal-website/"
-        }
-      ]
-    }
-    </script>
+    <!-- Preconnect to external domains - 使用国内 CDN 镜像 -->
+    <link rel="preconnect" href="https://fonts.loli.net" />
+    <link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+    
+    <!-- Google Fonts - 使用国内 CDN 镜像 -->
+    <link href="https://fonts.loli.net/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    
+    <title>佘杰 - 前端开发工程师</title>
   </head>
   <body>
     <div id="app"></div>

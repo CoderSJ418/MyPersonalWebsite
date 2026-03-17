@@ -184,7 +184,7 @@
         <RouterLink
           to="/projects"
           class="inline-flex items-center px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
-          style="background-color: #f97316; color: #ffffff"
+          style="background-color: #EA580C; color: #ffffff"
         >
           查看更多项目
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,7 +235,7 @@ const otherFeaturedProjects = computed(() =>
 
 // 根据项目ID返回不同的图标组件
 const getProjectIcon = (projectId: string) => {
-  const icons: Record<string, any> = {
+  const icons: Record<string, typeof Globe> = {
     '1': Globe,
     '2': BarChart3,
     '3': Microscope,

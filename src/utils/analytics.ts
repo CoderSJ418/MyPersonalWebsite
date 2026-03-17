@@ -240,14 +240,14 @@ export class AnalyticsTracker {
   /**
    * 追踪自定义事件
    */
-  public trackCustomEvent(category: string, action: string, params?: Record<string, any>) {
-    this.trackEvent(category, action, params?.label, params?.value)
+  public trackCustomEvent(category: string, action: string, params?: Record<string, unknown>) {
+    this.trackEvent(category, action, params?.label as string | undefined, params?.value as number | undefined)
   }
 
   /**
    * 发送到 Google Analytics
    */
-  private sendToGoogleAnalytics(type: string, data: any) {
+  private sendToGoogleAnalytics(type: string, data: unknown) {
     // 这里使用占位符，实际使用时需要安装 gtag
     // if (window.gtag) {
     //   if (type === 'page_view') {

@@ -4,7 +4,7 @@
     <!-- <ParticleBackground :theme="appStore.theme" /> -->
     
     <Header />
-    <main class="min-h-screen pb-16 md:pb-0">
+    <main id="main-content" class="min-h-screen pb-16 md:pb-0">
       <RouterView v-slot="{ Component }">
         <PageTransition type="fade">
           <component :is="Component" />

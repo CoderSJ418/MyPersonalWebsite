@@ -11,32 +11,31 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "analyze": "vite-bundle-visualizer",
-    "lighthouse": "lighthouse http://localhost:5173 --output=html --output-path=./lighthouse-report.html --view",
-    "verify-mcp": "node scripts/verify-mcp.js",
-    "automation": "node scripts/automation-controller.js",
-    "automation:help": "node scripts/automation-controller.js --help",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@types/dompurify": "^3.0.5",
     "@types/highlight.js": "^9.12.4",
     "axios": "^1.13.3",
+    "dompurify": "^3.3.1",
     "gsap": "^3.14.2",
     "highlight.js": "^11.11.1",
     "loglevel": "^1.9.2",
     "lucide-vue-next": "^0.312.0",
     "markdown-it": "^14.1.0",
     "markdown-it-table-of-contents": "^1.1.0",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@types/nprogress": "^0.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vitest/coverage-v8": "^4.0.18",
     "@vue/test-utils": "^2.4.6",
@@ -45,9 +44,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^9.20.1",
-    "happy-dom": "^13.3.0",
-    "js-yaml": "^4.1.0",
-    "lighthouse": "^13.0.1",
+    "happy-dom": "^20.7.0",
     "markdown-it-anchor": "^9.2.0",
     "postcss": "^8.4.33",
     "prettier": "^3.2.4",
@@ -57,9 +54,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-imagemin": "^0.6.1",
-    "vitest": "^1.0.0",
-    "vue-tsc": "^1.8.27",
-    "web-vitals": "^5.1.0"
+    "vitest": "^4.0.18",
+    "vue-tsc": "^3.2.4"
   }
 }

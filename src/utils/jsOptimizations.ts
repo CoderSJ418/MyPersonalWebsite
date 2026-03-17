@@ -6,7 +6,7 @@
 /**
  * 防抖函数 - 延迟执行，适用于搜索、resize 等场景
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
   delay: number,
   immediate = false
@@ -36,7 +36,7 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * 节流函数 - 限制执行频率，适用于 scroll、mousemove 等高频事件
  */
-export function throttle<T extends (...args: any[]) => any>(fn: T, delay: number): T {
+export function throttle<T extends (...args: unknown[]) => unknown>(fn: T, delay: number): T {
   let lastCall = 0
   let timeoutId: ReturnType<typeof setTimeout> | null = null
 
@@ -62,7 +62,7 @@ export function throttle<T extends (...args: any[]) => any>(fn: T, delay: number
 /**
  * requestAnimationFrame 节流 - 适用于动画场景
  */
-export function rafThrottle<T extends (...args: any[]) => any>(fn: T): T {
+export function rafThrottle<T extends (...args: unknown[]) => unknown>(fn: T): T {
   let rafId: number | null = null
 
   return ((...args: Parameters<T>) => {
@@ -154,7 +154,7 @@ export async function parallel<T, R>(
 /**
  * 缓存函数 - 缓存函数结果
  */
-export function memoize<T extends (...args: any[]) => any>(fn: T): T {
+export function memoize<T extends (...args: unknown[]) => unknown>(fn: T): T {
   const cache = new Map<string, ReturnType<T>>()
 
   return ((...args: Parameters<T>) => {

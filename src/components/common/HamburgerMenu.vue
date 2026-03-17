@@ -109,7 +109,7 @@
               <Linkedin class="w-6 h-6" />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:912999051@qq.com"
               class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               aria-label="Email"
             >
@@ -123,7 +123,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useAppStore } from '@/stores/useAppStore'
 import { useSearchStore } from '@/stores/useSearchStore'
 import {
@@ -131,14 +131,13 @@ import {
   X,
   Home,
   Briefcase,
-  Award,
   BookOpen,
-  Mail,
   Sun,
   Moon,
   Search,
   Github,
-  Linkedin
+  Linkedin,
+  Mail
 } from 'lucide-vue-next'
 
 const appStore = useAppStore()

@@ -79,7 +79,8 @@ export class PerformanceMonitor {
    */
   monitorMemory(): void {
     if ('memory' in performance) {
-      const memory = (performance as any).memory
+      const perfWithMemory = performance as unknown as { memory: { usedJSHeapSize: number; totalJSHeapSize: number } }
+      const memory = perfWithMemory.memory
       const usedMemory = memory.usedJSHeapSize / 1048576
       const totalMemory = memory.totalJSHeapSize / 1048576
       const memoryUsage = (usedMemory / totalMemory) * 100

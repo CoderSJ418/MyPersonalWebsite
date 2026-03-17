@@ -32,7 +32,7 @@
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                style="color: var(--accent-color)"
+                style="color: var(--color-primary)"
               >
                 <path
                   stroke-linecap="round"
@@ -48,20 +48,20 @@
                 v-for="skill in coreSkills"
                 :key="skill.id"
                 class="core-skill-card group relative rounded-2xl p-6 md:p-8 border transition-all duration-500"
-                style="background-color: var(--bg-surface); border-color: var(--bg-card)"
+                style="background-color: var(--bg-secondary); border-color: var(--border-color)"
               >
                 <!-- 技能图标 -->
                 <div class="flex items-center justify-between mb-4">
                   <div
                     class="w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-500"
-                    style="background-color: var(--accent-color); opacity: 0.1"
+                    style="background-color: rgba(99, 102, 241, 0.1)"
                   >
                     <svg
                       class="w-8 h-8"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      style="color: var(--accent-color)"
+                      style="color: var(--color-primary)"
                     >
                       <path
                         stroke-linecap="round"
@@ -97,7 +97,7 @@
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    style="color: var(--secondary-color)"
+                    style="color: var(--color-accent)"
                   >
                     <path
                       stroke-linecap="round"
@@ -123,7 +123,7 @@
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                style="color: var(--secondary-color)"
+                style="color: var(--color-accent)"
               >
                 <path
                   stroke-linecap="round"
@@ -139,7 +139,7 @@
                 v-for="category in skillCategories"
                 :key="category.name"
                 class="rounded-xl p-6 border"
-                style="background-color: var(--bg-surface); border-color: var(--bg-card)"
+                style="background-color: var(--bg-secondary); border-color: var(--border-color)"
               >
                 <h3
                   class="text-xl font-bold mb-4"
@@ -176,7 +176,7 @@
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                style="color: var(--accent-color)"
+                style="color: var(--color-primary)"
               >
                 <path
                   stroke-linecap="round"
@@ -192,19 +192,19 @@
                 v-for="highlight in techHighlights"
                 :key="highlight.title"
                 class="rounded-xl p-6 border"
-                style="background-color: var(--bg-surface); border-color: var(--bg-card)"
+                style="background-color: var(--bg-secondary); border-color: var(--border-color)"
               >
                 <div class="flex items-center mb-4">
                   <div
                     class="w-12 h-12 rounded-lg flex items-center justify-center mr-4"
-                    style="background-color: var(--accent-color); opacity: 0.1"
+                    style="background-color: rgba(99, 102, 241, 0.1)"
                   >
                     <svg
                       class="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      style="color: var(--accent-color)"
+                      style="color: var(--color-primary)"
                     >
                       <path
                         stroke-linecap="round"
@@ -231,12 +231,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { computed, onMounted, nextTick } from 'vue'
 import { useSkillStore } from '@/stores/useSkillStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 
 const skillStore = useSkillStore()
-const { fadeInUp, staggerIn } = useGSAPAnimations()
+const { staggerIn } = useGSAPAnimations()
 
 // 核心技能
 const coreSkills = computed(() => {
@@ -280,8 +280,13 @@ const techHighlights = [
 onMounted(() => {
   skillStore.loadSkills()
 
-  // 核心技能卡片动画
-  const coreCards = document.querySelectorAll('.core-skill-card')
-  staggerIn(coreCards, { duration: 0.6, delay: 0.3 })
+  // 在 DOM 更新后执行动画
+  nextTick(() => {
+    // 核心技能卡片动画
+    const coreCards = document.querySelectorAll('.core-skill-card')
+    if (coreCards.length > 0) {
+      staggerIn(coreCards, { duration: 0.6, delay: 0.3 })
+    }
+  })
 })
 </script>

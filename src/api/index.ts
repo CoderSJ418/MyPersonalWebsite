@@ -67,13 +67,22 @@ function generateRequestId(): string {
 }
 
 /**
+ * API 错误响应
+ */
+interface ApiErrorResponse {
+  code?: number
+  message?: string
+  details?: unknown
+}
+
+/**
  * 处理 API 错误
  */
 function handleApiError(error: AxiosError): void {
   if (error.response) {
     // 服务器返回错误
     const status = error.response.status
-    const data = error.response.data as any
+    const data = error.response.data as ApiErrorResponse
 
     switch (status) {
       case 400:
@@ -115,7 +124,7 @@ export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<
 /**
  * 封装 POST 请求
  */
-export async function post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+export async function post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
   const response = await apiClient.post<T>(url, data, config)
   return response.data
 }
@@ -123,7 +132,7 @@ export async function post<T>(url: string, data?: any, config?: AxiosRequestConf
 /**
  * 封装 PUT 请求
  */
-export async function put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+export async function put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
   const response = await apiClient.put<T>(url, data, config)
   return response.data
 }
@@ -139,7 +148,7 @@ export async function del<T>(url: string, config?: AxiosRequestConfig): Promise<
 /**
  * 封装 PATCH 请求
  */
-export async function patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+export async function patch<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
   const response = await apiClient.patch<T>(url, data, config)
   return response.data
 }

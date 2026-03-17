@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import type { BlogPost } from '@/types/blog'
 
 interface Props {
@@ -8,11 +6,13 @@ interface Props {
   title?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   title: '相关文章'
 })
 
-const router = useRouter()
+const emit = defineEmits<{
+  click: [post: BlogPost]
+}>()
 
 const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString('zh-CN', {
@@ -23,7 +23,7 @@ const formatDate = (date: string) => {
 }
 
 const handlePostClick = (post: BlogPost) => {
-  router.push({ name: 'BlogDetail', params: { id: post.id } })
+  emit('click', post)
 }
 </script>
 

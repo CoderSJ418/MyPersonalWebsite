@@ -63,7 +63,6 @@ onMounted(() => {
   createScrollProgressIndicator(progressRef)
 
   // 监听滚动进度变化
-  const unwatch = (scrollProgress.value = 0)
   const interval = setInterval(() => {
     updateProgress(scrollProgress.value)
   }, 16)

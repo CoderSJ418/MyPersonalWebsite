@@ -10,7 +10,7 @@ export const siteConfig = {
   description: '7年前端开发经验，Vue专家，专注于前端技术栈和工程化',
 
   // 联系方式（从环境变量读取，如果没有则使用默认值）
-  email: import.meta.env.VITE_EMAIL || 'contact@example.com',
+  email: import.meta.env.VITE_EMAIL || '912999051@qq.com',
   github: 'https://github.com/shejie',
   linkedin: 'https://linkedin.com/in/shejie',
 

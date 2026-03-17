@@ -11,6 +11,9 @@
 
         <!-- 搜索框容器 -->
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="search-modal-title"
           class="relative w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden"
           @click.stop
         >
@@ -18,10 +21,12 @@
           <div class="flex items-center border-b border-gray-200 dark:border-gray-700">
             <Search class="w-6 h-6 text-gray-400 ml-4 flex-shrink-0" />
             <input
+              id="search-modal-title"
               ref="searchInput"
               v-model="searchStore.query"
               type="text"
               placeholder="搜索项目、技能、博客..."
+              aria-label="搜索项目、技能、博客"
               class="flex-1 px-4 py-5 text-lg bg-transparent outline-none text-gray-900 dark:text-gray-100 placeholder-gray-400"
               @keydown="handleKeydown"
             />
@@ -97,7 +102,7 @@
                 </h3>
                 <div class="space-y-2">
                   <div
-                    v-for="(item, index) in searchStore.results.projects"
+                    v-for="item in searchStore.results.projects"
                     :key="item.id"
                     :class="[
                       'p-3 rounded-lg cursor-pointer transition-all',
@@ -112,11 +117,11 @@
                       <div class="flex-1 min-w-0">
                         <h4
                           class="font-medium text-gray-900 dark:text-gray-100 mb-1"
-                          v-html="item.highlight?.title || item.title"
+                          v-html="sanitizeHighlight(item.highlight?.title || item.title)"
                         />
                         <p
                           class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
-                          v-html="item.highlight?.description || item.description"
+                          v-html="sanitizeHighlight(item.highlight?.description || item.description)"
                         />
                         <div v-if="item.metadata?.tags && item.metadata.tags.length > 0" class="flex flex-wrap gap-1 mt-2">
                           <span
@@ -144,7 +149,7 @@
                 </h3>
                 <div class="space-y-2">
                   <div
-                    v-for="(item, index) in searchStore.results.skills"
+                    v-for="item in searchStore.results.skills"
                     :key="item.id"
                     :class="[
                       'p-3 rounded-lg cursor-pointer transition-all',
@@ -159,11 +164,11 @@
                       <div class="flex-1 min-w-0">
                         <h4
                           class="font-medium text-gray-900 dark:text-gray-100 mb-1"
-                          v-html="item.highlight?.title || item.title"
+                          v-html="sanitizeHighlight(item.highlight?.title || item.title)"
                         />
                         <p
                           class="text-sm text-gray-600 dark:text-gray-400"
-                          v-html="item.highlight?.description || item.description"
+                          v-html="sanitizeHighlight(item.highlight?.description || item.description)"
                         />
                       </div>
                       <ArrowUpRight class="w-5 h-5 text-gray-400 flex-shrink-0" />
@@ -182,7 +187,7 @@
                 </h3>
                 <div class="space-y-2">
                   <div
-                    v-for="(item, index) in searchStore.results.blogs"
+                    v-for="item in searchStore.results.blogs"
                     :key="item.id"
                     :class="[
                       'p-3 rounded-lg cursor-pointer transition-all',
@@ -197,11 +202,11 @@
                       <div class="flex-1 min-w-0">
                         <h4
                           class="font-medium text-gray-900 dark:text-gray-100 mb-1"
-                          v-html="item.highlight?.title || item.title"
+                          v-html="sanitizeHighlight(item.highlight?.title || item.title)"
                         />
                         <p
                           class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
-                          v-html="item.highlight?.description || item.description"
+                          v-html="sanitizeHighlight(item.highlight?.description || item.description)"
                         />
                         <div class="flex items-center gap-2 mt-2 text-xs text-gray-500">
                           <span>{{ item.metadata?.author }}</span>
@@ -260,6 +265,7 @@ import { useProjectStore } from '@/stores/useProjectStore'
 import { useSkillStore } from '@/stores/useSkillStore'
 import { useBlogStore } from '@/stores/useBlogStore'
 import { flattenSearchResults } from '@/utils/search'
+import { sanitizeHighlight } from '@/utils/xss'
 import { Search, SearchX, ArrowUpRight, FolderKanban, Zap, FileText } from 'lucide-vue-next'
 
 const router = useRouter()

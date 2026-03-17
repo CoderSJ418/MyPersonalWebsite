@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { BlogPost, Project, WorkExperience, Education, Skill } from '@/api/types'
+import type { BlogPost } from '@/types/blog'
+import type { Project, WorkExperience, Education, Skill } from '@/types/project'
+import type { SiteConfig, PaginationParams } from '@/types/common'
 import { cmsApi } from '@/api/cms'
 
 /**
@@ -73,7 +75,7 @@ export const useContentStore = defineStore('content', () => {
   /**
    * 网站配置
    */
-  const siteConfig = ref<any>(null)
+  const siteConfig = ref<SiteConfig | null>(null)
 
   /**
    * 内容最后更新时间
@@ -150,7 +152,11 @@ export const useContentStore = defineStore('content', () => {
   /**
    * 加载博客文章列表
    */
-  async function loadBlogPosts(params?: any) {
+  async function loadBlogPosts(params?: PaginationParams & {
+    category?: string
+    tags?: string[]
+    search?: string
+  }) {
     blogPostsLoading.value = true
     blogPostsError.value = null
 
@@ -264,7 +270,11 @@ export const useContentStore = defineStore('content', () => {
   /**
    * 加载项目列表
    */
-  async function loadProjects(params?: any) {
+  async function loadProjects(params?: PaginationParams & {
+    featured?: boolean
+    technology?: string
+    search?: string
+  }) {
     projectsLoading.value = true
     projectsError.value = null
 

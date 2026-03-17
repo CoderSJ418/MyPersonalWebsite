@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import HeroSection from '@/components/organisms/HeroSection.vue'
 import ProjectCard from '@/components/molecules/ProjectCard.vue'
 import CTASection from '@/components/organisms/CTASection.vue'

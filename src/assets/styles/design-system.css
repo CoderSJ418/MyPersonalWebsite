@@ -1,193 +1,24 @@
 /* ========================================
-   MyPersonalWebsite 设计系统 CSS
-   版本: v2.0
+   MyPersonalWebsite 设计系统 CSS v3.0
+   风格：Bento Box Grid + Aurora UI
    创建日期: 2026年1月25日
+   更新日期: 2026年2月25日
    ======================================== */
+
+/* 字体预加载 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 导入设计令牌 */
+@import './design-tokens.css';
+
+/* 导入 Aurora Bento 组件样式 */
+@import './aurora-bento.css';
 
 /* ========================================
-   1. 设计令牌 (Design Tokens)
+   1. 基础重置样式
    ======================================== */
 
-:root {
-  /* 颜色系统 - 主色调 */
-  --color-primary: #6366F1;
-  --color-primary-50: #EDE9FE;
-  --color-primary-100: #DDD6FE;
-  --color-primary-200: #C4B5FD;
-  --color-primary-300: #A78BFA;
-  --color-primary-400: #8B5CF6;
-  --color-primary-500: #6366F1;
-  --color-primary-600: #4F46E5;
-  --color-primary-700: #4338CA;
-  --color-primary-800: #3730A3;
-  --color-primary-900: #312E81;
-  --color-primary-light: #818CF8;
-  --color-primary-dark: #4F46E5;
-  --color-primary-variant: #4F46E5;
-
-  /* 颜色系统 - 中性色 */
-  --color-surface-bg: #FFFFFF;
-  --color-surface-bg-secondary: #F8FAFC;
-  --color-surface-bg-tertiary: #F1F5F9;
-  --color-surface-card: #FFFFFF;
-  --color-surface-card-border: #E2E8F0;
-  --color-surface-text: #1E293B;
-  --color-surface-text-secondary: #64748B;
-  --color-surface-text-tertiary: #94A3B8;
-  --color-surface-border: #E2E8F0;
-  --color-surface-border-secondary: #CBD5E1;
-
-  /* 深色模式中性色 */
-  --color-surface-dark-bg: #0F172A;
-  --color-surface-dark-bg-secondary: #1E293B;
-  --color-surface-dark-bg-tertiary: #334155;
-  --color-surface-dark-card: #1E293B;
-  --color-surface-dark-card-border: #334155;
-  --color-surface-dark-text: #F1F5F9;
-  --color-surface-dark-text-secondary: #94A3B8;
-  --color-surface-dark-text-tertiary: #64748B;
-  --color-surface-dark-border: #334155;
-  --color-surface-dark-border-secondary: #475569;
-
-  /* 功能色 */
-  --color-success: #10B981;
-  --color-success-50: #F0FDF4;
-  --color-success-100: #DCFCE7;
-  --color-success-500: #10B981;
-
-  --color-warning: #F59E0B;
-  --color-warning-50: #FFFBEB;
-  --color-warning-100: #FEF3C7;
-  --color-warning-500: #F59E0B;
-
-  --color-error: #EF4444;
-  --color-error-50: #FEF2F2;
-  --color-error-100: #FEE2E2;
-  --color-error-500: #EF4444;
-
-  --color-info: #3B82F6;
-  --color-info-50: #EFF6FF;
-  --color-info-100: #DBEAFE;
-  --color-info-500: #3B82F6;
-
-  /* 间距系统 */
-  --spacing-1: 0.25rem;   /* 4px */
-  --spacing-2: 0.5rem;    /* 8px */
-  --spacing-3: 0.75rem;   /* 12px */
-  --spacing-4: 1rem;      /* 16px */
-  --spacing-5: 1.25rem;   /* 20px */
-  --spacing-6: 1.5rem;    /* 24px */
-  --spacing-8: 2rem;      /* 32px */
-  --spacing-10: 2.5rem;   /* 40px */
-  --spacing-12: 3rem;     /* 48px */
-  --spacing-16: 4rem;     /* 64px */
-  --spacing-20: 5rem;     /* 80px */
-  --spacing-24: 6rem;     /* 96px */
-  --spacing-32: 8rem;     /* 128px */
-  --spacing-40: 10rem;    /* 160px */
-  --spacing-48: 12rem;    /* 192px */
-  --spacing-56: 14rem;    /* 224px */
-  --spacing-64: 16rem;    /* 256px */
-
-  /* 尺寸系统 */
-  --size-1: 0.25rem;
-  --size-4: 1rem;
-  --size-8: 2rem;
-
-  /* 字体大小 */
-  --font-size-xs: 0.75rem;      /* 12px */
-  --font-size-sm: 0.875rem;     /* 14px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-lg: 1.125rem;     /* 18px */
-  --font-size-xl: 1.25rem;      /* 20px */
-  --font-size-2xl: 1.5rem;      /* 24px */
-  --font-size-3xl: 1.875rem;    /* 30px */
-  --font-size-4xl: 2.25rem;     /* 36px */
-  --font-size-5xl: 3rem;        /* 48px */
-  --font-size-6xl: 3.75rem;     /* 60px */
-  --font-size-7xl: 4.5rem;      /* 72px */
-  --font-size-8xl: 6rem;        /* 96px */
-  --font-size-9xl: 8rem;        /* 128px */
-
-  /* 行高 */
-  --line-height-tight: 1.25;    /* 125% */
-  --line-height-normal: 1.5;    /* 150% */
-  --line-height-relaxed: 1.75;  /* 175% */
-  --line-height-loose: 2;       /* 200% */
-
-  /* 字重 */
-  --font-weight-light: 300;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-
-  /* 字体族 */
-  --font-family-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-secondary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
-
-  /* 圆角 */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
-  --radius-full: 9999px;
-
-  /* 阴影 */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
-  /* 过渡 */
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 350ms ease;
-  --transition-slowest: 500ms ease;
-
-  /* 缓动函数 */
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-  /* 悬停效果 */
-  --hover-scale: 1.02;
-  --hover-translate: translateY(-2px);
-  --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-  /* 点击反馈 */
-  --press-scale: 0.98;
-  --press-translate: translateY(0);
-  --press-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
-  /* 响应式断点 */
-  --breakpoint-xs: 320px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-
-  /* Z-index */
-  --z-tooltip: 1000;
-  --z-modal: 1500;
-  --z-dropdown: 2000;
-  --z-popover: 2500;
-  --z-notification: 3000;
-}
-
-/* ========================================
-   2. 基础样式 (Base Styles)
-   ======================================== */
-
-/* 重置样式 */
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -196,47 +27,81 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-surface-text);
-  background: var(--color-surface-bg);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* 深色模式 */
+/* ========================================
+   2. 深色模式
+   ======================================== */
+
 @media (prefers-color-scheme: dark) {
-  html {
+  html:not([data-theme]) {
     color-scheme: dark;
   }
 }
 
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) {
+    color-scheme: light;
+  }
+}
+
 /* ========================================
-   3. 通用工具类 (Utility Classes)
+   3. 布局容器
    ======================================== */
 
-/* 布局 */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--spacing-4);
+  padding: 0 var(--space-4);
 }
 
-.container-wide {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-6);
+.container-sm {
+  max-width: 640px;
 }
 
-/* 网格系统 */
+.container-md {
+  max-width: 768px;
+}
+
+.container-lg {
+  max-width: 1024px;
+}
+
+.container-xl {
+  max-width: 1280px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* ========================================
+   4. 网格系统
+   ======================================== */
+
 .grid {
   display: grid;
-  gap: var(--spacing-6);
+  gap: var(--space-6);
 }
 
 .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
@@ -263,11 +128,12 @@ body {
   .grid-cols-lg-6 { grid-template-columns: repeat(6, 1fr); }
 }
 
-/* Flexbox 工具 */
-.flex {
-  display: flex;
-}
+/* ========================================
+   5. Flexbox 工具
+   ======================================== */
 
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
 .flex-col { flex-direction: column; }
 .flex-row { flex-direction: row; }
 .flex-wrap { flex-wrap: wrap; }
@@ -277,100 +143,134 @@ body {
 .items-center { align-items: center; }
 .items-end { align-items: flex-end; }
 .items-stretch { align-items: stretch; }
+.items-baseline { align-items: baseline; }
 
 .justify-start { justify-content: flex-start; }
 .justify-center { justify-content: center; }
 .justify-end { justify-content: flex-end; }
 .justify-between { justify-content: space-between; }
 .justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
 
-.gap-2 { gap: var(--spacing-2); }
-.gap-4 { gap: var(--spacing-4); }
-.gap-6 { gap: var(--spacing-6); }
-.gap-8 { gap: var(--spacing-8); }
-
-/* 间距工具 */
-.m-1 { margin: var(--spacing-1); }
-.m-2 { margin: var(--spacing-2); }
-.m-3 { margin: var(--spacing-3); }
-.m-4 { margin: var(--spacing-4); }
-.m-6 { margin: var(--spacing-6); }
-.m-8 { margin: var(--spacing-8); }
-.m-12 { margin: var(--spacing-12); }
-.m-16 { margin: var(--spacing-16); }
-
-.m-t-1 { margin-top: var(--spacing-1); }
-.m-t-2 { margin-top: var(--spacing-2); }
-.m-t-4 { margin-top: var(--spacing-4); }
-.m-t-6 { margin-top: var(--spacing-6); }
-.m-t-8 { margin-top: var(--spacing-8); }
-.m-t-12 { margin-top: var(--spacing-12); }
-
-.m-b-1 { margin-bottom: var(--spacing-1); }
-.m-b-2 { margin-bottom: var(--spacing-2); }
-.m-b-4 { margin-bottom: var(--spacing-4); }
-.m-b-6 { margin-bottom: var(--spacing-6); }
-.m-b-8 { margin-bottom: var(--spacing-8); }
-.m-b-12 { margin-bottom: var(--spacing-12); }
-
-.p-1 { padding: var(--spacing-1); }
-.p-2 { padding: var(--spacing-2); }
-.p-3 { padding: var(--spacing-3); }
-.p-4 { padding: var(--spacing-4); }
-.p-6 { padding: var(--spacing-6); }
-.p-8 { padding: var(--spacing-8); }
-.p-12 { padding: var(--spacing-12); }
-
-.p-t-1 { padding-top: var(--spacing-1); }
-.p-t-2 { padding-top: var(--spacing-2); }
-.p-t-4 { padding-top: var(--spacing-4); }
-.p-t-6 { padding-top: var(--spacing-6); }
-.p-t-8 { padding-top: var(--spacing-8); }
-
-/* 响应式间距 */
-@media (max-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-3);
-  }
-  
-  .m-b-12 { margin-bottom: var(--spacing-8); }
-  .p-12 { padding: var(--spacing-8); }
-}
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
 
 /* ========================================
-   4. 交互工具类 (Interactive Classes)
+   6. 间距工具
+   ======================================== */
+
+/* Margin */
+.m-auto { margin: auto; }
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-1); }
+.m-2 { margin: var(--space-2); }
+.m-4 { margin: var(--space-4); }
+.m-6 { margin: var(--space-6); }
+.m-8 { margin: var(--space-8); }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
+
+/* Padding */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-4 { padding: var(--space-4); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+
+.pt-0 { padding-top: 0; }
+.pt-1 { padding-top: var(--space-1); }
+.pt-2 { padding-top: var(--space-2); }
+.pt-4 { padding-top: var(--space-4); }
+.pt-6 { padding-top: var(--space-6); }
+.pt-8 { padding-top: var(--space-8); }
+
+.pb-0 { padding-bottom: 0; }
+.pb-1 { padding-bottom: var(--space-1); }
+.pb-2 { padding-bottom: var(--space-2); }
+.pb-4 { padding-bottom: var(--space-4); }
+.pb-6 { padding-bottom: var(--space-6); }
+.pb-8 { padding-bottom: var(--space-8); }
+
+.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+.px-6 { padding-left: var(--space-6); padding-right: var(--space-6); }
+.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.py-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+
+/* ========================================
+   7. 文字工具
+   ======================================== */
+
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+
+.font-light { font-weight: var(--font-light); }
+.font-normal { font-weight: var(--font-normal); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-muted { color: var(--text-muted); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* ========================================
+   8. 交互工具
    ======================================== */
 
 /* 焦点指示器 */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--aurora-cyan);
   outline-offset: 2px;
 }
 
 /* 悬停效果 */
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
 .hover-scale:hover {
-  transform: scale(var(--hover-scale));
+  transform: scale(1.02);
 }
 
-.hover-translate:hover {
-  transform: var(--hover-translate);
-}
-
-.hover-shadow:hover {
-  box-shadow: var(--hover-shadow);
+.hover-glow:hover {
+  box-shadow: var(--aurora-glow-cyan);
 }
 
 /* 点击反馈 */
 .press-scale:active {
-  transform: var(--press-scale);
-}
-
-.press-translate:active {
-  transform: var(--press-translate);
-}
-
-.press-shadow:active {
-  box-shadow: var(--press-shadow);
+  transform: scale(0.98);
 }
 
 /* 状态类 */
@@ -386,11 +286,13 @@ body {
 }
 
 /* ========================================
-   5. 响应式工具类 (Responsive Utilities)
+   9. 显示/隐藏工具
    ======================================== */
 
-/* 显示/隐藏 */
 .hidden { display: none !important; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
 
 @media (max-width: 639px) {
   .hidden-sm { display: none !important; }
@@ -404,78 +306,16 @@ body {
   .hidden-lg { display: none !important; }
 }
 
-/* ========================================
-   6. 动画类 (Animation Classes)
-   ======================================== */
-
-/* 进入动画 */
-.fade-in {
-  animation: fadeIn var(--transition-normal) ease-in-out;
+@media (min-width: 640px) {
+  .hidden-sm-up { display: none !important; }
 }
 
-.slide-up {
-  animation: slideUp var(--transition-normal) ease-in-out;
-}
-
-.slide-right {
-  animation: slideRight var(--transition-normal) ease-in-out;
-}
-
-/* 退出动画 */
-.fade-out {
-  animation: fadeOut var(--transition-normal) ease-in-out;
-}
-
-.slide-down {
-  animation: slideDown var(--transition-normal) ease-in-out;
-}
-
-/* 循环动画 */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+@media (min-width: 768px) {
+  .hidden-md-up { display: none !important; }
 }
 
 /* ========================================
-   7. 可访问性类 (Accessibility Classes)
+   10. 可访问性
    ======================================== */
 
 /* 屏幕阅读器专用 */
@@ -496,13 +336,13 @@ body {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: var(--color-primary);
-  color: white;
-  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--aurora-cyan);
+  color: var(--bg-dark-primary);
+  padding: var(--space-2) var(--space-4);
   text-decoration: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   z-index: var(--z-tooltip);
-  transition: top var(--transition-fast);
+  transition: top var(--duration-fast) ease;
 }
 
 .skip-link:focus {
@@ -510,17 +350,7 @@ body {
 }
 
 /* ========================================
-   8. 深色模式支持
-   ======================================== */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
-}
-
-/* ========================================
-   9. 性能优化类
+   11. 性能优化
    ======================================== */
 
 /* GPU 加速 */
@@ -539,10 +369,9 @@ body {
 }
 
 /* ========================================
-   10. 无障碍设计
+   12. 减少运动偏好
    ======================================== */
 
-/* 减少运动偏好 */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -554,72 +383,56 @@ body {
   }
 }
 
-/* 高对比度模式 */
+/* ========================================
+   13. 高对比度模式
+   ======================================== */
+
 @media (prefers-contrast: high) {
   :root {
-    --color-surface-text: #000000;
-    --color-surface-text-secondary: #333333;
-    --color-surface-text-tertiary: #666666;
-    --color-surface-border: #000000;
-    --color-surface-border-secondary: #333333;
-  }
-}
-
-/* ========================================
-   11. 响应式设计
-   ======================================== */
-
-/* 移动优先断点 */
-@media (min-width: 640px) {
-  .container {
-    padding: 0 var(--spacing-6);
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-8);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 var(--spacing-12);
-  }
-}
-
-/* 触摸友好设计 */
-@media (hover: none) {
-  .btn:hover:not(:disabled) {
-    transform: none;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --text-tertiary: #BDBDBD;
   }
   
-  .project-card:hover {
-    transform: none;
-  }
-}
-
-/* 安全区域适配 */
-@media (max-width: 768px) {
-  .hero__container {
-    padding-bottom: env(safe-area-inset-bottom);
+  .bento-card {
+    border-width: 2px;
   }
 }
 
 /* ========================================
-   12. 性能监控类
+   14. 安全区域适配
    ======================================== */
 
-/* 加载状态 */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ========================================
+   15. 加载状态
+   ======================================== */
+
 .loading-skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-surface-bg-secondary) 25%,
-    var(--color-surface-bg-tertiary) 50%,
-    var(--color-surface-bg-secondary) 75%
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
   );
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
+  border-radius: var(--radius-md);
 }
 
 @keyframes loading {
@@ -632,194 +445,92 @@ body {
 }
 
 /* ========================================
-   13. 组件样式
+   16. 滚动条样式
    ======================================== */
 
-/* 按钮 */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  overflow: hidden;
-  min-height: 40px;
-  min-width: 40px;
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* 卡片 */
-.card {
-  background: var(--color-surface-card);
-  border: 1px solid var(--color-surface-card-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all var(--transition-normal);
-  box-shadow: var(--shadow-sm);
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
 }
 
-/* 输入框 */
-.input {
-  padding: var(--spacing-3) var(--spacing-4);
-  border: 1px solid var(--color-surface-border);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  transition: all var(--transition-normal);
-  color: var(--color-surface-text);
-  background: var(--color-surface-bg);
-  font-family: var(--font-family-primary);
+::-webkit-scrollbar-thumb {
+  background: var(--aurora-purple);
+  border-radius: var(--radius-full);
 }
 
-.input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-}
-
-/* ========================================
-   14. 组件特定样式
-   ======================================== */
-
-/* Hero Section */
-.hero {
-  padding: var(--spacing-5xl) 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-3xl);
-  align-items: center;
-}
-
-/* CTA Section */
-.cta {
-  padding: var(--spacing-5xl) 0;
-  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
-  position: relative;
-  overflow: hidden;
-}
-
-.cta__container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-  position: relative;
-  z-index: 1;
-}
-
-.cta__content {
-  text-align: center;
-  background: var(--color-surface-card);
-  padding: var(--spacing-6xl) var(--spacing-4xl);
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-lg);
-}
-
-/* ========================================
-   15. 字体加载优化
-   ======================================== */
-
-/* 字体预加载 */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/inter-regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('/fonts/inter-medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/fonts/inter-semibold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/inter-bold.woff2') format('woff2');
-}
-
-/* ========================================
-   16. 代码注释和版本信息
-   ======================================== */
-
-/*
- * MyPersonalWebsite Design System v2.0
- * 
- * 版本: 2.0
- * 创建日期: 2026年1月25日
- * 最后更新: 2026年1月25日
- * 设计师: BMAD UX 专家
- * 
- * 设计理念: 现代简约 + 个人特色 + 用户中心
- * 设计原则:
- *   - 以用户为中心
- *   - 功能优先
- *   - 性能至上
- *   - 一致性
- *   - 可访问性
- * 
- * 主要特性:
- *   - 完整的色彩系统
- *   - 规范的排版系统
- *   - 标准化的间距系统
- *   - 响应式设计
- *   - 无障碍设计
- *   - 性能优化
- * 
- * 使用方法:
- *   1. 在 main.css 中引入此文件
- *   2. 遵循设计令牌规范
- *   3. 使用组件库
- *   4. 参考设计系统文档
- */
-
-/* ========================================
-   17. 浏览器兼容性
-   ======================================== */
-
-/* Chrome, Edge, Safari */
-@supports (-webkit-appearance: none) {
-  .input {
-    -webkit-appearance: none;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aurora-cyan);
 }
 
 /* Firefox */
-@supports (-moz-appearance: none) {
-  .input {
-    -moz-appearance: none;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--aurora-purple) var(--bg-secondary);
+}
+
+/* ========================================
+   17. 选择样式
+   ======================================== */
+
+::selection {
+  background: var(--aurora-cyan);
+  color: var(--bg-dark-primary);
+}
+
+::-moz-selection {
+  background: var(--aurora-cyan);
+  color: var(--bg-dark-primary);
+}
+
+/* ========================================
+   18. 打印样式
+   ======================================== */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .bento-card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
   }
 }
 
 /* ========================================
-   18. 代码注释结束
+   19. 版本信息
    ======================================== */
+
+/*
+ * MyPersonalWebsite Design System v3.0
+ * Aurora Bento 风格
+ * 
+ * 风格组合：
+ *   - Bento Box Grid：模块化卡片布局，非对称网格
+ *   - Aurora UI：极光渐变效果，流动色彩
+ * 
+ * 配色方案：
+ *   - 主色：Cyan #00FFFF, Purple #8B00FF
+ *   - 渐变：Electric Blue #0080FF → Magenta #FF1493
+ *   - 背景：深色 #0D0D0D / 亮色 #FFFFFF
+ * 
+ * 主要特性：
+ *   - Aurora 流动渐变背景
+ *   - Bento 模块化卡片系统
+ *   - 光晕效果和发光边框
+ *   - 保留像素风格组件（特定区域）
+ *   - 完整的深色/亮色主题支持
+ *   - 响应式设计
+ *   - 无障碍设计
+ */

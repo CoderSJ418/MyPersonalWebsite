@@ -123,7 +123,7 @@ export function usePageTitle(config?: Partial<PageTitleConfig>) {
     title?: string
     name?: string
     label?: string
-    [key: string]: any
+    [key: string]: unknown
   }): void {
     const title =
       content.title ||

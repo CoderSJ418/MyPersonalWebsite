@@ -512,7 +512,7 @@ onMounted(() => {
 .project-detail__section-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color__text-primary);
+  color: var(--color-text-primary);
   margin: 0 0 1.5rem 0;
 }
 

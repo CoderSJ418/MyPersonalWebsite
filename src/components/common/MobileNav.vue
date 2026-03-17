@@ -30,9 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { Home, Briefcase, Award, BookOpen, Mail } from 'lucide-vue-next'
+import { Home, Briefcase, BookOpen, Mail, Award } from 'lucide-vue-next'
 
 const route = useRoute()
 

@@ -1,13 +1,15 @@
 <template>
   <div class="pixel-input-group">
     <!-- 标签 -->
-    <label v-if="label" class="pixel-input__label" :for="id">
+    <label v-if="label" :id="labelId" class="pixel-input__label" :for="inputId">
       {{ label }}
+      <span v-if="required" aria-hidden="true" class="pixel-input__required">*</span>
     </label>
     
     <!-- 输入框 -->
     <input
-      :id="id"
+      :id="inputId"
+      ref="inputRef"
       :class="[
         'pixel-input',
         `pixel-input--${variant}`,
@@ -19,11 +21,15 @@
       :readonly="readonly"
       :required="required"
       :value="modelValue"
+      :aria-labelledby="label ? labelId : undefined"
+      :aria-describedby="helperText || error ? helperId : undefined"
+      :aria-invalid="!!error"
+      :aria-required="required"
       @input="handleInput"
     />
     
     <!-- 辅助文本 -->
-    <div v-if="helperText || error" class="pixel-input__helper">
+    <div v-if="helperText || error" :id="helperId" class="pixel-input__helper" role="alert">
       <span class="pixel-input__text" :class="{ 'pixel-input__text--error': error }">
         {{ error || helperText }}
       </span>
@@ -59,12 +65,24 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
 }>()
 
-const inputId = computed(() => props.id || `pixel-input-${Math.random().toString(36).substr(2, 9)}`)
+const inputRef = ref<HTMLInputElement | null>(null)
+
+// 生成唯一 ID 用于 ARIA 关联
+const uniqueId = computed(() => props.id || `pixel-input-${Math.random().toString(36).slice(2, 9)}`)
+const inputId = computed(() => uniqueId.value)
+const labelId = computed(() => `${uniqueId.value}-label`)
+const helperId = computed(() => `${uniqueId.value}-helper`)
 
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement
   emit('update:modelValue', target.value)
 }
+
+// 暴露 focus 方法
+defineExpose({
+  focus: () => inputRef.value?.focus(),
+  blur: () => inputRef.value?.blur()
+})
 </script>
 
 <style scoped>
@@ -80,15 +98,24 @@ const handleInput = (e: Event) => {
   letter-spacing: 0.05em;
 }
 
+.pixel-input__required {
+  @apply text-pixel-purple ml-1;
+}
+
 .pixel-input {
   @apply w-full px-4 py-2 bg-pixel-dark border-2 border-pixel-cyan text-pixel-light;
   font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
   transition: all 0.2s ease;
-  outline: none;
+  
+  /* 焦点指示器 - 可访问性修复 */
+  &:focus-visible {
+    @apply outline-none ring-2 ring-pixel-purple ring-offset-2 ring-offset-pixel-dark;
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+  }
   
   &:focus {
-    @apply border-pixel-purple shadow-[0_0_8px_rgba(255,0,255,0.5)];
+    @apply border-pixel-purple;
     box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
   }
   
@@ -135,6 +162,11 @@ const handleInput = (e: Event) => {
 @media (prefers-contrast: high) {
   .pixel-input {
     @apply border-2;
+  }
+  
+  .pixel-input:focus-visible {
+    outline: 3px solid;
+    outline-offset: 2px;
   }
 }
 
