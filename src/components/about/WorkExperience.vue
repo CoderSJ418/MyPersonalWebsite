@@ -44,13 +44,12 @@ onMounted(() => {
             <div
               v-for="achievement in experience.achievements"
               :key="achievement.title"
-              class="rounded-lg p-4 border"
-              style="background-color: var(--bg-secondary); border-color: var(--border-color)"
+              class="rounded-lg p-4 border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700"
             >
-              <h5 class="font-semibold mb-2" style="color: var(--color-accent)">
+              <h5 class="font-semibold mb-2 text-orange-600 dark:text-orange-400">
                 {{ achievement.title }}
               </h5>
-              <p class="text-sm" style="color: var(--text-secondary)">
+              <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ achievement.description }}
               </p>
             </div>
