@@ -16,13 +16,6 @@
   transition: none !important;
 }
 
-/* CSS 变量过渡 */
-:root {
-  --transition-fast: 150ms;
-  --transition-normal: 300ms;
-  --transition-slow: 500ms;
-}
-
 /* 颜色变量过渡 */
 :root {
   transition:

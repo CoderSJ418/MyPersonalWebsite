@@ -42,7 +42,7 @@
           <SocialLinks
             :github="contactStore.contact.social.github"
             :linkedin="contactStore.contact.social.linkedin"
-            :email="contactStore.contact.social.email.replace('mailto:', '')"
+            :email="contactStore.contact.social.email"
             :twitter="contactStore.contact.social.twitter"
           />
         </div>

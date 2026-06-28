@@ -4,6 +4,7 @@
       v-if="!error"
       :src="src"
       :alt="alt"
+      :loading="props.nativeLoading"
       :class="imageClass"
       :style="imageStyle"
       @load="onLoad"
@@ -25,6 +26,7 @@ import { ref, computed } from 'vue'
 interface Props {
   src: string
   alt?: string
+  nativeLoading?: 'lazy' | 'eager'
   imageClass?: string
   fallbackClass?: string
   skeletonClass?: string
@@ -35,6 +37,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   alt: '',
+  nativeLoading: 'lazy',
   imageClass: '',
   fallbackClass: '',
   skeletonClass: '',

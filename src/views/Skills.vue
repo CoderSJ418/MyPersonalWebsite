@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen" style="background-color: var(--bg-primary)">
+  <div class="min-h-screen bg-white dark:bg-slate-900">
     <PageHero title="专业技能" subtitle="7年前端开发经验，深耕 Vue 技术栈，熟悉现代前端工程化体系" />
 
     <!-- 技能展示 -->
@@ -8,19 +8,15 @@
         <div class="max-w-6xl mx-auto">
           <!-- 核心技能 - 大卡片展示 -->
           <div class="mb-16">
-            <h2
-              class="text-2xl md:text-3xl font-bold mb-8 flex items-center"
-              style="color: var(--text-primary)"
-            >
-              <Zap class="w-6 h-6 mr-3" :style="{ color: 'var(--color-primary)' }" />
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center text-slate-900 dark:text-slate-100">
+              <Zap class="w-6 h-6 mr-3 text-indigo-500 dark:text-indigo-400" />
               核心技能
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div
                 v-for="skill in coreSkills"
                 :key="skill.id"
-                class="core-skill-card group relative rounded-2xl p-6 md:p-8 border transition-all duration-500"
-                style="background-color: var(--bg-secondary); border-color: var(--border-color)"
+                class="core-skill-card group relative rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 transition-all duration-500"
               >
                 <!-- 技能图标 -->
                 <div class="flex items-center justify-between mb-4">
@@ -29,32 +25,30 @@
                     style="background-color: rgba(99, 102, 241, 0.1)"
                   >
                     <Code2
-                      class="w-8 h-8"
-                      :style="{ color: 'var(--color-primary)' }"
+                      class="w-8 h-8 text-indigo-500 dark:text-indigo-400"
                     />
                   </div>
                   <div class="text-right">
-                    <div class="text-3xl font-bold" style="color: var(--text-primary)">
+                    <div class="text-3xl font-bold text-slate-900 dark:text-slate-100">
                       {{ skill.level }}%
                     </div>
-                    <div class="text-sm" style="color: var(--text-secondary)">熟练度</div>
+                    <div class="text-sm text-slate-500 dark:text-slate-400">熟练度</div>
                   </div>
                 </div>
 
                 <!-- 技能名称和描述 -->
                 <h3
-                  class="text-2xl font-bold mb-3 transition-colors duration-300"
-                  style="color: var(--text-primary)"
+                  class="text-2xl font-bold mb-3 text-slate-900 dark:text-slate-100 transition-colors duration-300"
                 >
                   {{ skill.name }}
                 </h3>
-                <p class="mb-4 leading-relaxed" style="color: var(--text-secondary)">
+                <p class="mb-4 leading-relaxed text-slate-500 dark:text-slate-400">
                   {{ skill.description }}
                 </p>
 
                 <!-- 经验年限 -->
-                <div class="flex items-center" style="color: var(--text-secondary)">
-                  <Clock class="w-4 h-4 mr-2" :style="{ color: 'var(--color-accent)' }" />
+                <div class="flex items-center text-slate-500 dark:text-slate-400">
+                  <Clock class="w-4 h-4 mr-2 text-pink-500 dark:text-pink-400" />
                   {{ skill.yearsOfExperience }} 年经验
                 </div>
               </div>
@@ -63,36 +57,24 @@
 
           <!-- 技能分类 - 标签云 -->
           <div class="mb-16">
-            <h2
-              class="text-2xl md:text-3xl font-bold mb-8 flex items-center"
-              style="color: var(--text-primary)"
-            >
-              <Tag class="w-6 h-6 mr-3" :style="{ color: 'var(--color-accent)' }" />
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center text-slate-900 dark:text-slate-100">
+              <Tag class="w-6 h-6 mr-3 text-pink-500 dark:text-pink-400" />
               技能分类
             </h2>
             <div class="space-y-6">
               <div
                 v-for="category in skillCategories"
                 :key="category.name"
-                class="rounded-xl p-6 border"
-                style="background-color: var(--bg-secondary); border-color: var(--border-color)"
+                class="rounded-xl p-6 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
               >
-                <h3
-                  class="text-xl font-bold mb-4"
-                  style="color: var(--text-primary)"
-                >
+                <h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-slate-100">
                   {{ category.name }}
                 </h3>
                 <div class="flex flex-wrap gap-3">
                   <span
                     v-for="skill in category.skills"
                     :key="skill"
-                    class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                    style="
-                      background-color: var(--bg-primary);
-                      border: 1px solid var(--border-color);
-                      color: var(--text-secondary);
-                    "
+                    class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 transition-all duration-300"
                   >
                     {{ skill }}
                   </span>
@@ -103,13 +85,9 @@
 
           <!-- 技术亮点 -->
           <div>
-            <h2
-              class="text-2xl md:text-3xl font-bold mb-8 flex items-center"
-              style="color: var(--text-primary)"
-            >
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 flex items-center text-slate-900 dark:text-slate-100">
               <Lightbulb
-                class="w-6 h-6 mr-3"
-                :style="{ color: 'var(--color-primary)' }"
+                class="w-6 h-6 mr-3 text-indigo-500 dark:text-indigo-400"
               />
               技术亮点
             </h2>
@@ -117,8 +95,7 @@
               <div
                 v-for="highlight in techHighlights"
                 :key="highlight.title"
-                class="rounded-xl p-6 border"
-                style="background-color: var(--bg-secondary); border-color: var(--border-color)"
+                class="rounded-xl p-6 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
               >
                 <div class="flex items-center mb-4">
                   <div
@@ -126,15 +103,14 @@
                     style="background-color: rgba(99, 102, 241, 0.1)"
                   >
                     <CheckCircle2
-                      class="w-6 h-6"
-                      :style="{ color: 'var(--color-primary)' }"
+                      class="w-6 h-6 text-indigo-500 dark:text-indigo-400"
                     />
                   </div>
-                  <h3 class="text-xl font-bold" style="color: var(--text-primary)">
+                  <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">
                     {{ highlight.title }}
                   </h3>
                 </div>
-                <p class="text-sm leading-relaxed" style="color: var(--text-secondary)">
+                <p class="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
                   {{ highlight.description }}
                 </p>
               </div>
@@ -198,9 +174,7 @@ const techHighlights = [
 onMounted(() => {
   skillStore.loadSkills()
 
-  // 在 DOM 更新后执行动画
   nextTick(() => {
-    // 核心技能卡片动画
     const coreCards = document.querySelectorAll('.core-skill-card')
     if (coreCards.length > 0) {
       staggerIn(coreCards, { duration: 0.6, delay: 0.3 })

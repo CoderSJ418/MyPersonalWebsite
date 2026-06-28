@@ -132,14 +132,18 @@ export interface PersonalInfo {
 export interface WorkExperience {
   id: string
   company: string
+  logo?: string
   position: string
   location?: string
   startDate: string
   endDate?: string
-  current: boolean
+  duration?: string
+  current?: boolean
   description: string
-  achievements: string[]
-  technologies: string[]
+  achievements: Array<{ title: string; description: string }>
+  techStack: string[]
+  responsibilities?: string[]
+  projects?: string[]
 }
 
 /**

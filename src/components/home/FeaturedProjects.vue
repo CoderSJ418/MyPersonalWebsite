@@ -1,19 +1,17 @@
 <template>
-  <section class="py-16 md:py-24" style="background-color: #f8fafc">
+  <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate-900">
     <div class="container mx-auto px-4">
       <!-- 标题区域 -->
       <div class="text-center mb-12 md:mb-16">
         <h2
           ref="titleRef"
-          class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-          style="color: #0f172a"
+          class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900 dark:text-slate-100"
         >
           精选项目
         </h2>
         <p
           ref="subtitleRef"
-          class="text-lg md:text-xl max-w-2xl mx-auto"
-          style="color: #64748b"
+          class="text-lg md:text-xl max-w-2xl mx-auto text-slate-500 dark:text-slate-400"
         >
           每个项目都是一次技术挑战，每个代码都承载着对用户体验的承诺
         </p>
@@ -21,16 +19,15 @@
 
       <!-- 加载状态 -->
       <div v-if="projectStore.loading" class="text-center py-12">
-        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300" style="border-top-color: #f97316"></div>
-        <p class="mt-4" style="color: #64748b">加载项目数据中...</p>
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-orange-500"></div>
+        <p class="mt-4 text-slate-500 dark:text-slate-400">加载项目数据中...</p>
       </div>
 
       <!-- 错误状态 -->
       <div v-else-if="projectStore.error" class="text-center py-12">
-        <p class="mb-4" style="color: #ef4444">{{ projectStore.error }}</p>
-        <button 
-          class="px-6 py-2 rounded-lg font-semibold transition-all duration-300" 
-          style="background-color: #f97316; color: #ffffff"
+        <p class="mb-4 text-red-500">{{ projectStore.error }}</p>
+        <button
+          class="px-6 py-2 rounded-lg font-semibold transition-all duration-300 bg-orange-600 text-white hover:bg-orange-700"
           @click="projectStore.loadProjects()"
         >
           重试
@@ -39,7 +36,7 @@
 
       <!-- 空状态 -->
       <div v-else-if="!hasFeaturedProjects" class="text-center py-12">
-        <p style="color: #64748b">暂无精选项目</p>
+        <p class="text-slate-500 dark:text-slate-400">暂无精选项目</p>
       </div>
 
       <!-- 项目卡片网格 -->
@@ -47,51 +44,44 @@
         <!-- 大卡片 - 第一个项目 -->
         <Card3D v-if="firstFeaturedProject" :max-tilt="10" :perspective="1000" :scale="1.02" :glare="true">
           <div
-            class="project-card-large group relative rounded-2xl overflow-hidden cursor-pointer border transition-all duration-500"
-            style="background-color: #ffffff; border-color: #e2e8f0"
+            class="project-card-large group relative rounded-2xl overflow-hidden cursor-pointer border border-slate-200 dark:border-slate-700 transition-all duration-500 bg-white dark:bg-slate-800"
             :data-index="0"
             @click="$router.push(`/projects/${firstFeaturedProject.id}`)"
           >
             <!-- 项目图片区域 -->
             <div
-              class="h-64 flex items-center justify-center relative overflow-hidden"
-              style="background-color: #f97316; opacity: 0.1"
+              class="h-64 flex items-center justify-center relative overflow-hidden bg-orange-500/10"
             >
               <div
-                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style="background-color: #f97316; opacity: 0.05"
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-orange-500/5"
               ></div>
               <component
                 :is="getProjectIcon(firstFeaturedProject.id)"
-                class="w-24 h-24 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500"
-                style="color: #f97316"
+                class="w-24 h-24 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 text-orange-500 dark:text-orange-400"
               />
             </div>
 
             <!-- 项目信息 -->
             <div class="p-6 md:p-8">
               <h3
-                class="text-2xl md:text-3xl font-bold mb-3 group-hover:opacity-100 transition-colors duration-300"
-                style="color: #0f172a"
+                class="text-2xl md:text-3xl font-bold mb-3 text-slate-900 dark:text-slate-100 transition-colors duration-300"
               >
                 {{ firstFeaturedProject.title }}
               </h3>
-              <p class="mb-6 line-clamp-3 leading-relaxed" style="color: #64748b">
+              <p class="mb-6 line-clamp-3 leading-relaxed text-slate-500 dark:text-slate-400">
                 {{ firstFeaturedProject.description }}
               </p>
               <div class="flex flex-wrap gap-2 mb-6">
                 <span
                   v-for="tag in (firstFeaturedProject.tags || []).slice(0, 4)"
                   :key="tag"
-                  class="px-3 py-1.5 rounded-lg text-sm font-medium"
-                  style="background-color: #06b6d4; opacity: 0.1; color: #06b6d4"
+                  class="px-3 py-1.5 rounded-lg text-sm font-medium bg-cyan-500/10 text-cyan-600 dark:text-cyan-400"
                 >
                   {{ tag }}
                 </span>
               </div>
               <div
-                class="flex items-center font-semibold group-hover:translate-x-2 transition-transform duration-300"
-                style="color: #f97316"
+                class="flex items-center font-semibold text-orange-600 dark:text-orange-400 group-hover:translate-x-2 transition-transform duration-300"
               >
                 查看详情
                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,41 +108,36 @@
             :glare="true"
           >
             <div
-              class="project-card-small group relative rounded-xl overflow-hidden cursor-pointer border transition-all duration-500"
-              style="background-color: #ffffff; border-color: #e2e8f0"
+              class="project-card-small group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 dark:border-slate-700 transition-all duration-500 bg-white dark:bg-slate-800"
               :data-index="index + 1"
               @click="$router.push(`/projects/${project.id}`)"
             >
               <div class="flex items-center p-5">
                 <!-- 图标 -->
                 <div
-                  class="w-20 h-20 flex-shrink-0 rounded-lg flex items-center justify-center mr-5"
-                  style="background-color: #06b6d4; opacity: 0.1"
+                  class="w-20 h-20 flex-shrink-0 rounded-lg flex items-center justify-center mr-5 bg-cyan-500/10"
                 >
                   <component
                     :is="getProjectIcon(project.id)"
-                    class="w-10 h-10 transform group-hover:scale-110 transition-transform duration-300"
-                    style="color: #06b6d4"
+                    class="w-10 h-10 transform group-hover:scale-110 transition-transform duration-300 text-cyan-500 dark:text-cyan-400"
                   />
                 </div>
 
                 <!-- 信息 -->
                 <div class="flex-1 min-w-0">
                   <h3
-                    class="text-xl font-bold mb-2 group-hover:opacity-100 transition-colors duration-300"
-                    style="color: #0f172a"
+                    class="text-xl font-bold mb-2 text-slate-900 dark:text-slate-100 transition-colors duration-300"
                   >
                     {{ project.title }}
                   </h3>
-                  <p class="text-sm line-clamp-2 mb-3" style="color: #64748b">
+                  <p class="text-sm line-clamp-2 mb-3 text-slate-500 dark:text-slate-400">
                     {{ project.description }}
                   </p>
                   <div class="flex flex-wrap gap-2">
                     <span
                       v-for="tag in (project.tags || []).slice(0, 2)"
                       :key="tag"
-                      class="px-2 py-1 rounded text-xs font-medium"
-                      style="background-color: #f97316; opacity: 0.1; color: #f97316"
+                      class="px-2 py-1 rounded text-xs font-medium bg-orange-500/10 text-orange-600 dark:text-orange-400"
                     >
                       {{ tag }}
                     </span>
@@ -161,8 +146,7 @@
 
                 <!-- 箭头 -->
                 <div
-                  class="ml-4 transform group-hover:translate-x-1 transition-transform duration-300"
-                  style="color: #06b6d4"
+                  class="ml-4 transform group-hover:translate-x-1 transition-transform duration-300 text-cyan-500 dark:text-cyan-400"
                 >
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -183,8 +167,7 @@
       <div ref="ctaRef" class="text-center mt-12 md:mt-16">
         <RouterLink
           to="/projects"
-          class="inline-flex items-center px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
-          style="background-color: #EA580C; color: #ffffff"
+          class="inline-flex items-center px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-orange-600 text-white hover:bg-orange-700"
         >
           查看更多项目
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -216,24 +199,20 @@ const ctaRef = ref<HTMLElement | null>(null)
 
 const { fadeInUp, staggerIn } = useGSAPAnimations()
 
-// 计算属性：是否有精选项目
-const hasFeaturedProjects = computed(() => 
+const hasFeaturedProjects = computed(() =>
   projectStore.featuredProjects && projectStore.featuredProjects.length > 0
 )
 
-// 计算属性：第一个精选项目
-const firstFeaturedProject = computed(() => 
+const firstFeaturedProject = computed(() =>
   hasFeaturedProjects.value ? projectStore.featuredProjects[0] : null
 )
 
-// 计算属性：其他精选项目
-const otherFeaturedProjects = computed(() => 
-  hasFeaturedProjects.value && projectStore.featuredProjects 
-    ? projectStore.featuredProjects.slice(1, 3) 
+const otherFeaturedProjects = computed(() =>
+  hasFeaturedProjects.value && projectStore.featuredProjects
+    ? projectStore.featuredProjects.slice(1, 3)
     : []
 )
 
-// 根据项目ID返回不同的图标组件
 const getProjectIcon = (projectId: string) => {
   const icons: Record<string, typeof Globe> = {
     '1': Globe,
@@ -244,11 +223,9 @@ const getProjectIcon = (projectId: string) => {
   return icons[projectId] || Globe
 }
 
-// 动画初始化函数
 const initAnimations = async () => {
-  await nextTick() // 确保DOM已更新
+  await nextTick()
 
-  // 标题动画
   if (titleRef.value) {
     fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
   }
@@ -257,7 +234,6 @@ const initAnimations = async () => {
     fadeInUp(subtitleRef.value, { duration: 0.8, delay: 0.2 })
   }
 
-  // 项目卡片动画
   if (gridRef.value) {
     const cards = gridRef.value.querySelectorAll('.project-card-large, .project-card-small')
     if (cards.length > 0) {
@@ -265,7 +241,6 @@ const initAnimations = async () => {
     }
   }
 
-  // CTA 按钮动画
   if (ctaRef.value) {
     const ctaButton = ctaRef.value.querySelector('a')
     if (ctaButton) {
@@ -275,10 +250,7 @@ const initAnimations = async () => {
 }
 
 onMounted(async () => {
-  // 加载项目数据
   await projectStore.loadProjects()
-  
-  // 初始化动画
   initAnimations()
 })
 </script>

@@ -172,14 +172,16 @@
     --radius-2xl: 1.5rem;
     --radius-full: 9999px;
 
-    /* 动画时间 */
+    /* 动画时间（统一变量，animations.css 和 transitions.css 继承此处定义） */
     --duration-instant: 50ms;
-    --duration-fast: 100ms;
-    --duration-normal: 200ms;
-    --duration-slow: 300ms;
-    --duration-slower: 400ms;
-    --transition-normal: 200ms;
-    --transition-slower: 400ms;
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 400ms;
+    --duration-slower: 600ms;
+    --transition-fast: var(--duration-fast);
+    --transition-normal: var(--duration-normal);
+    --transition-slow: var(--duration-slow);
+    --transition-slower: var(--duration-slower);
     --surface-1-rgb: 255, 255, 255;
     --primary-500-rgb: 99, 102, 241;
 

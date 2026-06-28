@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 import contactInfoData from '@/assets/data/contact-info.json'
 import personalInfoData from '@/assets/data/personal-info.json'
 

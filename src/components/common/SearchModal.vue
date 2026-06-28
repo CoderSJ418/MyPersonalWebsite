@@ -25,8 +25,8 @@
               ref="searchInput"
               v-model="searchStore.query"
               type="text"
-              placeholder="搜索项目、技能、博客..."
-              aria-label="搜索项目、技能、博客"
+              placeholder="搜索博客文章..."
+              aria-label="搜索博客文章"
               class="flex-1 px-4 py-5 text-lg bg-transparent outline-none text-gray-900 dark:text-gray-100 placeholder-gray-400"
               @keydown="handleKeydown"
             />
@@ -64,7 +64,8 @@
               <div class="text-gray-400 mb-2">
                 <SearchX class="w-12 h-12 mx-auto mb-4" />
               </div>
-              <p class="text-gray-500 dark:text-gray-400">未找到相关结果</p>
+              <p class="text-gray-500 dark:text-gray-400">未找到相关博客文章</p>
+              <p class="text-sm text-gray-400 dark:text-gray-500 mt-1">尝试其他关键词</p>
             </div>
 
             <!-- 显示搜索历史 -->
@@ -91,132 +92,34 @@
             </div>
 
             <!-- 搜索结果 -->
-            <div v-else-if="hasResults" class="p-4 space-y-6">
-              <!-- 项目结果 -->
-              <div v-if="searchStore.results.projects.length > 0">
-                <h3
-                  class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2"
-                >
-                  <FolderKanban class="w-4 h-4" />
-                  项目 ({{ searchStore.results.projects.length }})
-                </h3>
-                <div class="space-y-2">
-                  <div
-                    v-for="item in searchStore.results.projects"
-                    :key="item.id"
-                    :class="[
-                      'p-3 rounded-lg cursor-pointer transition-all',
-                      isSelected(item)
-                        ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
-                    ]"
-                    @click="navigateTo(item.url)"
-                    @mouseenter="selectItem(item)"
-                  >
-                    <div class="flex items-start gap-3">
-                      <div class="flex-1 min-w-0">
-                        <h4
-                          class="font-medium text-gray-900 dark:text-gray-100 mb-1"
-                          v-html="sanitizeHighlight(item.highlight?.title || item.title)"
-                        />
-                        <p
-                          class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
-                          v-html="sanitizeHighlight(item.highlight?.description || item.description)"
-                        />
-                        <div v-if="item.metadata?.tags && item.metadata.tags.length > 0" class="flex flex-wrap gap-1 mt-2">
-                          <span
-                            v-for="tag in item.metadata.tags.slice(0, 3)"
-                            :key="tag"
-                            class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded"
-                          >
-                            {{ tag }}
-                          </span>
-                        </div>
-                      </div>
-                      <ArrowUpRight class="w-5 h-5 text-gray-400 flex-shrink-0" />
+            <div v-else-if="hasResults" class="p-4 space-y-3">
+              <div
+                v-for="(item, index) in searchStore.results.items"
+                :key="item.id"
+                :class="[
+                  'p-4 rounded-xl cursor-pointer transition-all',
+                  index === searchStore.selectedIndex
+                    ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
+                    : 'hover:bg-gray-50 dark:hover:bg-gray-700/50 border border-transparent'
+                ]"
+                @click="navigateTo(item.url)"
+                @mouseenter="searchStore.selectedIndex = index"
+              >
+                <div class="flex items-start gap-3">
+                  <div class="flex-1 min-w-0">
+                    <h4
+                      class="font-medium text-gray-900 dark:text-gray-100 mb-1"
+                      v-html="item.title"
+                    />
+                    <p
+                      class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
+                      v-html="item.description"
+                    />
+                    <div class="flex items-center gap-3 mt-2 text-xs text-gray-400 dark:text-gray-500">
+                      <span v-if="item.date">{{ formatDate(item.date) }}</span>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- 技能结果 -->
-              <div v-if="searchStore.results.skills.length > 0">
-                <h3
-                  class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2"
-                >
-                  <Zap class="w-4 h-4" />
-                  技能 ({{ searchStore.results.skills.length }})
-                </h3>
-                <div class="space-y-2">
-                  <div
-                    v-for="item in searchStore.results.skills"
-                    :key="item.id"
-                    :class="[
-                      'p-3 rounded-lg cursor-pointer transition-all',
-                      isSelected(item)
-                        ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
-                    ]"
-                    @click="navigateTo(item.url)"
-                    @mouseenter="selectItem(item)"
-                  >
-                    <div class="flex items-start gap-3">
-                      <div class="flex-1 min-w-0">
-                        <h4
-                          class="font-medium text-gray-900 dark:text-gray-100 mb-1"
-                          v-html="sanitizeHighlight(item.highlight?.title || item.title)"
-                        />
-                        <p
-                          class="text-sm text-gray-600 dark:text-gray-400"
-                          v-html="sanitizeHighlight(item.highlight?.description || item.description)"
-                        />
-                      </div>
-                      <ArrowUpRight class="w-5 h-5 text-gray-400 flex-shrink-0" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 博客结果 -->
-              <div v-if="searchStore.results.blogs.length > 0">
-                <h3
-                  class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2"
-                >
-                  <FileText class="w-4 h-4" />
-                  博客 ({{ searchStore.results.blogs.length }})
-                </h3>
-                <div class="space-y-2">
-                  <div
-                    v-for="item in searchStore.results.blogs"
-                    :key="item.id"
-                    :class="[
-                      'p-3 rounded-lg cursor-pointer transition-all',
-                      isSelected(item)
-                        ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
-                    ]"
-                    @click="navigateTo(item.url)"
-                    @mouseenter="selectItem(item)"
-                  >
-                    <div class="flex items-start gap-3">
-                      <div class="flex-1 min-w-0">
-                        <h4
-                          class="font-medium text-gray-900 dark:text-gray-100 mb-1"
-                          v-html="sanitizeHighlight(item.highlight?.title || item.title)"
-                        />
-                        <p
-                          class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
-                          v-html="sanitizeHighlight(item.highlight?.description || item.description)"
-                        />
-                        <div class="flex items-center gap-2 mt-2 text-xs text-gray-500">
-                          <span>{{ item.metadata?.author }}</span>
-                          <span>•</span>
-                          <span>{{ formatDate(item.metadata?.publishedAt) }}</span>
-                        </div>
-                      </div>
-                      <ArrowUpRight class="w-5 h-5 text-gray-400 flex-shrink-0" />
-                    </div>
-                  </div>
+                  <ArrowUpRight class="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
                 </div>
               </div>
             </div>
@@ -227,7 +130,7 @@
                 <Search class="w-12 h-12 mx-auto mb-4" />
               </div>
               <p class="text-gray-500 dark:text-gray-400 mb-2">输入关键词开始搜索</p>
-              <p class="text-sm text-gray-400 dark:text-gray-500">支持搜索项目、技能、博客</p>
+              <p class="text-sm text-gray-400 dark:text-gray-500">搜索技术博客文章</p>
             </div>
           </div>
 
@@ -248,7 +151,7 @@
                   跳转
                 </span>
               </div>
-              <span>共 {{ searchStore.results.total }} 个结果</span>
+              <span>共 {{ searchStore.results.total }} 篇博客</span>
             </div>
           </div>
         </div>
@@ -261,58 +164,32 @@
 import { ref, watch, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/stores/useSearchStore'
-import { useProjectStore } from '@/stores/useProjectStore'
-import { useSkillStore } from '@/stores/useSkillStore'
 import { useBlogStore } from '@/stores/useBlogStore'
-import { flattenSearchResults } from '@/utils/search'
-import { sanitizeHighlight } from '@/utils/xss'
-import { Search, SearchX, ArrowUpRight, FolderKanban, Zap, FileText } from 'lucide-vue-next'
+import { Search, SearchX, ArrowUpRight } from 'lucide-vue-next'
 
 const router = useRouter()
 const searchStore = useSearchStore()
-const projectStore = useProjectStore()
-const skillStore = useSkillStore()
 const blogStore = useBlogStore()
 
 const searchInput = ref<HTMLInputElement | null>(null)
 
-// 计算属性
 const hasResults = computed(() => searchStore.results.total > 0)
 const hasNoResults = computed(() => searchStore.query && searchStore.results.total === 0)
 
-// 格式化日期
-const formatDate = (dateStr?: string) => {
-  if (!dateStr) return ''
+const formatDate = (dateStr: string) => {
   const date = new Date(dateStr)
   return date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'short', day: 'numeric' })
 }
 
-// 判断是否选中
-const isSelected = (item: unknown) => {
-  return searchStore.selectedResult?.id === item.id
-}
-
-// 选择项目
-const selectItem = (item: unknown) => {
-  const flatResults = flattenSearchResults(searchStore.results)
-  const index = flatResults.findIndex((r) => r.id === item.id)
-  if (index !== -1) {
-    searchStore.selectedIndex = index
-  }
-}
-
-// 从历史记录搜索
 const searchFromHistory = (query: string) => {
   searchStore.query = query
 }
 
-// 导航到结果
 const navigateTo = (url: string) => {
   searchStore.closeSearch()
   router.push(url)
 }
 
-// 处理键盘事件
 const handleKeydown = (e: KeyboardEvent) => {
   switch (e.key) {
     case 'ArrowUp':
@@ -336,7 +213,6 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 }
 
-// 监听搜索框打开，自动聚焦
 watch(
   () => searchStore.isOpen,
   async (isOpen) => {
@@ -347,19 +223,13 @@ watch(
   }
 )
 
-// 监听查询变化，执行搜索
 watch(
   () => searchStore.query,
   (newQuery) => {
     if (newQuery.trim()) {
-      searchStore.performSearch(newQuery, projectStore.projects, skillStore.skills, blogStore.posts)
+      searchStore.performSearch(newQuery, blogStore.posts)
     } else {
-      searchStore.results = {
-        projects: [],
-        skills: [],
-        blogs: [],
-        total: 0
-      }
+      searchStore.results = { items: [], total: 0 }
     }
   }
 )
