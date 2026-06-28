@@ -526,12 +526,14 @@ onUnmounted(() => {
 .stat-card {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.8);
-  dark:background(rgba(30, 41, 59, 0.8));
   backdrop-filter: blur(12px);
   border-radius: 1rem;
   border: 1px solid rgba(226, 232, 240, 0.8);
-  dark:border(rgba(51, 65, 85, 0.8));
   transition: all 0.3s ease;
+}
+.dark .stat-card {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(51, 65, 85, 0.8);
 }
 
 .stat-card:hover {

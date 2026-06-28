@@ -60,30 +60,12 @@ const routes: RouteRecordRaw[] = [
     }
   },
   {
-    path: '/pixel-demo',
-    name: 'PixelDemo',
-    component: () => import('@/views/PixelDemo.vue'),
-    meta: {
-      title: '像素风格演示',
-      description: '像素风格组件演示'
-    }
-  },
-  {
     path: '/experience',
     name: 'Experience',
     component: () => import('@/views/Experience.vue'),
     meta: {
       title: '工作经历',
       description: '我的工作经历和职业发展'
-    }
-  },
-  {
-    path: '/interactive-demo',
-    name: 'InteractiveDemo',
-    component: () => import('@/views/InteractiveDemo.vue'),
-    meta: {
-      title: '交互式效果演示',
-      description: '交互式效果演示页面'
     }
   },
   {

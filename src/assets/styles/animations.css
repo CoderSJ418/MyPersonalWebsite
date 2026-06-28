@@ -25,7 +25,7 @@
 /* 淡入 + 向上滑入 */
 .stagger-fade-up {
   opacity: 0;
-  animation: staggerFadeUp var(--transition-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeUp var(--duration-slow) var(--ease-editorial) forwards;
 }
 
 @keyframes staggerFadeUp {
@@ -42,7 +42,7 @@
 /* 淡入 + 向左滑入 */
 .stagger-fade-left {
   opacity: 0;
-  animation: staggerFadeLeft var(--transition-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeLeft var(--duration-slow) var(--ease-editorial) forwards;
 }
 
 @keyframes staggerFadeLeft {
@@ -59,7 +59,7 @@
 /* 淡入 + 向右滑入 */
 .stagger-fade-right {
   opacity: 0;
-  animation: staggerFadeRight var(--transition-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeRight var(--duration-slow) var(--ease-editorial) forwards;
 }
 
 @keyframes staggerFadeRight {
@@ -76,7 +76,7 @@
 /* 淡入 + 缩放 */
 .stagger-fade-scale {
   opacity: 0;
-  animation: staggerFadeScale var(--transition-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeScale var(--duration-slow) var(--ease-editorial) forwards;
 }
 
 @keyframes staggerFadeScale {
@@ -93,7 +93,7 @@
 /* 淡入 + 旋转 */
 .stagger-fade-rotate {
   opacity: 0;
-  animation: staggerFadeRotate var(--transition-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeRotate var(--duration-slow) var(--ease-editorial) forwards;
 }
 
 @keyframes staggerFadeRotate {
@@ -114,8 +114,8 @@
 /* 卡片悬停 - 向上浮动 */
 .hover-lift {
   transition:
-    transform var(--transition-normal) var(--ease-editorial),
-    box-shadow var(--transition-normal) var(--ease-editorial);
+    transform var(--duration-normal) var(--ease-editorial),
+    box-shadow var(--duration-normal) var(--ease-editorial);
 }
 
 .hover-lift:hover {
@@ -127,8 +127,8 @@
 /* 按钮悬停 - 向上浮动 + 阴影增强 */
 .hover-lift-button {
   transition:
-    transform var(--transition-normal) var(--ease-editorial),
-    box-shadow var(--transition-normal) var(--ease-editorial);
+    transform var(--duration-normal) var(--ease-editorial),
+    box-shadow var(--duration-normal) var(--ease-editorial);
 }
 
 .hover-lift-button:hover {
@@ -141,8 +141,8 @@
 /* 图片悬停 - 缩放 + 亮度增强 */
 .hover-scale-bright {
   transition:
-    transform var(--transition-slow) var(--ease-editorial),
-    filter var(--transition-normal) ease;
+    transform var(--duration-slow) var(--ease-editorial),
+    filter var(--duration-normal) ease;
 }
 
 .hover-scale-bright:hover {
@@ -166,7 +166,7 @@
   background: var(--accent-color);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform var(--transition-normal) var(--ease-editorial);
+  transition: transform var(--duration-normal) var(--ease-editorial);
 }
 
 .hover-underline-expand:hover::after {
@@ -188,7 +188,7 @@
   height: 2px;
   background: var(--accent-color);
   transform: translateX(-50%);
-  transition: width var(--transition-normal) var(--ease-editorial);
+  transition: width var(--duration-normal) var(--ease-editorial);
 }
 
 .hover-underline-center:hover::after {
@@ -204,8 +204,8 @@
   opacity: 0;
   transform: translateY(30px);
   transition:
-    opacity var(--transition-slow) var(--ease-editorial),
-    transform var(--transition-slow) var(--ease-editorial);
+    opacity var(--duration-slow) var(--ease-editorial),
+    transform var(--duration-slow) var(--ease-editorial);
 }
 
 .scroll-fade-in.visible {
@@ -218,8 +218,8 @@
   opacity: 0;
   transform: scale(0.9);
   transition:
-    opacity var(--transition-slow) var(--ease-editorial),
-    transform var(--transition-slow) var(--ease-editorial);
+    opacity var(--duration-slow) var(--ease-editorial),
+    transform var(--duration-slow) var(--ease-editorial);
 }
 
 .scroll-scale-in.visible {
@@ -232,8 +232,8 @@
   opacity: 0;
   transform: translateX(50px);
   transition:
-    opacity var(--transition-slow) var(--ease-editorial),
-    transform var(--transition-slow) var(--ease-editorial);
+    opacity var(--duration-slow) var(--ease-editorial),
+    transform var(--duration-slow) var(--ease-editorial);
 }
 
 .scroll-slide-left.visible {
@@ -246,8 +246,8 @@
   opacity: 0;
   transform: translateX(-50px);
   transition:
-    opacity var(--transition-slow) var(--ease-editorial),
-    transform var(--transition-slow) var(--ease-editorial);
+    opacity var(--duration-slow) var(--ease-editorial),
+    transform var(--duration-slow) var(--ease-editorial);
 }
 
 .scroll-slide-right.visible {
@@ -369,9 +369,9 @@
    ============================================ */
 
 :root {
-  --transition-fast: 200ms;
-  --transition-normal: 400ms;
-  --transition-slow: 600ms;
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
   --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -396,9 +396,9 @@
 @media (max-width: 768px) {
   /* 减少移动端动画时间 */
   :root {
-    --transition-fast: 150ms;
-    --transition-normal: 300ms;
-    --transition-slow: 450ms;
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 450ms;
   }
 
   /* 移动端禁用 hover 效果 */

@@ -1,45 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import workExperienceData from '@/assets/data/work-experience.json'
-import type { WorkExperience } from '@/types/project'
+import { computed, onMounted, nextTick } from 'vue'
+import { useExperienceStore } from '@/stores/useExperienceStore'
+import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 
-const workExperiences = computed<WorkExperience[]>(() => workExperienceData as WorkExperience[])
+const experienceStore = useExperienceStore()
+const workExperiences = computed(() => experienceStore.experiences)
+const { staggerIn } = useGSAPAnimations()
 
-const formatDate = (date: string) => {
-  const [year, month] = date.split('-')
-  const monthNames = [
-    '1月',
-    '2月',
-    '3月',
-    '4月',
-    '5月',
-    '6月',
-    '7月',
-    '8月',
-    '9月',
-    '10月',
-    '11月',
-    '12月'
-  ]
-  return `${year}年${monthNames[parseInt(month) - 1]}`
-}
+onMounted(() => {
+  experienceStore.loadExperiences()
 
-const getDuration = (startDate: string, endDate?: string, current?: boolean) => {
-  const start = new Date(startDate)
-  const end = current ? new Date() : new Date(endDate || startDate)
-  const months =
-    (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth())
-  const years = Math.floor(months / 12)
-  const remainingMonths = months % 12
-
-  if (years > 0 && remainingMonths > 0) {
-    return `${years}年${remainingMonths}个月`
-  } else if (years > 0) {
-    return `${years}年`
-  } else {
-    return `${remainingMonths}个月`
-  }
-}
+  nextTick(() => {
+    const items = document.querySelectorAll('.experience-item')
+    if (items.length > 0) {
+      staggerIn(items, { duration: 0.8, delay: 0.2 })
+    }
+  })
+})
 </script>
 
 <template>
@@ -55,10 +32,7 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
           <div class="work-experience__position">{{ experience.position }}</div>
           <div class="work-experience__location">{{ experience.location }}</div>
           <div class="work-experience__duration">
-            {{ formatDate(experience.startDate) }} -
-            {{ experience.current ? '至今' : formatDate(experience.endDate || '') }} （{{
-              getDuration(experience.startDate, experience.endDate, experience.current)
-            }}）
+            {{ experience.startDate }} - {{ experience.endDate }} （{{ experience.duration }}）
           </div>
         </div>
 
@@ -66,17 +40,27 @@ const getDuration = (startDate: string, endDate?: string, current?: boolean) => 
 
         <div v-if="experience.achievements.length > 0" class="work-experience__achievements">
           <h4 class="work-experience__section-title">主要成就</h4>
-          <ul class="work-experience__list-items">
-            <li v-for="(achievement, index) in experience.achievements" :key="index">
-              {{ achievement }}
-            </li>
-          </ul>
+          <div class="space-y-3">
+            <div
+              v-for="achievement in experience.achievements"
+              :key="achievement.title"
+              class="rounded-lg p-4 border"
+              style="background-color: var(--bg-secondary); border-color: var(--border-color)"
+            >
+              <h5 class="font-semibold mb-2" style="color: var(--color-accent)">
+                {{ achievement.title }}
+              </h5>
+              <p class="text-sm" style="color: var(--text-secondary)">
+                {{ achievement.description }}
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div v-if="experience.technologies.length > 0" class="work-experience__technologies">
+        <div v-if="experience.techStack.length > 0" class="work-experience__technologies">
           <h4 class="work-experience__section-title">技术栈</h4>
           <div class="work-experience__tags">
-            <span v-for="tech in experience.technologies" :key="tech" class="work-experience__tag">
+            <span v-for="tech in experience.techStack" :key="tech" class="work-experience__tag">
               {{ tech }}
             </span>
           </div>

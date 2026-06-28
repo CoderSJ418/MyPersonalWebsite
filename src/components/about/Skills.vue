@@ -51,7 +51,7 @@ const getLevelIcon = (level: number) => {
     return '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>'
   }
   if (level >= 70) {
-    return '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>'
+    return '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 0016 0zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>'
   }
   return '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>'
 }
@@ -82,7 +82,7 @@ onMounted(() => {
         7年技术沉淀，从入门到精通的专业技能体系
       </p>
     </div>
-    
+
     <!-- 技能分类 -->
     <div class="skills-categories">
       <div
@@ -97,14 +97,14 @@ onMounted(() => {
           </h3>
           <div class="category-line" />
         </div>
-        
+
         <!-- 技能网格 -->
         <div class="skills-grid">
-          <div 
-            v-for="skill in categorySkills" 
-            :key="skill.id" 
+          <div
+            v-for="skill in categorySkills"
+            :key="skill.id"
             class="skill-card"
-            :style="{ 
+            :style="{
               '--skill-color': getLevelColor(skill.level),
               '--skill-gradient': getLevelGradient(skill.level)
             }"
@@ -113,9 +113,9 @@ onMounted(() => {
             <div class="skill-header">
               <div class="skill-info">
                 <h4 class="skill-name">{{ skill.name }}</h4>
-                <div 
+                <div
                   class="skill-level-badge"
-                  :style="{ 
+                  :style="{
                     background: getLevelGradient(skill.level),
                     color: 'white'
                   }"
@@ -126,7 +126,7 @@ onMounted(() => {
               </div>
               <div class="skill-percentage">{{ skill.level }}%</div>
             </div>
-            
+
             <!-- 进度条 -->
             <div class="skill-progress-container">
               <div class="progress-track">
@@ -141,12 +141,12 @@ onMounted(() => {
                 </div>
               </div>
             </div>
-            
+
             <!-- 描述 -->
             <p v-if="skill.description" class="skill-description">
               {{ skill.description }}
             </p>
-            
+
             <!-- 元数据 -->
             <div class="skill-meta">
               <div v-if="skill.yearsOfExperience" class="meta-item">
@@ -155,7 +155,7 @@ onMounted(() => {
                 </svg>
                 <span>{{ skill.yearsOfExperience }} 年经验</span>
               </div>
-              
+
               <div v-if="skill.projects && skill.projects.length > 0" class="meta-item">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -168,9 +168,9 @@ onMounted(() => {
             <div v-if="skill.projects && skill.projects.length > 0" class="skill-projects">
               <div class="projects-label">相关项目</div>
               <div class="projects-list">
-                <span 
-                  v-for="project in skill.projects.slice(0, 3)" 
-                  :key="project" 
+                <span
+                  v-for="project in skill.projects.slice(0, 3)"
+                  :key="project"
                   class="project-tag"
                 >
                   {{ project }}
@@ -192,12 +192,14 @@ onMounted(() => {
 .skills-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
-  dark:background(linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)));
   backdrop-filter: blur(12px);
   border-radius: 2rem;
   border: 1px solid rgba(226, 232, 240, 0.6);
-  dark:border(rgba(51, 65, 85, 0.6));
   box-shadow: var(--shadow-lg);
+}
+.dark .skills-section {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+  border-color: rgba(51, 65, 85, 0.6);
 }
 
 /* 标题区域 */
@@ -212,16 +214,18 @@ onMounted(() => {
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   background: var(--primary-50);
-  dark:background(var(--primary-950));
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--primary-200);
-  dark:border(var(--primary-800));
+}
+.dark .skills-badge {
+  background: var(--primary-950);
+  color: var(--primary-400);
+  border-color: var(--primary-800);
 }
 
 .badge-icon {
@@ -232,20 +236,24 @@ onMounted(() => {
   font-size: 3rem;
   font-weight: 800;
   color: var(--text-primary);
-  dark:color(var(--text-primary));
   margin: 0 0 1rem 0;
   letter-spacing: -0.02em;
   line-height: 1.1;
+}
+.dark .skills-title {
+  color: var(--text-primary);
 }
 
 .skills-subtitle {
   font-size: 1.125rem;
   color: var(--text-secondary);
-  dark:color(var(--text-secondary));
   margin: 0;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+.dark .skills-subtitle {
+  color: var(--text-secondary);
 }
 
 /* 技能分类 */
@@ -270,12 +278,14 @@ onMounted(() => {
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
-  dark:color(var(--text-primary));
   margin: 0 0 1rem 0;
   letter-spacing: -0.01em;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+.dark .category-title {
+  color: var(--text-primary);
 }
 
 .category-title::before {
@@ -316,13 +326,15 @@ onMounted(() => {
 .skill-card {
   position: relative;
   background: white;
-  dark:background(var(--surface-1));
   border-radius: 1.5rem;
   padding: 2rem;
   border: 1px solid var(--border-default);
-  dark:border(var(--border-default));
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+}
+.dark .skill-card {
+  background: var(--surface-1);
+  border-color: var(--border-default);
 }
 
 .skill-card::before {
@@ -363,9 +375,11 @@ onMounted(() => {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary);
-  dark:color(var(--text-primary));
   margin: 0 0 0.75rem 0;
   letter-spacing: -0.01em;
+}
+.dark .skill-name {
+  color: var(--text-primary);
 }
 
 .skill-level-badge {
@@ -443,8 +457,10 @@ onMounted(() => {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-secondary);
-  dark:color(var(--text-secondary));
   margin-bottom: 1rem;
+}
+.dark .skill-description {
+  color: var(--text-secondary);
 }
 
 /* 元数据 */
@@ -454,7 +470,9 @@ onMounted(() => {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border-subtle);
-  dark:border(var(--border-subtle));
+}
+.dark .skill-meta {
+  border-color: var(--border-subtle);
 }
 
 .meta-item {
@@ -463,8 +481,10 @@ onMounted(() => {
   gap: 0.5rem;
   font-size: 0.875rem;
   color: var(--text-tertiary);
-  dark:color(var(--text-tertiary));
   font-weight: 500;
+}
+.dark .meta-item {
+  color: var(--text-tertiary);
 }
 
 .meta-item svg {
@@ -483,9 +503,11 @@ onMounted(() => {
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-tertiary);
-  dark:color(var(--text-tertiary));
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+.dark .projects-label {
+  color: var(--text-tertiary);
 }
 
 .projects-list {
@@ -503,25 +525,32 @@ onMounted(() => {
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--text-secondary);
-  dark:color(var(--text-secondary));
   border: 1px solid var(--border-default);
   transition: all 0.3s ease;
 }
 
 .project-tag:hover {
   background: var(--primary-50);
-  dark:background(var(--primary-950));
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   border-color: var(--primary-300);
-  dark:border(var(--primary-700));
+  transform: translateY(-1px);
+}
+.dark .project-tag {
+  color: var(--text-secondary);
+}
+.dark .project-tag:hover {
+  background: var(--primary-950);
+  color: var(--primary-400);
+  border-color: var(--primary-700);
 }
 
 .project-more {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-tertiary);
-  dark:color(var(--text-tertiary));
+}
+.dark .project-more {
+  color: var(--text-tertiary);
 }
 
 /* 响应式优化 */

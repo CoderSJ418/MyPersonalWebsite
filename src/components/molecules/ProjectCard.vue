@@ -15,15 +15,15 @@
         height="600"
         class="project-card__image"
       />
-      
+
       <!-- 渐变遮罩 -->
       <div class="project-card__image-overlay" />
-      
+
       <!-- 主要技术标签 -->
       <div class="project-card__main-tech">
         <span class="tech-badge">{{ project.technologies[0] }}</span>
       </div>
-      
+
       <!-- 悬停时的覆盖层 -->
       <div class="project-card__hover-overlay">
         <div class="hover-content">
@@ -75,7 +75,7 @@
             <span>{{ project.category || 'Web应用' }}</span>
           </div>
         </div>
-        
+
         <!-- CTA 按钮 -->
         <CTA
           :href="`/projects/${project.slug}`"
@@ -140,21 +140,25 @@ onMounted(() => {
 .project-card {
   position: relative;
   background: white;
-  dark:bg-slate-900;
   border-radius: 1.5rem;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  dark:border(rgba(51, 65, 85, 0.8));
   box-shadow: var(--shadow-sm);
+}
+.dark .project-card {
+  background: #0F172A;
+  border-color: rgba(51, 65, 85, 0.8);
 }
 
 .project-card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: var(--shadow-2xl);
   border-color: rgba(99, 102, 241, 0.3);
-  dark:border(rgba(99, 102, 241, 0.3));
+}
+.dark .project-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
 /* 图片区域 */
@@ -196,21 +200,23 @@ onMounted(() => {
 
 .tech-badge {
   display: inline-flex;
-  align-items-center;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.95);
-  dark:bg(rgba(30, 41, 59, 0.95));
   backdrop-filter: blur(12px);
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  dark:border(rgba(51, 65, 85, 0.3));
   transition: all 0.3s ease;
+}
+.dark .tech-badge {
+  background: rgba(30, 41, 59, 0.95);
+  color: var(--primary-400);
+  border-color: rgba(51, 65, 85, 0.3);
 }
 
 .project-card:hover .tech-badge {
@@ -265,27 +271,33 @@ onMounted(() => {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
-  dark:color(var(--text-primary));
   margin-bottom: 0.75rem;
   line-height: 1.4;
   transition: color 0.3s ease;
 }
+.dark .project-card__title {
+  color: var(--text-primary);
+}
 
 .project-card:hover .project-card__title {
   color: var(--primary-600);
-  dark:color(var(--primary-400));
+}
+.dark .project-card:hover .project-card__title {
+  color: var(--primary-400);
 }
 
 .project-card__description {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-secondary);
-  dark:color(var(--text-secondary));
   margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.dark .project-card__description {
+  color: var(--text-secondary);
 }
 
 /* 技术标签 */
@@ -305,30 +317,36 @@ onMounted(() => {
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--text-secondary);
-  dark:color(var(--text-secondary));
   border: 1px solid var(--border-default);
   transition: all 0.3s ease;
+}
+.dark .tag-item {
+  color: var(--text-secondary);
 }
 
 .project-card:hover .tag-item {
   background: var(--primary-50);
-  dark:background(var(--primary-950));
   color: var(--primary-600);
-  dark:color(var(--primary-400));
   border-color: var(--primary-300);
-  dark:border(var(--primary-700));
   transform: translateY(-1px);
+}
+.dark .project-card:hover .tag-item {
+  background: var(--primary-950);
+  color: var(--primary-400);
+  border-color: var(--primary-700);
 }
 
 /* 底部信息 */
 .project-card__footer {
   padding-top: 1rem;
   border-top: 1px solid var(--border-subtle);
-  dark:border(var(--border-subtle));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+.dark .project-card__footer {
+  border-color: var(--border-subtle);
 }
 
 .project-meta {
@@ -343,13 +361,17 @@ onMounted(() => {
   gap: 0.375rem;
   font-size: 0.8125rem;
   color: var(--text-tertiary);
-  dark:color(var(--text-tertiary));
   transition: color 0.3s ease;
+}
+.dark .meta-item {
+  color: var(--text-tertiary);
 }
 
 .project-card:hover .meta-item {
   color: var(--text-secondary);
-  dark:color(var(--text-secondary));
+}
+.dark .project-card:hover .meta-item {
+  color: var(--text-secondary);
 }
 
 /* 顶部装饰条 */
@@ -373,15 +395,15 @@ onMounted(() => {
   .project-card__image-wrapper {
     height: 200px;
   }
-  
+
   .project-card__content {
     padding: 1.25rem;
   }
-  
+
   .project-card__title {
     font-size: 1.125rem;
   }
-  
+
   .project-card__description {
     font-size: 0.875rem;
   }

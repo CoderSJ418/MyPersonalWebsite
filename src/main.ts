@@ -13,8 +13,6 @@ import { initializeApp } from './boot'
 // 样式导入
 import './assets/styles/main.css'
 import './assets/styles/design-system.css'
-import './assets/styles/design-tokens.css'
-import './assets/animations.css'
 
 // 创建应用实例
 const app = createApp(App)
