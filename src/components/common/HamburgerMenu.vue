@@ -91,7 +91,7 @@
         >
           <div class="flex items-center justify-center gap-6">
             <a
-              href="https://github.com"
+              :href="contactStore.contact.social.github"
               target="_blank"
               rel="noopener noreferrer"
               class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -100,7 +100,7 @@
               <Github class="w-6 h-6" />
             </a>
             <a
-              href="https://linkedin.com"
+              :href="contactStore.contact.social.linkedin"
               target="_blank"
               rel="noopener noreferrer"
               class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -109,7 +109,7 @@
               <Linkedin class="w-6 h-6" />
             </a>
             <a
-              href="mailto:912999051@qq.com"
+              :href="'mailto:' + contactStore.contact.email"
               class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               aria-label="Email"
             >
@@ -126,6 +126,7 @@
 import { computed } from 'vue'
 import { useAppStore } from '@/stores/useAppStore'
 import { useSearchStore } from '@/stores/useSearchStore'
+import { useContactInfoStore } from '@/stores/useContactInfoStore'
 import {
   Menu,
   X,
@@ -142,6 +143,7 @@ import {
 
 const appStore = useAppStore()
 const searchStore = useSearchStore()
+const contactStore = useContactInfoStore()
 
 const isOpen = computed({
   get: () => appStore.menuOpen,

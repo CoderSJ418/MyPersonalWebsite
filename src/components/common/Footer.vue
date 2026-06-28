@@ -40,10 +40,10 @@
         <div class="footer__social">
           <h3 class="footer__title">社交媒体</h3>
           <SocialLinks
-            github="https://github.com/shejie"
-            linkedin="https://linkedin.com/in/shejie"
-            email="912999051@qq.com"
-            twitter="https://twitter.com/shejie"
+            :github="contactStore.contact.social.github"
+            :linkedin="contactStore.contact.social.linkedin"
+            :email="contactStore.contact.social.email.replace('mailto:', '')"
+            :twitter="contactStore.contact.social.twitter"
           />
         </div>
 
@@ -52,15 +52,15 @@
           <h3 class="footer__title">联系我</h3>
           <ul class="footer__list">
             <li>
-              <a href="mailto:912999051@qq.com" class="footer__link footer__link--email">
+              <a :href="'mailto:' + contactStore.contact.email" class="footer__link footer__link--email">
                 <Mail class="w-4 h-4" />
-                912999051@qq.com
+                {{ contactStore.contact.email }}
               </a>
             </li>
             <li>
               <span class="footer__link footer__link--location">
                 <MapPin class="w-4 h-4" />
-                中国 · 长沙
+                {{ contactStore.contact.location }}
               </span>
             </li>
           </ul>
@@ -94,8 +94,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useContactInfoStore } from '@/stores/useContactInfoStore'
 import { Mail, MapPin, Zap, Palette, Monitor } from 'lucide-vue-next'
 
+const contactStore = useContactInfoStore()
 const currentYear = computed(() => new Date().getFullYear())
 </script>
 
