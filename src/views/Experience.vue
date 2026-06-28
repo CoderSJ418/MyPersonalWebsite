@@ -49,44 +49,12 @@
                   </p>
                   <p class="text-sm mb-4" style="color: var(--text-secondary)">
                     <span class="inline-flex items-center">
-                      <svg
-                        class="w-4 h-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        style="color: var(--text-tertiary)"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        ></path>
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        ></path>
-                      </svg>
+                      <MapPin class="w-4 h-4 mr-1" :style="{ color: 'var(--text-tertiary)' }" />
                       {{ experience.location }}
                     </span>
                     <span class="mx-2">•</span>
                     <span class="inline-flex items-center">
-                      <svg
-                        class="w-4 h-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        style="color: var(--text-tertiary)"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
+                      <Clock class="w-4 h-4 mr-1" :style="{ color: 'var(--text-tertiary)' }" />
                       {{ experience.duration }}
                     </span>
                   </p>
@@ -104,20 +72,10 @@
                       class="font-semibold mb-3 flex items-center"
                       style="color: var(--text-primary)"
                     >
-                      <svg
+                      <CheckSquare
                         class="w-5 h-5 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        style="color: var(--color-primary)"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                        ></path>
-                      </svg>
+                        :style="{ color: 'var(--color-primary)' }"
+                      />
                       主要职责
                     </h4>
                     <ul class="space-y-2">
@@ -139,20 +97,10 @@
                       class="font-semibold mb-3 flex items-center"
                       style="color: var(--text-primary)"
                     >
-                      <svg
+                      <Award
                         class="w-5 h-5 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        style="color: var(--color-primary)"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                        ></path>
-                      </svg>
+                        :style="{ color: 'var(--color-primary)' }"
+                      />
                       主要成就
                     </h4>
                     <div class="space-y-3">
@@ -178,20 +126,10 @@
                       class="font-semibold mb-3 flex items-center"
                       style="color: var(--text-primary)"
                     >
-                      <svg
+                      <Code2
                         class="w-5 h-5 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        style="color: var(--color-primary)"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                        ></path>
-                      </svg>
+                        :style="{ color: 'var(--color-primary)' }"
+                      />
                       技术栈
                     </h4>
                     <div class="flex flex-wrap gap-2">
@@ -223,6 +161,7 @@
 import { nextTick, onMounted } from 'vue'
 import { useExperienceStore } from '@/stores/useExperienceStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
+import { MapPin, Clock, CheckSquare, Code2 } from 'lucide-vue-next'
 import PageHero from '@/components/templates/PageHero.vue'
 
 const experienceStore = useExperienceStore()

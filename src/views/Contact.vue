@@ -15,9 +15,7 @@ title="联系方式" subtitle="联系我" badge="{ icon: '✉️', text: '取得
       <div class="contact-form-section">
         <div class="section-header">
           <div class="section-icon">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
+            <Mail class="w-6 h-6" />
           </div>
           <h2 class="section-title">发送消息</h2>
           <p class="section-description">
@@ -33,9 +31,7 @@ title="联系方式" subtitle="联系我" badge="{ icon: '✉️', text: '取得
         <div class="info-card">
           <div class="info-card__header">
             <div class="info-card__icon info-card__icon--primary">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+              <Info class="w-6 h-6" />
             </div>
             <h3 class="info-card__title">联系方式</h3>
           </div>
@@ -46,9 +42,7 @@ title="联系方式" subtitle="联系我" badge="{ icon: '✉️', text: '取得
         <div class="info-card">
           <div class="info-card__header">
             <div class="info-card__icon info-card__icon--secondary">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-              </svg>
+              <Users class="w-6 h-6" />
             </div>
             <h3 class="info-card__title">社交媒体</h3>
           </div>
@@ -59,9 +53,7 @@ title="联系方式" subtitle="联系我" badge="{ icon: '✉️', text: '取得
         <div class="info-card">
           <div class="info-card__header">
             <div class="info-card__icon info-card__icon--success">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+              <Clock class="w-6 h-6" />
             </div>
             <h3 class="info-card__title">工作时间</h3>
           </div>
@@ -87,12 +79,12 @@ title="联系方式" subtitle="联系我" badge="{ icon: '✉️', text: '取得
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
+import { Mail, Info, Users, Clock } from 'lucide-vue-next'
 import contactInfoData from '@/assets/data/contact-info.json'
-import type { ContactInfo } from '@/types/project'
+import type { ContactInfo, ContactFormData } from '@/types/project'
 import ContactForm from '@/components/contact/ContactForm.vue'
 import ContactInfoDisplay from '@/components/contact/ContactInfoDisplay.vue'
 import SocialLinks from '@/components/common/SocialLinks.vue'
-import type { ContactFormData } from '@/types/project'
 
 const contactInfo = computed<ContactInfo>(() => contactInfoData as ContactInfo)
 

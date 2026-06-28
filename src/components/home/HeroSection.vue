@@ -145,9 +145,7 @@ developer.createAwesome() {
                   <div class="relative">
                     <div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-pink-500 shadow-2xl animate-float" />
                     <div class="absolute inset-0 flex items-center justify-center">
-                      <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                      </svg>
+                      <Code2 class="w-16 h-16 text-white" />
                     </div>
                   </div>
                 </div>
@@ -180,6 +178,7 @@ developer.createAwesome() {
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { Code2 } from 'lucide-vue-next'
 import CTA from '@/components/ui/CTA.vue'
 import SocialLinks from '@/components/common/SocialLinks.vue'
 

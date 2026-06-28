@@ -53,18 +53,13 @@
           <ul class="footer__list">
             <li>
               <a href="mailto:912999051@qq.com" class="footer__link footer__link--email">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
+                <Mail class="w-4 h-4" />
                 912999051@qq.com
               </a>
             </li>
             <li>
               <span class="footer__link footer__link--location">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
+                <MapPin class="w-4 h-4" />
                 中国 · 长沙
               </span>
             </li>
@@ -80,21 +75,15 @@
         
         <div class="footer__tech">
           <span class="tech-badge">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
+            <Zap class="w-4 h-4" />
             Vue 3
           </span>
           <span class="tech-badge">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-            </svg>
+            <Palette class="w-4 h-4" />
             TypeScript
           </span>
           <span class="tech-badge">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
+            <Monitor class="w-4 h-4" />
             Vite
           </span>
         </div>
@@ -105,6 +94,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Mail, MapPin, Zap, Palette, Monitor } from 'lucide-vue-next'
 
 const currentYear = computed(() => new Date().getFullYear())
 </script>

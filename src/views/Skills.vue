@@ -12,20 +12,7 @@
               class="text-2xl md:text-3xl font-bold mb-8 flex items-center"
               style="color: var(--text-primary)"
             >
-              <svg
-                class="w-6 h-6 mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style="color: var(--color-primary)"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                ></path>
-              </svg>
+              <Zap class="w-6 h-6 mr-3" :style="{ color: 'var(--color-primary)' }" />
               核心技能
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -41,20 +28,10 @@
                     class="w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-500"
                     style="background-color: rgba(99, 102, 241, 0.1)"
                   >
-                    <svg
+                    <Code2
                       class="w-8 h-8"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      style="color: var(--color-primary)"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                      ></path>
-                    </svg>
+                      :style="{ color: 'var(--color-primary)' }"
+                    />
                   </div>
                   <div class="text-right">
                     <div class="text-3xl font-bold" style="color: var(--text-primary)">
@@ -77,20 +54,7 @@
 
                 <!-- 经验年限 -->
                 <div class="flex items-center" style="color: var(--text-secondary)">
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    style="color: var(--color-accent)"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
+                  <Clock class="w-4 h-4 mr-2" :style="{ color: 'var(--color-accent)' }" />
                   {{ skill.yearsOfExperience }} 年经验
                 </div>
               </div>
@@ -103,20 +67,7 @@
               class="text-2xl md:text-3xl font-bold mb-8 flex items-center"
               style="color: var(--text-primary)"
             >
-              <svg
-                class="w-6 h-6 mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style="color: var(--color-accent)"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                ></path>
-              </svg>
+              <Tag class="w-6 h-6 mr-3" :style="{ color: 'var(--color-accent)' }" />
               技能分类
             </h2>
             <div class="space-y-6">
@@ -156,20 +107,10 @@
               class="text-2xl md:text-3xl font-bold mb-8 flex items-center"
               style="color: var(--text-primary)"
             >
-              <svg
+              <Lightbulb
                 class="w-6 h-6 mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style="color: var(--color-primary)"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                ></path>
-              </svg>
+                :style="{ color: 'var(--color-primary)' }"
+              />
               技术亮点
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -184,20 +125,10 @@
                     class="w-12 h-12 rounded-lg flex items-center justify-center mr-4"
                     style="background-color: rgba(99, 102, 241, 0.1)"
                   >
-                    <svg
+                    <CheckCircle2
                       class="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      style="color: var(--color-primary)"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
+                      :style="{ color: 'var(--color-primary)' }"
+                    />
                   </div>
                   <h3 class="text-xl font-bold" style="color: var(--text-primary)">
                     {{ highlight.title }}
@@ -219,6 +150,7 @@
 import { computed, nextTick, onMounted } from 'vue'
 import { useSkillStore } from '@/stores/useSkillStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
+import { Zap, Code2, Clock, Tag, Lightbulb, CheckCircle2 } from 'lucide-vue-next'
 import PageHero from '@/components/templates/PageHero.vue'
 
 const skillStore = useSkillStore()

@@ -11,9 +11,7 @@ title="分享知识 · 记录成长" :subtitle="'分享 Vue 3、TypeScript、前
         <!-- 搜索框 -->
         <div class="search-section">
           <div class="search-wrapper">
-            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
+            <Search class="search-icon" />
             <input
               v-model="blogStore.searchQuery"
               type="text"
@@ -27,9 +25,7 @@ title="分享知识 · 记录成长" :subtitle="'分享 Vue 3、TypeScript、前
               class="search-clear"
               @click="clearSearch"
             >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
+              <X class="w-5 h-5" />
             </button>
           </div>
           <div v-if="blogStore.searchQuery" class="search-result">
@@ -87,6 +83,7 @@ title="分享知识 · 记录成长" :subtitle="'分享 Vue 3、TypeScript、前
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
+import { Search, X } from 'lucide-vue-next'
 import BlogList from '@/components/blog/BlogList.vue'
 import type { BlogPost } from '@/types/blog'
 

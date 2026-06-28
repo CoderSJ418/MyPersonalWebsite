@@ -79,20 +79,10 @@
               class="w-14 h-14 rounded-xl flex items-center justify-center mr-4"
               style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(244, 114, 182, 0.15) 100%); border: 1px solid rgba(236, 72, 153, 0.3);"
             >
-              <svg
+              <Zap
                 class="w-7 h-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style="color: #EC4899"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                ></path>
-              </svg>
+                :style="{ color: '#EC4899' }"
+              />
             </div>
             <h3 class="text-2xl font-bold" style="color: #F1F5F9">性能优化</h3>
           </div>
@@ -110,20 +100,10 @@
               class="w-14 h-14 rounded-xl flex items-center justify-center mr-4"
               style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%); border: 1px solid rgba(139, 92, 246, 0.3);"
             >
-              <svg
+              <FlaskConical
                 class="w-7 h-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style="color: #8B5CF6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                ></path>
-              </svg>
+                :style="{ color: '#8B5CF6' }"
+              />
             </div>
             <h3 class="text-2xl font-bold" style="color: #F1F5F9">工程化</h3>
           </div>
@@ -141,20 +121,10 @@
               class="w-14 h-14 rounded-xl flex items-center justify-center mr-4"
               style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(129, 140, 248, 0.15) 100%); border: 1px solid rgba(99, 102, 241, 0.3);"
             >
-              <svg
+              <Settings
                 class="w-7 h-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style="color: #6366F1"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                ></path>
-              </svg>
+                :style="{ color: '#6366F1' }"
+              />
             </div>
             <h3 class="text-2xl font-bold" style="color: #F1F5F9">架构设计</h3>
           </div>
@@ -170,7 +140,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
-import { Code2, Zap, Database, Layers, Palette, Smartphone } from 'lucide-vue-next'
+import { Code2, Zap, Database, Layers, Palette, Smartphone, FlaskConical, Settings } from 'lucide-vue-next'
 
 const techStack = [
   { name: 'Vue 3', icon: Code2 },
