@@ -138,18 +138,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
+import { useSkillStore } from '@/stores/useSkillStore'
 import { Code2, Zap, Database, Layers, Palette, Smartphone, FlaskConical, Settings } from 'lucide-vue-next'
 
-const techStack = [
-  { name: 'Vue 3', icon: Code2 },
-  { name: 'Vite', icon: Zap },
-  { name: 'TypeScript', icon: Database },
-  { name: 'Pinia', icon: Layers },
-  { name: 'Tailwind', icon: Palette },
-  { name: 'uni-app', icon: Smartphone }
-]
+const skillStore = useSkillStore()
+
+const iconMap: Record<string, typeof Code2> = {
+  'Vue.js': Code2,
+  'Vite': Zap,
+  'TypeScript': Database,
+  'Pinia': Layers,
+  'Tailwind CSS': Palette,
+  'uni-app': Smartphone,
+  'Element Plus': Layers,
+  'ECharts': FlaskConical,
+  'Git': Settings,
+  'Webpack': Settings,
+}
+
+const displayNames: Record<string, string> = {
+  'Vue.js': 'Vue 3',
+  'Tailwind CSS': 'Tailwind',
+}
+
+const techStack = computed(() => {
+  return skillStore.topSkills
+    .filter(skill => iconMap[skill.name])
+    .slice(0, 6)
+    .map(skill => ({
+      name: displayNames[skill.name] || skill.name,
+      icon: iconMap[skill.name],
+    }))
+})
 
 const titleRef = ref<HTMLElement | null>(null)
 const subtitleRef = ref<HTMLElement | null>(null)

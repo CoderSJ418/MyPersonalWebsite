@@ -55,7 +55,7 @@ const checkFontsLoaded = (): boolean => {
   if (document.fonts) {
     try {
       return document.fonts.check('16px Inter')
-    } catch (e) {
+    } catch (_e) {
       // 如果无法检查字体，假设字体已加载
       return true
     }

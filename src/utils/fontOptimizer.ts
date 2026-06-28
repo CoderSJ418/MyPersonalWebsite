@@ -300,8 +300,8 @@ export class FontOptimizer {
    */
   getAllFontStatus(): Record<string, string> {
     const status: Record<string, string> = {}
-    
-    this.fontFaces.forEach((fontFace, key) => {
+
+    this.fontFaces.forEach((fontFace, _key) => {
       status[fontFace.family] = this.getFontStatus(fontFace.family)
     })
 

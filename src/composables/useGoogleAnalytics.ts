@@ -143,9 +143,11 @@ export function setUserProperties(
   }
 
   window.gtag('set', 'user_properties', userProperties)
-  userId && window.gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID, {
-    user_id: userId,
-  })
+  if (userId) {
+    window.gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID, {
+      user_id: userId,
+    })
+  }
 }
 
 /**
@@ -195,7 +197,7 @@ export function trackFormSubmit(formId: string, success: boolean): void {
  * @param fileName 文件名
  * @param fileExtension 文件扩展名
  */
-export function trackDownload(fileName: string, fileExtension: string): void {
+export function trackDownload(fileName: string, _fileExtension: string): void {
   trackCustomEvent('file_download', 'download', fileName, undefined)
 }
 

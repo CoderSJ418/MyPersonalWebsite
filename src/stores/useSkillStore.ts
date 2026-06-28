@@ -59,6 +59,11 @@ export const useSkillStore = defineStore('skill', () => {
     return skills.value.find((skill) => skill.id === id)
   }
 
+  const topSkills = computed(() => {
+    return [...skills.value]
+      .sort((a, b) => b.level - a.level)
+  })
+
   return {
     skills,
     loading,
@@ -66,6 +71,7 @@ export const useSkillStore = defineStore('skill', () => {
     skillCategories,
     skillRadarData,
     allCategories,
+    topSkills,
     loadSkills,
     getSkillsByCategory,
     getSkillById

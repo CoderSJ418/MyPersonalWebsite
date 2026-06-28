@@ -181,7 +181,7 @@ const handleSubmit = async () => {
     setTimeout(() => {
       submitSuccess.value = false
     }, 5000)
-  } catch (error) {
+  } catch (_error) {
     submitError.value = true
     setTimeout(() => {
       submitError.value = false

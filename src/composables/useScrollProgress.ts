@@ -2,7 +2,7 @@
  * 滚动进度 Composable
  */
 
-import { ref, onMounted, onUnmounted, Ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { prefersReducedMotion } from '@/utils/accessibility'
 

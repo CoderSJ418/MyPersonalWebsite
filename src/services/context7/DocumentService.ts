@@ -78,11 +78,11 @@ export abstract class BaseDocumentService implements IDocumentService {
    * @param content 文档内容
    * @returns API 信息列表
    */
-  protected parseAPIs(content: string): any[] {
+  protected parseAPIs(content: string): APIInfo[] {
     // 简化实现：从文档中提取 API 信息
     // 实际实现需要根据文档格式进行解析
     const apiRegex = /```typescript\s+export\s+(function|const|class|interface)\s+(\w+)/g
-    const apis: any[] = []
+    const apis: APIInfo[] = []
     let match
 
     while ((match = apiRegex.exec(content)) !== null) {

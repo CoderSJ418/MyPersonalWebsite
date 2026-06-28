@@ -26,7 +26,7 @@ export async function initMonitoring(app: App): Promise<void> {
 /**
  * 初始化性能监控
  */
-async function initPerformanceMonitoring(app: App): Promise<void> {
+async function initPerformanceMonitoring(_app: App): Promise<void> {
   if (!import.meta.env.PROD) {
     // 开发环境
     try {

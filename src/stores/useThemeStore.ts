@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
-import { themes, type DesignTheme, getDefaultTheme, getTheme } from '@/design-system/themes'
+import { themes, type DesignTheme, getTheme } from '@/design-system/themes'
 
 /**
  * 主题状态接口

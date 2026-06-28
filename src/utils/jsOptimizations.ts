@@ -198,7 +198,7 @@ export const features = {
       })
       window.addEventListener('test', () => {}, opts)
       window.removeEventListener('test', () => {}, opts)
-    } catch (e) {
+    } catch (_e) {
       // 忽略错误
     }
     return supportsPassive

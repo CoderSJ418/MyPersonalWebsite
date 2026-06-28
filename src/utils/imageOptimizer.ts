@@ -107,7 +107,7 @@ export class ImageOptimizer {
   ): string {
     const {
       quality = 80,
-      formats = ['webp', 'jpeg'],
+      _formats = ['webp', 'jpeg'],
       sizes = ['320w', '640w', '1024w', '1920w'],
       lazyLoad = true,
       aspectRatio
@@ -196,7 +196,7 @@ export class ImageOptimizer {
       for (const url of imageUrls) {
         try {
           await preloadImage(url);
-        } catch (error) {
+        } catch (_error) {
           console.warn(`Failed to preload image: ${url}`);
         }
       }

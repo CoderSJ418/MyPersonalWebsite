@@ -68,7 +68,7 @@ export function useTouchGestures(
     }
   }
 
-  const handleTouchEnd = (e: TouchEvent) => {
+  const handleTouchEnd = (_e: TouchEvent) => {
     // 清除长按定时器
     if (longPressTimer.value) {
       clearTimeout(longPressTimer.value)

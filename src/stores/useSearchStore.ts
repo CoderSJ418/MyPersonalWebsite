@@ -112,9 +112,9 @@ export const useSearchStore = defineStore('search', () => {
    */
   const performSearch = (
     searchQuery: string,
-    projects: any[],
-    skills: any[],
-    blogs: any[]
+    projects: unknown[],
+    skills: unknown[],
+    blogs: unknown[]
   ) => {
     if (!searchQuery.trim()) {
       results.value = {

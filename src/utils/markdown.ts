@@ -48,7 +48,7 @@ async function highlightAsync(str: string, lang: string): Promise<string> {
           </div>
           <pre class="hljs"><code class="language-${lang}">${highlightedCode}</code></pre>
         </div>`
-      } catch (__) {}
+      } catch (_) { /* highlight 失败，使用纯文本 */ }
     }
 
     // 如果没有指定语言或不支持，则不进行高亮
@@ -66,7 +66,7 @@ async function highlightAsync(str: string, lang: string): Promise<string> {
       </div>
       <pre class="hljs"><code>${escapedCode}</code></pre>
     </div>`
-  } catch (error) {
+  } catch (_error) {
     // 如果异步高亮失败，使用简单的转义
     const escapedCode = mdAsync.utils.escapeHtml(str)
     return `<div class="code-wrapper">

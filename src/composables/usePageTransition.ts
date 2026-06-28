@@ -2,7 +2,7 @@
  * 页面转场 Composable
  */
 
-import { ref, Ref } from 'vue'
+import { ref } from 'vue'
 import { gsap } from 'gsap'
 import { prefersReducedMotion } from '@/utils/accessibility'
 
@@ -31,7 +31,7 @@ export function usePageTransition(config: PageTransitionConfig = {}) {
   const {
     duration = 0.5,
     ease = 'power3.inOut',
-    direction = 'horizontal',
+    _direction = 'horizontal',
     scale = 0.95
   } = config
 

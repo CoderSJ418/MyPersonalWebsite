@@ -131,7 +131,7 @@ export class ProdDocumentService extends BaseDocumentService {
    * @param libraryName 库名称
    * @throws Error 生产环境不支持刷新
    */
-  async refreshCache(libraryName: string): Promise<void> {
+  async refreshCache(_libraryName: string): Promise<void> {
     throw new Error('生产环境不支持刷新文档缓存，请在开发环境中更新文档')
   }
 

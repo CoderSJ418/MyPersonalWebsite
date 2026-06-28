@@ -2,8 +2,8 @@
  * 粒子系统 Composable
  */
 
-import { ref, onMounted, onUnmounted, Ref } from 'vue'
-import { isMobile, isLowEnd, getDeviceType } from '@/utils/deviceDetection'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { isMobile, isLowEnd } from '@/utils/deviceDetection'
 
 /**
  * 粒子配置

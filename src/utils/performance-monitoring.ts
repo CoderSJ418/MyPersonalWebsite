@@ -16,7 +16,7 @@ interface WebVitalsMetric {
 type WebVitalsCallback = (metric: WebVitalsMetric) => void
 
 // 监控的 Web Vitals 指标
-const WEB_VITALS_METRICS = [
+const _WEB_VITALS_METRICS = [
   'CLS', // 累积布局偏移
   'FID', // 首次输入延迟
   'LCP', // 最大内容绘制
@@ -111,7 +111,7 @@ export function checkPerformanceThresholds(): {
   cls: boolean
   ttfb: boolean
 } {
-  const thresholds = {
+  const _thresholds = {
     lcp: 2.5, // 最大内容绘制 < 2.5s
     fcp: 1.8, // 首次内容绘制 < 1.8s
     cls: 0.1, // 累积布局偏移 < 0.1
@@ -136,7 +136,7 @@ export function getPerformanceRecommendations(): string[] {
   // 检查构建配置
   if (typeof window !== 'undefined') {
     const scripts = document.querySelectorAll('script[src]')
-    const totalScripts = scripts.length
+    const _totalScripts = scripts.length
     const largeScripts = Array.from(scripts).filter((script) => {
       const src = (script as HTMLScriptElement).src
       return src.includes('vendor') || src.includes('animation-vendor')

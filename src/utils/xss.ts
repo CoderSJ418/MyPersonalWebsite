@@ -57,7 +57,7 @@ const DEFAULT_CONFIG: DOMPurify.Config = {
     'controls', 'autoplay', 'loop', 'muted', 'playsinline',
   ],
   // 允许的 URI 协议
-  ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+  ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
   // 允许 data-* 属性
   ALLOW_DATA_ATTR: true,
   // 保持 HTML 注释（可选，通常不需要）

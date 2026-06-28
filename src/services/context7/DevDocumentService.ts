@@ -5,7 +5,7 @@
 
 import { BaseDocumentService } from './DocumentService'
 import { MCPClient } from './MCPClient'
-import type { Document, APIInfo } from './types'
+import type { Document } from './types'
 import path from 'path'
 import fs from 'fs/promises'
 
@@ -101,7 +101,7 @@ export class DevDocumentService extends BaseDocumentService {
     let exampleIndex = 0
 
     while ((match = codeBlockRegex.exec(content)) !== null) {
-      const language = match[1] || 'typescript'
+      const _language = match[1] || 'typescript'
       const code = match[2].trim()
 
       // 提取示例名称（如果有）

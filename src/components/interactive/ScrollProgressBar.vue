@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useScrollProgress } from '@/composables/useScrollProgress'
 
 interface Props {

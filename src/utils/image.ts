@@ -225,7 +225,7 @@ export const compressImage = (
 /**
  * 生成图片的渐进式加载 URL
  */
-export const generateProgressiveURL = (baseUrl: string, quality: number): string => {
+export const generateProgressiveURL = (baseUrl: string, _quality: number): string => {
   // 这里可以根据实际的图片服务进行调整
   // 例如：使用 Cloudinary、Imgix 等服务
   return baseUrl

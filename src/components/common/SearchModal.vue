@@ -288,12 +288,12 @@ const formatDate = (dateStr?: string) => {
 }
 
 // 判断是否选中
-const isSelected = (item: any) => {
+const isSelected = (item: unknown) => {
   return searchStore.selectedResult?.id === item.id
 }
 
 // 选择项目
-const selectItem = (item: any) => {
+const selectItem = (item: unknown) => {
   const flatResults = flattenSearchResults(searchStore.results)
   const index = flatResults.findIndex((r) => r.id === item.id)
   if (index !== -1) {
