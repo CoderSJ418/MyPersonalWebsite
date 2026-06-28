@@ -1,35 +1,13 @@
 <template>
   <main class="projects-page">
-    <!-- 英雄区域 -->
-    <section class="projects-hero">
-      <div class="container mx-auto px-4 sm:px-6">
-        <div class="projects-hero__content">
-          <h1 class="projects-hero__title">
-            项目作品
-          </h1>
-          
-          <p class="projects-hero__subtitle">
-            从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路
-          </p>
-          
-          <!-- 统计数据 -->
-          <div class="projects-hero__stats">
-            <div class="stat-item">
-              <div class="stat-number">50+</div>
-              <div class="stat-label">完成项目</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">15+</div>
-              <div class="stat-label">技术栈</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">100%</div>
-              <div class="stat-label">客户满意</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <PageHero
+title="项目作品" subtitle="从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路"
+      :stats="[
+        { number: '50+', label: '完成项目' },
+        { number: '15+', label: '技术栈' },
+        { number: '100%', label: '客户满意' }
+      ]"
+    />
 
     <!-- 筛选器区域 -->
     <section class="projects-filter">

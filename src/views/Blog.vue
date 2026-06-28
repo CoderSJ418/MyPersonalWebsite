@@ -1,49 +1,9 @@
 <template>
   <main class="blog-page">
-    <!-- 英雄区域 -->
-    <section class="blog-hero">
-      <div class="container mx-auto px-4 sm:px-6">
-        <div class="blog-hero__content">
-          <div class="blog-hero__badge">
-            <span class="badge-icon">✍️</span>
-            <span class="badge-text">技术博客</span>
-          </div>
-          
-          <h1 class="blog-hero__title">
-            <span class="text-gradient">分享知识</span>
-            <br />
-            记录成长
-          </h1>
-          
-          <p class="blog-hero__subtitle">
-            分享 Vue 3、TypeScript、前端工程化等技术文章，记录开发过程中的思考和心得
-          </p>
-          
-          <!-- 统计数据 -->
-          <div class="blog-hero__stats">
-            <div class="stat-item">
-              <div class="stat-number">{{ blogStore.posts.length }}</div>
-              <div class="stat-label">篇文章</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">{{ blogStore.allTags.length }}</div>
-              <div class="stat-label">个标签</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">{{ totalReadTime }}</div>
-              <div class="stat-label">分钟阅读</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 装饰性元素 -->
-        <div class="blog-hero__decoration">
-          <div class="decoration-circle decoration-circle--1"></div>
-          <div class="decoration-circle decoration-circle--2"></div>
-          <div class="decoration-circle decoration-circle--3"></div>
-        </div>
-      </div>
-    </section>
+    <PageHero
+title="分享知识 · 记录成长" :subtitle="'分享 Vue 3、TypeScript、前端工程化等技术文章，记录开发过程中的思考和心得'"
+      :stats="blogHeroStats"
+    />
 
     <!-- 搜索和筛选区域 -->
     <section class="blog-controls">
@@ -134,8 +94,14 @@ const router = useRouter()
 const blogStore = useBlogStore()
 
 const totalReadTime = computed(() => {
-  return blogStore.posts.reduce((total, post) => total + post.readTime, 0)
+  return blogStore.posts.reduce((sum: number, post: { readTime: number }) => sum + post.readTime, 0)
 })
+
+const blogHeroStats = computed(() => [
+  { number: String(blogStore.posts.length), label: '篇文章' },
+  { number: String(blogStore.allTags.length), label: '个标签' },
+  { number: `${totalReadTime.value} 分钟`, label: '分钟阅读' }
+])
 
 const handlePostClick = (post: BlogPost) => {
   router.push(`/blog/${post.id}`)

@@ -1,36 +1,13 @@
 <template>
   <main class="contact-page">
-    <!-- 英雄区域 -->
-    <section class="contact-hero">
-      <div class="contact-hero__badge">
-        <span class="badge-icon">✉️</span>
-        <span class="badge-text">联系方式</span>
-      </div>
-      <h1 class="contact-hero__title">
-        <span class="text-gradient">让我们一起</span>
-        <br />
-        创造美好的产品
-      </h1>
-      <p class="contact-hero__subtitle">
-        有项目想法或想了解更多？随时联系我，我很期待与您合作！
-      </p>
-      
-      <!-- 统计数据 -->
-      <div class="contact-hero__stats">
-        <div class="stat-item">
-          <div class="stat-number">24h</div>
-          <div class="stat-label">响应时间</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">项目交付</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">7年</div>
-          <div class="stat-label">开发经验</div>
-        </div>
-      </div>
-    </section>
+    <PageHero
+title="联系方式" subtitle="联系我" badge="{ icon: '✉️', text: '取得联系' }"
+      :stats="[
+        { number: '24h', label: '响应时间' },
+        { number: '100%', label: '项目交付' },
+        { number: '7年', label: '开发经验' }
+      ]"
+    />
 
     <!-- 主要内容区 -->
     <div class="contact-content">
@@ -75,7 +52,7 @@
             </div>
             <h3 class="info-card__title">社交媒体</h3>
           </div>
-          <SocialLinks :social="contactInfo.social" />
+          <SocialLinks :github="contactInfo.social.github" :email="contactInfo.email" :linkedin="contactInfo.social.linkedin" :twitter="contactInfo.social.twitter" />
         </div>
 
         <!-- 工作时间 -->
@@ -114,7 +91,7 @@ import contactInfoData from '@/assets/data/contact-info.json'
 import type { ContactInfo } from '@/types/project'
 import ContactForm from '@/components/contact/ContactForm.vue'
 import ContactInfoDisplay from '@/components/contact/ContactInfoDisplay.vue'
-import SocialLinks from '@/components/contact/SocialLinks.vue'
+import SocialLinks from '@/components/common/SocialLinks.vue'
 import type { ContactFormData } from '@/types/project'
 
 const contactInfo = computed<ContactInfo>(() => contactInfoData as ContactInfo)

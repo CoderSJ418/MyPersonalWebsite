@@ -1,21 +1,6 @@
 <template>
   <div class="min-h-screen" style="background-color: var(--bg-primary)">
-    <!-- Hero 区域 -->
-    <section class="py-16 md:py-24 relative overflow-hidden">
-      <div class="container mx-auto px-4">
-        <div class="text-center">
-          <h1
-            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-            style="color: var(--text-primary)"
-          >
-            专业技能
-          </h1>
-          <p class="text-lg md:text-xl max-w-2xl mx-auto" style="color: var(--text-secondary)">
-            7年前端开发经验，深耕 Vue 技术栈，熟悉现代前端工程化体系
-          </p>
-        </div>
-      </div>
-    </section>
+    <PageHero title="专业技能" subtitle="7年前端开发经验，深耕 Vue 技术栈，熟悉现代前端工程化体系" />
 
     <!-- 技能展示 -->
     <section class="py-16 md:py-24">
@@ -231,9 +216,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, nextTick } from 'vue'
+import { computed, nextTick, onMounted } from 'vue'
 import { useSkillStore } from '@/stores/useSkillStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
+import PageHero from '@/components/templates/PageHero.vue'
 
 const skillStore = useSkillStore()
 const { staggerIn } = useGSAPAnimations()

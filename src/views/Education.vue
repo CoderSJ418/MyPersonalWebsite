@@ -1,21 +1,6 @@
 <template>
   <div class="min-h-screen" style="background-color: var(--bg-primary)">
-    <!-- Hero 区域 -->
-    <section class="py-16 md:py-24 relative overflow-hidden">
-      <div class="container mx-auto px-4">
-        <div class="text-center">
-          <h1
-            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-            style="color: var(--text-primary)"
-          >
-            教育背景
-          </h1>
-          <p class="text-lg md:text-xl max-w-2xl mx-auto" style="color: var(--text-secondary)">
-            持续学习，不断成长，为前端开发之路打下坚实基础
-          </p>
-        </div>
-      </div>
-    </section>
+    <PageHero title="教育背景" subtitle="持续学习，不断成长，为前端开发之路打下坚实基础" />
 
     <!-- 教育背景展示 -->
     <section class="py-16 md:py-24">
@@ -274,9 +259,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, nextTick } from 'vue'
+import { nextTick, onMounted } from 'vue'
 import { useEducationStore } from '@/stores/useEducationStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
+import PageHero from '@/components/templates/PageHero.vue'
 
 const educationStore = useEducationStore()
 const { staggerIn } = useGSAPAnimations()
