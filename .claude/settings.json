@@ -1,0 +1,37 @@
+{
+  "projectName": "MyPersonalWebsite",
+  "modelPreference": "claude-opus-4-8",
+  "issueTracker": "github",
+  "triageLabels": {
+    "readyForImplementation": ["type:bug", "type:feature"],
+    "blocked": ["status:blocked"],
+    "review": ["status:review"]
+  },
+  "contextPath": "CONTEXT.md",
+  "adrFolder": "docs/adr",
+  "qualityGates": {
+    "lint": true,
+    "typeCheck": true,
+    "build": true,
+    "tests": true,
+    "testCoverageThreshold": 80,
+    "lighthouse": true,
+    "lighthouseThreshold": 90
+  },
+  "gitSafety": {
+    "requireApprovalForPush": true,
+    "blockForcePush": true,
+    "blockResetHard": true,
+    "blockClean": true
+  },
+  "permissions": {
+    "allowedBashCommands": [
+      "npm run lint",
+      "npm run build",
+      "npm run test",
+      "npm run dev",
+      "git status",
+      "git diff"
+    ]
+  }
+}
