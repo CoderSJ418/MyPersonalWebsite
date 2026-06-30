@@ -100,4 +100,8 @@ AGENTS.md.backup*
 *.temp
 .cache/
 .parcel-cache/
-.joycode/
+
+# Joycode AI tool config (except project rules)
+.joycode/*
+!.joycode/rules/
+!.joycode/rules/project-rules.md
