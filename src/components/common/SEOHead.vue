@@ -39,16 +39,11 @@
     />
     <meta v-if="config.category" :content="config.category" property="article:section" />
     <meta v-for="tag in config.tags" :key="tag" :content="tag" property="article:tag" />
-
-    <!-- 结构化数据 -->
-    <script v-if="structuredData" type="application/ld+json">
-      {{ structuredData }}
-    </script>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onMounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { SEOConfig } from '@/utils/seo'
 
@@ -98,12 +93,37 @@ const updatePageTitle = () => {
   document.title = fullTitle.value
 }
 
-// 监听标题变化
-watch(() => props.title, updatePageTitle, { immediate: true })
+// 注入 JSON-LD 结构化数据
+let scriptEl: HTMLScriptElement | null = null
 
-// 组件挂载时更新
+const injectStructuredData = () => {
+  if (!props.structuredData) return
+  if (scriptEl) {
+    scriptEl.remove()
+  }
+  scriptEl = document.createElement('script')
+  scriptEl.type = 'application/ld+json'
+  scriptEl.textContent = JSON.stringify(props.structuredData)
+  document.head.appendChild(scriptEl)
+}
+
+const removeStructuredData = () => {
+  if (scriptEl) {
+    scriptEl.remove()
+    scriptEl = null
+  }
+}
+
+// 监听标题和结构化数据变化
+watch(() => props.title, updatePageTitle, { immediate: true })
+watch(() => props.structuredData, injectStructuredData, { deep: true })
+
 onMounted(() => {
-  updatePageTitle()
+  injectStructuredData()
+})
+
+onUnmounted(() => {
+  removeStructuredData()
 })
 
 // 导出配置供外部使用
