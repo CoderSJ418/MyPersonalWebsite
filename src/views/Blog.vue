@@ -1,5 +1,9 @@
 <template>
-  <main class="min-h-screen bg-white dark:bg-slate-900">
+  <div class="pt-16 min-h-screen bg-white dark:bg-slate-900">
+    <SEOHead
+      title="技术博客"
+      description="分享 Vue 3、TypeScript、前端工程化等技术文章"
+    />
     <PageHero
       title="分享知识 · 记录成长" :subtitle="'分享 Vue 3、TypeScript、前端工程化等技术文章，记录开发过程中的思考和心得'"
       :stats="blogHeroStats"
@@ -80,7 +84,7 @@
         />
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -88,6 +92,7 @@ import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
 import { Search, X } from 'lucide-vue-next'
+import SEOHead from '@/components/common/SEOHead.vue'
 import BlogList from '@/components/blog/BlogList.vue'
 import type { BlogPost } from '@/types/blog'
 

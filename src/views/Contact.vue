@@ -1,5 +1,9 @@
 <template>
-  <main class="min-h-screen bg-white dark:bg-slate-900">
+  <main class="pt-16 min-h-screen bg-white dark:bg-slate-900">
+    <SEOHead
+      title="联系方式"
+      description="联系我"
+    />
     <PageHero
       title="联系方式" subtitle="联系我" :badge="{ icon: '✉️', text: '取得联系' }"
       :stats="[
@@ -87,11 +91,11 @@ import type { ContactInfo } from '@/types/project'
 import ContactForm from '@/components/contact/ContactForm.vue'
 import ContactInfoDisplay from '@/components/contact/ContactInfoDisplay.vue'
 import SocialLinks from '@/components/common/SocialLinks.vue'
+import SEOHead from '@/components/common/SEOHead.vue'
 
 const contactInfo = computed<ContactInfo>(() => contactInfoData as ContactInfo)
 
 onMounted(() => {
-  document.title = '联系我 - 佘杰'
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 </script>

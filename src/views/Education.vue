@@ -1,5 +1,11 @@
 <template>
-  <div class="min-h-screen bg-white dark:bg-slate-900">
+  <div class="pt-16 min-h-screen bg-white dark:bg-slate-900">
+    <SEOHead
+      title="教育背景"
+      description="我的教育背景和学习经历"
+      type="profile"
+      :structured-data="personStructuredData()"
+    />
     <PageHero title="教育背景" subtitle="持续学习，不断成长，为前端开发之路打下坚实基础" />
 
     <!-- 教育背景展示 -->
@@ -139,6 +145,8 @@ import { useEducationStore } from '@/stores/useEducationStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 import { GraduationCap, FlaskConical, Calendar, Clock, BookOpen, ShieldCheck, Code2 } from 'lucide-vue-next'
 import PageHero from '@/components/templates/PageHero.vue'
+import SEOHead from '@/components/common/SEOHead.vue'
+import { personStructuredData } from '@/utils/structuredData'
 
 const educationStore = useEducationStore()
 const { staggerIn } = useGSAPAnimations()

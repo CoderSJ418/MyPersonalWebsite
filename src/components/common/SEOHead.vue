@@ -71,12 +71,13 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  keywords: '',
   type: 'website',
   author: '佘杰',
-  siteName: '佘杰 - 前端开发工程师',
-  titleSuffix: ' - 佘杰',
   locale: 'zh_CN',
-  tags: () => []
+  tags: () => [],
+  siteName: '佘杰 - 前端开发工程师',
+  titleSuffix: ' - 佘杰'
 })
 
 const route = useRoute()

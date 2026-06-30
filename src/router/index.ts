@@ -3,13 +3,12 @@ import NProgress from 'nprogress'
 import '@/assets/styles/nprogress.css'
 import { useAppStore } from '@/stores/useAppStore'
 
-// 配置 NProgress
 NProgress.configure({
-  showSpinner: false, // 隐藏加载旋转器
-  trickleSpeed: 200, // 自动递增间隔
-  minimum: 0.1, // 最小百分比
-  easing: 'ease', // 动画方式
-  speed: 500, // 递增进度条的速度
+  showSpinner: false,
+  trickleSpeed: 200,
+  minimum: 0.1,
+  easing: 'ease',
+  speed: 500,
 })
 
 const routes: RouteRecordRaw[] = [
@@ -129,72 +128,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // 开始进度条
   NProgress.start()
-  
   const appStore = useAppStore()
-  const title = to.meta.title as string
-  const description = to.meta.description as string
-  
-  // 更新页面标题
-  document.title = `${title} - 佘杰`
-  
-  // 更新 Meta 标签
-  updateMetaTags({
-    title,
-    description,
-    url: window.location.href
-  })
-  
   appStore.closeMenu()
   next()
 })
 
-// 路由加载完成后关闭进度条
 router.afterEach(() => {
   NProgress.done()
 })
-
-function updateMetaTags(meta: { title: string; description: string; url: string }) {
-  // 更新 description
-  const descriptionTag = document.querySelector('meta[name="description"]')
-  if (descriptionTag && meta.description) {
-    descriptionTag.setAttribute('content', meta.description)
-  }
-
-  // 更新 keywords
-  const keywordsTag = document.querySelector('meta[name="keywords"]')
-  if (keywordsTag) {
-    const baseKeywords = '前端开发工程师, Vue.js, TypeScript, JavaScript, 前端工程化, 性能优化, 佘杰'
-    keywordsTag.setAttribute('content', `${baseKeywords}, ${meta.title}`)
-  }
-
-  // 更新 Open Graph 标签
-  const ogTitle = document.querySelector('meta[property="og:title"]')
-  if (ogTitle) {
-    ogTitle.setAttribute('content', `${meta.title} - 佘杰`)
-  }
-
-  const ogDescription = document.querySelector('meta[property="og:description"]')
-  if (ogDescription && meta.description) {
-    ogDescription.setAttribute('content', meta.description)
-  }
-
-  const ogUrl = document.querySelector('meta[property="og:url"]')
-  if (ogUrl) {
-    ogUrl.setAttribute('content', meta.url)
-  }
-
-  // 更新 Twitter Card 标签
-  const twitterTitle = document.querySelector('meta[name="twitter:title"]')
-  if (twitterTitle) {
-    twitterTitle.setAttribute('content', `${meta.title} - 佘杰`)
-  }
-
-  const twitterDescription = document.querySelector('meta[name="twitter:description"]')
-  if (twitterDescription && meta.description) {
-    twitterDescription.setAttribute('content', meta.description)
-  }
-}
 
 export default router

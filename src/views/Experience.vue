@@ -1,5 +1,11 @@
 <template>
-  <div class="min-h-screen bg-white dark:bg-slate-900">
+  <div class="pt-16 min-h-screen bg-white dark:bg-slate-900">
+    <SEOHead
+      title="工作经历"
+      description="我的工作经历和职业发展"
+      type="profile"
+      :structured-data="personStructuredData()"
+    />
     <PageHero title="工作经历" subtitle="7年前端开发经验，深耕 Vue 技术栈，从企业官网到 SaaS 平台，积累了丰富的实战经验" />
 
     <!-- 时间轴区域 -->
@@ -144,6 +150,8 @@ import { useExperienceStore } from '@/stores/useExperienceStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 import { MapPin, Clock, CheckSquare, Code2, Award } from 'lucide-vue-next'
 import PageHero from '@/components/templates/PageHero.vue'
+import SEOHead from '@/components/common/SEOHead.vue'
+import { personStructuredData } from '@/utils/structuredData'
 
 const experienceStore = useExperienceStore()
 const { staggerIn } = useGSAPAnimations()

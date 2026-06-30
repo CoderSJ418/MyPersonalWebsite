@@ -100,3 +100,4 @@ AGENTS.md.backup*
 *.temp
 .cache/
 .parcel-cache/
+.joycode/

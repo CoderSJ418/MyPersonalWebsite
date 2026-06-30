@@ -1,35 +1,31 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
-import PersonalInfo from '@/components/about/PersonalInfo.vue'
-import WorkExperience from '@/components/about/WorkExperience.vue'
-import Education from '@/components/about/Education.vue'
-import Skills from '@/components/about/Skills.vue'
-
-onMounted(() => {
-  document.title = '关于我 - 佘杰'
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-})
-</script>
-
 <template>
-  <main class="about-page">
+  <div class="pt-16 min-h-screen bg-white dark:bg-slate-900">
+    <SEOHead
+      title="关于我"
+      description="我的个人信息、工作经历、教育背景和技能"
+      type="profile"
+      :structured-data="personStructuredData()"
+    />
     <div class="about-page__container">
       <PersonalInfo />
       <WorkExperience />
       <Education />
       <Skills />
     </div>
-  </main>
+  </div>
 </template>
 
-<style scoped>
-/* 关于页面 */
-.about-page {
-  min-height: 100vh;
-  background: var(--bg-primary);
-  padding: 6rem 1rem 4rem;
-}
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import SEOHead from '@/components/common/SEOHead.vue'
+import { personStructuredData } from '@/utils/structuredData'
 
+onMounted(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+})
+</script>
+
+<style scoped>
 .about-page__container {
   max-width: 1200px;
   margin: 0 auto;
@@ -38,22 +34,13 @@ onMounted(() => {
   gap: 4rem;
 }
 
-/* 响应式 */
 @media (max-width: 768px) {
-  .about-page {
-    padding: 5rem 1rem 3rem;
-  }
-  
   .about-page__container {
     gap: 3rem;
   }
 }
 
 @media (max-width: 640px) {
-  .about-page {
-    padding: 4rem 1rem 2.5rem;
-  }
-  
   .about-page__container {
     gap: 2.5rem;
   }

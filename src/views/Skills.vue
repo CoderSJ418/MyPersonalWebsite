@@ -1,5 +1,11 @@
 <template>
-  <div class="min-h-screen bg-white dark:bg-slate-900">
+  <div class="pt-16 min-h-screen bg-white dark:bg-slate-900">
+    <SEOHead
+      title="技能展示"
+      description="7年前端开发经验，深耕 Vue 技术栈，熟悉现代前端工程化体系"
+      type="profile"
+      :structured-data="personStructuredData()"
+    />
     <PageHero title="专业技能" subtitle="7年前端开发经验，深耕 Vue 技术栈，熟悉现代前端工程化体系" />
 
     <!-- 技能展示 -->
@@ -128,6 +134,8 @@ import { useSkillStore } from '@/stores/useSkillStore'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 import { Zap, Code2, Clock, Tag, Lightbulb, CheckCircle2 } from 'lucide-vue-next'
 import PageHero from '@/components/templates/PageHero.vue'
+import SEOHead from '@/components/common/SEOHead.vue'
+import { personStructuredData } from '@/utils/structuredData'
 
 const skillStore = useSkillStore()
 const { staggerIn } = useGSAPAnimations()

@@ -1,5 +1,14 @@
 <template>
-  <div class="blog-detail-page">
+  <div class="pt-16 min-h-screen" style="background-color: var(--bg-primary)">
+    <SEOHead
+      :title="post?.title || '文章详情'"
+      :description="post?.excerpt || ''"
+      type="article"
+      :publish-date="post?.publishedAt"
+      :modified-date="post?.updatedAt"
+      :tags="post?.tags"
+      :structured-data="post ? blogPostStructuredData(post) : undefined"
+    />
     <!-- 加载状态 -->
     <div v-if="loading" class="blog-detail-page__loading">
       <div class="skeleton skeleton--header"></div>
@@ -34,6 +43,8 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
 import BlogDetail from '@/components/blog/BlogDetail.vue'
+import SEOHead from '@/components/common/SEOHead.vue'
+import { blogPostStructuredData } from '@/utils/structuredData'
 
 const route = useRoute()
 const blogStore = useBlogStore()

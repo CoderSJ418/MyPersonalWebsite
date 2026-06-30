@@ -1,7 +1,8 @@
 <template>
   <div
-    class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+    class="pt-16 min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
   >
+    <SEOHead title="404" description="页面未找到" />
     <div class="text-center">
       <h1 class="text-9xl font-bold text-primary-600 dark:text-primary-400 mb-4">404</h1>
       <p class="text-2xl text-gray-700 dark:text-gray-300 mb-8">页面未找到</p>
@@ -14,3 +15,7 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import SEOHead from '@/components/common/SEOHead.vue'
+</script>
