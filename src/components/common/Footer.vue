@@ -96,6 +96,7 @@
 import { computed } from 'vue'
 import { useContactInfoStore } from '@/stores/useContactInfoStore'
 import { Mail, MapPin, Zap, Palette, Monitor } from 'lucide-vue-next'
+import SocialLinks from './SocialLinks.vue'
 
 const contactStore = useContactInfoStore()
 const currentYear = computed(() => new Date().getFullYear())
