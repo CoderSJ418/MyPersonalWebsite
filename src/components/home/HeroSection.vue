@@ -168,7 +168,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: transparent;
+  background: #0a0a1a;
   padding: var(--us-space-24) var(--us-space-6) var(--us-space-20);
   /* Entry animation handled by GSAP heroEntrance — no CSS transition needed */
 }
@@ -233,6 +233,82 @@ onUnmounted(() => {
 
 .hero--entered .hero__grid-overlay {
   opacity: 1;
+}
+
+/* ═══ Stripe Aurora Gradient Ribbons (CSS-only) ═══ */
+.hero--gradient-active::before,
+.hero--gradient-active::after {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.hero--gradient-active::before {
+  background:
+    radial-gradient(ellipse 60% 80% at 25% 30%, #ef008f 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 75% 70%, #7038ff 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 50% 50%, #6ec3f4 0%, transparent 50%);
+  filter: blur(80px);
+  opacity: 0.7;
+  animation: aurora-drift-1 18s ease-in-out infinite;
+}
+
+.hero--gradient-active::after {
+  background:
+    radial-gradient(ellipse 55% 65% at 65% 25%, #6ec3f4 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 35% 75%, #ef008f 0%, transparent 50%);
+  filter: blur(100px);
+  opacity: 0.6;
+  animation: aurora-drift-2 24s ease-in-out infinite;
+}
+
+.hero--gradient-active .hero__glow {
+  filter: blur(40px);
+  opacity: 0.4;
+  animation: aurora-drift-3 30s ease-in-out infinite;
+}
+
+.hero--gradient-active .hero__panel {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+:root.dark .hero--gradient-active .hero__panel {
+  background: rgba(15, 15, 24, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(8%, -5%) rotate(3deg) scale(1.08); }
+  40% { transform: translate(-4%, 8%) rotate(-2deg) scale(0.94); }
+  60% { transform: translate(-6%, -3%) rotate(1deg) scale(1.04); }
+  80% { transform: translate(4%, 4%) rotate(-1deg) scale(0.97); }
+}
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(-6%, 4%) rotate(-2deg) scale(1.05); }
+  50% { transform: translate(5%, -6%) rotate(3deg) scale(0.95); }
+  75% { transform: translate(3%, 2%) rotate(-1deg) scale(1.03); }
+}
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(3%, -4%) scale(1.1); }
+  66% { transform: translate(-4%, 3%) scale(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--gradient-active::before,
+  .hero--gradient-active::after,
+  .hero--gradient-active .hero__glow {
+    animation: none !important;
+  }
 }
 
 /* ── Bottom Fade ── */
