@@ -82,9 +82,9 @@ const gradientCanvasRef = ref<HTMLCanvasElement | null>(null)
 
 // Stripe-style WebGL gradient mesh background — Vertex displacement + WaveLayer color mixing
 useStripeGradient(heroRef, gradientCanvasRef, {
-  amp: 320,
-  seed: 5,
-  density: [0.06, 0.16],
+  accentColor: '#ef008f',
+  secondaryColor: '#6ec3f4',
+  tertiaryColor: '#7038ff',
   darkenTop: true,
 })
 
