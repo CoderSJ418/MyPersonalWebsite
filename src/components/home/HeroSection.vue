@@ -1,17 +1,13 @@
 <template>
   <!-- ═══════════════════════════════════════════════════════════
-       HERO — Stripe-Accurate v11.0
+       HERO — Stripe-Accurate v13.0
        ═══════════════════════════════════════════════════════════
-       Stripe hero pattern:
-       - White background with WebGL gradient mesh
-       - Large headline with three-layer blend mode
-       - Single line subtitle (no description paragraph)
-       - Single primary CTA
-       - NO metrics cards, NO glass panel, NO secondary button
-       - Content centered, generous spacing
+       - Canvas = full hero (gradient fills entire viewport)
+       - Content = 1216px baseline container centered
+       - Content overlaid on top of the gradient
        ═══════════════════════════════════════════════════════════ -->
   <section ref="heroRef" class="hero">
-    <!-- Stripe WebGL gradient mesh -->
+    <!-- Stripe WebGL gradient mesh — full hero -->
     <canvas
       id="stripe-gradient-canvas"
       ref="gradientCanvasRef"
@@ -19,7 +15,7 @@
       aria-hidden="true"
     ></canvas>
 
-    <!-- Content — minimal, centered, no glass panel -->
+    <!-- Content — 1216px baseline container, centered -->
     <div class="hero__content">
       <div class="hero__text-wrapper">
         <h1 class="hero__name hero__name--top">佘杰</h1>
@@ -46,13 +42,11 @@
 
 <script setup lang="ts">
 /**
- * HeroSection — Stripe-Accurate v11.0
+ * HeroSection — Stripe-Accurate v13.0
  *
- * Stripe hero pattern:
- * - Headline + subtitle + single CTA
- * - No metrics cards, no secondary button
+ * - Canvas = full hero (gradient fills entire viewport)
+ * - Content = 1216px baseline container, centered
  * - Three-layer text blend mode
- * - whatamesh WebGL gradient
  */
 
 import { ref, onMounted, onUnmounted } from 'vue'
@@ -95,24 +89,26 @@ onUnmounted(() => {
 
 <style scoped>
 /* ============================================
-   HERO — Stripe-Accurate v11.0
+   HERO — Stripe-Accurate v13.0
    ═════════════════════════════════════════
-   Minimal hero: headline + subtitle + CTA
-   No cards, no secondary button, no glass panel
+   - Canvas = full hero (gradient fills viewport)
+   - Content = 1216px baseline container
+   - Minimal: headline + subtitle + CTA
    ============================================ */
 
 .hero {
   position: relative;
+  width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   background: #fafafa;
-  padding: var(--us-space-24) var(--us-space-6) var(--us-space-20);
+  overflow: hidden;
 }
 
+/* ── Canvas = full hero ── */
 .hero__mesh-canvas {
   position: absolute;
   inset: 0;
@@ -122,12 +118,14 @@ onUnmounted(() => {
   z-index: 0;
 }
 
+/* ── Content — 1216px baseline, centered ── */
 .hero__content {
   position: relative;
   z-index: 10;
-  max-width: 800px;
   width: 100%;
+  max-width: 1216px;
   margin: 0 auto;
+  padding: 0 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -142,7 +140,7 @@ onUnmounted(() => {
 }
 
 .hero__name--top {
-  font-size: clamp(64px, 10vw, 96px);
+  font-size: clamp(64px, 8vw, 96px);
   font-weight: 700;
   line-height: var(--leading-none);
   letter-spacing: -0.04em;
@@ -153,7 +151,7 @@ onUnmounted(() => {
 }
 
 .hero__name--blended {
-  font-size: clamp(64px, 10vw, 96px);
+  font-size: clamp(64px, 8vw, 96px);
   font-weight: 700;
   line-height: var(--leading-none);
   letter-spacing: -0.04em;
@@ -169,7 +167,7 @@ onUnmounted(() => {
 }
 
 .hero__name--overlay {
-  font-size: clamp(64px, 10vw, 96px);
+  font-size: clamp(64px, 8vw, 96px);
   font-weight: 700;
   line-height: var(--leading-none);
   letter-spacing: -0.04em;
@@ -202,9 +200,9 @@ onUnmounted(() => {
   margin-bottom: var(--us-space-6);
 }
 
-/* ── Subtitle (role line) ── */
+/* ── Subtitle ── */
 .hero__subtitle {
-  font-size: clamp(18px, 2.5vw, 22px);
+  font-size: clamp(18px, 2.2vw, 22px);
   font-weight: 500;
   line-height: var(--leading-normal);
   margin: 0 0 var(--us-space-4) 0;
@@ -218,11 +216,11 @@ onUnmounted(() => {
 
 /* ── Positioning ── */
 .hero__positioning {
-  font-size: clamp(16px, 1.8vw, 18px);
+  font-size: clamp(15px, 1.6vw, 17px);
   font-weight: 400;
   line-height: var(--leading-relaxed);
   color: #6b7280;
-  max-width: 560px;
+  max-width: 520px;
   margin: 0 0 var(--us-space-10) 0;
 }
 
@@ -241,11 +239,8 @@ onUnmounted(() => {
    Responsive
    ============================================ */
 @media (max-width: 768px) {
-  .hero {
-    padding: var(--us-space-20) var(--us-space-4) var(--us-space-16);
-  }
-
   .hero__content {
+    padding: 0 24px;
     padding-top: var(--us-space-12);
   }
 
