@@ -14,7 +14,7 @@
 
       <!-- 技术栈网格 -->
       <div ref="gridRef" class="ts__grid">
-        <div v-for="(tech, index) in techStack" :key="tech.name" class="ts__card stripe-card stripe-border stripe-border--blue" :data-index="index" v-spotlight="{ color: '37,99,235', radius: 400 }">
+        <div v-for="(tech, index) in techStack" :key="tech.name" v-spotlight="{ color: '37,99,235', radius: 400 }" class="ts__card stripe-card stripe-border stripe-border--blue" :data-index="index">
           <!-- 图标背景装饰 - 渐变光晕 -->
           <div class="ts__card__glow" aria-hidden="true"></div>
 

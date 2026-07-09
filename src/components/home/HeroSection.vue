@@ -1,76 +1,75 @@
 <template>
   <!-- ═══════════════════════════════════════════════════════════
-       HERO — Content-Focused v9.0
+       HERO — Stripe-Accurate v10.0
        ═══════════════════════════════════════════════════════════
-       "我是谁" — 单焦点，内容优先，极少动效
-       
-       Structure: hero > subtle-glow + content > panel
-       - Subtle accent glow (single, static)
-       - Name = primary focus
-       - Metrics / Role / Actions / Social = supporting info
+       White background, WebGL gradient mesh (whatamesh),
+       three-layer text with mix-blend-mode: color-burn.
+       No glass panel — text sits directly on the gradient.
        ═══════════════════════════════════════════════════════════ -->
   <section ref="heroRef" class="hero">
-    <!-- Stripe-style gradient mesh canvas background -->
-    <canvas ref="gradientCanvasRef" class="hero__mesh-canvas" aria-hidden="true"></canvas>
-    <!-- Stripe-style grid overlay — subtle line pattern -->
-    <div class="hero__grid-overlay" aria-hidden="true"></div>
-    <!-- Ambient glow (kept for fallback / depth layering) -->
-    <div class="hero__glow" aria-hidden="true"></div>
+    <!-- Stripe-style WebGL gradient mesh canvas -->
+    <canvas
+      id="stripe-gradient-canvas"
+      ref="gradientCanvasRef"
+      class="hero__mesh-canvas"
+      aria-hidden="true"
+    ></canvas>
 
-    <!-- Content — flat, no z-layers -->
+    <!-- Content — flat on white, no glass panel -->
     <div class="hero__content">
-      <div ref="panelRef" class="hero__panel">
-        <h1 class="hero__name stripe-text-gradient">佘杰</h1>
-        <div class="hero__name-accent" aria-hidden="true"></div>
+      <!-- Three-layer text system for Stripe blend effect -->
+      <div class="hero__text-wrapper">
+        <h1 class="hero__name hero__name--top">佘杰</h1>
+        <h1 class="hero__name hero__name--blended" aria-hidden="true">佘杰</h1>
+        <h1 class="hero__name hero__name--overlay" aria-hidden="true">佘杰</h1>
+      </div>
 
-        <div class="hero__metrics">
-          <div class="metric stripe-glow">
-            <div class="metric__value">
-              <span data-count-up="7">0</span><span class="metric__suffix">+</span>
-            </div>
-            <div class="metric__label">Years</div>
+      <div class="hero__name-accent" aria-hidden="true"></div>
+
+      <div class="hero__metrics">
+        <div class="metric">
+          <div class="metric__value">
+            <span data-count-up="7">0</span><span class="metric__suffix">+</span>
           </div>
-          <div class="metric stripe-glow">
-            <div class="metric__value">
-              <span data-count-up="50">0</span><span class="metric__suffix">+</span>
-            </div>
-            <div class="metric__label">Projects</div>
-          </div>
-          <div class="metric stripe-glow">
-            <div class="metric__value">
-              <span data-count-up="10">0</span><span class="metric__suffix">+</span>
-            </div>
-            <div class="metric__label">Team Size</div>
-          </div>
+          <div class="metric__label">Years</div>
         </div>
-
-        <div class="hero__role stripe-text-gradient">Vue Expert · Frontend Architect</div>
-
-        <p class="hero__positioning">
-          专注高性能前端架构，从0到1构建可规模化工程体系
-        </p>
-        <div class="hero__actions">
-          <CTA href="/projects" variant="primary" size="large" label="查看作品集">查看作品</CTA>
-          <CTA href="mailto:912999051@qq.com" variant="outline" size="large" label="联系我">联系我</CTA>
+        <div class="metric">
+          <div class="metric__value">
+            <span data-count-up="50">0</span><span class="metric__suffix">+</span>
+          </div>
+          <div class="metric__label">Projects</div>
+        </div>
+        <div class="metric">
+          <div class="metric__value">
+            <span data-count-up="10">0</span><span class="metric__suffix">+</span>
+          </div>
+          <div class="metric__label">Team Size</div>
         </div>
       </div>
-    </div>
 
-    <!-- Bottom Fade -->
-    <div class="hero__fade" aria-hidden="true"></div>
+      <div class="hero__role">Vue Expert · Frontend Architect</div>
+
+      <p class="hero__positioning">
+        专注高性能前端架构，从0到1构建可规模化工程体系
+      </p>
+      <div class="hero__actions">
+        <CTA href="/projects" variant="primary" size="large" label="查看作品集">查看作品</CTA>
+        <CTA href="mailto:912999051@qq.com" variant="outline" size="large" label="联系我">联系我</CTA>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 /**
- * HeroSection — Content-Focused v9.0 + Stripe Motion
+ * HeroSection — Stripe-Accurate v10.0
  *
- * Stripe-level entrance choreography:
- * - GSAP timeline: name → metrics → role → positioning → actions → social
- * - Canvas gradient mesh background
- * - Count-up animation for metrics
- * - Spring-like micro-interactions
+ * - whatamesh WebGL gradient (Stripe's MiniGL)
+ * - Three-layer text with mix-blend-mode: color-burn
+ * - White background, no glass panel
+ * - GSAP choreographed entrance
  */
+
 import { ref, onMounted, onUnmounted } from 'vue'
 import CTA from '@/components/ui/CTA.vue'
 import { gsap } from 'gsap'
@@ -80,13 +79,8 @@ import { useStripeScrollAnimation } from '@/composables/useStripeScrollAnimation
 const heroRef = ref<HTMLElement | null>(null)
 const gradientCanvasRef = ref<HTMLCanvasElement | null>(null)
 
-// Stripe-style WebGL gradient mesh background — Vertex displacement + WaveLayer color mixing
-useStripeGradient(heroRef, gradientCanvasRef, {
-  accentColor: '#ef008f',
-  secondaryColor: '#6ec3f4',
-  tertiaryColor: '#7038ff',
-  darkenTop: true,
-})
+// Stripe-accurate WebGL gradient mesh via whatamesh
+useStripeGradient(heroRef, gradientCanvasRef)
 
 // Stripe-level GSAP scroll animation system
 const { heroEntrance, cleanup } = useStripeScrollAnimation()
@@ -117,7 +111,6 @@ const animateCountUp = () => {
 
 /** Entry — GSAP choreographed entrance */
 const triggerEntry = () => {
-  // Animate the hero container itself (GSAP takes over from CSS default opacity:0)
   if (heroRef.value) {
     gsap.to(heroRef.value, {
       opacity: 1,
@@ -125,9 +118,8 @@ const triggerEntry = () => {
       ease: 'power2.out',
     })
   }
-  // GSAP handles the choreographed entrance of all hero elements
   heroEntrance(heroRef, {
-    name: '.hero__name',
+    name: '.hero__name--top',
     metrics: '.metric',
     role: '.hero__role',
     positioning: '.hero__positioning',
@@ -137,7 +129,6 @@ const triggerEntry = () => {
 
 onMounted(() => {
   triggerEntry()
-  // Count-up starts after metrics have faded in (GSAP timeline delay ~0.6s + 0.6s duration)
   setTimeout(animateCountUp, 1200)
 })
 
@@ -148,29 +139,23 @@ onUnmounted(() => {
 
 <style scoped>
 /* ============================================
-   HERO — Content-Focused v9.0
-   ─────────────────────────────────────────
-   "我是谁" — 单焦点，内容优先，极少动效
-   - 单一微光 (hero__glow)
-   - 名字 = 主焦点 (渐变文字 + 单drop-shadow)
-   - 卡片hover = translateY + shadow elevation
-   - 无tilt/spring/3D/perspective/clip-path
+   HERO — Stripe-Accurate v10.0
+   ═════════════════════════════════════════
+   White background, WebGL gradient mesh,
+   three-layer text blend mode, no glass panel
    ============================================ */
 
 /* ── Hero Root ── */
 .hero {
   position: relative;
   min-height: 100vh;
-  /* fallback for older browsers */
   min-height: 100dvh;
-  /* dynamic viewport height for mobile */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #0a0a1a;
+  background: #fafafa;
   padding: var(--us-space-24) var(--us-space-6) var(--us-space-20);
-  /* Entry animation handled by GSAP heroEntrance — no CSS transition needed */
 }
 
 /* ── Gradient Mesh Canvas ── */
@@ -181,217 +166,94 @@ onUnmounted(() => {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  /* Stripe gradient colors — magenta/cyan/purple/gold (authentic Stripe palette) */
-  --gradient-color-1: #ef008f;
-  --gradient-color-2: #6ec3f4;
-  --gradient-color-3: #7038ff;
-  --gradient-color-4: #ffba27;
-}
-
-/* Dark mode — same authentic Stripe palette, slightly richer */
-.dark .hero__mesh-canvas {
-  --gradient-color-1: #ef008f;
-  --gradient-color-2: #6ec3f4;
-  --gradient-color-3: #7038ff;
-  --gradient-color-4: #ffba27;
-}
-
-/* ── Ambient Glow ── */
-.hero__glow {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center,
-      var(--us-accent-subtle) 0%,
-      transparent 70%);
-  opacity: 0.4;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Stripe-style Grid Overlay — subtle line pattern ── */
-.hero__grid-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 2s ease-out;
-  /* Grid lines — horizontal + vertical */
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  /* Radial fade — center visible, edges fade out */
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
-}
-
-.hero--entered .hero__grid-overlay {
-  opacity: 1;
-}
-
-/* ═══ Stripe Aurora Gradient Ribbons (CSS-only) ═══ */
-.hero--gradient-active::before,
-.hero--gradient-active::after {
-  content: '';
-  position: absolute;
-  inset: -30%;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-}
-
-.hero--gradient-active::before {
-  background:
-    radial-gradient(ellipse 60% 80% at 25% 30%, #ef008f 0%, transparent 50%),
-    radial-gradient(ellipse 50% 70% at 75% 70%, #7038ff 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 50% 50%, #6ec3f4 0%, transparent 50%);
-  filter: blur(80px);
-  opacity: 0.7;
-  animation: aurora-drift-1 18s ease-in-out infinite;
-}
-
-.hero--gradient-active::after {
-  background:
-    radial-gradient(ellipse 55% 65% at 65% 25%, #6ec3f4 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 35% 75%, #ef008f 0%, transparent 50%);
-  filter: blur(100px);
-  opacity: 0.6;
-  animation: aurora-drift-2 24s ease-in-out infinite;
-}
-
-.hero--gradient-active .hero__glow {
-  filter: blur(40px);
-  opacity: 0.4;
-  animation: aurora-drift-3 30s ease-in-out infinite;
-}
-
-.hero--gradient-active .hero__panel {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-:root.dark .hero--gradient-active .hero__panel {
-  background: rgba(15, 15, 24, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-color: rgba(255, 255, 255, 0.10);
-}
-
-@keyframes aurora-drift-1 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  20% { transform: translate(8%, -5%) rotate(3deg) scale(1.08); }
-  40% { transform: translate(-4%, 8%) rotate(-2deg) scale(0.94); }
-  60% { transform: translate(-6%, -3%) rotate(1deg) scale(1.04); }
-  80% { transform: translate(4%, 4%) rotate(-1deg) scale(0.97); }
-}
-@keyframes aurora-drift-2 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  25% { transform: translate(-6%, 4%) rotate(-2deg) scale(1.05); }
-  50% { transform: translate(5%, -6%) rotate(3deg) scale(0.95); }
-  75% { transform: translate(3%, 2%) rotate(-1deg) scale(1.03); }
-}
-@keyframes aurora-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(3%, -4%) scale(1.1); }
-  66% { transform: translate(-4%, 3%) scale(0.9); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero--gradient-active::before,
-  .hero--gradient-active::after,
-  .hero--gradient-active .hero__glow {
-    animation: none !important;
-  }
-}
-
-/* ── Bottom Fade ── */
-.hero__fade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(to bottom, transparent 0%, var(--us-bg-end) 100%);
-  pointer-events: none;
-  z-index: var(--z-sticky);
 }
 
 /* ── Content Container ── */
 .hero__content {
   position: relative;
-  z-index: var(--z-sticky);
+  z-index: 10;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 
-/* ── Glass Panel ── */
-.hero__panel {
+/* ═══ Three-Layer Text System ═══ */
+.hero__text-wrapper {
   position: relative;
-  padding: var(--us-hero-padding);
-  border-radius: var(--radius-xl);
-  background: var(--us-glass-bg);
-  border: 1px solid var(--us-glass-border);
-  box-shadow: var(--us-depth-2);
-  max-width: min(var(--measure-relaxed), 860px);
-  width: 100%;
-  transition:
-    transform var(--us-duration-slow) var(--us-easing),
-    box-shadow var(--us-duration-slow) var(--us-easing),
-    border-color var(--us-duration-slow) var(--us-easing);
+  line-height: 0;
 }
 
-.hero__panel:hover {
-  transform: translateY(var(--us-lift-lg));
-  box-shadow: var(--us-depth-3);
-  border-color: var(--us-accent-border);
-}
-
-/* Dark mode: accent glow on panel hover */
-:root.dark .hero__panel:hover {
-  box-shadow: var(--us-depth-3), var(--us-accent-glow);
-}
-
-/* Dark mode — dark glass panel so white text is readable */
-:root.dark .hero__panel {
-  background: rgba(15, 15, 24, 0.85);
-  border-color: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(20px);
-}
-
-/* ── Name — Primary Focus ── */
-.hero__name {
+/* Layer 1: Normal text on top */
+.hero__name--top {
   font-size: clamp(56px, 9vw, 80px);
   font-weight: 600;
   line-height: var(--leading-none);
   letter-spacing: -0.03em;
   margin: 0 0 var(--us-space-2) 0;
-  color: var(--us-text-primary);
+  color: #1a1a2e;
+  position: relative;
+  z-index: 3;
 }
 
-/* ── Name Accent Line — decorative bar below name ── */
+/* Layer 2: color-burn blend layer — text color interacts with gradient behind */
+.hero__name--blended {
+  font-size: clamp(56px, 9vw, 80px);
+  font-weight: 600;
+  line-height: var(--leading-none);
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--us-space-2) 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #3a3a3a;
+  mix-blend-mode: color-burn;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Layer 3: overlay — subtle opacity boost for readability */
+.hero__name--overlay {
+  font-size: clamp(56px, 9vw, 80px);
+  font-weight: 600;
+  line-height: var(--leading-none);
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--us-space-2) 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #3a3a3a;
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Dark mode text colors */
+.dark .hero {
+  background: #0a0a1a;
+}
+
+.dark .hero__name--top {
+  color: #ffffff;
+}
+
+.dark .hero__name--blended {
+  color: #6a6a7a;
+}
+
+/* ── Name Accent Line ── */
 .hero__name-accent {
   width: 60px;
   height: 3px;
-  background: var(--us-accent);
+  background: linear-gradient(90deg, #ef008f, #7038ff);
   border-radius: 2px;
   margin-top: var(--us-space-2);
   margin-bottom: var(--us-space-4);
-  transition: width 0.6s var(--us-easing-enter);
-}
-
-.hero--entered .hero__name-accent {
-  width: 80px;
 }
 
 /* ── Metrics ── */
@@ -406,21 +268,19 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   padding: var(--us-space-3) var(--us-space-4);
-  border-radius: var(--us-card-radius);
-  background: var(--us-surface);
-  border: 1px solid var(--us-border);
-  box-shadow: var(--us-depth-1);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition:
     transform var(--us-duration-normal) var(--us-easing-enter),
-    box-shadow var(--us-duration-normal) var(--us-easing-enter),
-    border-color var(--us-duration-normal) var(--us-easing-enter);
+    box-shadow var(--us-duration-normal) var(--us-easing-enter);
   cursor: default;
 }
 
 .metric:hover {
-  transform: translateY(var(--us-lift-md));
-  box-shadow: var(--us-depth-1-hover);
-  border-color: var(--us-accent-border);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .metric__value {
@@ -428,7 +288,7 @@ onUnmounted(() => {
   font-weight: 700;
   font-size: 2rem;
   line-height: var(--leading-none);
-  color: var(--us-accent);
+  color: #7038ff;
   margin-bottom: var(--us-space-1);
 }
 
@@ -437,7 +297,7 @@ onUnmounted(() => {
   font-weight: 600;
   font-size: var(--text-xl);
   line-height: var(--leading-none);
-  color: var(--us-accent);
+  color: #7038ff;
   opacity: 0.7;
 }
 
@@ -445,11 +305,29 @@ onUnmounted(() => {
   font-size: var(--text-xs);
   font-weight: 600;
   line-height: var(--leading-none);
-  color: var(--us-text-tertiary);
+  color: #6b7280;
   letter-spacing: 0.02em;
 }
 
-/* ── Role — gradient text only, no pill decoration ── */
+/* Dark mode metrics */
+.dark .metric {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .metric__value {
+  color: #a78bfa;
+}
+
+.dark .metric__suffix {
+  color: #a78bfa;
+}
+
+.dark .metric__label {
+  color: #9ca3af;
+}
+
+/* ── Role ── */
 .hero__role {
   display: inline-block;
   font-size: 18px;
@@ -457,6 +335,11 @@ onUnmounted(() => {
   line-height: var(--leading-normal);
   margin: 0 0 var(--us-space-8) 0;
   letter-spacing: 0.06em;
+  color: #4b5563;
+}
+
+.dark .hero__role {
+  color: #d1d5db;
 }
 
 /* ── Positioning ── */
@@ -464,10 +347,14 @@ onUnmounted(() => {
   font-size: var(--text-lg);
   font-weight: 400;
   line-height: var(--leading-relaxed);
-  color: var(--us-text-secondary);
+  color: #4b5563;
   max-width: 540px;
   margin: 0 0 var(--us-space-8) 0;
   letter-spacing: -0.01em;
+}
+
+.dark .hero__positioning {
+  color: #9ca3af;
 }
 
 /* ── Actions ── */
@@ -477,9 +364,6 @@ onUnmounted(() => {
   margin-bottom: var(--us-space-8);
 }
 
-/* ── GSAP entrance — initial states set by JS, no CSS vs-reveal needed ── */
-/* GSAP sets opacity:0 and y:offset on mount, then animates to visible */
-
 /* ============================================
    Responsive
    ============================================ */
@@ -488,21 +372,10 @@ onUnmounted(() => {
     padding: var(--us-space-24) var(--us-space-4) var(--us-space-16);
   }
 
-  .hero__panel {
-    padding: var(--us-space-10) var(--us-space-6);
-    border-radius: var(--radius-xl);
-  }
-
-  .hero__name {
+  .hero__name--top,
+  .hero__name--blended,
+  .hero__name--overlay {
     font-size: var(--text-5xl);
-  }
-
-  .hero__name-accent {
-    width: 50px;
-  }
-
-  .hero--entered .hero__name-accent {
-    width: 60px;
   }
 
   .hero__metrics {
@@ -511,7 +384,6 @@ onUnmounted(() => {
 
   .metric {
     padding: var(--us-space-3) var(--us-space-4);
-    border-radius: var(--radius-lg);
   }
 
   .metric__value {
@@ -526,24 +398,13 @@ onUnmounted(() => {
     flex-direction: column;
     gap: var(--us-space-3);
   }
-
-  .hero__glow {
-    width: 500px;
-    height: 350px;
-  }
 }
 
 @media (max-width: 480px) {
-  .hero__name {
+  .hero__name--top,
+  .hero__name--blended,
+  .hero__name--overlay {
     font-size: var(--text-4xl);
-  }
-
-  .hero__name-accent {
-    width: 40px;
-  }
-
-  .hero--entered .hero__name-accent {
-    width: 50px;
   }
 
   .hero__metrics {
@@ -558,11 +419,6 @@ onUnmounted(() => {
 
   .metric__value {
     font-size: 1.25rem;
-  }
-
-  .hero__glow {
-    width: 350px;
-    height: 250px;
   }
 }
 
@@ -580,37 +436,22 @@ onUnmounted(() => {
     display: none !important;
   }
 
-  .hero__name {
-    filter: none;
+  .hero__name--blended {
+    mix-blend-mode: normal;
+    opacity: 1;
+  }
+
+  .hero__name--overlay {
+    display: none;
   }
 
   .hero__name-accent {
-    width: 80px !important;
+    width: 60px !important;
     transition: none !important;
-  }
-
-  .hero__panel {
-    transition: none !important;
-  }
-
-  .hero__panel:hover {
-    transform: none;
   }
 
   .metric:hover {
     transform: none;
-  }
-
-  /* GSAP-animated elements: force visible */
-  .hero__name,
-  .metric,
-  .hero__role,
-  .hero__positioning,
-  .hero__actions,
-  .hero__social {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
   }
 }
 </style>
