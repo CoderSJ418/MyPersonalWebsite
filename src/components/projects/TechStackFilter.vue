@@ -38,19 +38,15 @@ const clearFilters = () => {
       <h3 class="tech-stack-filter__title">分类</h3>
       <div class="tech-stack-filter__categories">
         <button
-          class="tech-stack-filter__category-btn"
+class="tech-stack-filter__category-btn"
           :class="{ 'tech-stack-filter__category-btn--active': selectedCategory === null }"
-          @click="handleCategoryClick(null)"
-        >
+          @click="handleCategoryClick(null)">
           全部
         </button>
         <button
-          v-for="category in categories"
-          :key="category"
-          class="tech-stack-filter__category-btn"
+v-for="category in categories" :key="category" class="tech-stack-filter__category-btn"
           :class="{ 'tech-stack-filter__category-btn--active': selectedCategory === category }"
-          @click="handleCategoryClick(category)"
-        >
+          @click="handleCategoryClick(category)">
           {{ category }}
         </button>
       </div>
@@ -60,22 +56,17 @@ const clearFilters = () => {
       <h3 class="tech-stack-filter__title">技术栈</h3>
       <div class="tech-stack-filter__tech-stacks">
         <button
-          v-for="techStack in allTechStacks"
-          :key="techStack"
-          class="tech-stack-filter__tech-btn"
+v-for="techStack in allTechStacks" :key="techStack" class="tech-stack-filter__tech-btn"
           :class="{ 'tech-stack-filter__tech-btn--active': selectedTechStacks.includes(techStack) }"
-          @click="handleTechStackToggle(techStack)"
-        >
+          @click="handleTechStackToggle(techStack)">
           {{ techStack }}
         </button>
       </div>
     </div>
 
     <button
-      v-if="selectedCategory || selectedTechStacks.length > 0"
-      class="tech-stack-filter__clear"
-      @click="clearFilters"
-    >
+v-if="selectedCategory || selectedTechStacks.length > 0" class="tech-stack-filter__clear"
+      @click="clearFilters">
       清除筛选
     </button>
   </div>
@@ -85,7 +76,13 @@ const clearFilters = () => {
 .tech-stack-filter {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--us-space-6);
+}
+
+@media (min-width: 768px) {
+  .tech-stack-filter {
+    gap: var(--us-space-8);
+  }
 }
 
 .tech-stack-filter__section {
@@ -93,105 +90,87 @@ const clearFilters = () => {
 }
 
 .tech-stack-filter__title {
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
+  margin: 0 0 var(--us-space-4) 0;
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--us-text-primary);
+}
+
+@media (min-width: 768px) {
+  .tech-stack-filter__title {
+    font-size: 1rem;
+  }
 }
 
 .tech-stack-filter__categories,
 .tech-stack-filter__tech-stacks {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--us-space-2);
 }
 
 .tech-stack-filter__category-btn,
 .tech-stack-filter__tech-btn {
-  padding: 0.5rem 1rem;
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-secondary);
-  font-size: 0.875rem;
+  padding: var(--us-space-2) var(--us-space-4);
+  background-color: var(--us-surface);
+  color: var(--us-text-secondary);
+  font-size: 0.8125rem;
   font-weight: 500;
-  border: 1px solid var(--color-border);
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-md);
+  transition: color, background-color, border-color, opacity var(--us-duration-fast) var(--us-easing);
 }
 
-.tech-stack-filter__category-btn:hover,
+@media (min-width: 768px) {
+
+  .tech-stack-filter__category-btn,
+  .tech-stack-filter__tech-btn {
+    padding: var(--us-space-2) var(--us-space-4);
+    font-size: 0.875rem;
+  }
+}
+
 .tech-stack-filter__tech-btn:hover {
-  background-color: var(--color-bg-tertiary);
-  color: var(--color-text-primary);
-  border-color: var(--color-primary);
+  background-color: var(--us-surface-hover);
+  color: var(--us-text-primary);
+  border-color: var(--us-accent);
 }
 
 .tech-stack-filter__category-btn--active,
 .tech-stack-filter__tech-btn--active {
-  background-color: var(--primary-500);
-  color: white;
-  border-color: var(--primary-500);
+  background-color: var(--us-accent-subtle);
+  color: var(--us-accent);
+  border-color: var(--us-accent-border);
 }
 
 .tech-stack-filter__category-btn--active:hover,
 .tech-stack-filter__tech-btn--active:hover {
-  background-color: var(--primary-600);
-  color: white;
-  border-color: var(--primary-600);
-}
-
-.dark .tech-stack-filter__category-btn--active,
-.dark .tech-stack-filter__tech-btn--active {
-  background-color: var(--primary-400);
-  color: #0D0D0D;
-  border-color: var(--primary-400);
-}
-
-.dark .tech-stack-filter__category-btn--active:hover,
-.dark .tech-stack-filter__tech-btn--active:hover {
-  background-color: var(--primary-500);
-  color: white;
-  border-color: var(--primary-500);
+  background-color: var(--us-accent-border);
+  color: var(--us-accent);
+  border-color: var(--us-accent);
 }
 
 .tech-stack-filter__clear {
-  padding: 0.5rem 1rem;
+  padding: var(--us-space-2) var(--us-space-4);
   background-color: transparent;
-  color: var(--color-text-secondary);
-  font-size: 0.875rem;
+  color: var(--us-text-secondary);
+  font-size: 0.8125rem;
   font-weight: 500;
-  border: 1px solid var(--color-border);
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  align-self: flex-start;
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-md);
+  transition: color, background-color, border-color, opacity var(--us-duration-fast) var(--us-easing);
+}
+
+@media (min-width: 768px) {
+  .tech-stack-filter__clear {
+    padding: var(--us-space-2) var(--us-space-4);
+    font-size: 0.875rem;
+  }
 }
 
 .tech-stack-filter__clear:hover {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-primary);
-  border-color: var(--color-primary);
-}
-
-/* 响应式 */
-@media (max-width: 768px) {
-  .tech-stack-filter {
-    gap: 1.5rem;
-  }
-
-  .tech-stack-filter__title {
-    font-size: 0.9375rem;
-  }
-
-  .tech-stack-filter__category-btn,
-  .tech-stack-filter__tech-btn {
-    font-size: 0.8125rem;
-    padding: 0.4375rem 0.875rem;
-  }
-
-  .tech-stack-filter__clear {
-    font-size: 0.8125rem;
-    padding: 0.4375rem 0.875rem;
-  }
+  background-color: var(--us-surface);
+  color: var(--us-text-primary);
+  border-color: var(--us-accent);
 }
 </style>

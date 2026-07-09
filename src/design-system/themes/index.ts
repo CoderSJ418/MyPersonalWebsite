@@ -16,7 +16,7 @@ export const professionalMinimal: DesignTheme = {
 
   colors: {
     primary: '#6366F1',
-    secondary: '#8B5CF6',
+    secondary: '#6366F1',
     accent: '#EC4899',
     background: '#FFFFFF',
     surface: '#F8FAFC',
@@ -64,8 +64,8 @@ export const darkProfessional: DesignTheme = {
   trendYear: '2025',
 
   colors: {
-    primary: '#818CF8',
-    secondary: '#A78BFA',
+    primary: '#6366F1',
+    secondary: '#6366F1',
     accent: '#F472B6',
     background: '#0F172A',
     surface: '#1E293B',

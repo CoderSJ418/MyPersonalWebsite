@@ -126,7 +126,7 @@ function searchSkills(skills: Skill[], query: string): SearchResultItem[] {
       type: 'skill' as const,
       title: skill.name,
       description: skill.description || `${skill.category} - ${skill.level}级`,
-      url: `/skills#${skill.id}`,
+      url: '/#skills',
       metadata: {
         category: skill.category,
         level: skill.level

@@ -1,0 +1,298 @@
+/* ============================================
+   Unified Visual System v7.2 — VERTICAL TIMELINE
+   Clean Modern Design: rounded-xl / shadow-sm / blue-600
+   ============================================
+   GLOBAL RULES:
+   - Single visual dominance per viewport
+   - Max 2 visual effects per element
+   - NO blur filter, NO brightness, NO saturate
+   - Visual hierarchy: opacity + translateY + z-index only
+   - Hover = elevation only (translateY + shadow)
+   - Solid cards, no glassmorphism default
+   - No bounce/elastic easing
+   ============================================ */
+
+@layer base {
+   :root {
+      /* === BASE COLORS === */
+      --us-bg-start: #08080D;
+      --us-bg-end: #0F0F18;
+      --us-surface: rgba(255, 255, 255, 0.08);
+      --us-surface-hover: rgba(255, 255, 255, 0.09);
+      --us-border: rgba(255, 255, 255, 0.12);
+      --us-border-hover: rgba(255, 255, 255, 0.16);
+
+      /* === TEXT — semantic mapping ===
+         primary:   Main titles, core content, active states
+         secondary: Subtitles, descriptions, nav links, chip text
+         tertiary:  Tags, metadata, timestamps, section titles, auxiliary info
+         */
+      --us-text-primary: rgba(255, 255, 255, 0.92);
+      --us-text-secondary: rgba(255, 255, 255, 0.82);
+      --us-text-tertiary: rgba(255, 255, 255, 0.55);
+
+      /* === ACCENT — single color system === */
+      --us-accent: rgba(37, 99, 235, 1);
+      --us-accent-subtle: rgba(37, 99, 235, 0.15);
+      --us-accent-border: rgba(37, 99, 235, 0.25);
+      --us-accent-glow: 0 0 20px rgba(37, 99, 235, 0.2);
+      --us-accent-glow-strong: 0 0 30px rgba(37, 99, 235, 0.3);
+
+      /* === LIGHT SYSTEM — 方案A光感系统 === */
+      --us-light-warm: rgba(255, 200, 100, 0.08);
+      /* 暖光 — 模拟环境光 */
+      --us-light-cool: rgba(100, 150, 255, 0.06);
+      /* 冷光 — 模拟天光 */
+      --us-light-highlight: rgba(255, 255, 255, 0.1);
+      /* 高光 — 模拟直射光 */
+
+      /* === DEPTH SYSTEM — shadow-sm/md/lg 等价，克制阴影 === */
+      --us-depth-0: none;
+      --us-depth-1: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.15);
+      --us-depth-2: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+      --us-depth-3: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+
+      --us-depth-1-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+      --us-depth-2-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+      --us-depth-3-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.35), 0 8px 10px -6px rgba(0, 0, 0, 0.25);
+
+      /* === HOVER ELEVATION — 悬浮提升 === */
+      --us-lift-xs: -1px;
+      --us-lift-sm: -2px;
+      --us-lift-md: -4px;
+      --us-lift-lg: -6px;
+
+      /* === MOTION === */
+      --us-easing: cubic-bezier(0.4, 0, 0.2, 1);
+      --us-easing-enter: cubic-bezier(0.0, 0.0, 0.2, 1);
+      --us-easing-exit: cubic-bezier(0.4, 0.0, 1, 1);
+      /* ── Stripe-level motion tokens ── */
+      --us-easing-hover: cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* Spring-like hover lift */
+      --us-easing-press: cubic-bezier(0.34, 1.2, 0.64, 1);
+      /* Quick press settle */
+      --us-easing-settle: cubic-bezier(0.22, 1, 0.36, 1);
+      /* Natural settle */
+      --us-easing-overshoot: cubic-bezier(0.16, 1, 0.3, 1);
+      /* Overshoot entrance — Stripe hero */
+      --us-press-scale: 0.97;
+      /* Press/active state scale */
+      --us-duration-micro: 150ms;
+      --us-duration-fast: 180ms;
+      --us-duration-normal: 280ms;
+      --us-duration-slow: 420ms;
+      --us-duration-enter: 500ms;
+      /* ── Additional Stripe duration levels ── */
+      --us-duration-instant: 100ms;
+      --us-duration-smooth: 350ms;
+      --us-duration-lazy: 800ms;
+
+      /* === GLASS — semi-transparent dark for glass morphism === */
+      --us-glass-bg: rgba(255, 255, 255, 0.07);
+      --us-glass-border: rgba(255, 255, 255, 0.12);
+      --us-glass-blur: 8px;
+
+      /* === MATERIAL — solid风格，无blur === */
+      --us-material-solid-bg: rgba(255, 255, 255, 0.04);
+      --us-material-solid-border: rgba(255, 255, 255, 0.06);
+      --us-material-solid-blur: 0px;
+      --us-material-solid-depth: var(--us-depth-1);
+
+      --us-material-elevated-bg: rgba(255, 255, 255, 0.06);
+      --us-material-elevated-border: rgba(255, 255, 255, 0.12);
+      --us-material-elevated-blur: 12px;
+
+      /* === OVERLAY — modal/overlay backdrop layer === */
+      --us-overlay-blur: 4px;
+
+      /* === SPACING SCALE — 8px grid aligned === */
+      --us-space-1: 0.25rem;
+      /* 4px */
+      --us-space-2: 0.5rem;
+      /* 8px */
+      --us-space-3: 0.75rem;
+      /* 紧凑间距例外token: 不在4/8基准网格上，用于特定组件内间距 */
+      /* 12px — 紧凑间距例外token: 不在4/8基准网格上，用于特定组件内间距 */
+      --us-space-4: 1rem;
+      /* 16px */
+      --us-space-5: 1.25rem;
+      /* 紧凑间距例外token: 不在4/8基准网格上，用于特定组件内间距 */
+      /* 20px — 紧凑间距例外token: 不在4/8基准网格上，用于特定组件内间距 */
+      --us-space-6: 1.5rem;
+      /* 24px */
+      --us-space-8: 2rem;
+      /* 32px */
+      --us-space-10: 2.5rem;
+      /* 40px */
+      --us-space-12: 3rem;
+      /* 48px */
+      --us-space-16: 4rem;
+      /* 64px */
+      --us-space-20: 5rem;
+      /* 80px */
+      --us-space-24: 6rem;
+      /* 96px */
+      --us-space-32: 8rem;
+      /* 128px */
+
+      /* === COMPONENT SPACING — semantic tokens === */
+      --us-header-height: 4.5rem;
+      --us-page-top-offset: calc(var(--us-header-height) + var(--us-space-4));
+      --us-card-radius: 1.25rem;
+      /* 16px */
+      --us-card-padding-lg: 1.5rem;
+      /* 24px — project cards */
+      --us-card-padding-md: 1.25rem;
+      /* 20px — blog cards */
+      --us-card-padding-sm: 1rem;
+      /* 16px — blog feed */
+      --us-hero-radius: 1.75rem;
+      /* 24px */
+      --us-hero-padding: 4rem 3.5rem;
+      /* 64px 56px */
+
+      /* === HERO — minimal, content-focused === */
+      --us-hero-entry-duration: 1.2s;
+      --us-hero-entry-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* === VAG — Visual Attention Graph, opacity/translateY only === */
+      --vag-transition-duration: 0.5s;
+      --vag-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+      --vag-cluster-opacity: 0.6;
+      --vag-background-opacity: 0.35;
+   }
+
+   /* ═══════════════════════════════════════════════════════════════
+      Light Mode Overrides — :root:not(.dark)
+      所有 --us-* 变量的亮色等价值
+      暗色值定义在上方 :root 中，此处仅覆盖亮色值
+      ═══════════════════════════════════════════════════════════════ */
+   :root:not(.dark) {
+      /* === BASE COLORS — 暗色→亮色反转 === */
+      --us-bg-start: #FAFAFA;
+      --us-bg-end: #F5F5F7;
+      --us-surface: rgba(37, 99, 235, 0.03);
+      --us-surface-hover: rgba(37, 99, 235, 0.06);
+      --us-border: rgba(0, 0, 0, 0.08);
+      --us-border-hover: rgba(0, 0, 0, 0.12);
+
+      /* === TEXT — 白色半透明→黑色半透明 === */
+      --us-text-primary: rgba(0, 0, 0, 0.88);
+      --us-text-secondary: rgba(0, 0, 0, 0.72);
+      --us-text-tertiary: rgba(0, 0, 0, 0.55);
+
+      /* === ACCENT — blue-600色系，适配亮色背景 === */
+      --us-accent: rgba(37, 99, 235, 1);
+      --us-accent-subtle: rgba(37, 99, 235, 0.08);
+      --us-accent-border: rgba(37, 99, 235, 0.2);
+      --us-accent-glow: none;
+      --us-accent-glow-strong: none;
+
+      /* === LIGHT SYSTEM — 亮色环境下光效更克制 === */
+      --us-light-warm: rgba(255, 180, 80, 0.06);
+      --us-light-cool: rgba(100, 150, 255, 0.04);
+      --us-light-highlight: rgba(0, 0, 0, 0.04);
+
+      /* === DEPTH SYSTEM — 亮色环境阴影更轻柔（shadow-sm/md/lg 等价） === */
+      --us-depth-1: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+      --us-depth-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+      --us-depth-3: 0 10px 15px -3px rgba(0, 0, 0, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+
+      --us-depth-1-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+      --us-depth-2-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+      --us-depth-3-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+      /* === GLASS — 亮色solid card：纯白背景，zinc-100边框 === */
+      --us-glass-bg: #ffffff;
+      --us-glass-border: rgba(0, 0, 0, 0.06);
+
+      /* === MATERIAL — 亮色solid风格 === */
+      --us-material-solid-bg: #ffffff;
+      --us-material-solid-border: rgba(0, 0, 0, 0.06);
+      --us-material-elevated-bg: #ffffff;
+      --us-material-elevated-border: rgba(0, 0, 0, 0.06);
+
+      /* === SPACING SCALE — 8px grid aligned (same as dark) === */
+      --us-space-1: 0.25rem;
+      --us-space-2: 0.5rem;
+      --us-space-3: 0.75rem;
+      /* 紧凑间距例外token: 不在4/8基准网格上，用于特定组件内间距 */
+      --us-space-4: 1rem;
+      --us-space-5: 1.25rem;
+      /* 紧凑间距例外token: 不在4/8基准网格上，用于特定组件内间距 */
+      --us-space-6: 1.5rem;
+      --us-space-8: 2rem;
+      --us-space-10: 2.5rem;
+      --us-space-12: 3rem;
+      --us-space-16: 4rem;
+      --us-space-20: 5rem;
+      --us-space-24: 6rem;
+      --us-space-32: 8rem;
+
+      /* === COMPONENT SPACING — semantic tokens (same as dark) === */
+      --us-header-height: 4.5rem;
+      --us-page-top-offset: calc(var(--us-header-height) + var(--us-space-4));
+      --us-card-radius: 1.25rem;
+      --us-card-padding-lg: 1.5rem;
+      --us-card-padding-md: 1.25rem;
+      --us-card-padding-sm: 1rem;
+      --us-hero-radius: 1.75rem;
+      --us-hero-padding: 4rem 3.5rem;
+   }
+}
+
+
+/* ═══ Visual Attention Graph — ACTIVE / INACTIVE only ═══ */
+
+@layer components {
+   [data-attention-level="primary"] {
+      opacity: 1;
+      transform: translateY(0px);
+      z-index: var(--z-header);
+      pointer-events: auto;
+      transition:
+         opacity var(--vag-transition-duration) var(--vag-transition-easing),
+         transform var(--vag-transition-duration) var(--vag-transition-easing);
+   }
+
+   [data-attention-level="cluster"] {
+      opacity: var(--vag-cluster-opacity, 0.6);
+      transform: translateY(8px);
+      z-index: var(--z-overlay-elevated);
+      pointer-events: auto;
+      transition:
+         opacity var(--vag-transition-duration) var(--vag-transition-easing),
+         transform var(--vag-transition-duration) var(--vag-transition-easing);
+   }
+
+   [data-attention-level="background"] {
+      opacity: var(--vag-background-opacity, 0.35);
+      transform: translateY(16px);
+      z-index: var(--z-sticky);
+      pointer-events: auto;
+      transition:
+         opacity var(--vag-transition-duration) var(--vag-transition-easing),
+         transform var(--vag-transition-duration) var(--vag-transition-easing);
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+      [data-attention-level="primary"] {
+         opacity: 1;
+         transform: none;
+         z-index: var(--z-header);
+      }
+
+      [data-attention-level="cluster"] {
+         opacity: 1;
+         transform: none;
+         z-index: var(--z-overlay-elevated);
+      }
+
+      [data-attention-level="background"] {
+         opacity: 1;
+         transform: none;
+         z-index: var(--z-sticky);
+         pointer-events: auto;
+      }
+   }
+}

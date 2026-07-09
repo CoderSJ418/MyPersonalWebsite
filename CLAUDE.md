@@ -1,5 +1,8 @@
 # CLAUDE.md
 
+> **⚠️ Before anything else: Read `.ai/PROJECT_CONSTITUTION.md`**
+> This project operates under a constitutional governance model. The Constitution defines task classification (P1-P4), Definition of Done, exception handling, and document priority. All development behavior must comply with it.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Workspace Overview
@@ -414,23 +417,23 @@ chore: update dependencies
 
 ## Key Files Reference
 
-| Purpose | Location |
-|---------|----------|
-| App entry | `src/main.ts` |
-| Root component | `src/App.vue` |
-| Router config | `src/router/index.ts` |
-| Stores | `src/stores/` |
-| Composables | `src/composables/` |
-| Components | `src/components/` |
-| Pages | `src/views/` |
-| Types | `src/types/` |
-| Utils | `src/utils/` |
-| API layer | `src/api/` |
-| Styles | `src/assets/styles/` |
-| Config | `src/config/` |
-| Vite config | `vite.config.ts` |
-| Tailwind config | `tailwind.config.js` |
-| Test config | `vitest.config.ts` |
+| Purpose         | Location              |
+| --------------- | --------------------- |
+| App entry       | `src/main.ts`         |
+| Root component  | `src/App.vue`         |
+| Router config   | `src/router/index.ts` |
+| Stores          | `src/stores/`         |
+| Composables     | `src/composables/`    |
+| Components      | `src/components/`     |
+| Pages           | `src/views/`          |
+| Types           | `src/types/`          |
+| Utils           | `src/utils/`          |
+| API layer       | `src/api/`            |
+| Styles          | `src/assets/styles/`  |
+| Config          | `src/config/`         |
+| Vite config     | `vite.config.ts`      |
+| Tailwind config | `tailwind.config.js`  |
+| Test config     | `vitest.config.ts`    |
 
 ---
 

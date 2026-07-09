@@ -4,9 +4,9 @@
  */
 
 export const transition = {
-  fast: 'transition-all duration-300',
-  normal: 'transition-all duration-500',
-  slow: 'transition-all duration-800',
+  fast: 'transition duration-300',
+  normal: 'transition duration-500',
+  slow: 'transition duration-800',
   color: 'transition-colors duration-500',
   transform: 'transition-transform duration-500'
 }

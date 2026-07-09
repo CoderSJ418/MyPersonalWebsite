@@ -4,6 +4,7 @@
  */
 
 import type { IMCPClient, Document, ValidationResult } from './types'
+import { logger } from '@/utils/logger'
 
 /**
  * MCP 客户端实现
@@ -47,7 +48,7 @@ export class MCPClient implements IMCPClient {
       const data = await response.json()
       return data.content || ''
     } catch (error) {
-      console.error(`Error fetching documentation for ${libraryName}:`, error)
+      logger.error(`Error fetching documentation for ${libraryName}:`, error)
       throw error
     }
   }
@@ -82,7 +83,7 @@ export class MCPClient implements IMCPClient {
       const result = await response.json()
       return result
     } catch (error) {
-      console.error('Error validating code:', error)
+      logger.error('Error validating code:', error)
       throw error
     }
   }
@@ -111,7 +112,7 @@ export class MCPClient implements IMCPClient {
       const data = await response.json()
       return data.versions || []
     } catch (error) {
-      console.error(`Error fetching versions for ${libraryName}:`, error)
+      logger.error(`Error fetching versions for ${libraryName}:`, error)
       throw error
     }
   }

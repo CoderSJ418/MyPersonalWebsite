@@ -51,7 +51,7 @@ const {
   position: fixed;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: var(--z-progress);
 }
 
 .scroll-progress-bar--top {
@@ -64,7 +64,7 @@ const {
 
 .scroll-progress-bar__fill {
   height: 100%;
-  transition: width 0.3s ease;
+  transition: width var(--us-duration-normal) var(--us-easing);
 }
 
 .scroll-progress-bar__percentage {
@@ -72,7 +72,7 @@ const {
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 600;
 }
 </style>

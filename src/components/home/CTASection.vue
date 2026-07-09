@@ -1,15 +1,15 @@
 <template>
   <section
     ref="sectionRef"
-    class="py-16 md:py-24 relative overflow-hidden"
-    style="background-color: #f8fafc"
+    class="py-16 md:py-24 relative overflow-hidden cta-section stripe-orbs stripe-orbs--indigo"
   >
+    <div class="stripe-orb-extra stripe-orb-extra--violet" style="bottom:-10%;left:30%;" aria-hidden="true"></div>
     <!-- 背景装饰 - 纯色块 -->
     <div class="absolute inset-0">
       <!-- 左上角橙色块 -->
-      <div class="absolute top-0 left-0 w-96 h-96 opacity-5" style="background-color: #f97316"></div>
+      <div class="absolute top-0 left-0 w-96 h-96 opacity-5 cta-section__deco--orange"></div>
       <!-- 右下角青色块 -->
-      <div class="absolute bottom-0 right-0 w-64 h-64 opacity-5" style="background-color: #06b6d4"></div>
+      <div class="absolute bottom-0 right-0 w-64 h-64 opacity-5 cta-section__deco--cyan"></div>
     </div>
 
     <div class="container mx-auto px-4 relative z-10">
@@ -17,17 +17,15 @@
         <!-- 个性化文案 -->
         <h2
           ref="titleRef"
-          class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
-          style="color: #0f172a"
+          class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight cta-section__title"
         >
           有项目想法？<br />
-          <span style="color: #f97316">让我们聊聊</span>
+          <span class="cta-section__title-accent">让我们聊聊</span>
         </h2>
 
         <p
           ref="descriptionRef"
-          class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
-          style="color: #64748b"
+          class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed cta-section__desc"
         >
           从企业官网到 SaaS 平台，从微信小程序到数据可视化，我都能提供专业的技术方案。
           如果您有项目想法，或者想了解更多，欢迎随时联系。
@@ -36,7 +34,7 @@
         <!-- CTA 按钮 - 纯色背景 -->
         <div ref="ctaRef" class="flex flex-col sm:flex-row gap-4 justify-center">
           <CTA
-            href="/contact"
+            href="mailto:912999051@qq.com"
             variant="accent"
             size="large"
             label="联系我"
@@ -124,3 +122,30 @@ onMounted(() => {
   })
 })
 </script>
+
+<style scoped>
+/* CTA Section — 使用CSS变量替代内联硬编码hex */
+.cta-section {
+  background-color: var(--bg-secondary, #f8fafc);
+}
+
+.cta-section__deco--orange {
+  background-color: var(--accent-amber-500, #f97316);
+}
+
+.cta-section__deco--cyan {
+  background-color: var(--info-color, #06b6d4);
+}
+
+.cta-section__title {
+  color: var(--us-text-primary, #0f172a);
+}
+
+.cta-section__title-accent {
+  color: var(--accent-amber-500, #f97316);
+}
+
+.cta-section__desc {
+  color: var(--us-text-secondary, #64748b);
+}
+</style>

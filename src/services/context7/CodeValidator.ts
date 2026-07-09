@@ -5,6 +5,7 @@
 
 import type { ICodeValidator, ValidationResult, IDocumentService } from './types'
 import { createDocumentService } from './DocumentService'
+import { logger } from '@/utils/logger'
 
 /**
  * 代码校验器实现
@@ -92,7 +93,7 @@ export class CodeValidator implements ICodeValidator {
       try {
         results[fileName] = await this.validateComponent(code, library)
       } catch (error) {
-        console.error(`Error validating ${fileName}:`, error)
+        logger.error(`Error validating ${fileName}:`, error)
         results[fileName] = {
           isValid: false,
           errors: [

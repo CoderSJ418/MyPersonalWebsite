@@ -38,11 +38,10 @@ const {
 <style scoped>
 .magnetic-button {
   position: relative;
-  transition: transform 0.1s ease;
-  cursor: pointer;
+  transition: transform var(--us-duration-micro) var(--us-easing);
 }
 
 .magnetic-button:hover {
-  z-index: 10;
+  z-index: var(--z-sticky);
 }
 </style>

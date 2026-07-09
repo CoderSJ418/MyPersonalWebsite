@@ -19,7 +19,7 @@ export default {
         /* ============================================
            Aurora Bento 配色系统 v3.0
            ============================================ */
-        
+
         /* Aurora 主色系 - Cyan */
         aurora: {
           cyan: {
@@ -62,7 +62,7 @@ export default {
             dark: '#CC0075',
           },
         },
-        
+
         /* Bento 背景色 - 深色 */
         dark: {
           DEFAULT: '#0D0D0D',
@@ -72,7 +72,7 @@ export default {
           elevated: '#333333',
           card: '#1F1F1F',
         },
-        
+
         /* Bento 背景色 - 亮色 */
         light: {
           DEFAULT: '#FFFFFF',
@@ -82,7 +82,7 @@ export default {
           elevated: '#FAFAFA',
           card: '#FFFFFF',
         },
-        
+
         /* 语义化颜色 */
         surface: {
           DEFAULT: 'var(--bg-card)',
@@ -91,7 +91,7 @@ export default {
           tertiary: 'var(--bg-tertiary)',
           elevated: 'var(--bg-elevated)',
         },
-        
+
         text: {
           DEFAULT: 'var(--text-primary)',
           primary: 'var(--text-primary)',
@@ -99,7 +99,7 @@ export default {
           tertiary: 'var(--text-tertiary)',
           muted: 'var(--text-muted)',
         },
-        
+
         /* 功能色 */
         success: {
           DEFAULT: '#10B981',
@@ -121,7 +121,7 @@ export default {
           light: '#60A5FA',
           dark: '#2563EB',
         },
-        
+
         /* 复古像素风格配色（保留用于特定区域） */
         pixel: {
           cyan: '#00FFFF',
@@ -135,30 +135,30 @@ export default {
           'purple-dark': '#880088',
         },
       },
-      
+
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
         display: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         pixel: ['"Press Start 2P"', 'cursive'],
       },
-      
+
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.025em' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.025em' }],
-        'base': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.025em' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem', letterSpacing: '0.025em' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '0.025em' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem', letterSpacing: '0.025em' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '0.025em' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '0.025em' }],
-        '5xl': ['3rem', { lineHeight: '1', letterSpacing: '0.025em' }],
-        '6xl': ['3.75rem', { lineHeight: '1', letterSpacing: '0.025em' }],
-        '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '0.025em' }],
-        '8xl': ['6rem', { lineHeight: '1', letterSpacing: '0.025em' }],
-        '9xl': ['8rem', { lineHeight: '1', letterSpacing: '0.025em' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.015em' }],
+        'base': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.01em' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem', letterSpacing: '0' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '0' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem', letterSpacing: '-0.01em' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.015em' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '-0.02em' }],
+        '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.025em' }],
+        '6xl': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
+        '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.035em' }],
+        '8xl': ['6rem', { lineHeight: '1', letterSpacing: '-0.04em' }],
+        '9xl': ['8rem', { lineHeight: '1', letterSpacing: '-0.04em' }],
       },
-      
+
       spacing: {
         'safe-top': 'env(safe-area-inset-top)',
         'safe-bottom': 'env(safe-area-inset-bottom)',
@@ -174,7 +174,7 @@ export default {
         '46': '11.5rem',
         '50': '12.5rem',
       },
-      
+
       borderRadius: {
         'none': '0',
         'sm': '4px',
@@ -194,7 +194,7 @@ export default {
         'pixel-sm': '1px',
         'pixel-lg': '4px',
       },
-      
+
       boxShadow: {
         'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         'DEFAULT': '0 2px 4px rgba(0, 0, 0, 0.1)',
@@ -203,28 +203,28 @@ export default {
         'xl': '0 16px 32px rgba(0, 0, 0, 0.15)',
         '2xl': '0 24px 48px rgba(0, 0, 0, 0.2)',
         'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
-        
+
         /* Aurora 光晕效果 */
         'aurora-cyan': '0 0 40px rgba(0, 255, 255, 0.4)',
         'aurora-purple': '0 0 40px rgba(139, 0, 255, 0.4)',
         'aurora-electric': '0 0 40px rgba(0, 128, 255, 0.4)',
         'aurora-magenta': '0 0 40px rgba(255, 20, 147, 0.4)',
-        
+
         /* Bento 阴影 */
         'bento': '0 4px 24px rgba(0, 0, 0, 0.1)',
         'bento-hover': '0 8px 32px rgba(0, 0, 0, 0.15)',
         'bento-glow': '0 0 24px rgba(0, 255, 255, 0.15)',
-        
+
         /* 内发光 */
         'inner-glow-cyan': 'inset 0 0 24px rgba(0, 255, 255, 0.1)',
         'inner-glow-purple': 'inset 0 0 24px rgba(139, 0, 255, 0.1)',
-        
+
         /* 复古像素风格阴影 */
         'pixel': '0 2px 0 0 #00FFFF',
         'pixel-lg': '0 4px 0 0 #00FFFF',
         'pixel-xl': '0 6px 0 0 #00FFFF',
       },
-      
+
       backgroundImage: {
         /* Aurora 渐变 */
         'aurora-primary': 'linear-gradient(135deg, #0080FF 0%, #FF1493 100%)',
@@ -234,28 +234,28 @@ export default {
         'aurora-flow': 'linear-gradient(135deg, #00FFFF 0%, #0080FF 25%, #8B00FF 50%, #FF1493 75%, #00FFFF 100%)',
         'aurora-bg': 'linear-gradient(180deg, rgba(0, 255, 255, 0.1) 0%, rgba(139, 0, 255, 0.1) 50%, rgba(255, 20, 147, 0.05) 100%)',
         'aurora-border': 'linear-gradient(90deg, #00FFFF, #0080FF, #8B00FF, #FF1493)',
-        
+
         /* 通用渐变 */
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      
+
       animation: {
         /* Aurora 动画 */
         'aurora-flow': 'aurora-flow 8s ease infinite',
         'aurora-float': 'aurora-float 6s ease-in-out infinite',
         'aurora-pulse': 'aurora-pulse 4s ease-in-out infinite',
         'aurora-glow': 'aurora-glow 2s ease-in-out infinite',
-        
+
         /* Bento 动画 */
         'bento-hover': 'bento-hover 0.25s ease-out',
-        
+
         /* 基础动画 */
         'fade-in': 'fade-in 0.25s ease-out',
         'slide-up': 'slide-up 0.25s ease-out',
         'slide-down': 'slide-down 0.25s ease-out',
       },
-      
+
       keyframes: {
         'aurora-flow': {
           '0%, 100%': { backgroundPosition: '0% 50%' },
@@ -290,7 +290,7 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
-      
+
       transitionDuration: {
         '75': '75ms',
         '100': '100ms',
@@ -302,22 +302,21 @@ export default {
         '1000': '1000ms',
         'aurora': '8000ms',
       },
-      
+
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
-        'bounce-in': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         'ease-out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
         'ease-in-out-expo': 'cubic-bezier(0.87, 0, 0.13, 1)',
         'aurora': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       },
-      
+
       minHeight: {
         'touch': '44px',
       },
       minWidth: {
         'touch': '44px',
       },
-      
+
       zIndex: {
         'base': '0',
         'dropdown': '100',

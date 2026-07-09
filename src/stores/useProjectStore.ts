@@ -56,7 +56,6 @@ export const useProjectStore = defineStore('project', () => {
     try {
       loading.value = true
       error.value = null
-      await new Promise((resolve) => setTimeout(resolve, 300))
       projects.value = projectsData
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to load projects'
@@ -70,7 +69,6 @@ export const useProjectStore = defineStore('project', () => {
     try {
       loading.value = true
       error.value = null
-      await new Promise((resolve) => setTimeout(resolve, 300))
       const project = projects.value.find((p) => p.id === id)
       if (project) {
         currentProjectDetail.value = project as ProjectDetail
@@ -101,8 +99,11 @@ export const useProjectStore = defineStore('project', () => {
     return projects.value.find((p) => p.id === id)
   }
 
-  const getProjectDetail = (_id: string) => {
-    return currentProjectDetail.value
+  const getProjectDetail = (id: string) => {
+    if (currentProjectDetail.value && currentProjectDetail.value.id === id) {
+      return currentProjectDetail.value
+    }
+    return (projects.value.find((p) => p.id === id) as ProjectDetail) ?? null
   }
 
   const getRelatedProjects = (id: string) => {

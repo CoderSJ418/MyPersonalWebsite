@@ -3,6 +3,8 @@
  * 专门针对 MyPersonalWebsite 的字体系统进行优化
  */
 
+import { logger } from '@/utils/logger'
+
 export interface FontOptimizationConfig {
   preload?: boolean
   fontDisplay?: 'auto' | 'swap' | 'fallback' | 'optional'
@@ -89,7 +91,7 @@ export class FontOptimizer {
     if (this.loadingFonts.has(key)) return
 
     this.loadingFonts.add(key)
-    
+
     // 创建字体加载器
     const font = new FontFace(fontFace.family, fontFace.src, {
       weight: fontFace.weight,
@@ -103,14 +105,14 @@ export class FontOptimizer {
       document.fonts.add(font)
       this.loadedFonts.add(key)
       this.loadingFonts.delete(key)
-      
+
       // 触发字体加载完成事件
       this.emitFontLoaded(fontFace.family)
-      
+
       // 应用字体到页面
       this.applyFontToElements(fontFace.family)
     }).catch(error => {
-      console.warn(`Failed to load font: ${fontFace.family}`, error)
+      logger.warn(`Failed to load font: ${fontFace.family}`, error)
       this.loadingFonts.delete(key)
       this.emitFontFailed(fontFace.family, error)
     })
@@ -139,7 +141,7 @@ export class FontOptimizer {
     link.type = 'font/woff2'
     link.crossOrigin = 'anonymous'
     link.href = fontFace.src
-    
+
     // 添加字体加载完成回调
     link.onload = () => {
       this.loadedFonts.add(this.generateFontKey(fontFace))
@@ -172,7 +174,7 @@ export class FontOptimizer {
    */
   generateFontCSS(): string {
     let css = ''
-    
+
     this.fontFaces.forEach(fontFace => {
       const key = this.generateFontKey(fontFace)
       if (this.loadedFonts.has(key)) {
@@ -195,7 +197,7 @@ export class FontOptimizer {
    */
   generatePreloadTags(): string {
     let tags = ''
-    
+
     this.fontFaces.forEach(fontFace => {
       if (this.isCriticalFont(fontFace)) {
         tags += `<link rel="preload" as="font" type="font/woff2" crossorigin href="${fontFace.src}">
@@ -239,7 +241,7 @@ export class FontOptimizer {
     }
 
     document.addEventListener('font-loaded', eventListener as EventListener)
-    
+
     return () => {
       document.removeEventListener('font-loaded', eventListener as EventListener)
     }
@@ -256,7 +258,7 @@ export class FontOptimizer {
     }
 
     document.addEventListener('font-failed', eventListener as EventListener)
-    
+
     return () => {
       document.removeEventListener('font-failed', eventListener as EventListener)
     }

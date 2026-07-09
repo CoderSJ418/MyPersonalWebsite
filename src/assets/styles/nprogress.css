@@ -1,6 +1,6 @@
 /**
  * NProgress 自定义样式 - 匹配项目主题
- * 主色调: Indigo (#6366F1) -> Violet (#8B5CF6) -> Pink (#EC4899)
+ * 主色调: Blue-600 (#2563EB / rgba(37, 99, 235, X))
  */
 
 /* 进度条容器 */
@@ -10,39 +10,39 @@
 
 /* 进度条 */
 #nprogress .bar {
-  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 1) 0%, rgba(37, 99, 235, 0.85) 50%, rgba(37, 99, 235, 0.7) 100%);
   position: fixed;
-  z-index: 9999;
+  z-index: var(--z-cursor);
   top: 0;
   left: 0;
   width: 100%;
   height: 3px;
 }
 
-/* 进度条发光效果 */
+/* 进度条阴影效果 */
 #nprogress .peg {
   display: block;
   position: absolute;
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #6366F1, 0 0 5px #8B5CF6;
+  box-shadow: var(--us-depth-1);
   opacity: 1;
   transform: rotate(3deg) translate(0px, -4px);
 }
 
 /* 暗黑模式适配 */
 .dark #nprogress .bar {
-  background: linear-gradient(135deg, #818CF8 0%, #A78BFA 50%, #F472B6 100%);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(37, 99, 235, 0.75) 50%, rgba(37, 99, 235, 0.6) 100%);
 }
 
 .dark #nprogress .peg {
-  box-shadow: 0 0 15px #818CF8, 0 0 8px #A78BFA;
+  box-shadow: var(--us-depth-1);
 }
 
 /* 亮色模式适配 */
 @media (prefers-color-scheme: light) {
   :root:not(.dark) #nprogress .bar {
-    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #DB2777 100%);
+    background: linear-gradient(135deg, var(--us-accent) 0%, rgba(37, 99, 235, 0.8) 100%);
   }
 }

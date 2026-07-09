@@ -1,5 +1,8 @@
 # CLAUDE.md — MyPersonalWebsite
 
+> **⚠️ Before anything else: Read `.ai/PROJECT_CONSTITUTION.md`**
+> This project operates under a constitutional governance model. The Constitution defines task classification (P1-P4), Definition of Done, exception handling, and document priority. All development behavior must comply with it.
+
 This file provides guidance to Claude Code when working with this Vue 3 project.
 
 ## Quick Start

@@ -3,11 +3,8 @@
     <div class="virtual-scroll-spacer" :style="{ height: totalHeight + 'px' }" />
     <div class="virtual-scroll-content" :style="{ transform: `translateY(${scrollTop}px)` }">
       <div
-        v-for="item in visibleItems"
-        :key="item.key"
-        :style="{ height: itemHeight + 'px' }"
-        class="virtual-scroll-item"
-      >
+v-for="item in visibleItems" :key="item.key" :style="{ height: itemHeight + 'px' }"
+        class="virtual-scroll-item">
         <slot :item="item.data" :index="item.index" :is-visible="item.isVisible" />
       </div>
     </div>
@@ -39,8 +36,8 @@ const props = withDefaults(defineProps<Props>(), {
   bufferSize: 5,
   overscan: 10,
   containerHeight: 0,
-  onScroll: () => {},
-  onVisibleChange: () => {}
+  onScroll: () => { },
+  onVisibleChange: () => { }
 })
 
 const emit = defineEmits<{
@@ -74,7 +71,7 @@ const handleScroll = () => {
   scrollTop.value = containerRef.value.scrollTop
   emit('scroll', scrollTop.value)
   emit('visibleChange', visibleItems.value)
-  
+
   // 通知父组件滚动
   props.onScroll(scrollTop.value)
   props.onVisibleChange(visibleItems.value)
@@ -208,12 +205,12 @@ defineExpose({
 }
 
 .virtual-scroll-container::-webkit-scrollbar-thumb {
-  background: rgba(102, 126, 234, 0.3);
-  border-radius: 4px;
+  background: var(--us-accent-border);
+  border-radius: var(--radius-sm);
 }
 
 .virtual-scroll-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(102, 126, 234, 0.5);
+  background: var(--us-accent);
 }
 
 .virtual-scroll-spacer {

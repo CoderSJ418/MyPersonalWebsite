@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import { themes, type DesignTheme, getTheme } from '@/design-system/themes'
+import { logger } from '@/utils/logger'
 
 /**
  * 主题状态接口
@@ -43,7 +44,7 @@ export const useThemeStore = defineStore('theme', () => {
         state.value.isDark = parsed.isDark || false
       }
     } catch (error) {
-      console.error('加载主题偏好失败:', error)
+      logger.error('加载主题偏好失败:', error)
     }
 
     applyTheme()
@@ -121,7 +122,7 @@ export const useThemeStore = defineStore('theme', () => {
         }
 
         link.onerror = () => {
-          console.error(`加载字体失败: ${font.family}`)
+          logger.error(`加载字体失败: ${font.family}`)
           fontLoading.value.delete(fontId)
         }
       }
@@ -154,7 +155,7 @@ export const useThemeStore = defineStore('theme', () => {
     try {
       localStorage.setItem('theme-state', JSON.stringify(state.value))
     } catch (error) {
-      console.error('保存主题偏好失败:', error)
+      logger.error('保存主题偏好失败:', error)
     }
   }
 

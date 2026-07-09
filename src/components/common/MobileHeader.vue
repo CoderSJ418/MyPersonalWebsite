@@ -1,37 +1,23 @@
 <template>
-  <header
-    class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-sm transition-all duration-300"
-    :class="{ 'shadow-md': isScrolled }"
-  >
-    <nav class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-14">
+  <header class="mh" :class="{ 'mh--scrolled': isScrolled }">
+    <nav class="mh__nav">
+      <div class="mh__bar">
         <!-- Logo -->
-        <RouterLink
-          to="/"
-          class="flex items-center gap-2 text-xl font-bold text-primary-600 dark:text-primary-400 hover:opacity-80 transition-opacity"
-        >
-          <span class="mobile-xl">佘杰</span>
+        <RouterLink to="/" class="mh__logo">
+          <span>佘杰</span>
         </RouterLink>
 
         <!-- 右侧操作按钮 -->
-        <div class="flex items-center gap-2">
+        <div class="mh__actions">
           <!-- 搜索按钮 -->
-          <button
-            class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast focus:outline-none focus:ring-2 focus:ring-primary-500"
-            aria-label="搜索"
-            @click="openSearch"
-          >
-            <Search class="w-5 h-5 text-gray-600 dark:text-gray-400" />
+          <button class="mh__btn" aria-label="搜索" @click="openSearch">
+            <Search class="mh__icon" />
           </button>
 
           <!-- 主题切换 -->
-          <button
-            class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast focus:outline-none focus:ring-2 focus:ring-primary-500"
-            aria-label="Toggle theme"
-            @click="appStore.toggleTheme"
-          >
-            <Sun v-if="appStore.theme === 'dark'" class="w-5 h-5 text-yellow-400" />
-            <Moon v-else class="w-5 h-5 text-gray-600" />
+          <button class="mh__btn" aria-label="Toggle theme" @click="appStore.toggleTheme">
+            <Sun v-if="appStore.theme === 'dark'" class="mh__icon mh__icon--sun" />
+            <Moon v-else class="mh__icon" />
           </button>
 
           <!-- 汉堡菜单 -->
@@ -71,9 +57,90 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 优化移动端滚动性能 */
-header {
+.mh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-overlay-elevated);
+  background: var(--us-bg-start);
+  box-shadow: var(--us-depth-1);
+  transition: box-shadow var(--us-duration-normal) var(--us-easing);
   will-change: transform;
   transform: translateZ(0);
+}
+
+.mh--scrolled {
+  box-shadow: var(--us-depth-2);
+}
+
+.mh__nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.mh__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5rem;
+}
+
+.mh__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--us-space-2);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--us-accent);
+  transition: opacity var(--us-duration-fast) var(--us-easing);
+}
+
+.mh__logo:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.mh__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--us-space-2);
+}
+
+.mh__btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--us-space-2);
+  border-radius: var(--radius-md, 0.375rem);
+  border: none;
+  background: transparent;
+  transition: background var(--us-duration-fast) var(--us-easing);
+}
+
+.mh__btn:hover {
+  background: var(--us-surface-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--us-depth-1);
+}
+
+.mh__btn:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+.mh__btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--us-accent-border);
+}
+
+.mh__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--us-text-secondary);
+}
+
+.mh__icon--sun {
+  color: #facc15;
 }
 </style>

@@ -4,6 +4,7 @@
  */
 
 import { monitoringConfig } from './monitoring'
+import { logger } from '@/utils/logger'
 
 export interface ErrorInfo {
   message: string
@@ -166,7 +167,7 @@ export class ErrorTracker {
     }
 
     // 记录到控制台
-    console.error('[Error Tracking]', errorInfo)
+    logger.error('[Error Tracking]', errorInfo)
 
     // 发送到 Sentry（如果配置了）
     if (monitoringConfig.error.sentryDsn) {
@@ -190,7 +191,7 @@ export class ErrorTracker {
     //   extra: errorInfo.extra
     // })
 
-    console.warn('[Sentry] Would send error to Sentry:', errorInfo.message)
+    logger.warn('[Sentry] Would send error to Sentry:', errorInfo.message)
   }
 
   /**

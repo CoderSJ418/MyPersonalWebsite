@@ -4,6 +4,7 @@
  */
 
 import { monitoringConfig } from './monitoring'
+import { logger } from '@/utils/logger'
 
 export interface EventInfo {
   category: string
@@ -82,7 +83,7 @@ export class AnalyticsTracker {
     // gtag('js', new Date())
     // gtag('config', monitoringConfig.analytics.googleAnalyticsId)
 
-    console.warn(
+    logger.warn(
       '[Analytics] Google Analytics would be initialized with ID:',
       monitoringConfig.analytics.googleAnalyticsId
     )
@@ -164,7 +165,7 @@ export class AnalyticsTracker {
       this.sendToGoogleAnalytics('page_view', pageInfo)
     }
 
-    console.info('[Analytics] Page view:', pageInfo)
+    logger.info('[Analytics] Page view:', pageInfo)
   }
 
   /**
@@ -199,7 +200,7 @@ export class AnalyticsTracker {
       this.sendToGoogleAnalytics('event', eventInfo)
     }
 
-    console.info('[Analytics] Event:', eventInfo)
+    logger.info('[Analytics] Event:', eventInfo)
   }
 
   /**
@@ -265,7 +266,7 @@ export class AnalyticsTracker {
     //   }
     // }
 
-    console.warn('[Google Analytics] Would send:', type, data)
+    logger.warn('[Google Analytics] Would send:', type, data)
   }
 
   /**

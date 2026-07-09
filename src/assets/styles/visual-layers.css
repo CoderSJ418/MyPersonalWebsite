@@ -1,0 +1,306 @@
+/* ============================================
+   Visual Layer Utility Classes
+   ============================================
+   Global visual layer classes for the 5-layer architecture:
+   Layer 0: Background Field — noise + grid + vignette
+   Layer 1: Light Field — global spotlight (cursor glow)
+   Layer 2: Surface System — cards / blog / hero blocks
+   Layer 3: Interaction Layer — hover glow / tilt / spotlight
+   Layer 4: Content — text / metrics / code
+
+   Uses --us-* tokens from unified-system.css :root
+   Uses --global-light-x/y from useCursorInteraction composable
+   ============================================ */
+
+/* ═══════════════════════════════════════════════════════════════
+   Layer 0: Background Container
+   ═══════════════════════════════════════════════════════════════ */
+.vs-bg-layered {
+  position: relative;
+  min-height: 100vh;
+  /* fallback for older browsers */
+  min-height: 100dvh;
+  /* dynamic viewport height for mobile */
+  background: linear-gradient(160deg, var(--us-bg-start) 0%, var(--us-bg-end) 100%);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Layer 0: Noise Texture Overlay
+   ═══════════════════════════════════════════════════════════════ */
+.vs-noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-local);
+  pointer-events: none;
+  opacity: 0.03;
+  /* Static noise texture — replaced feTurbulence SVG filter for GPU performance.
+     feTurbulence recalculates every repaint frame; static image is GPU-composited once. */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  /* Force GPU compositing layer — image is rasterized once, not recalculated */
+  will-change: transform;
+  contain: strict;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Layer 0: Grid Pattern Overlay
+   ═══════════════════════════════════════════════════════════════ */
+.vs-grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-local);
+  pointer-events: none;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Layer 0: Vignette Overlay
+   ═══════════════════════════════════════════════════════════════ */
+.vs-vignette-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-local);
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+      transparent 50%,
+      rgba(0, 0, 0, 0.4) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Layer 1: Section-Level Light
+   ═══════════════════════════════════════════════════════════════ */
+.vs-light-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.vs-light-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(800px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+      rgba(37, 99, 235, 0.04) 0%,
+      transparent 100%);
+  transition: opacity var(--us-duration-normal) var(--us-easing);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Sticky Header — solid background (no backdrop-filter)
+   ═══════════════════════════════════════════════════════════════ */
+.vs-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: white;
+  border-bottom: 1px solid var(--us-border);
+  transition:
+    background var(--us-duration-fast) var(--us-easing),
+    border-color var(--us-duration-fast) var(--us-easing);
+}
+
+.vs-sticky-header__title {
+  font-weight: 600;
+  color: var(--us-text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Code Block Glow — solid background (no backdrop-filter)
+   ═══════════════════════════════════════════════════════════════ */
+.vs-code-glow {
+  position: relative;
+  border: 1px solid var(--us-accent-border);
+  border-radius: 12px;
+  background: #18181b;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.vs-code-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+      rgba(37, 99, 235, 0.03) 0%,
+      transparent 50%,
+      rgba(37, 99, 235, 0.02) 100%);
+}
+
+.vs-code-glow__header {
+  position: relative;
+  z-index: var(--z-local);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--us-space-3) var(--us-space-4);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+  background: rgba(37, 99, 235, 0.03);
+}
+
+.vs-code-glow__lang {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--us-accent);
+  letter-spacing: 0.02em;
+}
+
+.vs-code-glow__body {
+  position: relative;
+  z-index: var(--z-local);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Light Surface — ambient light follow via --global-light-x/y
+   ═══════════════════════════════════════════════════════════════ */
+.vs-light-surface {
+  position: relative;
+}
+
+.vs-light-surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(400px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+      rgba(37, 99, 235, 0.03) 0%,
+      transparent 100%);
+  opacity: 0;
+  transition: opacity var(--us-duration-normal) var(--us-easing);
+}
+
+.vs-light-surface:hover::after {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Dark Mode Overrides
+   ═══════════════════════════════════════════════════════════════ */
+.dark .vs-sticky-header {
+  background: #18181b;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .vs-noise-overlay {
+  opacity: 0.06;
+}
+
+/* 暗色模式 — 光效跟踪增强 */
+.dark .vs-light-section::before {
+  background: radial-gradient(800px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+      rgba(37, 99, 235, 0.06) 0%,
+      transparent 100%);
+}
+
+.dark .vs-light-surface::after {
+  background: radial-gradient(400px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+      rgba(37, 99, 235, 0.05) 0%,
+      transparent 100%);
+}
+
+.dark .vs-code-glow {
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), var(--us-accent-glow);
+}
+
+.dark .vs-code-glow::before {
+  background: linear-gradient(135deg,
+      rgba(37, 99, 235, 0.06) 0%,
+      transparent 50%,
+      rgba(37, 99, 235, 0.03) 100%);
+}
+
+.dark .vs-code-glow__header {
+  border-bottom-color: rgba(37, 99, 235, 0.12);
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.dark .vs-grid-overlay {
+  opacity: 0.05;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+.dark .vs-vignette-overlay {
+  background: radial-gradient(ellipse at center,
+      transparent 25%,
+      rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Light Mode Overrides
+   ═══════════════════════════════════════════════════════════════ */
+:root:not(.dark) .vs-bg-layered {
+  background: linear-gradient(160deg, #FAFAFA 0%, #F5F5F7 100%);
+}
+
+:root:not(.dark) .vs-noise-overlay {
+  opacity: 0.015;
+}
+
+:root:not(.dark) .vs-grid-overlay {
+  opacity: 0.02;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+:root:not(.dark) .vs-vignette-overlay {
+  background: radial-gradient(ellipse at center,
+      transparent 60%,
+      rgba(0, 0, 0, 0.08) 100%);
+}
+
+:root:not(.dark) .vs-sticky-header {
+  background: white;
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+:root:not(.dark) .vs-code-glow {
+  border-color: rgba(37, 99, 235, 0.12);
+  background: #fafafa;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+:root:not(.dark) .vs-code-glow::before {
+  background: linear-gradient(135deg,
+      rgba(37, 99, 235, 0.02) 0%,
+      transparent 50%,
+      rgba(37, 99, 235, 0.01) 100%);
+}
+
+:root:not(.dark) .vs-code-glow__header {
+  border-bottom-color: rgba(37, 99, 235, 0.06);
+  background: rgba(37, 99, 235, 0.02);
+}
+
+:root:not(.dark) .vs-light-surface::after {
+  background: radial-gradient(400px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+      rgba(37, 99, 235, 0.02) 0%,
+      transparent 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Reduced Motion
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .vs-light-surface::after {
+    transition: none;
+  }
+
+  .vs-light-section::before {
+    transition: none;
+  }
+}

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Theme } from '@/types/app'
+import { logger } from '@/utils/logger'
 
 /**
  * Toast 消息类型
@@ -398,7 +399,7 @@ export const useAppStore = defineStore('app', () => {
       }
       localStorage.setItem('app_preferences', JSON.stringify(data))
     } catch (error) {
-      console.error('Failed to save app preferences:', error)
+      logger.error('Failed to save app preferences:', error)
     }
   }
 
@@ -411,7 +412,7 @@ export const useAppStore = defineStore('app', () => {
         if (typeof parsed.isNavFixed === 'boolean') isNavFixed.value = parsed.isNavFixed
       }
     } catch (error) {
-      console.error('Failed to load app preferences:', error)
+      logger.error('Failed to load app preferences:', error)
     }
   }
 

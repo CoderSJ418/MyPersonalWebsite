@@ -22,15 +22,6 @@ const routes: RouteRecordRaw[] = [
     }
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/About.vue'),
-    meta: {
-      title: '关于我',
-      description: '我的个人信息、工作经历、教育背景和技能'
-    }
-  },
-  {
     path: '/projects',
     name: 'Projects',
     component: () => import('@/views/Projects.vue'),
@@ -50,33 +41,6 @@ const routes: RouteRecordRaw[] = [
     props: true
   },
   {
-    path: '/skills',
-    name: 'Skills',
-    component: () => import('@/views/Skills.vue'),
-    meta: {
-      title: '技能展示',
-      description: '我的技术栈和技能'
-    }
-  },
-  {
-    path: '/experience',
-    name: 'Experience',
-    component: () => import('@/views/Experience.vue'),
-    meta: {
-      title: '工作经历',
-      description: '我的工作经历和职业发展'
-    }
-  },
-  {
-    path: '/education',
-    name: 'Education',
-    component: () => import('@/views/Education.vue'),
-    meta: {
-      title: '教育背景',
-      description: '我的教育背景和学习经历'
-    }
-  },
-  {
     path: '/blog',
     name: 'Blog',
     component: () => import('@/views/Blog.vue'),
@@ -94,15 +58,6 @@ const routes: RouteRecordRaw[] = [
       description: '技术文章详情'
     },
     props: true
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import('@/views/Contact.vue'),
-    meta: {
-      title: '联系方式',
-      description: '联系我'
-    }
   },
   {
     path: '/:pathMatch(.*)*',

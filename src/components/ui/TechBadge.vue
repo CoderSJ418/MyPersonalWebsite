@@ -18,7 +18,7 @@ const colors = computed(() => colorMap[props.variant])
 </script>
 
 <template>
-  <span :class="['px-3 py-1 rounded-lg text-sm font-medium', colors.bg, colors.text]">
+  <span :class="['px-3 py-1 rounded-xl text-sm font-medium', colors.bg, colors.text]">
     {{ name }}
   </span>
 </template>

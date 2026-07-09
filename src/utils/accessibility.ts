@@ -45,13 +45,18 @@ export function applyAccessibilityOptimizations(): CleanupFunction {
   }
   prefersHighContrast.addEventListener('change', handleHighContrastChange)
 
-  // 添加键盘导航指示器
+  // 添加键盘导航指示器 + 滚动行为控制
   let hasKeyboardNav = false
+
+  // 默认启用smooth scroll（鼠标用户）
+  document.documentElement.setAttribute('data-scroll-smooth', '')
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Tab') {
       hasKeyboardNav = true
       document.documentElement.classList.add('keyboard-nav')
+      // 键盘导航时禁用smooth scroll，避免焦点元素滚动到视口外
+      document.documentElement.removeAttribute('data-scroll-smooth')
     }
   }
 
@@ -60,6 +65,8 @@ export function applyAccessibilityOptimizations(): CleanupFunction {
       document.documentElement.classList.remove('keyboard-nav')
       hasKeyboardNav = false
     }
+    // 鼠标操作时重新启用smooth scroll
+    document.documentElement.setAttribute('data-scroll-smooth', '')
   }
 
   document.addEventListener('keydown', handleKeyDown)
@@ -88,7 +95,7 @@ export function applyAccessibilityOptimizations(): CleanupFunction {
   const style = document.createElement('style')
   style.textContent = `
     .focus-ring:focus-visible {
-      outline: 2px solid var(--color-primary);
+      outline: 2px solid var(--us-accent);
       outline-offset: 2px;
     }
 
@@ -96,7 +103,7 @@ export function applyAccessibilityOptimizations(): CleanupFunction {
     .keyboard-nav .input:focus,
     .keyboard-nav .select:focus,
     .keyboard-nav .textarea:focus {
-      outline: 2px solid var(--color-primary);
+      outline: 2px solid var(--us-accent);
       outline-offset: 2px;
     }
 
@@ -133,8 +140,9 @@ export function applyAccessibilityOptimizations(): CleanupFunction {
       style.parentNode.removeChild(style)
     }
 
-    // 移除添加的类
+    // 移除添加的类和属性
     document.documentElement.classList.remove('reduced-motion', 'high-contrast', 'keyboard-nav')
+    document.documentElement.removeAttribute('data-scroll-smooth')
   }
 }
 
@@ -221,7 +229,7 @@ export function validateComponentAccessibility(element: Element): {
     const color = computedStyle.color
     const backgroundColor = computedStyle.backgroundColor
     const contrast = calculateContrast(color, backgroundColor)
-    
+
     if (contrast < 4.5) {
       errors.push(`文本对比度不足: ${el.textContent?.substring(0, 20)}...`)
     }

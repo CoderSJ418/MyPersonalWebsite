@@ -9,10 +9,12 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import { initializeApp } from './boot'
+import { installRoutePrefetch } from './utils/routePrefetch'
 
 // 样式导入
 import './assets/styles/main.css'
 import './assets/styles/design-system.css'
+import './assets/stripe-effects.css'
 
 // 创建应用实例
 const app = createApp(App)
@@ -22,8 +24,15 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 
-// 挂载应用
+// 路由 hover 预加载 — 用户 hover 导航链接时预加载目标 chunk
+installRoutePrefetch(router)
+
+// 注册全局指令
+import { vSpotlight } from '@/composables/useCardSpotlight'
+app.directive('spotlight', vSpotlight)
+
+// 挂载应用（不阻塞字体加载，优先渲染）
 app.mount('#app')
 
-// 初始化子系统（字体、监控、Service Worker）
+// 初始化子系统（字体非阻塞加载、监控、Service Worker）
 initializeApp(app)

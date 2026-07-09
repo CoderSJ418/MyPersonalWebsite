@@ -1,10 +1,8 @@
 <template>
   <main class="project-detail-page">
     <SEOHead
-      :title="project?.title || '项目详情'"
-      :description="project?.description || '项目详细信息'"
-      :structured-data="project ? projectStructuredData(project) : undefined"
-    />
+:title="project?.title || '项目详情'" :description="project?.description || '项目详细信息'"
+      :structured-data="project ? projectStructuredData(project) : undefined" />
     <ProjectDetail />
   </main>
 </template>
@@ -28,7 +26,9 @@ onMounted(() => {
 
 <style scoped>
 .project-detail-page {
-  min-height: 100vh;
-  background-color: var(--color-bg-primary);
+  min-height: 100vh; /* fallback for older browsers */
+  min-height: 100dvh; /* dynamic viewport height for mobile */
+  background: linear-gradient(180deg, var(--us-bg-start), var(--us-bg-end));
+  color: var(--us-text-primary);
 }
 </style>

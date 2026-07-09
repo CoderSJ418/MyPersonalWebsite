@@ -25,85 +25,100 @@
 /* 淡入 + 向上滑入 */
 .stagger-fade-up {
   opacity: 0;
-  animation: staggerFadeUp var(--duration-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeUp var(--duration-slow) var(--us-easing-enter) forwards;
 }
 
 @keyframes staggerFadeUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(24px) scale(0.96);
+    filter: blur(4px);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
 /* 淡入 + 向左滑入 */
 .stagger-fade-left {
   opacity: 0;
-  animation: staggerFadeLeft var(--duration-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeLeft var(--duration-slow) var(--us-easing-enter) forwards;
 }
 
 @keyframes staggerFadeLeft {
   from {
     opacity: 0;
-    transform: translateX(40px);
+    transform: translateX(24px) scale(0.96);
+    filter: blur(4px);
   }
+
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
 }
 
 /* 淡入 + 向右滑入 */
 .stagger-fade-right {
   opacity: 0;
-  animation: staggerFadeRight var(--duration-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeRight var(--duration-slow) var(--us-easing-enter) forwards;
 }
 
 @keyframes staggerFadeRight {
   from {
     opacity: 0;
-    transform: translateX(-40px);
+    transform: translateX(-24px) scale(0.96);
+    filter: blur(4px);
   }
+
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
 }
 
 /* 淡入 + 缩放 */
 .stagger-fade-scale {
   opacity: 0;
-  animation: staggerFadeScale var(--duration-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeScale var(--duration-slow) var(--us-easing-enter) forwards;
 }
 
 @keyframes staggerFadeScale {
   from {
     opacity: 0;
     transform: scale(0.9);
+    filter: blur(4px);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
+    filter: blur(0);
   }
 }
 
 /* 淡入 + 旋转 */
 .stagger-fade-rotate {
   opacity: 0;
-  animation: staggerFadeRotate var(--duration-slow) var(--ease-editorial) forwards;
+  animation: staggerFadeRotate var(--duration-slow) var(--us-easing-enter) forwards;
 }
 
 @keyframes staggerFadeRotate {
   from {
     opacity: 0;
-    transform: rotate(-5deg) translateY(20px);
+    transform: rotate(-2deg) scale(0.96);
+    filter: blur(4px);
   }
+
   to {
     opacity: 1;
-    transform: rotate(0) translateY(0);
+    transform: rotate(0) scale(1);
+    filter: blur(0);
   }
 }
 
@@ -111,43 +126,39 @@
    悬停微动效（Hover Micro-interactions）
    ============================================ */
 
-/* 卡片悬停 - 向上浮动 */
+/* 卡片悬停 - 向上浮动 + 阴影增强 */
 .hover-lift {
   transition:
-    transform var(--duration-normal) var(--ease-editorial),
-    box-shadow var(--duration-normal) var(--ease-editorial);
+    transform var(--duration-normal) var(--us-easing-enter),
+    box-shadow var(--duration-normal) var(--us-easing);
 }
 
 .hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--us-depth-1-hover);
 }
 
 /* 按钮悬停 - 向上浮动 + 阴影增强 */
 .hover-lift-button {
   transition:
-    transform var(--duration-normal) var(--ease-editorial),
-    box-shadow var(--duration-normal) var(--ease-editorial);
+    transform var(--duration-normal) var(--us-easing-enter),
+    box-shadow var(--duration-normal) var(--us-easing);
 }
 
 .hover-lift-button:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+  box-shadow: var(--us-depth-1-hover);
 }
 
 /* 图片悬停 - 缩放 + 亮度增强 */
 .hover-scale-bright {
   transition:
-    transform var(--duration-slow) var(--ease-editorial),
-    filter var(--duration-normal) ease;
+    transform var(--duration-slow) var(--us-easing-enter),
+    filter var(--duration-slow) var(--us-easing);
 }
 
 .hover-scale-bright:hover {
-  transform: scale(1.08);
-  filter: brightness(1.1);
+  transform: scale(1.04);
 }
 
 /* 链接悬停 - 下划线展开 */
@@ -163,7 +174,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--accent-color);
+  background: var(--us-accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--duration-normal) var(--ease-editorial);
@@ -186,7 +197,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: var(--accent-color);
+  background: var(--us-accent);
   transform: translateX(-50%);
   transition: width var(--duration-normal) var(--ease-editorial);
 }
@@ -265,27 +276,14 @@
 }
 
 @keyframes pulseEditorial {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
-  }
-}
-
-/* 强调动画 - 弹跳 */
-.animate-bounce-editorial {
-  animation: bounceEditorial 1s infinite;
-}
-
-@keyframes bounceEditorial {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
 
@@ -298,25 +296,9 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* 强调动画 - 摇摆 */
-.animate-swing {
-  animation: swing 1s ease-in-out infinite;
-}
-
-@keyframes swing {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(5deg);
-  }
-  75% {
-    transform: rotate(-5deg);
   }
 }
 
@@ -369,10 +351,12 @@
    ============================================ */
 
 :root {
-  --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* --ease-editorial: 别名映射到 unified-system.css --us-easing（唯一标准源） */
+  --ease-editorial: var(--us-easing);
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -387,12 +371,6 @@
    ============================================ */
 
 @media (max-width: 768px) {
-  /* 减少移动端动画时间 */
-  :root {
-    --duration-fast: 150ms;
-    --duration-normal: 300ms;
-    --duration-slow: 450ms;
-  }
 
   /* 移动端禁用 hover 效果 */
   .hover-lift:hover,
@@ -401,5 +379,95 @@
   .hover-underline-expand:hover::after,
   .hover-underline-center:hover::after {
     transform: none;
+  }
+}
+
+/* ============================================
+   全局 vs-reveal 入场动画系统
+   ============================================ */
+
+/* 初始态 — 不可见，微下移 + 柔和模糊 */
+.vs-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition:
+    opacity 0.7s var(--us-easing-enter),
+    transform 0.7s var(--us-easing-enter),
+    filter 0.5s var(--us-easing-enter);
+  /* Safety net: force visibility after 4s even if observer fails */
+  animation: vs-reveal-safety-fallback 0.01s 4s forwards;
+}
+
+/* 可见态 — 完全显示 */
+.vs-reveal.vs-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  animation: none;
+  /* Cancel safety fallback when properly revealed */
+}
+
+/* Stagger延迟支持 */
+.vs-reveal--stagger {
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+/* Safety fallback keyframes — forces visibility after timeout */
+@keyframes vs-reveal-safety-fallback {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ============================================
+   微交互工具类（Micro-interactions）
+   ============================================ */
+
+/* 按下微缩 — 按钮/卡片点击反馈 */
+.micro-bounce {
+  transition: transform 0.1s var(--us-easing-exit);
+}
+
+.micro-bounce:active {
+  transform: scale(0.97);
+}
+
+/* 悬浮微升 — 轻量hover提升 */
+.micro-lift {
+  transition: transform 0.2s var(--us-easing-enter);
+}
+
+.micro-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* 悬浮辉光 — accent glow hover效果 */
+.micro-glow {
+  transition: box-shadow 0.3s var(--us-easing-enter);
+}
+
+.micro-glow:hover {
+  box-shadow: var(--us-accent-glow);
+}
+
+/* 通用淡入淡出 */
+.micro-fade {
+  transition: opacity 0.2s var(--us-easing-exit);
+}
+
+/* ============================================
+   共享 @keyframes — 供组件复用
+   ============================================ */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

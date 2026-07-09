@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { Draggable } from 'gsap/Draggable'
+import { logger } from '@/utils/logger'
 
 // 注册插件
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Draggable)
@@ -82,7 +83,7 @@ export class GSAPOptimizer {
 
     // 应用性能优化配置
     const optimizedProperties = this.applyPerformanceOptimizations(properties)
-    
+
     // 创建动画
     const animation = gsap.to(targets, {
       ...optimizedProperties,
@@ -92,7 +93,7 @@ export class GSAPOptimizer {
     })
 
     this.activeAnimations.add(animation)
-    
+
     // 监听动画完成
     animation.eventCallback('onComplete', () => {
       this.activeAnimations.delete(animation)
@@ -156,13 +157,13 @@ export class GSAPOptimizer {
         delete optimized.x
         delete optimized.xPercent
       }
-      
+
       if (optimized.y || optimized.yPercent) {
         optimized.transformY = optimized.y || `${optimized.yPercent || 0}%`
         delete optimized.y
         delete optimized.yPercent
       }
-      
+
       if (optimized.z || optimized.zPercent) {
         optimized.transformZ = optimized.z || `${optimized.zPercent || 0}%`
         delete optimized.z
@@ -175,7 +176,7 @@ export class GSAPOptimizer {
       if (!optimized.willChange) {
         optimized.willChange = 'transform, opacity'
       }
-      
+
       if (!optimized.transform) {
         optimized.transform = 'translateZ(0)'
       }
@@ -200,7 +201,7 @@ export class GSAPOptimizer {
     animationFn: (item: Element, index: number) => gsap.core.Tween
   ): gsap.core.Tween[] {
     const animations: gsap.core.Tween[] = []
-    
+
     items.forEach((item, index) => {
       if (index < this.maxConcurrentAnimations) {
         const animation = animationFn(item, index)
@@ -220,13 +221,13 @@ export class GSAPOptimizer {
     config: AnimationConfig = {}
   ): gsap.core.Tween[] {
     const animations: gsap.core.Tween[] = []
-    
+
     targets.forEach((target, index) => {
       const staggerConfig = {
         ...config,
         delay: (config.delay || 0) + (index * (config.stagger || 0.1))
       }
-      
+
       const animation = this.createOptimizedAnimation(target, properties, staggerConfig)
       animations.push(animation)
     })
@@ -239,7 +240,7 @@ export class GSAPOptimizer {
    */
   optimizeScrollTrigger(trigger: gsap.core.Tween): void {
     const scrollTrigger = trigger.scrollTrigger
-    
+
     if (scrollTrigger) {
       // 减少更新频率
       scrollTrigger.update = () => {
@@ -247,7 +248,7 @@ export class GSAPOptimizer {
           scrollTrigger.progress = Math.round(scrollTrigger.progress * 100) / 100
         }
       }
-      
+
       // 优化缩放
       if (scrollTrigger.scrub) {
         scrollTrigger.scrub = Math.min(scrollTrigger.scrub, 2)
@@ -261,7 +262,7 @@ export class GSAPOptimizer {
   private cleanupOldAnimations(): void {
     const animationsToDelete = Array.from(this.activeAnimations)
       .slice(0, Math.floor(this.maxConcurrentAnimations * 0.2))
-    
+
     animationsToDelete.forEach(anim => {
       anim.kill()
       this.activeAnimations.delete(anim)
@@ -294,7 +295,7 @@ export class GSAPOptimizer {
         if (entry.entryType === 'measure') {
           const duration = entry.duration
           if (duration > 100) {
-            console.warn(`Performance warning: Animation took ${duration}ms`)
+            logger.warn(`Performance warning: Animation took ${duration}ms`)
           }
         }
       }

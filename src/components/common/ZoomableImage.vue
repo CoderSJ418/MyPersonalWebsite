@@ -1,18 +1,8 @@
 <template>
-  <div
-    ref="containerRef"
-    class="overflow-hidden relative"
-    :style="{ width: width, height: height }"
-  >
+  <div ref="containerRef" class="overflow-hidden relative" :style="{ width: width, height: height }">
     <img
-      ref="imageRef"
-      :src="src"
-      :alt="alt"
-      class="transition-transform duration-300 cursor-zoom-in"
-      :style="{ transform: `scale(${scale})` }"
-      @click="handleClick"
-      @load="handleImageLoad"
-    />
+ref="imageRef" :src="src" :alt="alt" loading="lazy" class="transition-transform duration-300 cursor-zoom-in"
+      :style="{ transform: `scale(${scale})` }" @click="handleClick" @load="handleImageLoad" />
   </div>
 </template>
 
@@ -70,6 +60,5 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-  touch-action: manipulation;
 }
 </style>

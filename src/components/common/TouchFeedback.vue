@@ -66,7 +66,7 @@ const handleTouchCancel = () => {
 <style scoped>
 .ripple-enter-active,
 .ripple-leave-active {
-  transition: all 0.3s ease-out;
+  transition: opacity, transform var(--us-duration-normal) var(--us-easing-exit);
 }
 
 .ripple-enter-from,

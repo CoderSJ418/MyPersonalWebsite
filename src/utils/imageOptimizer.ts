@@ -3,6 +3,8 @@
  * 支持 WebP 格式、渐进式加载、虚拟滚动等优化
  */
 
+import { logger } from '@/utils/logger'
+
 // 图片优化配置
 export interface ImageOptimizationConfig {
   quality?: number;
@@ -37,20 +39,20 @@ export class ImageOptimizer {
    */
   private detectSupportedFormats(): Set<string> {
     const formats = new Set<string>();
-    
+
     // 检测 WebP 支持
     if (this.isWebPSupported()) {
       formats.add('webp');
     }
-    
+
     // 检测 AVIF 支持
     if (this.isAvifSupported()) {
       formats.add('avif');
     }
-    
+
     // JPEG 总是支持
     formats.add('jpeg');
-    
+
     return formats;
   }
 
@@ -59,11 +61,11 @@ export class ImageOptimizer {
    */
   private isWebPSupported(): boolean {
     if (typeof document === 'undefined') return false;
-    
+
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;
-    
+
     try {
       return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
     } catch {
@@ -76,11 +78,11 @@ export class ImageOptimizer {
    */
   private isAvifSupported(): boolean {
     if (typeof document === 'undefined') return false;
-    
+
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;
-    
+
     try {
       return canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0;
     } catch {
@@ -115,11 +117,11 @@ export class ImageOptimizer {
 
     const format = this.getOptimalFormat();
     const optimizedUrl = this.applyOptimizations(originalUrl, format, quality, aspectRatio);
-    
+
     if (lazyLoad) {
       return this.generateSrcSet(optimizedUrl, sizes, format);
     }
-    
+
     return optimizedUrl;
   }
 
@@ -174,7 +176,7 @@ export class ImageOptimizer {
    */
   createPreloader(
     imageUrls: string[],
-    callback: (progress: number) => void = () => {}
+    callback: (progress: number) => void = () => { }
   ): () => void {
     let loadedCount = 0;
     const totalCount = imageUrls.length;
@@ -197,7 +199,7 @@ export class ImageOptimizer {
         try {
           await preloadImage(url);
         } catch (_error) {
-          console.warn(`Failed to preload image: ${url}`);
+          logger.warn(`Failed to preload image: ${url}`);
         }
       }
     };
@@ -218,13 +220,13 @@ export class ImageOptimizer {
   ): { container: HTMLElement; cleanup: () => void } {
     const container = document.createElement('div');
     container.className = 'virtual-scroll-container';
-    
+
     const bufferSize = 5; // 缓冲区大小
     const visibleRange = { start: 0, end: 10 };
 
     const renderVisibleItems = () => {
       container.innerHTML = '';
-      
+
       for (let i = visibleRange.start; i <= visibleRange.end; i++) {
         if (imageUrls[i]) {
           const item = renderItem(imageUrls[i], i);
@@ -236,7 +238,7 @@ export class ImageOptimizer {
     const handleScroll = () => {
       const scrollTop = container.scrollTop;
       const itemHeight = 200; // 假设每个项目高度为 200px
-      
+
       visibleRange.start = Math.max(0, Math.floor(scrollTop / itemHeight) - bufferSize);
       visibleRange.end = Math.min(
         imageUrls.length - 1,
@@ -268,7 +270,7 @@ export class ImageOptimizer {
     format: 'blur' | 'color' | 'none' = 'blur'
   ): string {
     if (format === 'none') return '';
-    
+
     if (format === 'color') {
       const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe'];
       const randomColor = colors[Math.floor(Math.random() * colors.length)];

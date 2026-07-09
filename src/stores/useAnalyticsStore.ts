@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { logger } from '@/utils/logger'
 
 /**
  * 分析事件接口
@@ -48,7 +49,7 @@ export const useAnalyticsStore = defineStore('analytics', () => {
    */
   function trackPageView(page: string, title: string) {
     const now = Date.now()
-    
+
     // 更新上一个页面的持续时间
     if (pageVisits.value.length > 0) {
       const lastVisit = pageVisits.value[pageVisits.value.length - 1]
@@ -151,7 +152,7 @@ export const useAnalyticsStore = defineStore('analytics', () => {
       }
       localStorage.setItem('analytics_data', JSON.stringify(data))
     } catch (e) {
-      console.warn('Failed to save analytics data:', e)
+      logger.warn('Failed to save analytics data:', e)
     }
   }
 
@@ -170,7 +171,7 @@ export const useAnalyticsStore = defineStore('analytics', () => {
         requestCount.value = data.requestCount || 0
       }
     } catch (e) {
-      console.warn('Failed to load analytics data:', e)
+      logger.warn('Failed to load analytics data:', e)
     }
   }
 

@@ -6,6 +6,7 @@
 import { BaseDocumentService } from './DocumentService'
 import { MCPClient } from './MCPClient'
 import type { Document } from './types'
+import { logger } from '@/utils/logger'
 import path from 'path'
 import fs from 'fs/promises'
 
@@ -51,10 +52,10 @@ export class DevDocumentService extends BaseDocumentService {
       // 4. 缓存文档
       this.cache.set(cacheKey, parsed)
 
-      console.log(`✅ 文档已获取: ${libraryName}@${parsed.version}`)
+      logger.info(`✅ 文档已获取: ${libraryName}@${parsed.version}`)
       return parsed
     } catch (error) {
-      console.error(`❌ 获取文档失败: ${libraryName}`, error)
+      logger.error(`❌ 获取文档失败: ${libraryName}`, error)
       throw error
     }
   }
@@ -143,9 +144,9 @@ export class DevDocumentService extends BaseDocumentService {
       // 写入文件
       await fs.writeFile(filePath, JSON.stringify(doc, null, 2), 'utf-8')
 
-      console.log(`📄 静态文件已生成: ${fileName}`)
+      logger.info(`📄 静态文件已生成: ${fileName}`)
     } catch (error) {
-      console.error(`❌ 生成静态文件失败: ${libraryName}`, error)
+      logger.error(`❌ 生成静态文件失败: ${libraryName}`, error)
       throw error
     }
   }
@@ -165,7 +166,7 @@ export class DevDocumentService extends BaseDocumentService {
     // 重新获取文档
     await this.getDocument(libraryName)
 
-    console.log(`🔄 文档缓存已刷新: ${libraryName}`)
+    logger.info(`🔄 文档缓存已刷新: ${libraryName}`)
   }
 
   /**
@@ -177,7 +178,7 @@ export class DevDocumentService extends BaseDocumentService {
     try {
       return await this.mcpClient.getLibraryVersions(libraryName)
     } catch (error) {
-      console.error(`❌ 获取版本列表失败: ${libraryName}`, error)
+      logger.error(`❌ 获取版本列表失败: ${libraryName}`, error)
       return []
     }
   }
@@ -192,17 +193,17 @@ export class DevDocumentService extends BaseDocumentService {
   ): Promise<Record<string, Document>> {
     const results: Record<string, Document> = {}
 
-    console.log(`📚 开始获取 ${libraries.length} 个库的文档...`)
+    logger.info(`📚 开始获取 ${libraries.length} 个库的文档...`)
 
     for (const { name, version } of libraries) {
       try {
         results[name] = await this.getDocument(name, version)
       } catch (error) {
-        console.error(`❌ 获取文档失败: ${name}`, error)
+        logger.error(`❌ 获取文档失败: ${name}`, error)
       }
     }
 
-    console.log(`✅ 文档获取完成: ${Object.keys(results).length}/${libraries.length}`)
+    logger.info(`✅ 文档获取完成: ${Object.keys(results).length}/${libraries.length}`)
     return results
   }
 
@@ -250,9 +251,9 @@ export class DevDocumentService extends BaseDocumentService {
       const indexPath = path.join(this.docsDir, 'index.json')
       await fs.writeFile(indexPath, JSON.stringify(index, null, 2), 'utf-8')
 
-      console.log(`📋 文档索引已生成: ${entries.length} 个文档`)
+      logger.info(`📋 文档索引已生成: ${entries.length} 个文档`)
     } catch (error) {
-      console.error('❌ 生成文档索引失败:', error)
+      logger.error('❌ 生成文档索引失败:', error)
       throw error
     }
   }

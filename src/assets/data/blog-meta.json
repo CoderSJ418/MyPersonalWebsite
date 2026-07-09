@@ -1,0 +1,345 @@
+[
+  {
+    "id": "21",
+    "title": "Stripe/Framer/Raycast视觉特效深度拆解与落地实施",
+    "excerpt": "深度拆解Stripe/Framer/Raycast三大竞品15个标志性视觉特效的底层技术逻辑，结合Vue3+GSAP+TypeScript技术栈提供可复用代码示例、组件拆分方案、集成步骤，以及完整的性能优化与低端设备降级策略。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-04",
+    "updatedAt": "2026-07-04",
+    "tags": [
+      "视觉特效",
+      "GSAP",
+      "CSS动画",
+      "前端架构",
+      "性能优化"
+    ],
+    "readTime": 35,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "视觉工程"
+  },
+  {
+    "id": "16",
+    "title": "Stripe级光效系统工程设计",
+    "excerpt": "深入解析如何用纯CSS Custom Properties构建Stripe级别的鼠标追踪光效系统，包括radial-gradient渲染、CSS变量驱动、性能优化策略，以及从设计意图到工程落地的完整决策链。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-02",
+    "updatedAt": "2026-07-02",
+    "tags": [
+      "CSS",
+      "视觉系统",
+      "光效设计",
+      "工程实践"
+    ],
+    "readTime": 18,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "视觉工程"
+  },
+  {
+    "id": "17",
+    "title": "卡片交互物理模型设计",
+    "excerpt": "解析卡片交互的统一物理模型设计——从hover位移、阴影深度、边框光效到按压反馈，构建一套自洽的卡片交互物理系统，让每个微交互都遵循同一套物理法则。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-02",
+    "updatedAt": "2026-07-02",
+    "tags": [
+      "CSS",
+      "交互设计",
+      "物理模型",
+      "视觉系统"
+    ],
+    "readTime": 15,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "视觉工程"
+  },
+  {
+    "id": "18",
+    "title": "Framer级滚动叙事系统设计",
+    "excerpt": "从Framer Motion的滚动动画中汲取灵感，用IntersectionObserver+CSS transition构建零依赖的滚动叙事系统，包括stagger延迟策略、一次性触发机制和composable+directive双模式API设计。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-02",
+    "updatedAt": "2026-07-02",
+    "tags": [
+      "CSS",
+      "滚动动画",
+      "IntersectionObserver",
+      "视觉系统"
+    ],
+    "readTime": 16,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "视觉工程"
+  },
+  {
+    "id": "19",
+    "title": "视觉层次工程设计",
+    "excerpt": "从Stripe和Vercel的视觉层次中提炼设计原则，用CSS Custom Properties构建可编程的视觉层次系统——Typography Scale、Color Hierarchy、Spacing Model，让每个像素都有存在的理由。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-02",
+    "updatedAt": "2026-07-02",
+    "tags": [
+      "CSS",
+      "视觉层次",
+      "设计系统",
+      "Typography"
+    ],
+    "readTime": 14,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "视觉工程"
+  },
+  {
+    "id": "20",
+    "title": "构建统一视觉交互系统",
+    "excerpt": "从零到一构建统一视觉交互系统的完整工程记录——5大模型（Light/Surface/Motion/Hierarchy/Spacing）、CSS @layer架构、双系统共存迁移策略、composable抽取，以及从392处旧token到统一系统的渐进式迁移路径。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-02",
+    "updatedAt": "2026-07-02",
+    "tags": [
+      "CSS",
+      "设计系统",
+      "视觉系统",
+      "工程架构"
+    ],
+    "readTime": 20,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "视觉工程"
+  },
+  {
+    "id": "15",
+    "title": "谈谈我对2025年前端技术的思考和理解",
+    "excerpt": "资深前端工程师对2025年前端技术的深度思考，包括AI影响、技术趋势、职业发展等前瞻性观点。",
+    "author": "三桥sankyu",
+    "publishedAt": "2025-01-29",
+    "updatedAt": "2025-01-29",
+    "tags": [
+      "思考",
+      "前端",
+      "2025"
+    ],
+    "readTime": 20,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "思考"
+  },
+  {
+    "id": "14",
+    "title": "启动与搭建Vue3工程极简脚手架教程(2025超详细教程)",
+    "excerpt": "2025年超详细Vue3工程脚手架搭建教程，包含命令行启动、IDEA配置、项目瘦身等完整实践指南。",
+    "author": "CSDN博主",
+    "publishedAt": "2025-01-28",
+    "updatedAt": "2025-01-28",
+    "tags": [
+      "Vue3",
+      "脚手架",
+      "教程"
+    ],
+    "readTime": 16,
+    "coverImage": "/images/projects/blog-2.svg",
+    "category": "Vue3"
+  },
+  {
+    "id": "13",
+    "title": "【2025最新版】3小时学会Vue3，小白零基础视频教程",
+    "excerpt": "2025最新版Vue3零基础视频教程，3小时快速掌握Vue3核心语法、组件开发、状态管理等关键技能。",
+    "author": "邓瑞编程",
+    "publishedAt": "2025-01-27",
+    "updatedAt": "2025-01-27",
+    "tags": [
+      "Vue3",
+      "教程",
+      "视频"
+    ],
+    "readTime": 18,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "Vue3"
+  },
+  {
+    "id": "12",
+    "title": "2025新版Vue3基础实践与项目实战",
+    "excerpt": "2025新版Vue3基础实践与项目实战教程，包含Vite脚手架工程化搭建、组件实战、UI框架整合等完整内容。",
+    "author": "Java小卷",
+    "publishedAt": "2025-01-26",
+    "updatedAt": "2025-01-26",
+    "tags": [
+      "Vue3",
+      "实战",
+      "项目"
+    ],
+    "readTime": 22,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "Vue3"
+  },
+  {
+    "id": "11",
+    "title": "2025年前端性能优化实战指南：从加载到渲染的全链路优化",
+    "excerpt": "2025年前端性能优化实战指南，涵盖资源加载优化、代码执行优化、渲染性能优化等核心维度，打造秒开级Web应用。",
+    "author": "fruge365",
+    "publishedAt": "2025-01-25",
+    "updatedAt": "2025-01-25",
+    "tags": [
+      "性能优化",
+      "前端",
+      "实战"
+    ],
+    "readTime": 28,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "性能优化"
+  },
+  {
+    "id": "10",
+    "title": "2025最新Web前端开发系统学习图文教程",
+    "excerpt": "2025年最新Web前端开发系统学习教程，从VSCode安装到HTML/CSS/JavaScript，再到Vue、TypeScript、Node.js全栈开发。",
+    "author": "艾编程",
+    "publishedAt": "2025-01-24",
+    "updatedAt": "2025-01-24",
+    "tags": [
+      "教程",
+      "前端",
+      "系统学习"
+    ],
+    "readTime": 35,
+    "coverImage": "/images/projects/blog-2.svg",
+    "category": "教程"
+  },
+  {
+    "id": "9",
+    "title": "前端开发学习路线2025版",
+    "excerpt": "黑马程序员出品的前端学习路线图，包含基础入门、技术进阶、Vue开发、小程序、鸿蒙应用开发等完整学习路径。",
+    "author": "黑马程序员",
+    "publishedAt": "2025-01-23",
+    "updatedAt": "2025-01-23",
+    "tags": [
+      "学习路线",
+      "前端",
+      "黑马"
+    ],
+    "readTime": 20,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "学习路线"
+  },
+  {
+    "id": "8",
+    "title": "2025年最新超详细的前端学习路线",
+    "excerpt": "2025年最新前端学习路线图，从HTML/CSS基础到Vue/React框架，再到工程化、性能优化，全面指导前端学习路径。",
+    "author": "沉默王二",
+    "publishedAt": "2025-01-22",
+    "updatedAt": "2025-01-22",
+    "tags": [
+      "学习路线",
+      "前端",
+      "2025"
+    ],
+    "readTime": 25,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "学习路线"
+  },
+  {
+    "id": "7",
+    "title": "2025年资深前端面试心得",
+    "excerpt": "资深前端工程师分享2025年面试经验，包括技术准备、项目展示、沟通技巧等，帮助你顺利通过面试。",
+    "author": "匿名作者",
+    "publishedAt": "2025-01-21",
+    "updatedAt": "2025-01-21",
+    "tags": [
+      "面试",
+      "心得",
+      "前端"
+    ],
+    "readTime": 15,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "面试"
+  },
+  {
+    "id": "6",
+    "title": "2025年前端面试题库大全",
+    "excerpt": "2025年前端面试最全面试题库，涵盖HTML、CSS、JavaScript、Vue、React、性能优化、工程化等核心知识点，帮助前端开发者系统准备面试。",
+    "author": "社区整理",
+    "publishedAt": "2025-01-20",
+    "updatedAt": "2025-01-20",
+    "tags": [
+      "面试",
+      "前端",
+      "题库"
+    ],
+    "readTime": 30,
+    "coverImage": "/images/projects/blog-2.svg",
+    "category": "面试"
+  },
+  {
+    "id": "5",
+    "title": "Pinia 状态管理最佳实践",
+    "excerpt": "深入探讨 Pinia 状态管理的使用技巧和最佳实践，包括 Store 设计、状态持久化、模块化等，帮助你构建可维护的状态管理方案。",
+    "author": "佘杰",
+    "publishedAt": "2024-05-15",
+    "updatedAt": "2024-05-15",
+    "tags": [
+      "Pinia",
+      "状态管理",
+      "Vue 3"
+    ],
+    "readTime": 16,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "Vue3"
+  },
+  {
+    "id": "4",
+    "title": "前端性能优化实战指南",
+    "excerpt": "全面解析前端性能优化的各个方面，包括资源加载优化、渲染性能优化、网络优化等，帮助你打造极速的 Web 应用。",
+    "author": "佘杰",
+    "publishedAt": "2024-04-20",
+    "updatedAt": "2024-04-20",
+    "tags": [
+      "性能优化",
+      "前端",
+      "Web 性能"
+    ],
+    "readTime": 25,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "性能优化"
+  },
+  {
+    "id": "3",
+    "title": "Vite 构建工具深度实践",
+    "excerpt": "探索 Vite 的核心原理和高级配置，包括插件开发、构建优化、性能调优等，帮助你构建更快的开发体验和生产构建。",
+    "author": "佘杰",
+    "publishedAt": "2024-03-05",
+    "updatedAt": "2024-03-05",
+    "tags": [
+      "Vite",
+      "构建工具",
+      "性能优化"
+    ],
+    "readTime": 18,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "构建工具"
+  },
+  {
+    "id": "2",
+    "title": "TypeScript 高级类型技巧",
+    "excerpt": "掌握 TypeScript 高级类型系统，包括泛型、条件类型、映射类型、模板字面量类型等，提升代码的类型安全性和可维护性。",
+    "author": "佘杰",
+    "publishedAt": "2024-02-10",
+    "updatedAt": "2024-02-10",
+    "tags": [
+      "TypeScript",
+      "类型系统",
+      "泛型"
+    ],
+    "readTime": 20,
+    "coverImage": "/images/projects/blog-2.svg",
+    "category": "TypeScript"
+  },
+  {
+    "id": "1",
+    "title": "Vue 3 Composition API 最佳实践",
+    "excerpt": "深入探讨 Vue 3 Composition API 的使用技巧和最佳实践，包括响应式原理、组合式函数设计、依赖注入等核心概念，帮助你写出更优雅的 Vue 3 代码。",
+    "author": "佘杰",
+    "publishedAt": "2024-01-15",
+    "updatedAt": "2024-01-15",
+    "tags": [
+      "Vue 3",
+      "Composition API",
+      "TypeScript"
+    ],
+    "readTime": 15,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "Vue3"
+  }
+]

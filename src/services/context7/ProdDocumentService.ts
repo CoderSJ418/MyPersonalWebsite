@@ -5,6 +5,7 @@
 
 import { BaseDocumentService } from './DocumentService'
 import type { Document } from './types'
+import { logger } from '@/utils/logger'
 import path from 'path'
 import fs from 'fs/promises'
 
@@ -32,7 +33,7 @@ export class ProdDocumentService extends BaseDocumentService {
     }
 
     try {
-      console.log('📚 初始化生产环境文档缓存...')
+      logger.info('📚 初始化生产环境文档缓存...')
 
       // 确保目录存在
       await fs.mkdir(this.docsDir, { recursive: true })
@@ -41,7 +42,7 @@ export class ProdDocumentService extends BaseDocumentService {
       const files = await fs.readdir(this.docsDir)
       const jsonFiles = files.filter((file) => file.endsWith('.json') && file !== 'index.json')
 
-      console.log(`📄 发现 ${jsonFiles.length} 个文档文件`)
+      logger.info(`📄 发现 ${jsonFiles.length} 个文档文件`)
 
       for (const file of jsonFiles) {
         try {
@@ -51,23 +52,23 @@ export class ProdDocumentService extends BaseDocumentService {
 
           // 验证校验和
           if (!this.verifyChecksum(doc.content, doc.checksum)) {
-            console.warn(`⚠️  文档校验和不匹配: ${file}`)
+            logger.warn(`⚠️  文档校验和不匹配: ${file}`)
           }
 
           // 缓存文档
           const cacheKey = this.getCacheKey(doc.library, doc.version)
           this.cache.set(cacheKey, doc)
 
-          console.log(`✅ 已加载: ${doc.library}@${doc.version}`)
+          logger.info(`✅ 已加载: ${doc.library}@${doc.version}`)
         } catch (error) {
-          console.error(`❌ 加载文档失败: ${file}`, error)
+          logger.error(`❌ 加载文档失败: ${file}`, error)
         }
       }
 
       this.initialized = true
-      console.log(`✅ 文档缓存初始化完成: ${this.cache.size} 个文档`)
+      logger.info(`✅ 文档缓存初始化完成: ${this.cache.size} 个文档`)
     } catch (error) {
-      console.error('❌ 初始化文档缓存失败:', error)
+      logger.error('❌ 初始化文档缓存失败:', error)
       // 不抛出错误，允许应用继续运行
     }
   }
@@ -97,7 +98,7 @@ export class ProdDocumentService extends BaseDocumentService {
       this.cache.set(cacheKey, doc)
       return doc
     } catch (error) {
-      console.error(`❌ 加载文档失败: ${libraryName}`, error)
+      logger.error(`❌ 加载文档失败: ${libraryName}`, error)
       throw new Error(`文档未找到: ${libraryName}${version ? `@${version}` : ''}`)
     }
   }
@@ -120,7 +121,7 @@ export class ProdDocumentService extends BaseDocumentService {
 
     // 验证校验和
     if (!this.verifyChecksum(doc.content, doc.checksum)) {
-      console.warn(`⚠️  文档校验和不匹配: ${fileName}`)
+      logger.warn(`⚠️  文档校验和不匹配: ${fileName}`)
     }
 
     return doc
@@ -190,7 +191,7 @@ export class ProdDocumentService extends BaseDocumentService {
   async clearCache(): Promise<void> {
     this.cache.clear()
     this.initialized = false
-    console.log('🗑️  文档缓存已清除')
+    logger.info('🗑️  文档缓存已清除')
   }
 
   /**
@@ -199,17 +200,17 @@ export class ProdDocumentService extends BaseDocumentService {
    * @param libraries 库列表
    */
   async warmupCache(libraries: string[]): Promise<void> {
-    console.log(`🔥 预热缓存: ${libraries.length} 个库`)
+    logger.info(`🔥 预热缓存: ${libraries.length} 个库`)
 
     for (const library of libraries) {
       try {
         await this.getDocument(library)
       } catch (error) {
-        console.error(`❌ 预热缓存失败: ${library}`, error)
+        logger.error(`❌ 预热缓存失败: ${library}`, error)
       }
     }
 
-    console.log('✅ 缓存预热完成')
+    logger.info('✅ 缓存预热完成')
   }
 }
 

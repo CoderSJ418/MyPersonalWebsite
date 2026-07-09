@@ -1,562 +1,540 @@
 <template>
-  <section
-    ref="heroRef"
-    class="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-  >
-    <!-- 动态背景 - 多层渐变光晕 -->
-    <div class="absolute inset-0 overflow-hidden">
-      <!-- 主光晕 - 靛蓝紫罗兰 -->
-      <div class="blob-shape blob-1" />
-      <div class="blob-shape blob-2" />
-      <div class="blob-shape blob-3" />
-      <div class="blob-shape blob-4" />
-    </div>
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO — Content-Focused v9.0
+       ═══════════════════════════════════════════════════════════
+       "我是谁" — 单焦点，内容优先，极少动效
+       
+       Structure: hero > subtle-glow + content > panel
+       - Subtle accent glow (single, static)
+       - Name = primary focus
+       - Metrics / Role / Actions / Social = supporting info
+       ═══════════════════════════════════════════════════════════ -->
+  <section ref="heroRef" class="hero">
+    <!-- Stripe-style gradient mesh canvas background -->
+    <canvas ref="gradientCanvasRef" class="hero__mesh-canvas" aria-hidden="true"></canvas>
+    <!-- Stripe-style grid overlay — subtle line pattern -->
+    <div class="hero__grid-overlay" aria-hidden="true"></div>
+    <!-- Ambient glow (kept for fallback / depth layering) -->
+    <div class="hero__glow" aria-hidden="true"></div>
 
-    <!-- 几何网格背景 -->
-    <div class="absolute inset-0 opacity-[0.4]">
-      <div class="grid-pattern" />
-    </div>
+    <!-- Content — flat, no z-layers -->
+    <div class="hero__content">
+      <div ref="panelRef" class="hero__panel">
+        <h1 class="hero__name stripe-text-gradient">佘杰</h1>
+        <div class="hero__name-accent" aria-hidden="true"></div>
 
-    <!-- 粒子效果 -->
-    <div ref="particlesRef" class="absolute inset-0 pointer-events-none">
-      <div v-for="i in 15" :key="i" class="particle" :style="getParticleStyle(i)" />
-    </div>
-
-    <!-- 主内容 -->
-    <div class="container mx-auto px-4 py-20 md:py-24 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- 左侧内容 - 占7列 -->
-        <div class="lg:col-span-7 max-w-3xl">
-          <!-- 徽章标签 -->
-          <div ref="badgeRef" class="inline-flex items-center gap-3 mb-6 p-2 pr-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-full border border-slate-200 dark:border-slate-800 shadow-sm">
-            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span class="text-sm font-semibold tracking-wide text-slate-600 dark:text-slate-400">
-              接受新项目委托
-            </span>
-          </div>
-
-          <!-- 主标题 -->
-          <h1 ref="titleRef" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1]">
-            <span class="block text-slate-900 dark:text-white">
-              你好，我是
-            </span>
-            <span class="block text-gradient">
-              佘杰
-            </span>
-          </h1>
-
-          <!-- 副标题 -->
-          <h2 ref="subtitleRef" class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-slate-700 dark:text-slate-300">
-            Vue 专家 · 前端架构师 · 7年开发经验
-          </h2>
-
-          <!-- 描述 -->
-          <p ref="descriptionRef" class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-2xl">
-            专注于构建高性能、可维护的前端应用。擅长 Vue 3、TypeScript、现代前端架构，致力于创造卓越的用户体验和优雅的代码。
-          </p>
-
-          <!-- 关键数据统计 -->
-          <div ref="statsRef" class="grid grid-cols-3 gap-6 mb-10">
-            <div class="stat-card">
-              <div class="text-4xl md:text-5xl font-black text-gradient-secondary">
-                7+
-              </div>
-              <div class="text-sm font-medium text-slate-600 dark:text-slate-400 mt-1">
-                年经验
-              </div>
+        <div class="hero__metrics">
+          <div class="metric stripe-glow">
+            <div class="metric__value">
+              <span data-count-up="7">0</span><span class="metric__suffix">+</span>
             </div>
-            <div class="stat-card">
-              <div class="text-4xl md:text-5xl font-black text-gradient-accent">
-                50+
-              </div>
-              <div class="text-sm font-medium text-slate-600 dark:text-slate-400 mt-1">
-                项目交付
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="text-4xl md:text-5xl font-black text-gradient">
-                10+
-              </div>
-              <div class="text-sm font-medium text-slate-600 dark:text-slate-400 mt-1">
-                团队规模
-              </div>
-            </div>
+            <div class="metric__label">Years</div>
           </div>
-
-          <!-- CTA 按钮组 -->
-          <div ref="ctaRef" class="flex flex-col sm:flex-row gap-4">
-            <CTA
-              href="/projects"
-              variant="primary"
-              size="large"
-              label="查看我的作品集"
-            >
-              查看作品
-            </CTA>
-            <CTA
-              href="/contact"
-              variant="outline"
-              size="large"
-              label="联系我"
-            >
-              联系我
-            </CTA>
+          <div class="metric stripe-glow">
+            <div class="metric__value">
+              <span data-count-up="50">0</span><span class="metric__suffix">+</span>
+            </div>
+            <div class="metric__label">Projects</div>
           </div>
-
-          <div ref="socialRef" class="flex items-center gap-4 mt-8">
-            <SocialLinks github="https://github.com/shejie" email="912999051@qq.com" />
+          <div class="metric stripe-glow">
+            <div class="metric__value">
+              <span data-count-up="10">0</span><span class="metric__suffix">+</span>
+            </div>
+            <div class="metric__label">Team Size</div>
           </div>
         </div>
 
-        <!-- 右侧装饰 - 占5列 -->
-        <div ref="decorRef" class="hidden lg:block lg:col-span-5 relative">
-          <!-- 3D 卡片堆叠效果 -->
-          <div class="relative w-full h-[600px]">
-            <!-- 卡片 1 -->
-            <div class="absolute top-0 right-0 w-full h-[500px] bg-gradient-to-br from-primary-500/10 to-pink-500/10 dark:from-primary-500/20 dark:to-pink-500/20 backdrop-blur-sm rounded-3xl border border-white/20 dark:border-slate-700/50 transform rotate-[-6deg] translate-y-8 translate-x-8 card-stack-1" />
-            
-            <!-- 卡片 2 -->
-            <div class="absolute top-0 right-0 w-full h-[500px] bg-gradient-to-br from-pink-500/10 to-amber-500/10 dark:from-pink-500/20 dark:to-amber-500/20 backdrop-blur-sm rounded-3xl border border-white/20 dark:border-slate-700/50 transform rotate-[-3deg] translate-y-4 translate-x-4 card-stack-2" />
-            
-            <!-- 主卡片 -->
-            <div class="absolute top-0 right-0 w-full h-[500px] bg-gradient-to-br from-primary-500/20 to-pink-500/20 dark:from-primary-500/30 dark:to-pink-500/30 backdrop-blur-sm rounded-3xl border border-white/30 dark:border-slate-700/50 shadow-2xl card-stack-main overflow-hidden">
-              <!-- 卡片内容 -->
-              <div class="absolute inset-0 p-8 flex flex-col justify-between">
-                <!-- 顶部代码片段 -->
-                <div class="bg-white/90 dark:bg-slate-900/90 rounded-xl p-4 shadow-lg">
-                  <div class="flex items-center gap-2 mb-3">
-                    <div class="w-3 h-3 rounded-full bg-red-500" />
-                    <div class="w-3 h-3 rounded-full bg-yellow-500" />
-                    <div class="w-3 h-3 rounded-full bg-green-500" />
-                  </div>
-                  <pre class="text-xs md:text-sm font-mono text-slate-700 dark:text-slate-300 overflow-hidden"><code>const developer = {
-  name: "佘杰",
-  skills: ["Vue", "TS", "Node"],
-  passion: "Building Great UI"
-}
+        <div class="hero__role stripe-text-gradient">Vue Expert · Frontend Architect</div>
 
-developer.createAwesome() {
-  return "Let's build!"
-}</code></pre>
-                </div>
-                
-                <!-- 中间图标 -->
-                <div class="flex justify-center">
-                  <div class="relative">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-pink-500 shadow-2xl animate-float" />
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <Code2 class="w-16 h-16 text-white" />
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- 底部技术栈标签 -->
-                <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 text-xs font-semibold bg-primary-500/20 text-primary-700 dark:text-primary-300 rounded-full">Vue 3</span>
-                  <span class="px-3 py-1 text-xs font-semibold bg-pink-500/20 text-pink-700 dark:text-pink-300 rounded-full">TypeScript</span>
-                  <span class="px-3 py-1 text-xs font-semibold bg-amber-500/20 text-amber-700 dark:text-amber-300 rounded-full">Vite</span>
-                  <span class="px-3 py-1 text-xs font-semibold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-full">Tailwind</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <p class="hero__positioning">
+          专注高性能前端架构，从0到1构建可规模化工程体系
+        </p>
+        <div class="hero__actions">
+          <CTA href="/projects" variant="primary" size="large" label="查看作品集">查看作品</CTA>
+          <CTA href="mailto:912999051@qq.com" variant="outline" size="large" label="联系我">联系我</CTA>
         </div>
       </div>
     </div>
 
-    <!-- 滚动提示 -->
-    <div ref="scrollRef" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 z-20">
-      <span class="text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-500">向下滚动</span>
-      <div class="w-8 h-12 border-2 border-slate-300 dark:border-slate-700 rounded-full flex justify-center pt-3">
-        <div class="w-1.5 h-3 bg-gradient-to-b from-primary-500 to-pink-500 rounded-full animate-bounce" />
-      </div>
-    </div>
+    <!-- Bottom Fade -->
+    <div class="hero__fade" aria-hidden="true"></div>
   </section>
 </template>
 
 <script setup lang="ts">
+/**
+ * HeroSection — Content-Focused v9.0 + Stripe Motion
+ *
+ * Stripe-level entrance choreography:
+ * - GSAP timeline: name → metrics → role → positioning → actions → social
+ * - Canvas gradient mesh background
+ * - Count-up animation for metrics
+ * - Spring-like micro-interactions
+ */
 import { ref, onMounted, onUnmounted } from 'vue'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import { Code2 } from 'lucide-vue-next'
 import CTA from '@/components/ui/CTA.vue'
-import SocialLinks from '@/components/common/SocialLinks.vue'
+import { gsap } from 'gsap'
+import { useStripeGradient } from '@/composables/useStripeGradient'
+import { useStripeScrollAnimation } from '@/composables/useStripeScrollAnimation'
 
-// 注册 ScrollTrigger 插件
-gsap.registerPlugin(ScrollTrigger)
-
-// 引用元素
 const heroRef = ref<HTMLElement | null>(null)
-const badgeRef = ref<HTMLElement | null>(null)
-const titleRef = ref<HTMLElement | null>(null)
-const subtitleRef = ref<HTMLElement | null>(null)
-const descriptionRef = ref<HTMLElement | null>(null)
-const statsRef = ref<HTMLElement | null>(null)
-const ctaRef = ref<HTMLElement | null>(null)
-const socialRef = ref<HTMLElement | null>(null)
-const decorRef = ref<HTMLElement | null>(null)
-const scrollRef = ref<HTMLElement | null>(null)
-const particlesRef = ref<HTMLElement | null>(null)
+const gradientCanvasRef = ref<HTMLCanvasElement | null>(null)
 
-// 存储动画实例
-let mainTimeline: gsap.core.Timeline | null = null
-let scrollAnimation: gsap.core.Tween | null = null
+// Stripe-style WebGL gradient mesh background — Vertex displacement + WaveLayer color mixing
+useStripeGradient(heroRef, gradientCanvasRef, {
+  amp: 320,
+  seed: 5,
+  density: [0.06, 0.16],
+  darkenTop: true,
+})
 
-// 动画配置
-const animationConfig = {
-  duration: 0.8,
-  ease: 'power3.out',
+// Stripe-level GSAP scroll animation system
+const { heroEntrance, cleanup } = useStripeScrollAnimation()
+
+/** Count-Up Animation */
+const animateCountUp = () => {
+  if (!heroRef.value) return
+  const elements = heroRef.value.querySelectorAll<HTMLElement>('[data-count-up]')
+  elements.forEach((el) => {
+    const target = parseInt(el.dataset.countUp || '0', 10)
+    const duration = 1500
+    const startTime = performance.now()
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
+
+    const update = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const easedProgress = easeOutCubic(progress)
+      const currentValue = Math.round(easedProgress * target)
+      el.textContent = String(currentValue)
+      if (progress < 1) {
+        requestAnimationFrame(update)
+      }
+    }
+    requestAnimationFrame(update)
+  })
 }
 
-// 生成粒子样式
-const getParticleStyle = (index: number) => {
-  const positions = [
-    { top: '10%', left: '20%' },
-    { top: '30%', left: '80%' },
-    { top: '60%', left: '15%' },
-    { top: '80%', left: '70%' },
-    { top: '20%', left: '50%' },
-    { top: '50%', left: '10%' },
-    { top: '70%', left: '85%' },
-    { top: '40%', left: '45%' },
-    { top: '15%', left: '75%' },
-    { top: '85%', left: '30%' },
-    { top: '55%', left: '95%' },
-    { top: '25%', left: '5%' },
-    { top: '75%', left: '55%' },
-    { top: '35%', left: '60%' },
-    { top: '65%', left: '35%' },
-  ]
-  
-  const delays = [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8]
-  
-  const size = Math.random() * 8 + 4
-  const position = positions[index % positions.length]
-  
-  return {
-    ...position,
-    width: `${size}px`,
-    height: `${size}px`,
-    animationDelay: `${delays[index % delays.length]}s`,
+/** Entry — GSAP choreographed entrance */
+const triggerEntry = () => {
+  // Animate the hero container itself (GSAP takes over from CSS default opacity:0)
+  if (heroRef.value) {
+    gsap.to(heroRef.value, {
+      opacity: 1,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
   }
+  // GSAP handles the choreographed entrance of all hero elements
+  heroEntrance(heroRef, {
+    name: '.hero__name',
+    metrics: '.metric',
+    role: '.hero__role',
+    positioning: '.hero__positioning',
+    actions: '.hero__actions',
+  })
 }
 
 onMounted(() => {
-  // 创建入场动画时间线
-  mainTimeline = gsap.timeline({
-    defaults: animationConfig,
-  })
-
-  // 徽章淡入
-  if (badgeRef.value) {
-    mainTimeline.fromTo(
-      badgeRef.value,
-      { opacity: 0, y: -20, scale: 0.9 },
-      { opacity: 1, y: 0, scale: 1, ease: 'back.out(1.7)' },
-      0
-    )
-  }
-
-  // 标题淡入
-  if (titleRef.value) {
-    mainTimeline.fromTo(
-      titleRef.value,
-      { opacity: 0, y: 60, scale: 0.95 },
-      { opacity: 1, y: 0, scale: 1, ease: 'power3.out' },
-      0.1
-    )
-  }
-
-  // 副标题淡入
-  if (subtitleRef.value) {
-    mainTimeline.fromTo(
-      subtitleRef.value,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, ease: 'power3.out' },
-      0.2
-    )
-  }
-
-  // 描述淡入
-  if (descriptionRef.value) {
-    mainTimeline.fromTo(
-      descriptionRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, ease: 'power3.out' },
-      0.3
-    )
-  }
-
-  // 统计数据交错淡入
-  if (statsRef.value) {
-    const statCards = statsRef.value.querySelectorAll('.stat-card')
-    mainTimeline.fromTo(
-      statCards,
-      { opacity: 0, y: 30, scale: 0.9 },
-      { opacity: 1, y: 0, scale: 1, stagger: 0.1, ease: 'back.out(1.5)' },
-      0.4
-    )
-  }
-
-  // CTA 按钮淡入
-  if (ctaRef.value) {
-    const buttons = ctaRef.value.querySelectorAll('.btn')
-    mainTimeline.fromTo(
-      buttons,
-      { opacity: 0, y: 30, scale: 0.95 },
-      { opacity: 1, y: 0, scale: 1, stagger: 0.1, ease: 'back.out(1.5)' },
-      0.5
-    )
-  }
-
-  // 社交链接淡入
-  if (socialRef.value) {
-    const links = socialRef.value.querySelectorAll('a')
-    mainTimeline.fromTo(
-      links,
-      { opacity: 0, scale: 0 },
-      { opacity: 1, scale: 1, stagger: 0.1, ease: 'back.out(1.7)' },
-      0.6
-    )
-  }
-
-  // 右侧装饰卡片动画
-  if (decorRef.value) {
-    const cards = decorRef.value.querySelectorAll('[class*="card-stack"]')
-    mainTimeline.fromTo(
-      cards,
-      { opacity: 0, y: 50, rotateX: -10 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        rotateX: 0, 
-        stagger: 0.15, 
-        ease: 'power3.out',
-        duration: 1
-      },
-      0.3
-    )
-  }
-
-  // 滚动提示淡入
-  if (scrollRef.value) {
-    mainTimeline.fromTo(
-      scrollRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0 },
-      0.8
-    )
-  }
-
-  // 视差滚动效果
-  if (heroRef.value) {
-    scrollAnimation = gsap.to(heroRef.value, {
-      scrollTrigger: {
-        trigger: heroRef.value,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-      },
-      y: -100,
-    })
-  }
+  triggerEntry()
+  // Count-up starts after metrics have faded in (GSAP timeline delay ~0.6s + 0.6s duration)
+  setTimeout(animateCountUp, 1200)
 })
 
 onUnmounted(() => {
-  if (mainTimeline) {
-    mainTimeline.kill()
-  }
-  if (scrollAnimation) {
-    scrollAnimation.kill()
-  }
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+  cleanup()
 })
 </script>
 
 <style scoped>
-/* Blob 形状动画 */
-.blob-shape {
+/* ============================================
+   HERO — Content-Focused v9.0
+   ─────────────────────────────────────────
+   "我是谁" — 单焦点，内容优先，极少动效
+   - 单一微光 (hero__glow)
+   - 名字 = 主焦点 (渐变文字 + 单drop-shadow)
+   - 卡片hover = translateY + shadow elevation
+   - 无tilt/spring/3D/perspective/clip-path
+   ============================================ */
+
+/* ── Hero Root ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  /* fallback for older browsers */
+  min-height: 100dvh;
+  /* dynamic viewport height for mobile */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+  padding: var(--us-space-24) var(--us-space-6) var(--us-space-20);
+  /* Entry animation handled by GSAP heroEntrance — no CSS transition needed */
+}
+
+/* ── Gradient Mesh Canvas ── */
+.hero__mesh-canvas {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  animation: blob-move 20s infinite ease-in-out;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  /* Stripe gradient colors — magenta/cyan/purple/gold (authentic Stripe palette) */
+  --gradient-color-1: #ef008f;
+  --gradient-color-2: #6ec3f4;
+  --gradient-color-3: #7038ff;
+  --gradient-color-4: #ffba27;
 }
 
-.blob-1 {
-  width: 600px;
-  height: 600px;
-  background: rgba(99, 102, 241, 0.3);
-  top: -200px;
-  left: -200px;
-  animation-delay: 0s;
+/* Dark mode — same authentic Stripe palette, slightly richer */
+.dark .hero__mesh-canvas {
+  --gradient-color-1: #ef008f;
+  --gradient-color-2: #6ec3f4;
+  --gradient-color-3: #7038ff;
+  --gradient-color-4: #ffba27;
 }
 
-.blob-2 {
-  width: 500px;
+/* ── Ambient Glow ── */
+.hero__glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
   height: 500px;
-  background: rgba(139, 92, 246, 0.3);
-  top: 20%;
-  right: -150px;
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  width: 400px;
-  height: 400px;
-  background: rgba(236, 72, 153, 0.25);
-  bottom: 10%;
-  left: 30%;
-  animation-delay: -10s;
-}
-
-.blob-4 {
-  width: 350px;
-  height: 350px;
-  background: rgba(245, 158, 11, 0.2);
-  bottom: -100px;
-  right: 20%;
-  animation-delay: -15s;
-}
-
-@keyframes blob-move {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(50px, -50px) scale(1.1);
-  }
-  50% {
-    transform: translate(-30px, 30px) scale(0.95);
-  }
-  75% {
-    transform: translate(40px, 20px) scale(1.05);
-  }
-}
-
-/* 网格图案 */
-.grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: grid-move 20s linear infinite;
-}
-
-@keyframes grid-move {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(60px, 60px);
-  }
-}
-
-/* 粒子效果 */
-.particle {
-  position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.6), rgba(139, 92, 246, 0.6));
-  animation: particle-float 3s ease-in-out infinite;
+  background: radial-gradient(ellipse at center,
+      var(--us-accent-subtle) 0%,
+      transparent 70%);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
 }
 
-@keyframes particle-float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-20px) scale(1.2);
-    opacity: 1;
-  }
+/* ── Stripe-style Grid Overlay — subtle line pattern ── */
+.hero__grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 2s ease-out;
+  /* Grid lines — horizontal + vertical */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  /* Radial fade — center visible, edges fade out */
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
 }
 
-/* 卡片堆叠动画 */
-.card-stack-1 {
-  transition: all 0.3s ease;
+.hero--entered .hero__grid-overlay {
+  opacity: 1;
 }
 
-.card-stack-2 {
-  transition: all 0.3s ease;
+/* ── Bottom Fade ── */
+.hero__fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent 0%, var(--us-bg-end) 100%);
+  pointer-events: none;
+  z-index: var(--z-sticky);
 }
 
-.card-stack-main {
-  transition: all 0.3s ease;
+/* ── Content Container ── */
+.hero__content {
+  position: relative;
+  z-index: var(--z-sticky);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 悬停效果 */
-.card-stack-main:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.4);
+/* ── Glass Panel ── */
+.hero__panel {
+  position: relative;
+  padding: var(--us-hero-padding);
+  border-radius: var(--radius-xl);
+  background: var(--us-glass-bg);
+  border: 1px solid var(--us-glass-border);
+  box-shadow: var(--us-depth-2);
+  max-width: min(var(--measure-relaxed), 860px);
+  width: 100%;
+  transition:
+    transform var(--us-duration-slow) var(--us-easing),
+    box-shadow var(--us-duration-slow) var(--us-easing),
+    border-color var(--us-duration-slow) var(--us-easing);
 }
 
-/* 浮动动画 */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+.hero__panel:hover {
+  transform: translateY(var(--us-lift-lg));
+  box-shadow: var(--us-depth-3);
+  border-color: var(--us-accent-border);
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* Dark mode: accent glow on panel hover */
+:root.dark .hero__panel:hover {
+  box-shadow: var(--us-depth-3), var(--us-accent-glow);
 }
 
-/* 统计卡片 */
-.stat-card {
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border-radius: 1rem;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  transition: all 0.3s ease;
-}
-.dark .stat-card {
-  background: rgba(30, 41, 59, 0.8);
-  border-color: rgba(51, 65, 85, 0.8);
+/* Dark mode — dark glass panel so white text is readable */
+:root.dark .hero__panel {
+  background: rgba(15, 15, 24, 0.85);
+  border-color: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px);
 }
 
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+/* ── Name — Primary Focus ── */
+.hero__name {
+  font-size: clamp(56px, 9vw, 80px);
+  font-weight: 600;
+  line-height: var(--leading-none);
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--us-space-2) 0;
+  color: var(--us-text-primary);
 }
 
-/* 减少动画 */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* ── Name Accent Line — decorative bar below name ── */
+.hero__name-accent {
+  width: 60px;
+  height: 3px;
+  background: var(--us-accent);
+  border-radius: 2px;
+  margin-top: var(--us-space-2);
+  margin-bottom: var(--us-space-4);
+  transition: width 0.6s var(--us-easing-enter);
 }
 
-/* 响应式优化 */
-@media (max-width: 1024px) {
-  .blob-1,
-  .blob-2,
-  .blob-3,
-  .blob-4 {
-    width: 400px;
-    height: 400px;
-  }
+.hero--entered .hero__name-accent {
+  width: 80px;
 }
 
+/* ── Metrics ── */
+.hero__metrics {
+  display: flex;
+  gap: var(--us-space-4);
+  margin-bottom: var(--us-space-8);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--us-space-3) var(--us-space-4);
+  border-radius: var(--us-card-radius);
+  background: var(--us-surface);
+  border: 1px solid var(--us-border);
+  box-shadow: var(--us-depth-1);
+  transition:
+    transform var(--us-duration-normal) var(--us-easing-enter),
+    box-shadow var(--us-duration-normal) var(--us-easing-enter),
+    border-color var(--us-duration-normal) var(--us-easing-enter);
+  cursor: default;
+}
+
+.metric:hover {
+  transform: translateY(var(--us-lift-md));
+  box-shadow: var(--us-depth-1-hover);
+  border-color: var(--us-accent-border);
+}
+
+.metric__value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: var(--leading-none);
+  color: var(--us-accent);
+  margin-bottom: var(--us-space-1);
+}
+
+.metric__suffix {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: var(--text-xl);
+  line-height: var(--leading-none);
+  color: var(--us-accent);
+  opacity: 0.7;
+}
+
+.metric__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: var(--leading-none);
+  color: var(--us-text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+/* ── Role — gradient text only, no pill decoration ── */
+.hero__role {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: var(--leading-normal);
+  margin: 0 0 var(--us-space-8) 0;
+  letter-spacing: 0.06em;
+}
+
+/* ── Positioning ── */
+.hero__positioning {
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: var(--leading-relaxed);
+  color: var(--us-text-secondary);
+  max-width: 540px;
+  margin: 0 0 var(--us-space-8) 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Actions ── */
+.hero__actions {
+  display: flex;
+  gap: var(--us-space-4);
+  margin-bottom: var(--us-space-8);
+}
+
+/* ── GSAP entrance — initial states set by JS, no CSS vs-reveal needed ── */
+/* GSAP sets opacity:0 and y:offset on mount, then animates to visible */
+
+/* ============================================
+   Responsive
+   ============================================ */
 @media (max-width: 768px) {
-  .blob-1,
-  .blob-2,
-  .blob-3,
-  .blob-4 {
-    width: 300px;
-    height: 300px;
-    filter: blur(60px);
+  .hero {
+    padding: var(--us-space-24) var(--us-space-4) var(--us-space-16);
   }
-  
-  .grid-pattern {
-    background-size: 40px 40px;
+
+  .hero__panel {
+    padding: var(--us-space-10) var(--us-space-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .hero__name {
+    font-size: var(--text-5xl);
+  }
+
+  .hero__name-accent {
+    width: 50px;
+  }
+
+  .hero--entered .hero__name-accent {
+    width: 60px;
+  }
+
+  .hero__metrics {
+    gap: var(--us-space-3);
+  }
+
+  .metric {
+    padding: var(--us-space-3) var(--us-space-4);
+    border-radius: var(--radius-lg);
+  }
+
+  .metric__value {
+    font-size: 1.5rem;
+  }
+
+  .metric__suffix {
+    font-size: var(--text-base);
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    gap: var(--us-space-3);
+  }
+
+  .hero__glow {
+    width: 500px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__name {
+    font-size: var(--text-4xl);
+  }
+
+  .hero__name-accent {
+    width: 40px;
+  }
+
+  .hero--entered .hero__name-accent {
+    width: 50px;
+  }
+
+  .hero__metrics {
+    flex-wrap: wrap;
+  }
+
+  .metric {
+    flex: 1;
+    min-width: 80px;
+    padding: var(--us-space-3);
+  }
+
+  .metric__value {
+    font-size: 1.25rem;
+  }
+
+  .hero__glow {
+    width: 350px;
+    height: 250px;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero__mesh-canvas {
+    display: none !important;
+  }
+
+  .hero__name {
+    filter: none;
+  }
+
+  .hero__name-accent {
+    width: 80px !important;
+    transition: none !important;
+  }
+
+  .hero__panel {
+    transition: none !important;
+  }
+
+  .hero__panel:hover {
+    transform: none;
+  }
+
+  .metric:hover {
+    transform: none;
+  }
+
+  /* GSAP-animated elements: force visible */
+  .hero__name,
+  .metric,
+  .hero__role,
+  .hero__positioning,
+  .hero__actions,
+  .hero__social {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
 </style>

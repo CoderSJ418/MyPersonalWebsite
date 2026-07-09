@@ -43,6 +43,16 @@ export interface ProjectFilter {
 }
 
 /**
+ * 项目叙事（MVP Schema）
+ */
+export interface ProjectNarrative {
+  challenge: string
+  approach: string
+  impact: string
+  metrics?: Array<{ label: string; value: string }>
+}
+
+/**
  * 项目详情（扩展项目信息）
  */
 export interface ProjectDetail extends Project {
@@ -66,6 +76,7 @@ export interface ProjectDetail extends Project {
     docs?: string[]
     articles?: string[]
   }
+  narrative?: ProjectNarrative
 }
 
 /**

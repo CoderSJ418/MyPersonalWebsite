@@ -19,7 +19,7 @@ const {
   size: 20,
   hoverSize: 40,
   color: '#3b82f6',
-  hoverColor: '#8b5cf6',
+  hoverColor: '#2563eb',
   enableRipple: true
 })
 
@@ -37,7 +37,7 @@ const dotStyle = computed(() => ({
   height: `${cursorSize.value}px`,
   backgroundColor: cursorColor.value,
   borderRadius: '50%',
-  transition: 'width 0.3s ease, height 0.3s ease, background-color 0.3s ease'
+  transition: 'width var(--us-duration-normal) var(--us-easing), height var(--us-duration-normal) var(--us-easing), background-color var(--us-duration-normal) var(--us-easing)'
 }))
 
 const ringStyle = computed(() => ({
@@ -46,7 +46,7 @@ const ringStyle = computed(() => ({
   border: `2px solid ${cursorColor.value}`,
   borderRadius: '50%',
   opacity: isHovering.value ? 1 : 0,
-  transition: 'all 0.3s ease'
+  transition: 'all var(--us-duration-normal) var(--us-easing)'
 }))
 
 const showRing = computed(() => isHovering.value)

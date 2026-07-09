@@ -87,7 +87,6 @@ export const PREFETCH_RESOURCES = [
   // 页面路由
   { type: 'script', href: '/assets/js/blog.js' },
   { type: 'script', href: '/assets/js/projects.js' },
-  { type: 'script', href: '/assets/js/skills.js' },
 
   // 非核心库
   { type: 'script', href: '/assets/js/gsap.js' },
@@ -160,7 +159,7 @@ export const CODE_SPLITTING_STRATEGY = {
   // 组件级别分割
   components: {
     threshold: 10, // KB，大于此值自动分割
-    include: ['BlogCard', 'ProjectCard', 'DesignSettings']
+    include: ['ContentCard', 'DesignSettings']
   },
 
   // 第三方库分割

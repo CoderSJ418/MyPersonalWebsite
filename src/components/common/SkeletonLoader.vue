@@ -1,5 +1,10 @@
 <template>
-  <div class="skeleton-loader" :class="variant">
+  <template v-if="count > 1">
+    <div v-for="i in count" :key="i" class="skeleton-loader" :class="variant">
+      <div class="skeleton-loader__shimmer" />
+    </div>
+  </template>
+  <div v-else class="skeleton-loader" :class="variant">
     <div class="skeleton-loader__shimmer" />
   </div>
 </template>
@@ -8,14 +13,14 @@
 /**
  * 骨架屏变体
  */
-export type SkeletonVariant = 'text' | 'title' | 'avatar' | 'card' | 'image' | 'button' | 'custom'
+export type SkeletonVariant = 'text' | 'title' | 'avatar' | 'card' | 'blog-card' | 'image' | 'button' | 'custom'
 
 interface Props {
   variant?: SkeletonVariant
   width?: string
   height?: string
   borderRadius?: string
-  lines?: number
+  count?: number
 }
 
 withDefaults(defineProps<Props>(), {
@@ -23,7 +28,7 @@ withDefaults(defineProps<Props>(), {
   width: '100%',
   height: 'auto',
   borderRadius: '4px',
-  lines: 1
+  count: 1
 })
 </script>
 
@@ -31,12 +36,12 @@ withDefaults(defineProps<Props>(), {
 .skeleton-loader {
   position: relative;
   overflow: hidden;
-  background-color: #e5e7eb;
-  border-radius: 4px;
+  background-color: var(--us-surface, rgba(0, 0, 0, 0.06));
+  border-radius: var(--radius-sm);
 }
 
 .dark .skeleton-loader {
-  background-color: #374151;
+  background-color: var(--us-surface, rgba(255, 255, 255, 0.08));
 }
 
 /* Shimmer 动画 */
@@ -51,13 +56,14 @@ withDefaults(defineProps<Props>(), {
 }
 
 .dark .skeleton-loader__shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
 
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -86,21 +92,38 @@ withDefaults(defineProps<Props>(), {
 .skeleton-loader.card {
   width: v-bind(width);
   height: 200px;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
+}
+
+/* Blog Card 变体 - 模拟博客卡片布局 */
+.skeleton-loader.blog-card {
+  width: v-bind(width);
+  height: 280px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--us-space-3);
+  padding: 0;
+  overflow: hidden;
+  background: none;
+}
+
+.skeleton-loader.blog-card .skeleton-loader__shimmer {
+  border-radius: var(--radius-xl);
 }
 
 /* Image 变体 */
 .skeleton-loader.image {
   width: v-bind(width);
   height: v-bind(height);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
 }
 
 /* Button 变体 */
 .skeleton-loader.button {
   width: 100px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
 }
 
 /* Custom 变体 */

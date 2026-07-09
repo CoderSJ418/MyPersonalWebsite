@@ -13,11 +13,12 @@ import { registerServiceWorker } from './service-worker'
 
 /**
  * 初始化应用
- * 按优先级并行初始化各子系统
+ * 字体加载改为非阻塞 — 优先渲染，字体就绪后自动切换
  */
 export async function initializeApp(app: App): Promise<void> {
-  // 关键路径：字体加载（阻塞渲染）
-  await initFonts()
+  // 字体加载不阻塞渲染 — 使用 font-display: swap 策略
+  // 先显示系统字体，Web 字体就绪后自动切换
+  initFonts()
 
   // 非关键路径：并行初始化
   Promise.all([

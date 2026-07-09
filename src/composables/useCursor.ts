@@ -34,7 +34,7 @@ export function useCursor(config: CursorConfig = {}) {
     size = 20,
     hoverSize = 40,
     color = '#3b82f6',
-    hoverColor = '#8b5cf6',
+    hoverColor = '#2563eb',
     enableRipple = true
   } = config
 
@@ -113,7 +113,7 @@ export function useCursor(config: CursorConfig = {}) {
       background: ${hoverColor};
       pointer-events: none;
       transform: translate(-50%, -50%);
-      z-index: 9999;
+      z-index: var(--z-cursor);
       opacity: 0.5;
     `
     document.body.appendChild(ripple)

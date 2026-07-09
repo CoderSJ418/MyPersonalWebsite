@@ -43,7 +43,7 @@ const {
 .card-3d {
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.1s ease;
+  transition: transform var(--us-duration-micro) var(--us-easing);
 }
 
 .card-3d__glare {

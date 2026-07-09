@@ -1,119 +1,72 @@
 <template>
-  <div class="relative">
+  <div class="hm">
     <!-- 汉堡菜单按钮 -->
-    <button
-      class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast focus-ring"
-      aria-label="Toggle menu"
-      aria-expanded="isOpen"
-      @click="toggleMenu"
-    >
+    <button class="hm__trigger" aria-label="Toggle menu" :aria-expanded="isOpen" @click="toggleMenu">
       <Transition name="hamburger" mode="out-in">
-        <Menu v-if="!isOpen" class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-        <X v-else class="w-6 h-6 text-gray-700 dark:text-gray-300" />
+        <Menu v-if="!isOpen" class="hm__trigger-icon" />
+        <X v-else class="hm__trigger-icon" />
       </Transition>
     </button>
 
     <!-- 遮罩层 -->
     <Transition name="fade">
-      <div
-        v-if="isOpen"
-        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
-        aria-hidden="true"
-        @click="closeMenu"
-      />
+      <div v-if="isOpen" class="hm__overlay" aria-hidden="true" @click="closeMenu" />
     </Transition>
 
     <!-- 移动端菜单 -->
     <Transition name="slide">
-      <div
-        v-if="isOpen"
-        class="fixed top-0 right-0 bottom-0 w-72 max-w-[80vw] bg-white dark:bg-gray-900 shadow-2xl z-50 md:hidden overflow-y-auto"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Navigation menu"
-      >
+      <div v-if="isOpen" class="hm__panel" role="dialog" aria-modal="true" aria-label="Navigation menu">
         <!-- 菜单头部 -->
-        <div
-          class="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-4 flex items-center justify-between"
-        >
-          <span class="text-lg font-bold text-gray-900 dark:text-white">菜单</span>
-          <button
-            class="min-h-touch min-w-touch p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-ring"
-            aria-label="Close menu"
-            @click="closeMenu"
-          >
-            <X class="w-6 h-6 text-gray-700 dark:text-gray-300" />
+        <div class="hm__header">
+          <span class="hm__title">菜单</span>
+          <button class="hm__close" aria-label="Close menu" @click="closeMenu">
+            <X class="hm__close-icon" />
           </button>
         </div>
 
         <!-- 菜单内容 -->
-        <nav class="px-4 py-6">
-          <ul class="space-y-2">
+        <nav class="hm__nav">
+          <ul class="hm__list">
             <li v-for="item in navItems" :key="item.path">
-              <RouterLink
-                :to="item.path"
-                class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-mobile-fast"
-                active-class="bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-semibold"
-                @click="closeMenu"
-              >
-                <component :is="item.icon" class="w-5 h-5 flex-shrink-0" />
-                <span class="mobile-base">{{ item.name }}</span>
+              <RouterLink :to="item.path" class="hm__link" active-class="hm__link--active" @click="closeMenu">
+                <component :is="item.icon" class="hm__link-icon" />
+                <span>{{ item.name }}</span>
               </RouterLink>
             </li>
           </ul>
 
           <!-- 分隔线 -->
-          <div class="my-6 border-t border-gray-200 dark:border-gray-700" />
+          <div class="hm__divider" />
 
           <!-- 主题切换 -->
-          <button
-            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast"
-            @click="toggleTheme"
-          >
-            <Sun v-if="theme === 'dark'" class="w-5 h-5 flex-shrink-0 text-yellow-400" />
-            <Moon v-else class="w-5 h-5 flex-shrink-0 text-gray-600" />
-            <span class="mobile-base">{{ theme === 'dark' ? '浅色模式' : '深色模式' }}</span>
+          <button class="hm__action" aria-label="切换主题" @click="toggleTheme">
+            <Sun v-if="theme === 'dark'" class="hm__action-icon hm__action-icon--sun" />
+            <Moon v-else class="hm__action-icon" />
+            <span>{{ theme === 'dark' ? '浅色模式' : '深色模式' }}</span>
           </button>
 
           <!-- 搜索按钮 -->
-          <button
-            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-mobile-fast"
-            @click="openSearch"
-          >
-            <Search class="w-5 h-5 flex-shrink-0" />
-            <span class="mobile-base">搜索</span>
+          <button class="hm__action" aria-label="搜索" @click="openSearch">
+            <Search class="hm__action-icon" />
+            <span>搜索</span>
           </button>
         </nav>
 
         <!-- 菜单底部 -->
-        <div
-          class="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-4 py-4"
-        >
-          <div class="flex items-center justify-center gap-6">
+        <div class="hm__footer">
+          <div class="hm__socials">
             <a
-              :href="contactStore.contact.social.github"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              aria-label="GitHub"
-            >
-              <Github class="w-6 h-6" />
+:href="contactStore.contact.social.github" target="_blank" rel="noopener noreferrer" class="hm__social"
+              aria-label="GitHub">
+              <Github class="hm__social-icon" />
             </a>
             <a
-              :href="contactStore.contact.social.linkedin"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin class="w-6 h-6" />
+:href="contactStore.contact.social.linkedin" target="_blank" rel="noopener noreferrer" class="hm__social"
+              aria-label="LinkedIn">
+              <Linkedin class="hm__social-icon" />
             </a>
-            <a
-              :href="'mailto:' + contactStore.contact.email"
-              class="min-h-touch min-w-touch flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              aria-label="Email"
-            >
-              <Mail class="w-6 h-6" />
+            <a :href="'mailto:' + contactStore.contact.email" class="hm__social" aria-label="Email">
+              <Mail class="hm__social-icon" />
             </a>
           </div>
         </div>
@@ -183,10 +136,251 @@ const openSearch = () => {
 </script>
 
 <style scoped>
-/* 汉堡菜单按钮动画 */
+.hm {
+  position: relative;
+}
+
+/* ===== 触发按钮 ===== */
+.hm__trigger {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--us-space-2);
+  border-radius: var(--radius-md, 0.375rem);
+  border: none;
+  background: transparent;
+  transition: background var(--us-duration-fast) var(--us-easing);
+}
+
+.hm__trigger:hover {
+  background: var(--us-surface-hover);
+  transform: translateY(-1px);
+}
+
+.hm__trigger:active {
+  transform: scale(0.95);
+}
+
+.hm__trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--us-accent-border);
+}
+
+.hm__trigger-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--us-text-primary);
+}
+
+/* ===== 遮罩层 ===== */
+.hm__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-overlay);
+}
+
+@media (min-width: 768px) {
+  .hm__overlay {
+    display: none;
+  }
+}
+
+/* ===== 面板 ===== */
+.hm__panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 18rem;
+  max-width: 80vw;
+  background: var(--us-material-solid);
+  box-shadow: var(--us-depth-3);
+  z-index: var(--z-overlay-elevated);
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .hm__panel {
+    display: none;
+  }
+}
+
+/* ===== 头部 ===== */
+.hm__header {
+  position: sticky;
+  top: 0;
+  background: var(--us-material-solid);
+  border-bottom: 1px solid var(--us-border);
+  padding: var(--us-space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hm__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--us-text-primary);
+}
+
+.hm__close {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--us-space-2);
+  border-radius: var(--radius-md, 0.375rem);
+  border: none;
+  background: transparent;
+  transition: background var(--us-duration-fast) var(--us-easing);
+}
+
+.hm__close:hover {
+  background: var(--us-surface-hover);
+  transform: translateY(-1px);
+}
+
+.hm__close:active {
+  transform: scale(0.95);
+}
+
+.hm__close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--us-accent-border);
+}
+
+.hm__close-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--us-text-primary);
+}
+
+/* ===== 导航 ===== */
+.hm__nav {
+  padding: var(--us-space-6) var(--us-space-4);
+}
+
+.hm__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--us-space-2);
+}
+
+.hm__link {
+  display: flex;
+  align-items: center;
+  gap: var(--us-space-3);
+  padding: var(--us-space-3) var(--us-space-4);
+  border-radius: var(--radius-md, 0.375rem);
+  color: var(--us-text-secondary);
+  transition:
+    background var(--us-duration-fast) var(--us-easing),
+    color var(--us-duration-fast) var(--us-easing);
+}
+
+.hm__link:hover {
+  background: var(--us-accent-subtle);
+  color: var(--us-accent);
+  transform: translateY(-1px);
+}
+
+.hm__link:active {
+  transform: scale(0.95);
+}
+
+.hm__link--active {
+  background: var(--us-accent-subtle);
+  color: var(--us-accent);
+  font-weight: 600;
+}
+
+.hm__link-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ===== 分隔线 ===== */
+.hm__divider {
+  margin: var(--us-space-6) 0;
+  border-top: 1px solid var(--us-border);
+}
+
+/* ===== 操作按钮 ===== */
+.hm__action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--us-space-3);
+  padding: var(--us-space-3) var(--us-space-4);
+  border-radius: var(--radius-md, 0.375rem);
+  border: none;
+  background: transparent;
+  color: var(--us-text-secondary);
+  transition:
+    background var(--us-duration-fast) var(--us-easing),
+    color var(--us-duration-fast) var(--us-easing);
+}
+
+.hm__action:hover {
+  background: var(--us-surface-hover);
+  transform: translateY(-1px);
+}
+
+.hm__action:active {
+  transform: scale(0.95);
+}
+
+.hm__action-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.hm__action-icon--sun {
+  color: #facc15;
+}
+
+/* ===== 底部 ===== */
+.hm__footer {
+  position: sticky;
+  bottom: 0;
+  background: var(--us-material-solid);
+  border-top: 1px solid var(--us-border);
+  padding: var(--us-space-4);
+}
+
+.hm__socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--us-space-6);
+}
+
+.hm__social {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--us-text-tertiary);
+  transition: color var(--us-duration-fast) var(--us-easing);
+}
+
+.hm__social:hover {
+  color: var(--us-accent);
+}
+
+.hm__social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ===== 动画 ===== */
 .hamburger-enter-active,
 .hamburger-leave-active {
-  transition: transform 0.2s ease;
+  transition: transform var(--us-duration-fast) var(--us-easing);
 }
 
 .hamburger-enter-from,
@@ -195,10 +389,9 @@ const openSearch = () => {
   opacity: 0;
 }
 
-/* 遮罩层动画 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity var(--us-duration-normal) var(--us-easing);
 }
 
 .fade-enter-from,
@@ -206,10 +399,9 @@ const openSearch = () => {
   opacity: 0;
 }
 
-/* 菜单滑入动画 */
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--us-duration-normal) var(--us-easing);
 }
 
 .slide-enter-from,
