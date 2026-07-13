@@ -55,18 +55,18 @@
         <!-- 联系方式 -->
         <div ref="contactRef" class="mt-12 flex flex-wrap justify-center gap-6">
           <a
-            :href="'mailto:' + contactStore.contact.email"
+            :href="'mailto:' + contact.email"
             class="flex items-center transition-colors duration-300"
           >
             <Mail class="w-5 h-5 mr-2" />
-            {{ contactStore.contact.email }}
+            {{ contact.email }}
           </a>
           <a
-            :href="'tel:' + contactStore.contact.phone.replace(/\D/g, '')"
+            :href="'tel:' + contact.phone.replace(/\D/g, '')"
             class="flex items-center transition-colors duration-300"
           >
             <Phone class="w-5 h-5 mr-2" />
-            {{ contactStore.contact.phone }}
+            {{ contact.phone }}
           </a>
         </div>
       </div>
@@ -76,12 +76,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+import contactInfo from '@/assets/data/contact-info.json'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
-import { useContactInfoStore } from '@/stores/useContactInfoStore'
 import { Mail, Phone } from 'lucide-vue-next'
 import CTA from '@/components/ui/CTA.vue'
 
-const contactStore = useContactInfoStore()
+const contact = contactInfo
 
 const sectionRef = ref<HTMLElement | null>(null)
 const titleRef = ref<HTMLElement | null>(null)

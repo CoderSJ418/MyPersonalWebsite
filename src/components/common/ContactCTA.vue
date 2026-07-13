@@ -20,17 +20,17 @@ v-if="isOpen" class="contact-cta__panel stripe-card" role="dialog"
 
         <div class="contact-cta__panel-body">
           <!-- Email -->
-          <a :href="'mailto:' + contactStore.contact.email" class="contact-cta__link">
+          <a :href="'mailto:' + contact.email" class="contact-cta__link">
             <Mail :size="18" class="contact-cta__link-icon" />
             <div class="contact-cta__link-content">
               <span class="contact-cta__link-label">邮箱</span>
-              <span class="contact-cta__link-value">{{ contactStore.contact.email }}</span>
+              <span class="contact-cta__link-value">{{ contact.email }}</span>
             </div>
           </a>
 
           <!-- GitHub -->
           <a
-v-if="contactStore.contact.social.github" :href="contactStore.contact.social.github" target="_blank"
+v-if="contact.social.github" :href="contact.social.github" target="_blank"
             rel="noopener noreferrer" class="contact-cta__link">
             <svg class="contact-cta__link-icon" :size="18" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -44,7 +44,7 @@ v-if="contactStore.contact.social.github" :href="contactStore.contact.social.git
 
           <!-- LinkedIn -->
           <a
-v-if="contactStore.contact.social.linkedin" :href="contactStore.contact.social.linkedin" target="_blank"
+v-if="contact.social.linkedin" :href="contact.social.linkedin" target="_blank"
             rel="noopener noreferrer" class="contact-cta__link">
             <svg class="contact-cta__link-icon" :size="18" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -58,7 +58,7 @@ v-if="contactStore.contact.social.linkedin" :href="contactStore.contact.social.l
         </div>
 
         <div class="contact-cta__panel-footer">
-          <span class="contact-cta__response-time">{{ contactStore.contact.responseTime }}</span>
+          <span class="contact-cta__response-time">{{ contact.responseTime }}</span>
         </div>
       </div>
     </Transition>
@@ -77,10 +77,10 @@ class="contact-cta__btn" :aria-label="isOpen ? '关闭联系方式' : '打开联
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useContactInfoStore } from '@/stores/useContactInfoStore'
+import contactInfo from '@/assets/data/contact-info.json'
 import { MessageCircle, X, Mail } from 'lucide-vue-next'
 
-const contactStore = useContactInfoStore()
+const contact = contactInfo
 const isOpen = ref(false)
 
 const togglePanel = () => {

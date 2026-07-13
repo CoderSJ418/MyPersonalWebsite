@@ -78,10 +78,12 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from 'vue'
 import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
-import { useSkillStore } from '@/stores/useSkillStore'
+import skillsData from '@/assets/data/skills.json'
 import { Code2, Zap, Database, Layers, Palette, Smartphone, FlaskConical, Settings } from 'lucide-vue-next'
 
-const skillStore = useSkillStore()
+const topSkills = computed(() => {
+  return [...skillsData].sort((a, b) => b.level - a.level)
+})
 
 const iconMap: Record<string, typeof Code2> = {
   'Vue.js': Code2,
@@ -102,7 +104,7 @@ const displayNames: Record<string, string> = {
 }
 
 const techStack = computed(() => {
-  return skillStore.topSkills
+  return topSkills.value
     .filter(skill => iconMap[skill.name])
     .slice(0, 6)
     .map(skill => ({

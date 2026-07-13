@@ -42,17 +42,17 @@
           <ul class="sf__contact-list">
             <li>
               <a
-:href="'mailto:' + contactStore.contact.email" class="sf__chip stripe-glow" :style="{
+:href="'mailto:' + contact.email" class="sf__chip stripe-glow" :style="{
                 '--chip-o': chipOpacity.email.value,
               }" @mouseenter="handleChipEnter('email')" @mouseleave="handleChipLeave('email')">
                 <Mail class="sf__chip-icon" />
-                <span>{{ contactStore.contact.email }}</span>
+                <span>{{ contact.email }}</span>
               </a>
             </li>
             <li>
               <span class="sf__chip sf__chip--static">
                 <MapPin class="sf__chip-icon" />
-                <span>{{ contactStore.contact.location }}</span>
+                <span>{{ contact.location }}</span>
               </span>
             </li>
           </ul>
@@ -63,7 +63,7 @@
           <h3 class="sf__section-title">社交网络</h3>
           <div class="sf__social-icons">
             <a
-v-if="contactStore.contact.social.github" :href="contactStore.contact.social.github" target="_blank"
+v-if="contact.social.github" :href="contact.social.github" target="_blank"
               rel="noopener noreferrer" class="sf__social-icon" :style="{
                 '--social-o': socialOpacity.github.value,
               }" aria-label="GitHub" @mouseenter="handleSocialEnter('github')"
@@ -74,7 +74,7 @@ v-if="contactStore.contact.social.github" :href="contactStore.contact.social.git
               </svg>
             </a>
             <a
-v-if="contactStore.contact.social.linkedin" :href="contactStore.contact.social.linkedin" target="_blank"
+v-if="contact.social.linkedin" :href="contact.social.linkedin" target="_blank"
               rel="noopener noreferrer" class="sf__social-icon" :style="{
                 '--social-o': socialOpacity.linkedin.value,
               }" aria-label="LinkedIn" @mouseenter="handleSocialEnter('linkedin')"
@@ -85,8 +85,8 @@ v-if="contactStore.contact.social.linkedin" :href="contactStore.contact.social.l
               </svg>
             </a>
             <a
-v-if="contactStore.contact.social.email"
-              :href="'mailto:' + contactStore.contact.social.email.replace(/^mailto:/i, '')" class="sf__social-icon"
+v-if="contact.social.email"
+              :href="'mailto:' + contact.social.email.replace(/^mailto:/i, '')" class="sf__social-icon"
               :style="{
                 '--social-o': socialOpacity.mail.value,
               }" aria-label="Email" @mouseenter="handleSocialEnter('mail')" @mouseleave="handleSocialLeave('mail')">
@@ -97,7 +97,7 @@ stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               </svg>
             </a>
             <a
-v-if="contactStore.contact.social.twitter" :href="contactStore.contact.social.twitter" target="_blank"
+v-if="contact.social.twitter" :href="contact.social.twitter" target="_blank"
               rel="noopener noreferrer" class="sf__social-icon" :style="{
                 '--social-o': socialOpacity.twitter.value,
               }" aria-label="Twitter" @mouseenter="handleSocialEnter('twitter')"
@@ -135,11 +135,11 @@ v-if="contactStore.contact.social.twitter" :href="contactStore.contact.social.tw
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { useContactInfoStore } from '@/stores/useContactInfoStore'
+import contactInfo from '@/assets/data/contact-info.json'
 import { useSpringPhysics } from '@/composables/useSpringPhysics'
 import { Mail, MapPin, Zap, Palette, Monitor } from 'lucide-vue-next'
 
-const contactStore = useContactInfoStore()
+const contact = contactInfo
 const currentYear = computed(() => new Date().getFullYear())
 
 // REMOVED: Effect 2 — Light Field Fadeout (fieldIntensity) — exceeded Max 2 rule
