@@ -34,8 +34,6 @@
       </RouterView>
     </main>
     <Footer />
-    <!-- 移动端底部导航 -->
-    <MobileNav />
     <!-- 浮动联系CTA按钮 -->
     <ContactCTA />
     <ScrollProgress />
@@ -50,7 +48,6 @@ import { useThemeStore } from '@/stores/useThemeStore'
 import { useCursorInteraction } from '@/composables/useCursorInteraction'
 import Header from '@/components/common/Header.vue'
 import Footer from '@/components/common/Footer.vue'
-import MobileNav from '@/components/common/MobileNav.vue'
 import ContactCTA from '@/components/common/ContactCTA.vue'
 import PageTransition from '@/components/common/PageTransition.vue'
 import ScrollProgress from '@/components/common/ScrollProgress.vue'

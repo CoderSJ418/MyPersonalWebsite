@@ -34,5 +34,5 @@ app.directive('spotlight', vSpotlight)
 // 挂载应用（不阻塞字体加载，优先渲染）
 app.mount('#app')
 
-// 初始化子系统（字体非阻塞加载、监控、Service Worker）
+// 初始化子系统（字体非阻塞加载、Service Worker）
 initializeApp(app)
