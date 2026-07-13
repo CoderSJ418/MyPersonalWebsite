@@ -48,7 +48,7 @@ const copyCode = async () => {
     copied.value = true
     copyError.value = false
     setTimeout(() => { copied.value = false }, 2000)
-  } catch (err) {
+  } catch (_err) {
     copyError.value = true
     copied.value = false
     setTimeout(() => { copyError.value = false }, 2000)
@@ -191,141 +191,144 @@ v-if="showCopy" class="code-block__copy" :class="{
 
 .code-block__copy-text {
   line-height: var(--leading-none);
-  /* ═══════════════════════════════════════════════════════════════
+}
+
+/* ═══════════════════════════════════════════════════════════════
    CODE BODY — The IDE Interaction Layer
    ═══════════════════════════════════════════════════════════════ */
 
-  .code-block__body {
-    display: flex;
-    position: relative;
-    /* Global light follow provided by vs-light-surface::after on parent */
-  }
+.code-block__body {
+  display: flex;
+  position: relative;
+  /* Global light follow provided by vs-light-surface::after on parent */
+}
 
-  /* ── Line Numbers Column ── */
+/* ── Line Numbers Column ── */
+.code-block__lines {
+  display: flex;
+  flex-direction: column;
+  padding: var(--us-space-3) 0;
+  padding-right: var(--us-space-1);
+  border-right: 1px solid var(--us-border);
+  margin-right: var(--us-space-1);
+  user-select: none;
+  flex-shrink: 0;
+  min-width: 2rem;
+  text-align: right;
+}
+
+@media (min-width: 768px) {
   .code-block__lines {
-    display: flex;
-    flex-direction: column;
-    padding: var(--us-space-3) 0;
-    padding-right: var(--us-space-1);
-    border-right: 1px solid var(--us-border);
-    margin-right: var(--us-space-1);
-    user-select: none;
-    flex-shrink: 0;
-    min-width: 2rem;
-    text-align: right;
+    padding-right: var(--us-space-2);
+    margin-right: var(--us-space-2);
+    min-width: 2.5rem;
   }
+}
 
-  @media (min-width: 768px) {
-    .code-block__lines {
-      padding-right: var(--us-space-2);
-      margin-right: var(--us-space-2);
-      min-width: 2.5rem;
-    }
-  }
+.code-block__line-num {
+  display: block;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6875rem;
+  line-height: var(--leading-relaxed);
+  padding: 0 var(--us-space-1);
+  transition: color var(--us-duration-fast) var(--us-easing);
+}
 
+@media (min-width: 768px) {
   .code-block__line-num {
-    display: block;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.6875rem;
-    line-height: var(--leading-relaxed);
-    padding: 0 var(--us-space-1);
-    transition: color var(--us-duration-fast) var(--us-easing);
+    font-size: 0.75rem;
   }
+}
 
-  @media (min-width: 768px) {
-    .code-block__line-num {
-      font-size: 0.75rem;
-    }
-  }
+/* ── Code Pre ── */
+.code-block__pre {
+  margin: 0;
+  padding: var(--us-space-3) 0;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  position: relative;
+  z-index: var(--z-local-elevated);
+}
 
-  /* ── Code Pre ── */
-  .code-block__pre {
-    margin: 0;
-    padding: var(--us-space-3) 0;
-    flex: 1;
-    min-width: 0;
-    overflow-x: auto;
-    position: relative;
-    z-index: var(--z-local-elevated);
-  }
+.code-block__pre code {
+  display: block;
+  min-width: 100%;
+  tab-size: 2;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.8125rem;
+  line-height: var(--leading-relaxed);
+}
 
+@media (min-width: 768px) {
   .code-block__pre code {
-    display: block;
-    min-width: 100%;
-    tab-size: 2;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.8125rem;
-    line-height: var(--leading-relaxed);
+    font-size: 0.75rem;
   }
+}
 
-  @media (min-width: 768px) {
-    .code-block__pre code {
-      font-size: 0.75rem;
-    }
-  }
-
-  /* ── Hover Line Highlight ──
+/* ── Hover Line Highlight ──
    Using CSS :hover on the code element's lines.
    Since we can't target individual lines with pure CSS,
    we highlight the entire code block subtly on hover. */
-  .code-block__body:hover .code-block__line-num {
-    color: var(--us-accent);
-  }
+.code-block__body:hover .code-block__line-num {
+  color: var(--us-accent);
+}
 
-  /* ── Scrollbar Styling ── */
-  .code-block__pre::-webkit-scrollbar {
-    height: 6px;
-  }
+/* ── Scrollbar Styling ── */
+.code-block__pre::-webkit-scrollbar {
+  height: 6px;
+}
 
-  .code-block__pre::-webkit-scrollbar-track {
-    background: transparent;
-  }
+.code-block__pre::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  .code-block__pre::-webkit-scrollbar-thumb {
-    background: var(--us-accent-border);
-    border-radius: var(--radius-sm);
-  }
+.code-block__pre::-webkit-scrollbar-thumb {
+  background: var(--us-accent-border);
+  border-radius: var(--radius-sm);
+}
 
-  .code-block__pre::-webkit-scrollbar-thumb:hover {
-    background: var(--us-accent);
-  }
+.code-block__pre::-webkit-scrollbar-thumb:hover {
+  background: var(--us-accent);
+}
 
-  /* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
    DARK MODE
    ═══════════════════════════════════════════════════════════════ */
-  /* Global light dark mode handled by visual-system.css vs-light-surface */
+/* Global light dark mode handled by visual-system.css vs-light-surface */
 
-  .dark .code-block__lines {
-    border-right-color: var(--code-line-border);
-  }
+.dark .code-block__lines {
+  border-right-color: var(--code-line-border);
+}
 
-  .dark .code-block__line-num {
-    color: var(--code-line-muted);
-  }
+.dark .code-block__line-num {
+  color: var(--code-line-muted);
+}
 
-  .dark .code-block__body:hover .code-block__line-num {
-    color: var(--code-line-subtle);
-  }
+.dark .code-block__body:hover .code-block__line-num {
+  color: var(--code-line-subtle);
+}
 
-  /* 暗色模式 — copy按钮hover增强 */
-  .dark .code-block__copy:hover:not(:disabled) {
-    box-shadow: var(--us-accent-glow);
-  }
+/* 暗色模式 — copy按钮hover增强 */
+.dark .code-block__copy:hover:not(:disabled) {
+  box-shadow: var(--us-accent-glow);
+}
 
-  /* 暗色模式 — version pill增强 */
-  .dark .code-block__version-pill {
-    box-shadow: 0 0 6px rgba(37, 99, 235, 0.2);
-  }
+/* 暗色模式 — version pill增强 */
+.dark .code-block__version-pill {
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.2);
+}
 
-  /* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
    REDUCED MOTION
    ═══════════════════════════════════════════════════════════════ */
-  @media (prefers-reduced-motion: reduce) {
-    .code-block__copy-icon {
-      transition: none;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .code-block__copy-icon {
+    transition: none;
   }
+}
 
 
 
-  /* Touch device — vs-light-surface handled by visual-system.css */</style>
+/* Touch device — vs-light-surface handled by visual-system.css */
+</style>

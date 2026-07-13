@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stripe Ribbon Hero — Visual Prototype v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a14; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
+  #canvas-container { position: fixed; inset: 0; }
+  canvas { display: block; }
+
+  .hero-overlay {
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 64px;
+    transform: translateY(-50%);
+    max-width: 560px;
+    pointer-events: none;
+  }
+  .hero-overlay h1 {
+    font-size: clamp(48px, 7vw, 80px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    text-shadow: 0 0 80px rgba(99, 102, 241, 0.3);
+  }
+  .hero-overlay .accent-line {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, #ef008f, #7038ff);
+    border-radius: 2px;
+    margin: 20px 0;
+  }
+  .hero-overlay .subtitle {
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 500;
+    color: #a5b4fc;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .hero-overlay .desc {
+    font-size: 15px;
+    color: #94a3b8;
+    line-height: 1.7;
+    max-width: 440px;
+  }
+  .hero-overlay .cta {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 12px 28px;
+    background: #635bff;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    pointer-events: auto;
+    cursor: pointer;
+    border: none;
+  }
+
+  .label {
+    position: fixed;
+    bottom: 20px;
+    right: 24px;
+    z-index: 20;
+    color: #64748b;
+    font-size: 12px;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<div id="canvas-container"></div>
+
+<div class="hero-overlay">
+  <h1>佘杰</h1>
+  <div class="accent-line"></div>
+  <p class="subtitle">Vue Expert · Frontend Architect</p>
+  <p class="desc">
+    7年深耕 Vue 生态，从组件库架构到全链路性能优化，帮助团队建立可维护、可扩展的前端工程体系。
+  </p>
+  <button class="cta">查看作品集</button>
+</div>
+
+<div class="label">3D Gradient Ribbon — Three.js Prototype v2</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three'
+
+// ═══════════════════════════════════════════════════════
+// Scene Setup
+// ═══════════════════════════════════════════════════════
+const container = document.getElementById('canvas-container')
+const scene = new THREE.Scene()
+const camera = new THREE.PerspectiveCamera(
+  50, window.innerWidth / window.innerHeight, 0.1, 100
+)
+camera.position.set(0, 0.3, 16)
+camera.lookAt(0, 0, 0)
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
+renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.setClearColor(0x0a0a14)
+container.appendChild(renderer.domElement)
+
+// ═══════════════════════════════════════════════════════
+// Stripe Palette (3 colors — blue → purple → pink)
+// ═══════════════════════════════════════════════════════
+const colorA = new THREE.Vector3(0.22, 0.20, 0.88)
+const colorB = new THREE.Vector3(0.48, 0.20, 0.97)
+const colorC = new THREE.Vector3(0.85, 0.22, 0.58)
+const glowColor = new THREE.Vector3(0.55, 0.30, 1.00)
+
+// ═══════════════════════════════════════════════════════
+// Simplex Noise GLSL (Ashima Arts)
+// ═══════════════════════════════════════════════════════
+const noiseGLSL = `
+vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
+vec4 permute(vec4 x){return mod289(((x*34.)+1.)*x);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-.85373472095314*r;}
+float snoise(vec3 v){
+  const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);
+  vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+  vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;
+  vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
+  vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
+  i=mod289(i);
+  vec4 p=permute(permute(permute(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+  vec4 j=p-49.*floor(p*vec4(1./7.));
+  vec4 x_=floor(j*vec4(1./7.));vec4 y_=floor(j-7.*x_);
+  vec4 xx=x_*(1./7.)+(1./14.);vec4 yy=y_*(1./7.)+(1./14.);
+  vec4 h=1.-abs(xx)-abs(yy);
+  vec4 b0=vec4(xx.xy,yy.xy);vec4 b1=vec4(xx.zw,yy.zw);
+  vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;
+  vec4 sh=-step(h,vec4(0.));
+  vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+  vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+  vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+  p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+  vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);
+  m=m*m;
+  return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+}
+`
+
+// ═══════════════════════════════════════════════════════
+// Ribbon Shaders
+// ═══════════════════════════════════════════════════════
+const ribbonVertex = `
+precision highp float;
+${noiseGLSL}
+uniform float uTime;
+uniform float uWarpAmp;
+
+varying vec2 vUv;
+varying vec3 vWorldPos;
+varying vec3 vNormal;
+varying vec3 vViewDir;
+
+void main() {
+  vec4 worldPos = modelMatrix * vec4(position, 1.0);
+  vWorldPos = worldPos.xyz;
+  vNormal = normalize(mat3(modelMatrix) * normal);
+  vViewDir = normalize(cameraPosition - worldPos.xyz);
+  vUv = uv;
+
+  // Noise is only a subtle micro-deformation (20% shape, 80% tube)
+  float warp = snoise(worldPos * 0.5 + uTime * 0.06) * uWarpAmp;
+  vec3 pos = position + normal * warp;
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+}
+`
+
+const ribbonFragment = `
+precision highp float;
+
+uniform float uTime;
+uniform vec3 uColorA;
+uniform vec3 uColorB;
+uniform vec3 uColorC;
+uniform vec3 uGlowColor;
+
+varying vec2 vUv;
+varying vec3 vWorldPos;
+varying vec3 vNormal;
+varying vec3 vViewDir;
+
+${noiseGLSL}
+
+void main() {
+  float t = vUv.x;
+
+  // ── Gradient flows along the ribbon length ──
+  vec3 col = mix(uColorA, uColorB, smoothstep(0.0, 0.55, t));
+  col = mix(col, uColorC, smoothstep(0.45, 1.0, t));
+
+  // ── Subtle noise color warp (15% max influence) ──
+  float cw = snoise(vWorldPos * 0.6 + uTime * 0.05) * 0.05;
+  col += cw * 0.3;
+
+  // ── Fresnel edge glow (volume feel) ──
+  float fresnel = pow(1.0 - abs(dot(normalize(vViewDir), normalize(vNormal))), 3.0);
+  col += fresnel * uGlowColor * 0.5;
+
+  // ── Soft tube cross-section edge ──
+  float edge = 0.85 + 0.15 * sin(vUv.y * 3.14159);
+  col *= edge;
+
+  gl_FragColor = vec4(col, 1.0);
+}
+`
+
+// ═══════════════════════════════════════════════════════
+// Ribbon Curve — wider spread, subtle wave
+// ═══════════════════════════════════════════════════════
+function createCurve(time) {
+  const pts = [
+    new THREE.Vector3(-6.0 + Math.sin(time * 0.25) * 0.4, -1.5, -0.2),
+    new THREE.Vector3(-4.0 + Math.cos(time * 0.20) * 0.3,  2.2,  1.4),
+    new THREE.Vector3(-1.5 + Math.sin(time * 0.30) * 0.2, -0.4, -0.5),
+    new THREE.Vector3( 1.0 + Math.cos(time * 0.22) * 0.25, 2.0,  1.0),
+    new THREE.Vector3( 3.5 + Math.sin(time * 0.28) * 0.3, -1.0, -0.4),
+    new THREE.Vector3( 6.0 + Math.cos(time * 0.18) * 0.4,  0.8,  0.8),
+  ]
+  return new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5)
+}
+
+// ═══════════════════════════════════════════════════════
+// Build Ribbon Mesh
+// ═══════════════════════════════════════════════════════
+const ribbonMaterial = new THREE.ShaderMaterial({
+  vertexShader: ribbonVertex,
+  fragmentShader: ribbonFragment,
+  uniforms: {
+    uTime:      { value: 0 },
+    uWarpAmp:   { value: 0.12 },
+    uColorA:    { value: colorA },
+    uColorB:    { value: colorB },
+    uColorC:    { value: colorC },
+    uGlowColor: { value: glowColor },
+  },
+  side: THREE.DoubleSide,
+})
+
+let ribbonMesh
+let curveTime = 0
+let lastRebuild = 0
+
+function buildRibbon() {
+  const curve = createCurve(curveTime)
+  const geo = new THREE.TubeGeometry(curve, 300, 1.4, 20, false)
+
+  if (ribbonMesh) {
+    ribbonMesh.geometry.dispose()
+    scene.remove(ribbonMesh)
+  }
+  ribbonMesh = new THREE.Mesh(geo, ribbonMaterial)
+  scene.add(ribbonMesh)
+}
+
+buildRibbon()
+
+// ═══════════════════════════════════════════════════════
+// Background Orbs — extremely subtle (barely visible)
+// ═══════════════════════════════════════════════════════
+function createOrb(x, y, z, radius, hexColor, opacity) {
+  const geo = new THREE.SphereGeometry(radius, 24, 24)
+  const mat = new THREE.MeshBasicMaterial({
+    color: hexColor,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+  })
+  const mesh = new THREE.Mesh(geo, mat)
+  mesh.position.set(x, y, z)
+  scene.add(mesh)
+  return mesh
+}
+
+const orbs = [
+  createOrb(-5,  2, -8, 4.0, 0x3757ff, 0.07),
+  createOrb( 5, -2, -7, 3.5, 0x7a33f7, 0.06),
+  createOrb( 0,  4, -9, 5.0, 0xd93893, 0.04),
+]
+
+// ═══════════════════════════════════════════════════════
+// Particles
+// ═══════════════════════════════════════════════════════
+const pCount = 300
+const pGeo = new THREE.BufferGeometry()
+const pPos = new Float32Array(pCount * 3)
+for (let i = 0; i < pCount; i++) {
+  pPos[i * 3]     = (Math.random() - 0.5) * 24
+  pPos[i * 3 + 1] = (Math.random() - 0.5) * 14
+  pPos[i * 3 + 2] = (Math.random() - 0.5) * 10 - 3
+}
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+const pMat = new THREE.PointsMaterial({
+  color: 0x6366f1,
+  size: 0.025,
+  transparent: true,
+  opacity: 0.3,
+  depthWrite: false,
+})
+const particles = new THREE.Points(pGeo, pMat)
+scene.add(particles)
+
+// ═══════════════════════════════════════════════════════
+// Mouse
+// ═══════════════════════════════════════════════════════
+let mx = 0, my = 0, tmx = 0, tmy = 0
+document.addEventListener('mousemove', (e) => {
+  tmx = (e.clientX / window.innerWidth) * 2 - 1
+  tmy = -(e.clientY / window.innerHeight) * 2 + 1
+})
+
+// ═══════════════════════════════════════════════════════
+// Animation Loop
+// ═══════════════════════════════════════════════════════
+const clock = new THREE.Clock()
+
+function animate() {
+  requestAnimationFrame(animate)
+  const t = clock.getElapsedTime()
+
+  ribbonMaterial.uniforms.uTime.value = t
+
+  // Rebuild ribbon geometry every 4 seconds for curve animation
+  curveTime = t * 0.35
+  if (t - lastRebuild > 4) {
+    buildRibbon()
+    lastRebuild = t
+  }
+
+  // Smooth mouse
+  mx += (tmx - mx) * 0.025
+  my += (tmy - my) * 0.025
+
+  // Camera parallax
+  camera.position.x = mx * 1.2
+  camera.position.y = 0.3 + my * 0.6
+  camera.lookAt(0, 0, 0)
+
+  // Orb float
+  orbs[0].position.y = 2 + Math.sin(t * 0.3) * 0.8
+  orbs[0].position.x = -5 + Math.cos(t * 0.2) * 0.5
+  orbs[1].position.y = -2 + Math.cos(t * 0.25) * 0.6
+  orbs[2].position.x = Math.sin(t * 0.15) * 2
+
+  // Particles drift
+  particles.rotation.y = t * 0.015
+  particles.rotation.x = Math.sin(t * 0.08) * 0.04
+
+  renderer.render(scene, camera)
+}
+
+animate()
+
+// ═══════════════════════════════════════════════════════
+// Resize
+// ═══════════════════════════════════════════════════════
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+})
+</script>
+</body>
+</html>

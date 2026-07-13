@@ -1,0 +1,226 @@
+{
+  "items": [
+    {
+      "name": "beautiful-layout-page-with-pulse-stripes",
+      "type": "component",
+      "path": "items/beautiful-layout-page-with-pulse-stripes.json",
+      "description": "Full page bundle with pulse stripes visuals"
+    },
+    {
+      "name": "chaotic-dots-loader-for-data-tables",
+      "type": "component",
+      "path": "items/chaotic-dots-loader-for-data-tables.json",
+      "description": "Chaotic pixels loader for user data tables with infinite loading"
+    },
+    {
+      "name": "animated-svg-branch-connector",
+      "type": "component",
+      "path": "items/animated-svg-branch-connector.json",
+      "description": "Animated SVG branch connector for visualizing hierarchical data"
+    },
+    {
+      "name": "animated-feature-cards-for-react-tailwind-framer-motion",
+      "type": "component",
+      "path": "items/animated-feature-cards-for-react-tailwind-framer-motion.json",
+      "description": "Animated feature cards built with React, Tailwind, and Framer Motion"
+    },
+    {
+      "name": "animated-border-button",
+      "type": "component",
+      "path": "items/animated-border-button.json",
+      "description": "Configurable button with animated dashed border and success/error states"
+    },
+    {
+      "name": "infinite-grid-with-framer-motion",
+      "type": "component",
+      "path": "items/infinite-grid-with-framer-motion.json",
+      "description": "Infinite animated grid with pointer spotlight and density controls"
+    },
+    {
+      "name": "animated-like-button-with-burst-effect",
+      "type": "component",
+      "path": "items/animated-like-button-with-burst-effect.json",
+      "description": "Interactive like button with heart burst and count animation"
+    },
+    {
+      "name": "text-shimmer-wave",
+      "type": "component",
+      "path": "items/text-shimmer-wave.json",
+      "description": "Wave shimmer text animation with per-character motion effects"
+    },
+    {
+      "name": "swipe-card-stack-ui-with-framer-motion",
+      "type": "component",
+      "path": "items/swipe-card-stack-ui-with-framer-motion.json",
+      "description": "Swipeable animated card stack with drag gestures and cycling content"
+    },
+    {
+      "name": "scroll-scramble-section",
+      "type": "component",
+      "path": "items/scroll-scramble-section.json",
+      "description": "Scroll-driven text scramble section with GSAP Flip and ScrollTrigger effects"
+    },
+    {
+      "name": "scroll-text-reveal-animation",
+      "type": "component",
+      "path": "items/scroll-text-reveal-animation.json",
+      "description": "Scroll-linked headline with scattered letter reveal and sticky viewport section"
+    },
+    {
+      "name": "morphing-navigation-tabs-compact-expanded",
+      "type": "component",
+      "path": "items/morphing-navigation-tabs-compact-expanded.json",
+      "description": "Expandable navigation tabs that morph between compact and labeled states"
+    },
+    {
+      "name": "precision-slider-with-animated-value",
+      "type": "component",
+      "path": "items/precision-slider-with-animated-value.json",
+      "description": "Precision slider with animated numeric value display"
+    },
+    {
+      "name": "parametric-orbit-loader",
+      "type": "component",
+      "path": "items/parametric-orbit-loader.json",
+      "description": "SVG hypocycloid-style orbit loader with layered dash motion and soft glow (Tailwind, no extra runtime deps)"
+    },
+    {
+      "name": "transaction-flow-in-one-button",
+      "type": "component",
+      "path": "items/transaction-flow-in-one-button.json",
+      "description": "Single transaction button with loading pixels and success state morph"
+    },
+    {
+      "name": "usage-analytics-dashboard-card",
+      "type": "component",
+      "path": "items/usage-analytics-dashboard-card.json",
+      "description": "Usage analytics dashboard card with animated bars and top app breakdown"
+    },
+    {
+      "name": "flipping-card-ui-for-react",
+      "type": "component",
+      "path": "items/flipping-card-ui-for-react.json",
+      "description": "3D flipping card UI component with customizable front and back content"
+    },
+    {
+      "name": "shaders-hero-section",
+      "type": "component",
+      "path": "items/shaders-hero-section.json",
+      "description": "Hero section with animated shader backgrounds and pulsing circular CTA"
+    },
+    {
+      "name": "smooth-expand-accordion",
+      "type": "component",
+      "path": "items/smooth-expand-accordion.json",
+      "description": "Smooth expanding accordion with animated transitions and hover interactions"
+    },
+    {
+      "name": "saas-hero-with-animated-background",
+      "type": "component",
+      "path": "items/saas-hero-with-animated-background.json",
+      "description": "SaaS hero section with animated dithering shader background"
+    },
+    {
+      "name": "animated-hover-button-ui-component-for-react",
+      "type": "component",
+      "path": "items/animated-hover-button-ui-component-for-react.json",
+      "description": "Animated hover button with sliding text and expanding background"
+    },
+    {
+      "name": "ai-chat-input-ui-component-for-react",
+      "type": "component",
+      "path": "items/ai-chat-input-ui-component-for-react.json",
+      "description": "AI chat input box with attachments, recording timer, and action toggles"
+    },
+    {
+      "name": "audio-chat-room",
+      "type": "component",
+      "path": "items/audio-chat-room.json",
+      "description": "Expandable audio chat room UI with participant avatars and speaking indicators"
+    },
+    {
+      "name": "workflow-builder-card",
+      "type": "component",
+      "path": "items/workflow-builder-card.json",
+      "description": "Interactive workflow builder card with hover details and team/action metadata"
+    },
+    {
+      "name": "animated-registration-form",
+      "type": "component",
+      "path": "items/animated-registration-form.json",
+      "description": "Animated onboarding registration form with avatar upload and username submission"
+    },
+    {
+      "name": "activity-dropdown",
+      "type": "component",
+      "path": "items/activity-dropdown.json",
+      "description": "Expandable activity dropdown panel with animated list transitions"
+    },
+    {
+      "name": "animated-menu-text",
+      "type": "component",
+      "path": "items/animated-menu-text.json",
+      "description": "Animated menu text with per-character hover slide transitions"
+    },
+    {
+      "name": "animated-interests-picker",
+      "type": "component",
+      "path": "items/animated-interests-picker.json",
+      "description": "Animated interests picker with draggable rows and emoji burst effects"
+    },
+    {
+      "name": "team-member-selector",
+      "type": "component",
+      "path": "items/team-member-selector.json",
+      "description": "Animated team member selector with searchable dropdown and avatar chips"
+    },
+    {
+      "name": "a-component-displays-a-group-of-avatars",
+      "type": "component",
+      "path": "items/a-component-displays-a-group-of-avatars.json",
+      "description": "Animated overlapping avatar group with hover lift and label tooltips"
+    },
+    {
+      "name": "bento-grid-react-component-for-saas-ui",
+      "type": "component",
+      "path": "items/bento-grid-react-component-for-saas-ui.json",
+      "description": "SaaS bento grid with animated cards for notifications, emoji, and presence"
+    },
+    {
+      "name": "animated-dot-matrix-sales-chart-for-react-framer-motion-ui-component",
+      "type": "component",
+      "path": "items/animated-dot-matrix-sales-chart-for-react-framer-motion-ui-component.json",
+      "description": "Animated dot matrix sales chart card with interactive tooltip and trend summary"
+    },
+    {
+      "name": "shadcn-pricing-table-for-react-saas-apps",
+      "type": "component",
+      "path": "items/shadcn-pricing-table-for-react-saas-apps.json",
+      "description": "Shadcn-style SaaS pricing table with monthly/yearly toggle and feature matrix"
+    },
+    {
+      "name": "animated-status-badge-with-table-for-dashboards",
+      "type": "component",
+      "path": "items/animated-status-badge-with-table-for-dashboards.json",
+      "description": "Animated status badge with task table for dashboards"
+    },
+    {
+      "name": "animated-navbar-menu-with-morphing-hover-state",
+      "type": "component",
+      "path": "items/animated-navbar-menu-with-morphing-hover-state.json",
+      "description": "Horizontal nav links with morphing hover animation (Framer Motion)"
+    },
+    {
+      "name": "directional-hover-header",
+      "type": "component",
+      "path": "items/directional-hover-header.json",
+      "description": "Site header with directional mega-menu transitions and mobile drill-down"
+    },
+    {
+      "name": "animated-team-cards-gradient-hover",
+      "type": "component",
+      "path": "items/animated-team-cards-gradient-hover.json",
+      "description": "Stacked team cards with gradient hover, spring motion, and expandable focus"
+    }
+  ]
+}

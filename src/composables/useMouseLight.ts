@@ -17,7 +17,7 @@
  * ```
  */
 
-import { ref, onMounted, onUnmounted, type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
 export interface MouseLightOptions {
   /** 是否启用（移动端默认禁用） */

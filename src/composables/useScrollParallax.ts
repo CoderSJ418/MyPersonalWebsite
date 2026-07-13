@@ -48,7 +48,7 @@ const PARALLAX_RATES = {
 /** Scroll Velocity 配置 */
 const VELOCITY_DECAY = 0.95       // exponential decay factor
 const VELOCITY_MAX = 3000         // 最大滚动速度(px/s)，用于归一化
-const VELOCITY_SMOOTHING = 0.3    // velocity平滑因子
+const _VELOCITY_SMOOTHING = 0.3    // velocity平滑因子
 
 /** 单例状态 */
 let instanceCount = 0

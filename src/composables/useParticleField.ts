@@ -8,7 +8,7 @@
  *
  * Inspired by Stripe's modular solutions bento cards.
  */
-import { ref, onMounted, onUnmounted, type Ref } from 'vue'
+import { onMounted, onUnmounted, type Ref } from 'vue'
 
 interface Particle {
   x: number

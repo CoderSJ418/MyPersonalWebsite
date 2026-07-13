@@ -12,7 +12,7 @@
  * - Mouse attraction pulls blobs toward cursor
  * - Dark mode uses brighter, more saturated colors
  */
-import { ref, onMounted, onUnmounted, type Ref } from 'vue'
+import { onMounted, onUnmounted, type Ref } from 'vue'
 
 interface GradientBlob {
   x: number

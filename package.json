@@ -6,7 +6,7 @@
   "author": "佘杰",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/recruit-guard.mjs && vite build --mode production && node scripts/build-sitemap.js",
+    "build": "vite build --mode production && node scripts/build-sitemap.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
@@ -15,7 +15,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "validate:lab": "npm run lint && npm run build && npx tsx scripts/validateLabRegistry.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

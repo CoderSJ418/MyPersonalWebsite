@@ -18,7 +18,7 @@ import ProjectNarrative from './ProjectNarrative.vue'
 const route = useRoute()
 const router = useRouter()
 const projectStore = useProjectStore()
-const { viewMode, isRecruit, isReader, switchToRecruit, switchToReader } = useViewMode()
+const { viewMode: _viewMode, isRecruit, isReader, switchToRecruit, switchToReader } = useViewMode()
 
 const project = computed<ProjectDetailType | null>(() =>
   projectStore.getProjectDetail(route.params.id as string)

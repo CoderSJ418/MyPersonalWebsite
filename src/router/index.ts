@@ -60,6 +60,25 @@ const routes: RouteRecordRaw[] = [
     props: true
   },
   {
+    path: '/lab',
+    name: 'Lab',
+    component: () => import('@/views/Lab/LabIndex.vue'),
+    meta: {
+      title: '效果实验室',
+      description: '交互式前端效果演示 — Aurora、Spotlight、Marquee 等 20+ 效果'
+    }
+  },
+  {
+    path: '/lab/:id',
+    name: 'LabDemo',
+    component: () => import('@/views/Lab/LabLayout.vue'),
+    props: true,
+    meta: {
+      title: '效果演示',
+      description: '交互式前端效果演示'
+    }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/views/NotFound.vue'),

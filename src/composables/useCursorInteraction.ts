@@ -76,12 +76,12 @@ interface CursorInteractionOptions {
 
 export function useCursorInteraction(options: CursorInteractionOptions = {}) {
   const {
-    enableGlow = true,
+    _enableGlow = true,
     enableMagnetic = true,
     enableDistortion = true,
     enableSurface = true,
     enableFocus = true,
-    throttleMs = 16,
+    _throttleMs = 16,
   } = options
 
   let rafId: number | null = null

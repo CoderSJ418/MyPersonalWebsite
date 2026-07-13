@@ -157,13 +157,16 @@ const getFocusableElements = (): HTMLElement[] => {
 const navItems = [
   { name: '首页', path: '/' },
   { name: '项目', path: '/projects' },
-  { name: '博客', path: '/blog' }
+  { name: '博客', path: '/blog' },
+  { name: '效果实验室', path: '/lab' }
 ]
 
 const isDark = computed(() => appStore.theme === 'dark')
 
 const isActiveRoute = (path: string) => {
-  return route.path === path || (path !== '/' && route.path.startsWith(path))
+  if (route.path === path) return true
+  if (path === '/') return false
+  return route.path.startsWith(path + '/') || route.path.startsWith(path + '?')
 }
 
 // 打开搜索

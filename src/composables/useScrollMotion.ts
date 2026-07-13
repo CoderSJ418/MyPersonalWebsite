@@ -45,11 +45,11 @@ interface ScrollMotionOptions {
 export function useScrollMotion(options: ScrollMotionOptions = {}) {
   const {
     enableParallax = true,
-    throttleMs = 16,
+    _throttleMs = 16,
   } = options
 
   let rafId: number | null = null
-  let lastScrollY = 0
+  const _lastScrollY = 0
   const parallaxElements: Map<HTMLElement, string> = new Map()
 
   /** 收集所有 [data-parallax] 元素 */

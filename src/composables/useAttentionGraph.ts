@@ -179,7 +179,7 @@ let observer: IntersectionObserver | null = null
 let interpolationRafId: number | null = null
 
 /** reduced-motion偏好 */
-let prefersReducedMotion = false
+const _prefersReducedMotion = false
 
 /** 插值速率 */
 const LERP_RATE = 0.08

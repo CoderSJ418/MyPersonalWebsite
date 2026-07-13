@@ -82,7 +82,7 @@ onMounted(async () => {
 
   try {
     renderedContent.value = await renderMarkdown(content)
-  } catch (error) {
+  } catch (_error) {
     renderedContent.value = renderMarkdownSync(content)
   } finally {
     isLoadingContent.value = false
@@ -101,7 +101,7 @@ watch(
 
     try {
       renderedContent.value = await renderMarkdown(newContent)
-    } catch (error) {
+    } catch (_error) {
       renderedContent.value = renderMarkdownSync(newContent)
     } finally {
       isLoadingContent.value = false
@@ -129,7 +129,7 @@ const handleContentClick = async (event: MouseEvent) => {
         copyButton.classList.remove('copied')
       }, 2000)
     }
-  } catch (err) {
+  } catch (_err) {
     // 剪贴板复制失败静默处理
   }
 }
