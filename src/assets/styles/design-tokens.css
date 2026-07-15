@@ -1,386 +1,256 @@
-/* ============================================
+﻿/* ============================================
    Portfolio Design System v4.0
    风格：Minimal & Professional
-   配色：Indigo + Neutral (参考 ui-ux-pro-max)
+   配色：Blue-600 + Neutral (Vertical Timeline Design)
    ============================================ */
-
 :root {
-  /* ============================================
+   /* ============================================
      1. 核心色系 - Professional Portfolio
      ============================================ */
-  
-  /* 主色 - Indigo 系 */
-  --primary-50: #EEF2FF;
-  --primary-100: #E0E7FF;
-  --primary-200: #C7D2FE;
-  --primary-300: #A5B4FC;
-  --primary-400: #818CF8;
-  --primary-500: #6366F1;
-  --primary-600: #4F46E5;
-  --primary-700: #4338CA;
-  --primary-800: #3730A3;
-  --primary-900: #312E81;
-  --primary-950: #1E1B4B;
-  
-  /* 中性色 - Zinc 系 */
-  --neutral-50: #FAFAFA;
-  --neutral-100: #F4F4F5;
-  --neutral-200: #E4E4E7;
-  --neutral-300: #D4D4D8;
-  --neutral-400: #A1A1AA;
-  --neutral-500: #71717A;
-  --neutral-600: #52525B;
-  --neutral-700: #3F3F46;
-  --neutral-800: #27272A;
-  --neutral-900: #18181B;
-  --neutral-950: #09090B;
-  
-  /* 强调色 - 用于 CTA 和精选 */
-  --accent-500: #EC4899;
-  --accent-600: #DB2777;
-  --accent-400: #F472B6;
-  
-  /* ============================================
+   /* 中性色 - Zinc 系 */
+   --neutral-50: #FAFAFA;
+   --neutral-100: #F4F4F5;
+   --neutral-200: #E4E4E7;
+   --neutral-300: #D4D4D8;
+   --neutral-400: #A1A1AA;
+   --neutral-500: #71717A;
+   --neutral-600: #52525B;
+   --neutral-700: #3F3F46;
+   --neutral-800: #27272A;
+   --neutral-900: #18181B;
+   --neutral-950: #09090B;
+   /* Accent 别名 — 统一映射到 --us-accent（唯一accent源：unified-system.css） */
+   --accent-400: var(--us-accent-subtle);
+   --accent-500: var(--us-accent);
+   --accent-600: var(--us-accent);
+   /* ============================================
      2. 背景色系
      ============================================ */
-  
-  /* 深色背景 */
-  --bg-dark-primary: #09090B;
-  --bg-dark-secondary: #18181B;
-  --bg-dark-tertiary: #27272A;
-  --bg-dark-elevated: #3F3F46;
-  --bg-dark-card: #18181B;
-  
-  /* 亮色背景 */
-  --bg-light-primary: #FFFFFF;
-  --bg-light-secondary: #FAFAFA;
-  --bg-light-tertiary: #F4F4F5;
-  --bg-light-elevated: #FFFFFF;
-  --bg-light-card: #FFFFFF;
-  
-  /* ============================================
+   /* 亮色背景 */
+   --bg-light-primary: #FFFFFF;
+   --bg-light-secondary: #FAFAFA;
+   --bg-light-tertiary: #F4F4F5;
+   --bg-light-elevated: #FFFFFF;
+   --bg-light-card: #FFFFFF;
+   /* ============================================
      3. 渐变效果 - 柔和专业
      ============================================ */
-  
-  /* 主渐变 - Indigo 系列 */
-  --gradient-primary: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
-  --gradient-primary-reverse: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
-  
-  /* 辅助渐变 - Indigo → Pink */
-  --gradient-accent: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
-  
-  /* 卡片阴影 */
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  
-  /* ============================================
-     4. Bento Grid 系统
+   /* 主渐变 - Indigo 系列 */
+   /* 辅助渐变 - Indigo → Pink */
+   /* 卡片阴影 */
+   /* ============================================
+     4. 文字色系
      ============================================ */
-  
-  /* 网格间距 */
-  --bento-gap: 16px;
-  --bento-gap-sm: 8px;
-  --bento-gap-lg: 24px;
-  --bento-gap-xl: 32px;
-  
-  /* Bento 卡片尺寸 */
-  --bento-card-padding: 20px;
-  --bento-card-padding-sm: 16px;
-  --bento-card-padding-lg: 24px;
-  
-  /* Bento 圆角 */
-  --bento-radius: 12px;
-  --bento-radius-sm: 8px;
-  --bento-radius-lg: 16px;
-  --bento-radius-xl: 24px;
-  
-  /* ============================================
-     5. 文字色系
-     ============================================ */
-  
-  /* 深色模式文字 */
-  --text-dark-primary: #FFFFFF;
-  --text-dark-secondary: rgba(255, 255, 255, 0.7);
-  --text-dark-tertiary: rgba(255, 255, 255, 0.5);
-  --text-dark-muted: rgba(255, 255, 255, 0.3);
-  
-  /* 亮色模式文字 */
-  --text-light-primary: #0D0D0D;
-  --text-light-secondary: rgba(0, 0, 0, 0.7);
-  --text-light-tertiary: rgba(0, 0, 0, 0.5);
-  --text-light-muted: rgba(0, 0, 0, 0.3);
-  
-  /* 特殊文字色 */
-  --text-accent-cyan: #00FFFF;
-  --text-accent-purple: #8B00FF;
-  --text-accent-gradient: linear-gradient(135deg, #00FFFF 0%, #8B00FF 100%);
-  
-  /* ============================================
+   /* 深色模式文字 - 已迁移到语义映射 */
+   /* 亮色模式文字 - 已迁移到语义映射 */
+   /* 特殊文字色 - 已迁移到unified-system */
+   /* ============================================
      6. 间距系统 (8px 网格)
      ============================================ */
-  
-  --space-0: 0;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
-  --space-32: 128px;
-  
-  /* ============================================
+   --space-0: 0;
+   --space-1: var(--us-space-1);
+   --space-2: var(--us-space-2);
+   --space-3: var(--us-space-3);
+   --space-4: var(--us-space-4);
+   --space-5: var(--us-space-5);
+   --space-6: var(--us-space-6);
+   --space-8: var(--us-space-8);
+   --space-10: var(--us-space-10);
+   --space-12: var(--us-space-12);
+   --space-16: var(--us-space-16);
+   --space-20: var(--us-space-20);
+   --space-24: var(--us-space-24);
+   --space-32: var(--us-space-32);
+   /* ============================================
+     7a. 行宽系统 (Measure / Line Length)
+     ch单位基于当前字体"0"字符宽度
+     65ch ≈ 720px@16px, 75ch ≈ 800px@16px
+     ============================================ */
+   --measure-tight: 45ch;
+   --measure-normal: 65ch;
+   --measure-relaxed: 75ch;
+   /* ============================================
      7. 字体系统
      ============================================ */
-  
-  /* 字体族 */
-  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-pixel: '"Press Start 2P"', cursive;
-  
-  /* 字体大小 */
-  --text-xs: 0.75rem;     /* 12px */
-  --text-sm: 0.875rem;    /* 14px */
-  --text-base: 1rem;      /* 16px */
-  --text-lg: 1.125rem;    /* 18px */
-  --text-xl: 1.25rem;     /* 20px */
-  --text-2xl: 1.5rem;     /* 24px */
-  --text-3xl: 1.875rem;   /* 30px */
-  --text-4xl: 2.25rem;    /* 36px */
-  --text-5xl: 3rem;       /* 48px */
-  --text-6xl: 3.75rem;    /* 60px */
-  --text-7xl: 4.5rem;     /* 72px */
-  
-  /* 字重 */
-  --font-light: 300;
-  --font-normal: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-  --font-extrabold: 800;
-  
-  /* 行高 */
-  --leading-none: 1;
-  --leading-tight: 1.25;
-  --leading-snug: 1.375;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.625;
-  --leading-loose: 2;
-  
-  /* ============================================
+   /* 字体族 */
+   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+   --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+   --font-pixel: '"Press Start 2P"', cursive;
+   /* 字体大小 */
+   --text-xs: 0.75rem;
+   /* 12px */
+   --text-sm: 0.875rem;
+   /* 14px */
+   --text-base: 1rem;
+   /* 16px */
+   --text-lg: 1.125rem;
+   /* 18px */
+   --text-xl: 1.25rem;
+   /* 20px */
+   --text-2xl: 1.5rem;
+   /* 24px */
+   --text-3xl: 1.875rem;
+   /* 30px */
+   --text-4xl: 2.25rem;
+   /* 36px */
+   --text-5xl: 3rem;
+   /* 48px */
+   --text-6xl: 3.75rem;
+   /* 60px */
+   --text-7xl: 4.5rem;
+   /* 72px */
+   /* 字重 */
+   --font-light: 300;
+   --font-normal: 400;
+   --font-medium: 500;
+   --font-semibold: 600;
+   --font-bold: 700;
+   --font-extrabold: 800;
+   /* 行高 */
+   --leading-none: 1;
+   --leading-tight: 1.25;
+   --leading-snug: 1.375;
+   --leading-normal: 1.5;
+   --leading-relaxed: 1.75;
+   --leading-loose: 2;
+   /* ============================================
      8. 圆角系统
      ============================================ */
-  
-  --radius-none: 0;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-2xl: 24px;
-  --radius-3xl: 32px;
-  --radius-full: 9999px;
-  
-  /* ============================================
+   --radius-none: 0;
+   --radius-sm: 4px;
+   --radius-md: 8px;
+   --radius-lg: 10px;
+   --radius-xl: 14px;
+   --radius-2xl: 20px;
+   --radius-3xl: 32px;
+   --radius-full: 9999px;
+   /* ============================================
      9. 阴影系统
      ============================================ */
-  
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.15);
-  --shadow-2xl: 0 24px 48px rgba(0, 0, 0, 0.2);
-  
-  /* Aurora 内发光 */
-  --shadow-inner-glow: inset 0 0 24px rgba(0, 255, 255, 0.1);
-  --shadow-inner-glow-purple: inset 0 0 24px rgba(139, 0, 255, 0.1);
-  
-  /* ============================================
+   /* 阴影系统 - 已迁移到unified-system */
+   /* ============================================
      10. 过渡动画
      ============================================ */
-  
-  /* 时长 */
-  --duration-instant: 50ms;
-  --duration-fast: 150ms;
-  --duration-normal: 250ms;
-  --duration-slow: 400ms;
-  --duration-slower: 600ms;
-  --duration-aurora: 8000ms;  /* Aurora 流动动画 */
-  
-  /* 缓动函数 */
-  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  --ease-aurora: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  
-  /* ============================================
-     11. Z-Index 层级
+   /* 时长 */
+   --duration-instant: 50ms;
+   --duration-fast: 150ms;
+   --duration-normal: 250ms;
+   --duration-slow: 400ms;
+   --duration-slower: 600ms;
+   --duration-aurora: 8000ms;
+   /* Aurora 流动动画 */
+   /* 缓动函数 */
+   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-in: cubic-bezier(0.4, 0, 1, 1);
+   --ease-out: cubic-bezier(0, 0, 0.2, 1);
+   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-bounce: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-aurora: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+   /* ============================================
+      11. 响应式断点
      ============================================ */
-  
-  --z-base: 0;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-fixed: 300;
-  --z-modal-backdrop: 400;
-  --z-modal: 500;
-  --z-popover: 600;
-  --z-tooltip: 700;
-  --z-toast: 800;
-  --z-max: 9999;
-  
-  /* ============================================
-     12. 响应式断点
+   --breakpoint-xs: 375px;
+   --breakpoint-sm: 640px;
+   --breakpoint-md: 768px;
+   --breakpoint-lg: 1024px;
+   --breakpoint-xl: 1280px;
+   --breakpoint-2xl: 1536px;
+   /* ============================================
+     12. 功能色
      ============================================ */
-  
-  --breakpoint-xs: 375px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-  
-  /* ============================================
-     13. 功能色
-     ============================================ */
-  
-  --success: #10B981;
-  --success-light: #34D399;
-  --success-dark: #059669;
-  
-  --warning: #F59E0B;
-  --warning-light: #FBBF24;
-  --warning-dark: #D97706;
-  
-  --error: #EF4444;
-  --error-light: #F87171;
-  --error-dark: #DC2626;
-  
-  --info: #3B82F6;
-  --info-light: #60A5FA;
-  --info-dark: #2563EB;
-  
-  /* ============================================
+   --success: #10B981;
+   --success-light: #34D399;
+   --success-dark: #059669;
+   --warning: #F59E0B;
+   --warning-light: #FBBF24;
+   --warning-dark: #D97706;
+   --error: #EF4444;
+   --error-light: #F87171;
+   --error-dark: #DC2626;
+   --info: #3B82F6;
+   --info-light: #60A5FA;
+   --info-dark: #2563EB;
+   /* ============================================
      14. 语义化变量映射
      ============================================ */
-  
-  /* 默认亮色模式 */
-  --bg-primary: var(--bg-light-primary);
-  --bg-secondary: var(--bg-light-secondary);
-  --bg-tertiary: var(--bg-light-tertiary);
-  --bg-elevated: var(--bg-light-elevated);
-  --bg-card: var(--bg-light-card);
-  
-  --text-primary: var(--neutral-950);
-  --text-secondary: var(--neutral-600);
-  --text-tertiary: var(--neutral-500);
-  --text-muted: var(--neutral-400);
-  
-  --color-primary: var(--primary-500);
-  --color-secondary: var(--primary-600);
-  --color-accent: var(--accent-500);
-  
-  --border-color: var(--neutral-200);
-  --border-color-light: var(--neutral-100);
+   /* 默认亮色模式 */
+   /* @deprecated Use --us-bg-start instead. Will be removed in v2.0. */
+   --bg-primary: var(--bg-light-primary);
+   /* @deprecated Use --us-surface instead. Will be removed in v2.0. */
+   --bg-secondary: var(--bg-light-secondary);
+   /* @deprecated Use --us-surface-hover instead. Will be removed in v2.0. */
+   --bg-tertiary: var(--bg-light-tertiary);
+   /* @deprecated Use --us-material-elevated-bg instead. Will be removed in v2.0. */
+   --bg-elevated: var(--bg-light-elevated);
+   /* @deprecated Use --us-surface instead. Will be removed in v2.0. */
+   --bg-card: var(--bg-light-card);
+   /* @deprecated Use --us-text-primary instead. Will be removed in v2.0. */
+   --text-primary: var(--neutral-950);
+   /* @deprecated Use --us-text-secondary instead. Will be removed in v2.0. */
+   --text-secondary: var(--neutral-600);
+   /* @deprecated Use --us-text-tertiary instead. Will be removed in v2.0. */
+   --text-tertiary: var(--neutral-500);
+   /* @deprecated Use --us-text-tertiary instead. Will be removed in v2.0. */
+   --text-muted: var(--neutral-400);
+   /* ============================================
+      Code block tokens
+      ============================================ */
+   --code-add: #3FB950;
+   --code-add-border: rgba(63, 185, 80, 0.2);
+   --code-add-bg: rgba(63, 185, 80, 0.08);
+   --code-remove: #F85149;
+   --code-remove-border: rgba(248, 81, 73, 0.2);
+   --code-remove-bg: rgba(248, 81, 73, 0.08);
+   --code-line-border: rgba(37, 99, 235, 0.1);
+   --code-line-muted: rgba(37, 99, 235, 0.3);
+   --code-line-subtle: rgba(37, 99, 235, 0.5);
 }
 
 /* ============================================
    亮色模式
    ============================================ */
-
 .light,
 [data-theme="light"] {
-  --bg-primary: var(--bg-light-primary);
-  --bg-secondary: var(--bg-light-secondary);
-  --bg-tertiary: var(--bg-light-tertiary);
-  --bg-elevated: var(--bg-light-elevated);
-  --bg-card: var(--bg-light-card);
-  
-  --text-primary: var(--neutral-950);
-  --text-secondary: var(--neutral-600);
-  --text-tertiary: var(--neutral-500);
-  --text-muted: var(--neutral-400);
-  
-  --border-color: var(--neutral-200);
-  --border-color-light: var(--neutral-100);
-  
-  --color-primary: var(--primary-500);
-  --color-accent: var(--accent-500);
-}
-
-/* ============================================
-   深色模式
-   ============================================ */
-
-.dark,
-[data-theme="dark"] {
-  --bg-primary: var(--bg-dark-primary);
-  --bg-secondary: var(--bg-dark-secondary);
-  --bg-tertiary: var(--bg-dark-tertiary);
-  --bg-elevated: var(--bg-dark-elevated);
-  --bg-card: var(--bg-dark-card);
-  
-  --text-primary: #FAFAFA;
-  --text-secondary: #A1A1AA;
-  --text-tertiary: #71717A;
-  --text-muted: #52525B;
-  
-  --border-color: #27272A;
-  --border-color-light: #3F3F46;
-  
-  --color-primary: var(--primary-400);
-  --color-accent: var(--accent-400);
-}
-
-/* ============================================
-   系统偏好检测
-   ============================================ */
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    --bg-primary: var(--bg-light-primary);
-    --bg-secondary: var(--bg-light-secondary);
-    --bg-tertiary: var(--bg-light-tertiary);
-    --bg-elevated: var(--bg-light-elevated);
-    --bg-card: var(--bg-light-card);
-    
-    --text-primary: var(--text-light-primary);
-    --text-secondary: var(--text-light-secondary);
-    --text-tertiary: var(--text-light-tertiary);
-    --text-muted: var(--text-light-muted);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --bg-primary: var(--bg-dark-primary);
-    --bg-secondary: var(--bg-dark-secondary);
-    --bg-tertiary: var(--bg-dark-tertiary);
-    --bg-elevated: var(--bg-dark-elevated);
-    --bg-card: var(--bg-dark-card);
-    
-    --text-primary: var(--text-dark-primary);
-    --text-secondary: var(--text-dark-secondary);
-    --text-tertiary: var(--text-dark-tertiary);
-    --text-muted: var(--text-dark-muted);
-  }
+   /* @deprecated Use --us-bg-start instead. Will be removed in v2.0. */
+   --bg-primary: var(--bg-light-primary);
+   /* @deprecated Use --us-surface instead. Will be removed in v2.0. */
+   --bg-secondary: var(--bg-light-secondary);
+   /* @deprecated Use --us-surface-hover instead. Will be removed in v2.0. */
+   --bg-tertiary: var(--bg-light-tertiary);
+   /* @deprecated Use --us-material-elevated-bg instead. Will be removed in v2.0. */
+   --bg-elevated: var(--bg-light-elevated);
+   /* @deprecated Use --us-surface instead. Will be removed in v2.0. */
+   --bg-card: var(--bg-light-card);
+   /* @deprecated Use --us-text-primary instead. Will be removed in v2.0. */
+   --text-primary: var(--neutral-950);
+   /* @deprecated Use --us-text-secondary instead. Will be removed in v2.0. */
+   --text-secondary: var(--neutral-600);
+   /* @deprecated Use --us-text-tertiary instead. Will be removed in v2.0. */
+   --text-tertiary: var(--neutral-500);
+   /* @deprecated Use --us-text-tertiary instead. Will be removed in v2.0. */
+   --text-muted: var(--neutral-400);
+   /* ============================================
+      Code block tokens
+      ============================================ */
+   --code-add: #3FB950;
+   --code-add-border: rgba(63, 185, 80, 0.2);
+   --code-add-bg: rgba(63, 185, 80, 0.08);
+   --code-remove: #F85149;
+   --code-remove-border: rgba(248, 81, 73, 0.2);
+   --code-remove-bg: rgba(248, 81, 73, 0.08);
+   --code-line-border: rgba(37, 99, 235, 0.1);
+   --code-line-muted: rgba(37, 99, 235, 0.3);
+   --code-line-subtle: rgba(37, 99, 235, 0.5);
 }
 
 /* ============================================
    减少运动偏好
    ============================================ */
-
 @media (prefers-reduced-motion: reduce) {
-  :root {
-    --duration-aurora: 0ms;
-    --duration-slower: 0ms;
-    --duration-slow: 0ms;
-  }
+   :root {
+      --duration-aurora: 0ms;
+      --duration-slower: 0ms;
+      --duration-slow: 0ms;
+   }
 }

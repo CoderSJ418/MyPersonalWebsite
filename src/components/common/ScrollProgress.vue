@@ -81,10 +81,10 @@ onMounted(() => {
 .scroll-progress {
   position: fixed;
   left: 0;
-  z-index: 9999;
+  z-index: var(--z-progress);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--us-duration-normal) var(--us-easing);
 }
 
 .scroll-progress--visible {
@@ -93,7 +93,7 @@ onMounted(() => {
 
 .scroll-progress__bar {
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background: linear-gradient(90deg, rgba(37, 99, 235, 1), rgba(37, 99, 235, 0.8), rgba(37, 99, 235, 0.6));
   transition: width 0.1s linear;
 }
 

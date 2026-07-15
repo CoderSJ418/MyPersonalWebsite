@@ -1,0 +1,10 @@
+[33m8e18e71[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m chore: add .claude/launch.json for preview server config
+[33m59eb77d[m refactor: move project rules from .joycode/ to .claude/rules/
+[33m572b7be[m fix: replace <script> in template with imperative DOM injection
+[33m36f00d8[m feat: generate elite-tier project rules
+[33m5b2ed4c[m fix: add missing SocialLinks import in Footer
+[33mf30b8b2[m feat: Phase 3 - SEO optimization + Breadcrumb + RSS
+[33mfc24747[m refactor: Phase 1 visual unification + Phase 2 content migration
+[33m6cefec1[m[33m ([m[1;31morigin/main[m[33m)[m refactor: TechStack data-driven + fix 35 lint errors
+[33m1d65cb8[m feat: unify contact info data source across Footer, HamburgerMenu, CTASection
+[33mfe8646b[m refactor: Phase 4 - replace inline SVGs with lucide-vue-next icons

@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "browser": "149.0.7827.55",
+  "viewport": {
+    "width": 720,
+    "height": 720,
+    "deviceScaleFactor": 1
+  },
+  "randomSeed": 24,
+  "representativeFrame": "CSS animations paused at -1s delay",
+  "items": [
+    {
+      "id": "aurora",
+      "params": {
+        "speed": 2,
+        "colorTheme": "blue"
+      },
+      "sourceSha256": "6ab123bacf5e1705fa8a36f42d9d670e4ad8dbbd40bce14639aab8c5f4582e86",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/aurora.webp",
+      "reducedMotionPreview": "/images/lab/aurora-reduced.webp"
+    },
+    {
+      "id": "dot-pattern",
+      "params": {
+        "dotSize": 2,
+        "spacing": 20
+      },
+      "sourceSha256": "95e799a4854efbbd6b822ecac4d454332429d851f6cc9c26a156dda098f459b3",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/dot-pattern.webp",
+      "reducedMotionPreview": "/images/lab/dot-pattern-reduced.webp"
+    },
+    {
+      "id": "grid-pattern",
+      "params": {
+        "opacity": 0.5,
+        "gridSize": 40
+      },
+      "sourceSha256": "23c47c7908bcd8361be8cd165802cb959210f93c31ebf25b0f53ad423b11715e",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/grid-pattern.webp",
+      "reducedMotionPreview": "/images/lab/grid-pattern-reduced.webp"
+    },
+    {
+      "id": "magic-card",
+      "params": {
+        "borderWidth": 1
+      },
+      "sourceSha256": "ad42f399f96d7c9467f9be31113de6e2498cb2c08517bf04b9610f4a22291c90",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/magic-card.webp",
+      "reducedMotionPreview": "/images/lab/magic-card-reduced.webp"
+    },
+    {
+      "id": "marquee",
+      "params": {
+        "speed": 30,
+        "direction": "left"
+      },
+      "sourceSha256": "6a3e047347f34475bfb39af0ad76ec35eea5ac6c813f49b86f472fd7d7c267af",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/marquee.webp",
+      "reducedMotionPreview": "/images/lab/marquee-reduced.webp"
+    },
+    {
+      "id": "meteors",
+      "params": {
+        "count": 15,
+        "speed": 2
+      },
+      "sourceSha256": "9a113e0ed258bb5632f3fcf0c89a0b08e8212ee0fec155e91a13f371b63ae3bc",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/meteors.webp",
+      "reducedMotionPreview": "/images/lab/meteors-reduced.webp"
+    },
+    {
+      "id": "noise-texture",
+      "params": {
+        "opacity": 0.1
+      },
+      "sourceSha256": "bd6e82e7d5c49e4ae12b8255fa7a76227ee4263662a32f3ded1b811a29cce554",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/noise-texture.webp",
+      "reducedMotionPreview": "/images/lab/noise-texture-reduced.webp"
+    },
+    {
+      "id": "number-ticker",
+      "params": {
+        "targetValue": 98234,
+        "duration": 2000
+      },
+      "sourceSha256": "abc9f33732ca960825ef4fee4e920515bfd640aacbb1dfb59aeccebdfd8b5695",
+      "representativeFrameMs": 2200,
+      "preview": "/images/lab/number-ticker.webp",
+      "reducedMotionPreview": "/images/lab/number-ticker-reduced.webp"
+    },
+    {
+      "id": "shimmer-button",
+      "params": {
+        "duration": 2
+      },
+      "sourceSha256": "91ce1db39cdb89f987a568f0bfe1a642c975ce6e74996d6eb9b966f223a6406c",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/shimmer-button.webp",
+      "reducedMotionPreview": "/images/lab/shimmer-button-reduced.webp"
+    },
+    {
+      "id": "shine-border",
+      "params": {
+        "borderWidth": 1,
+        "speed": 3
+      },
+      "sourceSha256": "93318993e45346242e84da9e2b5584bfb8c66c21203790d93d53daead39d9755",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/shine-border.webp",
+      "reducedMotionPreview": "/images/lab/shine-border-reduced.webp"
+    },
+    {
+      "id": "spotlight",
+      "params": {
+        "radius": 250
+      },
+      "sourceSha256": "2db45a853b04c9fc24f1d79fe9376746bc60a74ece925732b92ad885ad0e4253",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/spotlight.webp",
+      "reducedMotionPreview": "/images/lab/spotlight-reduced.webp"
+    },
+    {
+      "id": "tilt-card",
+      "params": {
+        "maxTilt": 10,
+        "perspective": 500
+      },
+      "sourceSha256": "dcf6d6efe9a6412d1e64a6e1516e406f0a08398a90fc2a7b1086f4718e5bd155",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/tilt-card.webp",
+      "reducedMotionPreview": "/images/lab/tilt-card-reduced.webp"
+    }
+  ]
+}

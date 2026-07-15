@@ -4,6 +4,8 @@
  * 使用 Google Fonts 加载策略
  */
 
+import { logger } from '@/utils/logger'
+
 /**
  * 添加字体加载样式
  * 在字体加载期间使用系统字体，加载完成后切换到 Web 字体
@@ -42,7 +44,7 @@ export const addFontLoadingStyles = (): void => {
 export const preloadCriticalFonts = (): void => {
   // Google Fonts 已经在 index.html 中预加载
   // 这里可以添加额外的优化逻辑
-  
+
   // 标记开始加载
   document.documentElement.classList.add('font-loading')
 }
@@ -78,7 +80,7 @@ export const onFontLoaded = (callback: () => void): void => {
       callback()
     }
   })
-  
+
   // 使用 requestAnimationFrame 作为后备
   const checkWithTimeout = () => {
     if (checkFontsLoaded()) {
@@ -87,7 +89,7 @@ export const onFontLoaded = (callback: () => void): void => {
       setTimeout(checkWithTimeout, 100)
     }
   }
-  
+
   requestAnimationFrame(checkWithTimeout)
 }
 
@@ -102,11 +104,11 @@ export const loadAllFonts = async (): Promise<void> => {
       // 标记字体加载完成
       document.documentElement.classList.add('fonts-loaded')
       document.documentElement.classList.remove('font-loading')
-      
+
       // 触发字体加载完成事件
       window.dispatchEvent(new CustomEvent('fonts:loaded', { detail: { successful: true, failed: 0 } }))
-      
-      console.log('All fonts loaded successfully')
+
+      logger.info('All fonts loaded successfully')
       resolve()
     })
   })

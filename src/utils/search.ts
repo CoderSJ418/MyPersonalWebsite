@@ -39,7 +39,7 @@ export function highlightText(text: string, query: string): string {
   const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi')
   return text.replace(
     regex,
-    '<mark class="bg-yellow-200 dark:bg-yellow-700 px-0.5 rounded font-semibold">$1</mark>'
+    '<mark class="bg-yellow-200 px-0.5 rounded font-semibold">$1</mark>'
   )
 }
 
@@ -126,7 +126,7 @@ function searchSkills(skills: Skill[], query: string): SearchResultItem[] {
       type: 'skill' as const,
       title: skill.name,
       description: skill.description || `${skill.category} - ${skill.level}级`,
-      url: `/skills#${skill.id}`,
+      url: '/#skills',
       metadata: {
         category: skill.category,
         level: skill.level

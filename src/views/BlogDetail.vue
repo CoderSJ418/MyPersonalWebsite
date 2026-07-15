@@ -1,5 +1,9 @@
 <template>
-  <div class="blog-detail-page">
+  <div class="pt-16 min-h-screen min-h-dvh" style="background-color: var(--us-bg-start)">
+    <SEOHead
+:title="post?.title || '文章详情'" :description="post?.excerpt || ''" type="article"
+      :publish-date="post?.publishedAt" :modified-date="post?.updatedAt" :tags="post?.tags"
+      :structured-data="post ? blogPostStructuredData(post) : undefined" />
     <!-- 加载状态 -->
     <div v-if="loading" class="blog-detail-page__loading">
       <div class="skeleton skeleton--header"></div>
@@ -30,34 +34,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
 import BlogDetail from '@/components/blog/BlogDetail.vue'
+import SEOHead from '@/components/common/SEOHead.vue'
+import { blogPostStructuredData } from '@/utils/structuredData'
 
 const route = useRoute()
 const blogStore = useBlogStore()
 
+// Ensure metadata is loaded (sync, instant from blog-meta.json)
+if (blogStore.posts.length === 0) {
+  blogStore.loadPosts()
+}
+
 const loading = ref(false)
 const error = ref<string | null>(null)
 
+// Get post metadata from store (instant — from static index)
 const post = computed(() => blogStore.getPostById(route.params.id as string))
 
-// 加载文章数据
+// 加载文章完整内容（异步 — 按需加载单篇 .md）
 const loadPost = async () => {
   try {
     loading.value = true
     error.value = null
-    await blogStore.loadPosts()
+    const postId = route.params.id as string
+
+    // Load full content for this post
+    const loadedPost = await blogStore.loadSinglePost(postId)
+    if (!loadedPost) {
+      error.value = '文章未找到'
+    }
   } catch (err) {
     error.value = err instanceof Error ? err.message : 'Failed to load post'
-    console.error('Error loading post:', err)
   } finally {
     loading.value = false
   }
 }
 
-// 监听路由参数变化
+// 监听路由参数变化（immediate: true 已处理首次加载，无需 onMounted 重复调用）
 watch(
   () => route.params.id,
   () => {
@@ -65,36 +82,45 @@ watch(
   },
   { immediate: true }
 )
-
-onMounted(() => {
-  loadPost()
-})
 </script>
 
 <style scoped>
 .blog-detail-page {
   min-height: 100vh;
-  padding-top: 6rem;
-  background-color: var(--bg-primary);
+  /* fallback for older browsers */
+  min-height: 100dvh;
+  /* dynamic viewport height for mobile */
+  padding-top: 5rem;
+  background-color: var(--us-bg-start);
+}
+
+@media (min-width: 768px) {
+  .blog-detail-page {
+    padding-top: 6rem;
+  }
 }
 
 /* 加载状态 */
 .blog-detail-page__loading {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--us-space-8) var(--us-space-6);
+}
+
+@media (min-width: 768px) {
+  .blog-detail-page__loading {
+    padding: var(--us-space-8);
+  }
 }
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--bg-secondary) 25%,
-    var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%
-  );
+  background: linear-gradient(90deg,
+      var(--us-surface) 25%,
+      var(--us-surface-hover) 50%,
+      var(--us-surface) 75%);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s ease-in-out infinite;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
 }
 
 .skeleton--header {
@@ -110,6 +136,7 @@ onMounted(() => {
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
   }
@@ -118,92 +145,90 @@ onMounted(() => {
 /* 错误状态 */
 .blog-detail-page__error {
   max-width: 600px;
-  margin: 4rem auto;
-  padding: 3rem;
+  margin: var(--us-space-8) auto;
+  padding: var(--us-space-8) var(--us-space-6);
   text-align: center;
-  background-color: var(--bg-secondary);
+  background-color: var(--us-surface);
   border: 1px solid var(--error);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .blog-detail-page__error {
+    margin: var(--us-space-16) auto;
+    padding: var(--us-space-12);
+  }
 }
 
 .blog-detail-page__error-title {
-  margin: 0 0 1rem 0;
+  margin: 0 0 var(--us-space-4) 0;
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--error);
 }
 
 .blog-detail-page__error-message {
-  margin: 0 0 2rem 0;
-  color: var(--text-secondary);
+  margin: 0 0 var(--us-space-8) 0;
+  color: var(--us-text-secondary);
 }
 
 .blog-detail-page__error-button {
-  padding: 0.75rem 2rem;
+  padding: var(--us-space-3) var(--us-space-8);
   font-size: 1rem;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s;
+  color: var(--us-text-primary);
+  background-color: var(--us-bg-start);
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-lg);
+  transition: color, background-color, border-color, opacity var(--us-duration-fast) var(--us-easing);
 }
 
 .blog-detail-page__error-button:hover {
-  background-color: var(--bg-tertiary);
-  border-color: var(--color-primary);
+  background-color: var(--us-surface-hover);
+  border-color: var(--us-accent);
 }
 
 /* 文章未找到 */
 .blog-detail-page__not-found {
   max-width: 600px;
-  margin: 4rem auto;
-  padding: 3rem;
+  margin: var(--us-space-8) auto;
+  padding: var(--us-space-8) var(--us-space-6);
   text-align: center;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  background-color: var(--us-surface);
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .blog-detail-page__not-found {
+    margin: var(--us-space-16) auto;
+    padding: var(--us-space-12);
+  }
 }
 
 .blog-detail-page__not-found-title {
-  margin: 0 0 1rem 0;
+  margin: 0 0 var(--us-space-4) 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--us-text-primary);
 }
 
 .blog-detail-page__not-found-message {
-  margin: 0 0 2rem 0;
-  color: var(--text-secondary);
+  margin: 0 0 var(--us-space-8) 0;
+  color: var(--us-text-secondary);
 }
 
 .blog-detail-page__not-found-button {
-  padding: 0.75rem 2rem;
+  padding: var(--us-space-3) var(--us-space-8);
   font-size: 1rem;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s;
+  color: var(--us-text-primary);
+  background-color: var(--us-bg-start);
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-lg);
+  transition: color, background-color, border-color, opacity var(--us-duration-fast) var(--us-easing);
 }
 
 .blog-detail-page__not-found-button:hover {
-  background-color: var(--bg-tertiary);
-  border-color: var(--color-primary);
-}
-
-/* 响应式 */
-@media (max-width: 768px) {
-  .blog-detail-page {
-    padding-top: 5rem;
-  }
-
-  .blog-detail-page__loading,
-  .blog-detail-page__error,
-  .blog-detail-page__not-found {
-    padding: 2rem 1.5rem;
-    margin: 2rem auto;
-  }
+  background-color: var(--us-surface-hover);
+  border-color: var(--us-accent);
 }
 </style>

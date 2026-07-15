@@ -1,17 +1,11 @@
 /* ============================================
-   MyPersonalWebsite - Aurora Bento v3.0
-   Bento Box Grid + Aurora UI 风格
-   现代精致 · 视觉冲击 · 用户体验优先
+   MyPersonalWebsite - Design System v4.1
+   Vertical Timeline Design Language
+   干净现代 · rounded-xl · shadow-sm · blue-600 accent
    ============================================ */
 
-/* Import Google Fonts - Modern Premium */
-/* 使用 font-display: swap 优化字体加载 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-/* Import other style files - Must be before @tailwind and @layer */
-@import '@/styles/transitions.css';
-@import '@/styles/componentStyles.css';
-@import '@/assets/styles/animations.css';
+/* Import Unified Visual System FIRST — single source of truth for depth/motion/color */
+@import '@/assets/styles/unified-system.css';
 
 @tailwind base;
 @tailwind components;
@@ -24,81 +18,14 @@
        Aurora Bento Color System - Light Mode
        ============================================ */
 
-    /* Aurora 主色系 - Cyan + Purple */
-    --aurora-cyan: #00FFFF;
-    --aurora-cyan-light: #66FFFF;
-    --aurora-cyan-dark: #008888;
-    --aurora-purple: #8B00FF;
-    --aurora-purple-light: #AA44FF;
-    --aurora-purple-dark: #6600CC;
-    --aurora-magenta: #FF1493;
-    --aurora-electric-blue: #0080FF;
-
-    /* Aurora 渐变 */
-    --aurora-gradient-primary: linear-gradient(135deg, #00FFFF 0%, #8B00FF 50%, #FF1493 100%);
-    --aurora-gradient-cyan-purple: linear-gradient(135deg, #00FFFF 0%, #8B00FF 100%);
-    --aurora-gradient-electric-magenta: linear-gradient(135deg, #0080FF 0%, #FF1493 100%);
-    --aurora-gradient-flow: linear-gradient(45deg, #00FFFF, #0080FF, #8B00FF, #FF1493, #00FFFF);
-    --aurora-gradient-bg: linear-gradient(135deg, rgba(0,255,255,0.03) 0%, rgba(139,0,255,0.03) 100%);
-    --aurora-gradient-border: linear-gradient(135deg, #00FFFF 0%, #8B00FF 50%, #FF1493 100%);
-
-    /* Aurora 光晕效果 */
-    --aurora-glow-cyan: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2);
-    --aurora-glow-purple: 0 0 20px rgba(139, 0, 255, 0.4), 0 0 40px rgba(139, 0, 255, 0.2);
-    --aurora-glow-electric: 0 0 24px rgba(0, 128, 255, 0.4), 0 0 48px rgba(255, 20, 147, 0.3);
-
     /* 背景系统 - 浅色模式 */
     --bg-primary: #FFFFFF;
     --bg-secondary: #F8FAFC;
     --bg-tertiary: #F1F5F9;
     --bg-card: #FFFFFF;
     --bg-elevated: #FFFFFF;
-    --bg-dark-primary: #0D0D0D;
-    --bg-dark-secondary: #1A1A1A;
-    --bg-dark-card: #121212;
 
-    /* Bento Grid 变量 */
-    --bento-gap: 1.5rem;
-    --bento-gap-sm: 1rem;
-    --bento-radius: 1rem;
-    --bento-card-padding: 1.5rem;
-    --bento-card-padding-sm: 1rem;
-    --bento-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --bento-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 24px rgba(0, 255, 255, 0.1);
-
-    /* 文字系统 */
-    --text-primary: #0D0D0D;
-    --text-secondary: #4A5568;
-    --text-tertiary: #718096;
-    --text-muted: #A0AEC0;
-    --text-dark-primary: #FFFFFF;
-    --text-dark-secondary: #CBD5E1;
-    --text-dark-tertiary: #94A3B8;
-
-    /* 边框系统 */
-    --border-subtle: rgba(226, 232, 240, 0.8);
-    --border-default: #E2E8F0;
-    --border-strong: #CBD5E1;
-    --border-aurora: rgba(0, 255, 255, 0.2);
-
-    /* Surface 系统 - 统一变量 */
-    --surface-1: #FFFFFF;
-    --surface-2: #F8FAFC;
-    --surface-3: #F1F5F9;
-
-    /* 主色系 - 靛蓝紫罗兰渐变（保留兼容） */
-    --primary-50: #EEF2FF;
-    --primary-100: #E0E7FF;
-    --primary-200: #C7D2FE;
-    --primary-300: #A5B4FC;
-    --primary-400: #818CF8;
-    --primary-500: #6366F1;
-    --primary-600: #4F46E5;
-    --primary-700: #4338CA;
-    --primary-800: #3730A3;
-    --primary-900: #312E81;
-
-    /* 强调色系 */
+    /* 语义辅助色 — 非主accent，用于特定语义场景（如状态标签、分类标识） */
     --accent-pink-500: #EC4899;
     --accent-pink-600: #DB2777;
     --accent-amber-500: #F59E0B;
@@ -106,10 +33,16 @@
     --accent-emerald-500: #10B981;
     --accent-emerald-600: #059669;
 
-    /* Accent 橙色系 - 用于CTA按钮（高对比度） */
-    --accent-500: #EA580C;
-    --accent-600: #C2410C;
-    --accent-700: #9A3412;
+    /* Accent 别名 — 统一映射到 --us-accent（唯一accent源：unified-system.css） */
+    --accent-500: var(--us-accent);
+    --accent-600: var(--us-accent);
+    --accent-700: var(--us-accent);
+
+    /* CTA渐变深色端 — accent渐变终点 */
+    --us-accent-dark: rgba(29, 78, 216, 0.95);
+
+    /* 深色背景上的文字色（按钮/卡片等accent背景上的白色文字） */
+    --text-on-accent: #ffffff;
 
     /* Secondary 灰蓝色系 */
     --secondary-500: #64748B;
@@ -121,6 +54,31 @@
     --warning-color: #F59E0B;
     --error-color: #EF4444;
     --info-color: #3B82F6;
+
+    /* ============================================
+       响应式断点 Token — Mobile-First (min-width)
+       与 tailwind.config.js screens 保持一致
+       规范：项目统一使用 min-width 策略，
+       新代码禁止使用 max-width 媒体查询
+       ============================================ */
+    --breakpoint-xs: 375px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1440px;
+
+    /* ── 迁移状态 ──
+       已迁移（min-width）：14处低风险 max-width
+         - DetailSection, DetailLayout, DetailNav, CodeBlock,
+           ContactInfoDisplay, TechStackFilter, About,
+           ProjectDetail, BlogDetail, ProjectDetailRelated,
+           ProjectDetailContent, AboutSnapshot
+       保留（max-width）：32处中高风险
+         - 涉及 grid-template-columns/display/flex-direction
+           等布局变化，或与 480px 子断点属性重叠
+       边界偏移规则：max-width:768px → min-width:769px (+1px)
+       ─────────────── */
 
     /* 字体 */
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
@@ -145,24 +103,22 @@
     --font-semibold: 600;
     --font-bold: 700;
 
-    /* 行高 */
-    --leading-tight: 1.25;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.75;
+    /* 行高 — 统一由 design-tokens.css 定义，此处不再重复 */
 
-    /* 间距系统 */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-20: 5rem;
-    --space-24: 6rem;
+    /* 间距系统 — 别名映射到 unified-system.css --us-space-*（唯一标准源） */
+    --space-1: var(--us-space-1);
+    --space-2: var(--us-space-2);
+    --space-3: var(--us-space-3);
+    --space-4: var(--us-space-4);
+    --space-5: var(--us-space-5);
+    --space-6: var(--us-space-6);
+    --space-8: var(--us-space-8);
+    --space-10: var(--us-space-10);
+    --space-12: var(--us-space-12);
+    --space-16: var(--us-space-16);
+    --space-20: var(--us-space-20);
+    --space-24: var(--us-space-24);
+    --space-32: var(--us-space-32);
 
     /* 圆角系统 */
     --radius-sm: 0.25rem;
@@ -172,225 +128,71 @@
     --radius-2xl: 1.5rem;
     --radius-full: 9999px;
 
-    /* 动画时间 */
+    /* 动画时间 — 别名映射到 unified-system.css --us-duration-*（唯一标准源） */
     --duration-instant: 50ms;
-    --duration-fast: 100ms;
-    --duration-normal: 200ms;
-    --duration-slow: 300ms;
-    --duration-slower: 400ms;
-    --transition-normal: 200ms;
-    --transition-slower: 400ms;
-    --surface-1-rgb: 255, 255, 255;
-    --primary-500-rgb: 99, 102, 241;
+    --duration-fast: var(--us-duration-fast);
+    --duration-normal: var(--us-duration-normal);
+    --duration-slow: var(--us-duration-slow);
+    --duration-slower: 600ms;
+    --transition-fast: var(--duration-fast);
+    --transition-normal: var(--duration-normal);
+    --transition-slow: var(--duration-slow);
+    --transition-slower: var(--duration-slower);
+    /* 缓动函数 — 别名映射到 unified-system.css --us-easing*（唯一标准源） */
+    --ease-default: var(--us-easing);
+    --ease-in: var(--us-easing-enter);
+    --ease-out: var(--us-easing-exit);
+    --ease-bounce: var(--us-easing);
+    --ease-smooth: var(--us-easing);
 
-    /* 缓动函数 */
-    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Z-index */
+    /* Z-Index Scale — unified stacking context */
+    --z-base: 0;
+    /* Base layer (no stacking) */
+    --z-local: 1;
+    /* Component internal stacking */
+    --z-local-elevated: 2;
+    /* Elevated local elements */
+    --z-local-high: 3;
+    /* High local elements (Footer/FeaturedBlog) */
+    --z-sticky: 10;
+    /* Sticky elements (filters, badges) */
+    --z-overlay-subtle: 30;
+    /* Subtle overlay (Blog) */
+    --z-overlay: 40;
+    /* Overlay elements (CTA, hamburger) */
+    --z-overlay-elevated: 50;
+    /* Elevated overlays (mobile nav) */
+    --z-header: 100;
+    /* Fixed header */
+    --z-header-elevated: 110;
+    /* Header dropdowns/menus */
     --z-dropdown: 1000;
-    --z-sticky: 1020;
+    /* Dropdown menus */
+    --z-sticky-filter: 1020;
+    /* Sticky filter above header (Blog) */
     --z-fixed: 1030;
+    /* Fixed elements */
+    --z-modal-backdrop: 1040;
+    /* Modal backdrop */
     --z-modal: 1050;
+    /* Modal content */
+    --z-popover: 1060;
+    /* Popovers */
     --z-tooltip: 1070;
+    /* Tooltips */
+    --z-progress: 1080;
+    /* Progress bars (scroll, reading) */
+    --z-notification: 1090;
+    /* Notifications/toasts */
+    --z-toast: 1095;
+    /* Toast messages */
+    --z-cursor: 9999;
+    /* Custom cursor overlay */
 
-    /* 阴影系统 */
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-    --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --shadow-primary: 0 10px 25px -5px rgba(0, 255, 255, 0.3);
-    --shadow-aurora: 0 0 40px rgba(0, 255, 255, 0.15), 0 0 80px rgba(139, 0, 255, 0.1);
 
-    /* 渐变系统（保留兼容） */
-    --gradient-primary: linear-gradient(135deg, #00FFFF 0%, #8B00FF 100%);
-    --gradient-secondary: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
-    --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
-    --gradient-success: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
-    --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
-    --gradient-light: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
 
-    /* ============================================
-       规范B变量别名 - 兼容旧组件
-       Color-prefixed aliases for backward compatibility
-       ============================================ */
-    --color-bg-primary: var(--bg-primary);
-    --color-bg-secondary: var(--bg-secondary);
-    --color-bg-tertiary: var(--bg-tertiary);
-    --color-bg-card: var(--bg-card);
-    --color-bg-surface: var(--bg-secondary);
-    --color-text-primary: var(--text-primary);
-    --color-text-secondary: var(--text-secondary);
-    --color-text-tertiary: var(--text-tertiary);
-    --color-border: var(--border-default);
-    --color-border-subtle: var(--border-subtle);
-    --color-primary: var(--primary-500);
-    --color-primary-light: var(--primary-100);
-    --color-primary-50: var(--primary-50);
-    --color-primary-100: var(--primary-100);
-    --color-primary-600: var(--primary-600);
-    --color-success: var(--success-color);
-    --color-error: var(--error-color);
-    --color-surface-bg: var(--bg-primary);
-    --color-surface-card: var(--bg-card);
-    --color-surface-text: var(--text-primary);
-    --color-surface-text-secondary: var(--text-secondary);
-  }
 
-  .dark {
-    /* ============================================
-       Aurora Bento 配色系统 - 深色模式
-       Aurora Bento Color System - Dark Mode
-       ============================================ */
 
-    /* Aurora 主色系 - 深色模式下更亮 */
-    --aurora-cyan: #00FFFF;
-    --aurora-cyan-light: #66FFFF;
-    --aurora-purple: #AA44FF;
-    --aurora-purple-light: #CC88FF;
-    --aurora-magenta: #FF44AA;
-    --aurora-electric-blue: #44AAFF;
-
-    /* Aurora 渐变 - 深色模式增强 */
-    --aurora-gradient-primary: linear-gradient(135deg, #00FFFF 0%, #AA44FF 50%, #FF44AA 100%);
-    --aurora-gradient-cyan-purple: linear-gradient(135deg, #00FFFF 0%, #AA44FF 100%);
-    --aurora-gradient-electric-magenta: linear-gradient(135deg, #44AAFF 0%, #FF44AA 100%);
-    --aurora-gradient-flow: linear-gradient(45deg, #00FFFF, #44AAFF, #AA44FF, #FF44AA, #00FFFF);
-    --aurora-gradient-bg: linear-gradient(135deg, rgba(0,255,255,0.05) 0%, rgba(170,68,255,0.05) 100%);
-    --aurora-gradient-border: linear-gradient(135deg, #00FFFF 0%, #AA44FF 50%, #FF44AA 100%);
-
-    /* Aurora 光晕效果 - 深色模式增强 */
-    --aurora-glow-cyan: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.3);
-    --aurora-glow-purple: 0 0 30px rgba(170, 68, 255, 0.5), 0 0 60px rgba(170, 68, 255, 0.3);
-    --aurora-glow-electric: 0 0 30px rgba(68, 170, 255, 0.5), 0 0 60px rgba(255, 68, 170, 0.4);
-
-    /* 背景系统 - 深色 */
-    --bg-primary: #0D0D0D;
-    --bg-secondary: #1A1A1A;
-    --bg-tertiary: #262626;
-    --bg-card: #121212;
-    --bg-elevated: #1A1A1A;
-
-    /* 文字系统 - 深色 */
-    --text-primary: #FFFFFF;
-    --text-secondary: #A0AEC0;
-    --text-tertiary: #718096;
-    --text-muted: #4A5568;
-
-    /* 边框系统 - 深色 */
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-default: rgba(255, 255, 255, 0.1);
-    --border-strong: rgba(255, 255, 255, 0.2);
-    --border-aurora: rgba(0, 255, 255, 0.3);
-
-    /* Surface 系统 - 深色模式 */
-    --surface-1: #1A1A1A;
-    --surface-2: #262626;
-    --surface-3: #3F3F46;
-
-    /* Bento Grid 变量 - 深色 */
-    --bento-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --bento-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 255, 0.15);
-
-    /* 主色系 - 深色模式调整（保留兼容） */
-    --primary-50: #E0E7FF;
-    --primary-100: #C7D2FE;
-    --primary-200: #A5B4FC;
-    --primary-300: #818CF8;
-    --primary-400: #6366F1;
-    --primary-500: #4F46E5;
-    --primary-600: #4338CA;
-    --primary-700: #3730A3;
-    --primary-800: #312E81;
-    --primary-900: #1E1B4B;
-
-    /* Accent 橙色系 - 深色模式（更亮以保证对比度） */
-    --accent-500: #F97316;
-    --accent-600: #EA580C;
-    --accent-700: #C2410C;
-
-    /* Secondary 灰蓝色系 - 深色模式 */
-    --secondary-500: #94A3B8;
-    --secondary-600: #64748B;
-    --secondary-700: #475569;
-
-    /* 阴影系统 - 深色 */
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
-    --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-    --shadow-primary: 0 10px 25px -5px rgba(0, 255, 255, 0.4);
-    --shadow-aurora: 0 0 60px rgba(0, 255, 255, 0.2), 0 0 100px rgba(170, 68, 255, 0.15);
-
-    /* 渐变系统 - 深色 */
-    --gradient-primary: linear-gradient(135deg, #00FFFF 0%, #AA44FF 100%);
-    --gradient-secondary: linear-gradient(135deg, #FF44AA 0%, #AA44FF 100%);
-    --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
-    --gradient-light: linear-gradient(135deg, #1A1A1A 0%, #262626 100%);
-
-    /* 阴影系统 - 深色扩展 */
-    --shadow-pink: 0 10px 25px -5px rgba(236, 72, 153, 0.5);
-    --shadow-amber: 0 10px 25px -5px rgba(245, 158, 11, 0.5);
-
-    /* 渐变系统 - 深色 */
-    --gradient-primary: linear-gradient(135deg, #818CF8 0%, #A5B4FC 100%);
-    --gradient-secondary: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
-    --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
-    --gradient-success: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
-    --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-    --gradient-light: linear-gradient(135deg, #1E293B 0%, #334155 100%);
-    --gradient-surface: linear-gradient(135deg, #1E293B 0%, #334155 100%);
-
-    /* ============================================
-       规范B变量别名 - 深色模式
-       Color-prefixed aliases for dark mode
-       ============================================ */
-    --color-bg-primary: var(--bg-primary);
-    --color-bg-secondary: var(--bg-secondary);
-    --color-bg-tertiary: var(--bg-tertiary);
-    --color-bg-card: var(--bg-card);
-    --color-bg-surface: var(--bg-secondary);
-    --color-text-primary: var(--text-primary);
-    --color-text-secondary: var(--text-secondary);
-    --color-text-tertiary: var(--text-tertiary);
-    --color-border: var(--border-default);
-    --color-border-subtle: var(--border-subtle);
-    --color-primary: var(--primary-500);
-    --color-primary-light: var(--primary-400);
-    --color-primary-50: var(--primary-50);
-    --color-primary-100: var(--primary-100);
-    --color-primary-600: var(--primary-600);
-    --color-success: var(--success-color);
-    --color-error: var(--error-color);
-    --color-surface-bg: var(--bg-primary);
-    --color-surface-card: var(--bg-card);
-    --color-surface-text: var(--text-primary);
-    --color-surface-text-secondary: var(--text-secondary);
-  }
-
-  /* 可访问性焦点样式 - 深色模式（移到 .dark 外部） */
-  .dark .focus-ring:focus {
-    outline: 2px solid var(--primary-500);
-    outline-offset: 2px;
-  }
-
-  .dark .focus-ring:focus-visible {
-    outline: 2px solid var(--primary-500);
-    outline-offset: 2px;
-  }
-
-  /* 减少动画偏好 - 禁用焦点环 */
-  @media (prefers-reduced-motion: reduce) {
-    .dark .focus-ring:focus {
-      outline: none;
-    }
   }
 
   html {
@@ -398,7 +200,7 @@
   }
 
   body {
-    @apply text-slate-900 bg-white dark:text-slate-50 dark:bg-slate-950 transition-colors duration-300;
+    @apply text-slate-900 bg-white;
     /* 优化字体渲染 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -407,34 +209,41 @@
     line-height: 1.6;
   }
 
-  /* 全局选中文字样式 - 行业标准透明度 */
+  /* 全局选中文字样式 - blue-600 accent 统一色系 */
   ::selection {
-    background-color: rgba(59, 130, 246, 0.3);  /* blue-500 @ 30% */
+    background-color: rgba(37, 99, 235, 0.3);
+    /* blue-600 @ 30% */
     color: inherit;
   }
 
   ::-moz-selection {
-    background-color: rgba(59, 130, 246, 0.3);
+    background-color: rgba(37, 99, 235, 0.3);
     color: inherit;
   }
 
-  .dark ::selection {
-    background-color: rgba(96, 165, 250, 0.4);  /* blue-400 @ 40% */
-  }
-
-  .dark ::-moz-selection {
-    background-color: rgba(96, 165, 250, 0.4);
-  }
-
   /* 现代精致字体系统 */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     @apply font-semibold tracking-tight;
     line-height: 1.2;
   }
 
+  /* 标题行宽平衡 — 防止孤行 */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
   /* 代码字体 */
-  code, pre, .code {
+  code,
+  pre,
+  .code {
     font-family: 'JetBrains Mono', monospace;
   }
 
@@ -448,7 +257,7 @@
   input,
   textarea,
   select {
-    font-size: 16px;
+    font-size: var(--text-base);
   }
 
   /* 优化链接样式 */
@@ -466,228 +275,47 @@
 
   /* 按钮系统 */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition duration-200;
     font-size: 0.95rem;
     font-weight: 500;
     position: relative;
     overflow: hidden;
   }
 
-  .btn-primary {
-    background-color: var(--primary-600);
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--primary-700);
-  }
-  
-  .dark .btn-primary {
-    background-color: var(--primary-500);
-  }
-  
-  .dark .btn-primary:hover {
-    background-color: var(--primary-600);
-  }
-  
-  .btn-primary {
-    box-shadow: var(--shadow-primary);
-  }
-
-  .btn-primary:hover {
-    box-shadow: 0 12px 30px -5px rgba(99, 102, 241, 0.5);
-    transform: translateY(-2px);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
+  .btn:active {
+    transform: scale(0.95);
   }
 
   .btn-secondary {
-    background-color: transparent;
-    color: #0F172A;
-    border: 2px solid #0F172A;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #0F172A;
-    color: white;
-  }
-  
-  .dark .btn-secondary {
-    color: #F8FAFC;
-    border-color: #F8FAFC;
-  }
-  
-  .dark .btn-secondary:hover {
-    background-color: #F8FAFC;
-    color: #0F172A;
-  }
-  
-  .btn-secondary {
-    box-shadow: var(--shadow-sm);
-  }
-
-  .btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .btn-gradient {
-    color: white;
-    background: var(--gradient-primary);
-    box-shadow: var(--shadow-primary);
-  }
-
-  .btn-gradient:hover {
-    box-shadow: 0 12px 30px -5px rgba(99, 102, 241, 0.6);
-    transform: translateY(-2px);
-  }
-
-  /* 卡片系统 */
-  .card {
-    background-color: white;
-    border-radius: 1.5rem;
-    border: 1px solid #E2E8F0;
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal) var(--ease-smooth);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .dark .card {
-    background-color: #0F172A;
-    border-color: #1E293B;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-  }
-
-  .card:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-4px);
-  }
-
-  .card:hover::before {
-    opacity: 1;
-  }
-
-  .card-elevated {
-    background-color: white;
-    border-radius: 1.5rem;
-    border: 1px solid #E2E8F0;
-    box-shadow: var(--shadow-lg);
-    transition: all var(--transition-normal) var(--ease-smooth);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .dark .card-elevated {
-    background-color: #0F172A;
-    border-color: #1E293B;
-  }
-
-  .card-elevated:hover {
-    box-shadow: var(--shadow-2xl);
-    transform: translateY(-6px);
-  }
-
-  .card-glass {
-    background-color: white;
-    border-radius: 1.5rem;
-    border: 1px solid #E2E8F0;
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal) var(--ease-smooth);
-    position: relative;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  
-  .dark .card-glass {
-    background-color: #0F172A;
-    border-color: #1E293B;
-    background: rgba(30, 41, 59, 0.8);
-  }
-
-  .dark .card-glass {
-    background: rgba(30, 41, 59, 0.8);
-  }
-
-  /* 标签系统 */
-  .tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.75rem;
+    gap: var(--us-space-2);
     font-size: 0.875rem;
     font-weight: 500;
-    border-radius: 9999px;
-    background: var(--surface-2);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-default);
-    transition: all var(--transition-normal) var(--ease-smooth);
+    color: var(--us-accent);
+    background: transparent;
+    border: 1px solid var(--us-glass-border);
+    border-radius: 0.75rem;
+    padding: var(--us-space-2) var(--us-space-4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .tag:hover {
-    background: var(--primary-50);
-    color: var(--primary-600);
-    border-color: var(--primary-300);
+  .btn-secondary:hover {
+    background: rgba(37, 99, 235, 0.06);
+    border-color: rgba(37, 99, 235, 0.2);
     transform: translateY(-1px);
+    box-shadow: var(--us-depth-1-hover);
   }
 
-  .tag-primary {
-    background-color: #EEF2FF;
-    color: #4338CA;
-    border-color: var(--primary-300);
-  }
-  
-  .dark .tag-primary {
-    background-color: #312E81;
-    color: #C7D2FE;
-  }
-
-  .tag-gradient {
-    color: white;
-    background: var(--gradient-primary);
-    border: none;
-  }
-
-  /* 容器系统 */
-  .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8;
-    max-width: 1280px;
-  }
-
-  .container-narrow {
-    @apply container;
-    max-width: 960px;
-  }
-
-  .container-wide {
-    @apply container;
-    max-width: 1536px;
+  .btn-secondary:active {
+    transform: scale(0.95);
   }
 
   /* 分隔线 */
   .divider {
-    @apply w-full h-px bg-slate-200 dark:bg-slate-800;
+    @apply w-full h-px bg-slate-200;
   }
 
-  .divider-gradient {
-    @apply w-full h-px;
-    background: var(--gradient-primary);
-    opacity: 0.3;
-  }
 }
 
 @layer utilities {
@@ -711,17 +339,15 @@
     overflow: hidden;
   }
 
-  /* GPU加速 */
+  /* GPU加速 — will-change已移除，浏览器在transition/animation时自动优化合成层 */
   .gpu-accelerated {
     transform: translateZ(0);
-    will-change: transform;
     backface-visibility: hidden;
   }
 
-  /* 平滑滚动 */
+  /* 平滑滚动 - 由 design-system.css 的 data-scroll-smooth 属性控制 */
   .smooth-scroll {
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
   }
 
   /* 安全区域 */
@@ -741,17 +367,6 @@
     padding-right: env(safe-area-inset-right);
   }
 
-  /* 现代精致悬停效果 */
-  .hover-lift {
-    transition: transform var(--transition-normal) var(--ease-smooth), 
-                box-shadow var(--transition-normal) var(--ease-smooth);
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
-
   /* 现代精致进入动画 */
   .fade-in {
     animation: fadeIn var(--transition-slower) var(--ease-smooth);
@@ -762,6 +377,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -778,6 +394,7 @@
       opacity: 0;
       transform: translateX(-20px);
     }
+
     to {
       opacity: 1;
       transform: translateX(0);
@@ -794,44 +411,28 @@
       opacity: 0;
       transform: scale(0.95);
     }
+
     to {
       opacity: 1;
       transform: scale(1);
     }
   }
 
-  /* 现代精致弹跳动画 */
+  /* 平滑缩放进入动画（替代bounce-in） */
   .bounce-in {
-    animation: bounceIn 0.6s var(--ease-bounce);
+    animation: scaleIn var(--transition-slower) var(--ease-smooth);
   }
 
-  @keyframes bounceIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.3);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    70% {
-      transform: scale(0.9);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  /* 禁用选择 */
-  .no-select {
+  /* 仅交互控件禁用文本选择，保留内容区域的可选择性 */
+  button,
+  a {
     -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
   }
 
   /* 减少动画 */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -851,53 +452,14 @@
     display: none;
   }
 
-  /* 玻璃拟态效果 */
+  /* 玻璃拟态效果 → solid card风格（无backdrop-filter） */
   .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--us-glass-border);
+    border-radius: 0.75rem;
+    box-shadow: var(--us-depth-1);
   }
 
-  .dark .glass {
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(51, 65, 85, 0.5);
-  }
-
-  /* 渐变文字 */
-  .text-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-secondary {
-    background: var(--gradient-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-accent {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* 发光效果 */
-  .glow-primary {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-  }
-
-  .glow-pink {
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
-  }
-
-  .glow-amber {
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
-  }
 }
 
 /* ============================================
@@ -906,20 +468,10 @@
    ============================================ */
 
 @media (max-width: 768px) {
-  /* 减少移动端阴影 */
-  .shadow-lg {
-    box-shadow: var(--shadow-md);
-  }
 
   /* 优化移动端动画 */
-  .transition-all {
+  .transition {
     transition-duration: var(--transition-fast) !important;
-  }
-
-  /* 移动端悬停效果 */
-  .hover-lift:hover,
-  .card:hover {
-    transform: none;
   }
 
   /* 移动端按钮大小 */

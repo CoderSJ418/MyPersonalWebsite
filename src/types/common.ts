@@ -60,7 +60,6 @@ export interface SiteConfig {
  * 用户偏好
  */
 export interface UserPreferences {
-  theme: 'light' | 'dark' | 'auto'
   language: string
   newsletter: boolean
 }

@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta v-if="config.title" :content="fullTitle" property="og:title" />
     <meta v-if="config.description" :content="config.description" name="description" />
+    <meta :content="robots" name="robots" />
     <meta v-if="config.description" :content="config.description" property="og:description" />
     <meta v-if="config.keywords" :content="config.keywords" name="keywords" />
     <meta v-if="config.url" :content="config.url" property="og:url" />
-    <meta v-if="config.url" :href="config.url" rel="canonical" />
+    <link v-if="config.url" :href="config.url" rel="canonical" />
 
     <!-- Open Graph 标签 -->
     <meta :content="config.type || 'website'" property="og:type" />
@@ -39,16 +40,11 @@
     />
     <meta v-if="config.category" :content="config.category" property="article:section" />
     <meta v-for="tag in config.tags" :key="tag" :content="tag" property="article:tag" />
-
-    <!-- 结构化数据 -->
-    <script v-if="structuredData" type="application/ld+json">
-      {{ structuredData }}
-    </script>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onMounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { SEOConfig } from '@/utils/seo'
 
@@ -66,17 +62,26 @@ interface Props {
   tags?: string[]
   locale?: string
   structuredData?: Record<string, unknown>
+  robots?: 'index,follow' | 'noindex,nofollow'
   siteName?: string
   titleSuffix?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  keywords: '',
+  image: undefined,
+  url: undefined,
   type: 'website',
   author: '佘杰',
+  publishDate: undefined,
+  modifiedDate: undefined,
+  category: undefined,
+  locale: 'zh_CN',
+  tags: () => [],
+  structuredData: undefined,
+  robots: 'index,follow',
   siteName: '佘杰 - 前端开发工程师',
   titleSuffix: ' - 佘杰',
-  locale: 'zh_CN',
-  tags: () => []
 })
 
 const route = useRoute()
@@ -97,12 +102,38 @@ const updatePageTitle = () => {
   document.title = fullTitle.value
 }
 
-// 监听标题变化
-watch(() => props.title, updatePageTitle, { immediate: true })
+// 注入 JSON-LD 结构化数据
+let scriptEl: HTMLScriptElement | null = null
 
-// 组件挂载时更新
+const injectStructuredData = () => {
+  if (!props.structuredData) return
+  if (scriptEl) {
+    scriptEl.remove()
+  }
+  scriptEl = document.createElement('script')
+  scriptEl.type = 'application/ld+json'
+  scriptEl.textContent = JSON.stringify(props.structuredData)
+  document.head.appendChild(scriptEl)
+}
+
+const removeStructuredData = () => {
+  if (scriptEl) {
+    scriptEl.remove()
+    scriptEl = null
+  }
+}
+
+// 监听标题和结构化数据变化
+watch(() => props.title, updatePageTitle, { immediate: true })
+watch(() => props.structuredData, injectStructuredData, { deep: true })
+
 onMounted(() => {
-  updatePageTitle()
+  document.getElementById('app-default-description')?.remove()
+  injectStructuredData()
+})
+
+onUnmounted(() => {
+  removeStructuredData()
 })
 
 // 导出配置供外部使用

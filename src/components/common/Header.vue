@@ -1,15 +1,9 @@
 <template>
-  <header
-    class="header"
-    :class="{ 'header--scrolled': isScrolled }"
-  >
+  <header class="header" :class="{ 'header--scrolled': isScrolled }">
     <nav class="container mx-auto px-4 sm:px-6">
       <div class="header__content">
         <!-- Logo -->
-        <RouterLink
-          to="/"
-          class="header__logo"
-        >
+        <RouterLink to="/" class="header__logo">
           <div class="logo-text">佘杰</div>
           <div class="logo-dot"></div>
         </RouterLink>
@@ -17,12 +11,8 @@
         <!-- 桌面端导航 -->
         <div class="header__nav">
           <RouterLink
-            v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
-            class="header__nav-link"
-            :class="{ 'header__nav-link--active': isActiveRoute(item.path) }"
-          >
+v-for="item in navItems" :key="item.path" :to="item.to" class="header__nav-link"
+            :class="{ 'header__nav-link--active': isActiveRoute(item.path) }" @click="trackNavItem(item)">
             {{ item.name }}
           </RouterLink>
         </div>
@@ -30,40 +20,19 @@
         <!-- 右侧操作按钮 -->
         <div class="header__actions">
           <!-- 搜索按钮 -->
-          <button
-            class="header__action-btn"
-            aria-label="搜索"
-            @click="openSearch"
-          >
+          <button class="header__action-btn stripe-glow" aria-label="搜索" @click="openSearch">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <path
+stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-          </button>
-
-          <!-- 主题切换 -->
-          <button
-            class="header__action-btn header__action-btn--theme"
-            aria-label="Toggle theme"
-            @click="toggleTheme"
-          >
-            <Sun v-if="isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h.01M12 7h.01" />
-            </Sun>
-            <Moon v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </Moon>
           </button>
 
           <!-- 汉堡菜单 - 移动端 -->
           <button
-            ref="menuButtonRef"
-            class="header__action-btn header__menu-btn"
-            :aria-expanded="isMenuOpen"
-            aria-controls="mobile-menu"
-            aria-haspopup="true"
-            :aria-label="isMenuOpen ? '关闭菜单' : '打开菜单'"
-            @click="toggleMenu"
-          >
+ref="menuButtonRef" class="header__action-btn header__menu-btn" :aria-expanded="isMenuOpen"
+            aria-controls="mobile-menu" aria-haspopup="true" :aria-label="isMenuOpen ? '关闭菜单' : '打开菜单'"
+            @click="toggleMenu">
             <svg v-if="!isMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -76,86 +45,50 @@
     </nav>
 
     <!-- 移动端菜单遮罩层 -->
-    <div
-      v-if="isMenuOpen"
-      class="header__backdrop"
-      aria-hidden="true"
-      @click="closeMenu"
-    ></div>
+    <div v-if="isMenuOpen" class="header__backdrop" aria-hidden="true" @click="closeMenu"></div>
 
     <!-- 移动端菜单 -->
-    <div 
-      id="mobile-menu"
-      ref="mobileMenuRef"
-      class="header__mobile-menu"
-      :class="{ 'header__mobile-menu--open': isMenuOpen }"
-      role="menu"
-      :aria-hidden="!isMenuOpen"
-    >
+    <div
+id="mobile-menu" ref="mobileMenuRef" class="header__mobile-menu"
+      :class="{ 'header__mobile-menu--open': isMenuOpen }" role="menu" :aria-hidden="!isMenuOpen">
       <div class="mobile-menu__content">
         <RouterLink
-          v-for="(item, index) in navItems"
-          :key="item.path"
-          :ref="el => setNavLinkRef(el, index)"
-          :to="item.path"
-          class="mobile-menu__link"
-          :class="{ 'mobile-menu__link--active': isActiveRoute(item.path) }"
-          role="menuitem"
-          :tabindex="isMenuOpen ? 0 : -1"
-          @click="closeMenu"
-          @keydown="handleMenuKeydown"
-        >
+v-for="(item, index) in navItems" :key="item.path" :ref="el => setNavLinkRef(el, index)"
+          :to="item.to" class="mobile-menu__link" :class="{ 'mobile-menu__link--active': isActiveRoute(item.path) }"
+          role="menuitem" :tabindex="isMenuOpen ? 0 : -1" @click="handleMobileNavClick(item)" @keydown="handleMenuKeydown">
           {{ item.name }}
         </RouterLink>
-        
+
         <div class="mobile-menu__actions">
           <button
-            ref="searchBtnRef"
-            class="mobile-menu__btn"
-            :tabindex="isMenuOpen ? 0 : -1"
-            @click="handleSearchClick"
-            @keydown="handleMenuKeydown"
-          >
+ref="searchBtnRef" class="mobile-menu__btn" aria-label="搜索" :tabindex="isMenuOpen ? 0 : -1"
+            @click="handleSearchClick" @keydown="handleMenuKeydown">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <path
+stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             搜索
           </button>
-          
-          <button
-            ref="themeBtnRef"
-            class="mobile-menu__btn"
-            :tabindex="isMenuOpen ? 0 : -1"
-            @click="toggleTheme"
-            @keydown="handleMenuKeydown"
-          >
-            <Sun v-if="isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h.01M12 7h.01" />
-            </Sun>
-            <Moon v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </Moon>
-            {{ isDark ? '亮色' : '深色' }}
-          </button>
+
         </div>
       </div>
     </div>
 
     <!-- 搜索模态框 -->
-    <SearchModal />
+    <SearchModal v-if="searchStore.isOpen" />
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick, defineAsyncComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAppStore } from '@/stores/useAppStore'
+import { trackLabAnalytics } from '@/services/privacyAnalytics'
 import { useSearchStore } from '@/stores/useSearchStore'
-import SearchModal from '@/components/common/SearchModal.vue'
-import { Sun, Moon } from 'lucide-vue-next'
+// SearchModal 懒加载 — 仅在用户触发搜索时加载，避免引入 useBlogStore→blogLoader→yaml-parser 依赖链阻塞首屏
+const SearchModal = defineAsyncComponent(() => import('@/components/common/SearchModal.vue'))
 
 const route = useRoute()
-const appStore = useAppStore()
 const searchStore = useSearchStore()
 const isScrolled = ref(false)
 const isMenuOpen = ref(false)
@@ -164,7 +97,6 @@ const isMenuOpen = ref(false)
 const menuButtonRef = ref<HTMLButtonElement | null>(null)
 const mobileMenuRef = ref<HTMLElement | null>(null)
 const searchBtnRef = ref<HTMLButtonElement | null>(null)
-const themeBtnRef = ref<HTMLButtonElement | null>(null)
 const navLinkRefs = ref<(HTMLAnchorElement | null)[]>([])
 
 // Helper to collect nav link refs
@@ -177,31 +109,45 @@ const setNavLinkRef = (el: unknown, index: number) => {
 // Get all focusable elements in mobile menu
 const getFocusableElements = (): HTMLElement[] => {
   const elements: HTMLElement[] = []
-  
+
   // Add nav links
   navLinkRefs.value.forEach(el => {
     if (el) elements.push(el)
   })
-  
+
   // Add action buttons
   if (searchBtnRef.value) elements.push(searchBtnRef.value)
-  if (themeBtnRef.value) elements.push(themeBtnRef.value)
-  
+
   return elements
 }
 
-const navItems = [
-  { name: '首页', path: '/' },
-  { name: '项目', path: '/projects' },
-  { name: '技能', path: '/skills' },
-  { name: '博客', path: '/blog' },
-  { name: '联系', path: '/contact' }
+interface NavItem {
+  name: string
+  path: string
+  to: string
+}
+
+const navItems: NavItem[] = [
+  { name: '首页', path: '/', to: '/' },
+  { name: '项目', path: '/projects', to: '/projects' },
+  { name: '博客', path: '/blog', to: '/blog' },
+  { name: '实验室', path: '/lab', to: '/lab?source=nav' }
 ]
 
-const isDark = computed(() => appStore.theme === 'dark')
+const trackNavItem = (item: NavItem) => {
+  if (item.path !== '/lab') return
+  trackLabAnalytics({ event: 'lab_cta_click', placement: 'header' })
+}
+
+const handleMobileNavClick = (item: NavItem) => {
+  trackNavItem(item)
+  closeMenu()
+}
 
 const isActiveRoute = (path: string) => {
-  return route.path === path || (path !== '/' && route.path.startsWith(path))
+  if (route.path === path) return true
+  if (path === '/') return false
+  return route.path.startsWith(path + '/') || route.path.startsWith(path + '?')
 }
 
 // 打开搜索
@@ -215,11 +161,6 @@ const handleSearchClick = () => {
   nextTick(() => {
     openSearch()
   })
-}
-
-// 切换主题
-const toggleTheme = () => {
-  appStore.toggleTheme()
 }
 
 // 切换菜单
@@ -258,7 +199,7 @@ const handleMenuKeydown = (e: KeyboardEvent) => {
     const focusableElements = getFocusableElements()
     const firstElement = focusableElements[0]
     const lastElement = focusableElements[focusableElements.length - 1]
-    
+
     if (e.shiftKey) {
       // Shift+Tab: if on first element, go to last
       if (document.activeElement === firstElement) {
@@ -287,7 +228,7 @@ const handleGlobalKeydown = (e: KeyboardEvent) => {
     e.preventDefault()
     searchStore.openSearch()
   }
-  
+
   // ESC 关闭菜单
   if (e.key === 'Escape' && isMenuOpen.value) {
     e.preventDefault()
@@ -317,56 +258,72 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 导航栏 */
+/* ============================================
+   Header — Single Light Visual System
+   ============================================ */
+
+/* 导航栏 — light glass surface */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-subtle);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dark .header {
-  background: rgba(15, 23, 42, 0.8);
+  z-index: var(--z-header);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  transition: background 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header--scrolled {
-  box-shadow: var(--shadow-base);
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 0 rgba(226, 232, 240, 0.9), 0 8px 24px rgba(15, 23, 42, 0.08);
+  border-bottom-color: transparent;
 }
 
-:global(.dark) .header--scrolled {
-  background: rgba(15, 23, 42, 0.95);
+/* Gradient bottom line via ::after — avoids border-image browser inconsistencies */
+.header--scrolled::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(37, 99, 235, 0.2) 20%,
+      rgba(37, 99, 235, 0.55) 50%,
+      rgba(37, 99, 235, 0.2) 80%,
+      transparent 100%);
 }
 
 .header__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.5rem;
+  height: var(--us-header-height);
 }
 
 /* Logo */
 .header__logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--us-space-2);
   text-decoration: none;
-  transition: transform 0.3s ease;
+  transition: transform var(--us-duration-normal) var(--us-easing);
 }
 
 .header__logo:hover {
-  transform: translateY(-2px);
+  transform: translateY(var(--us-lift-xs));
 }
 
 .logo-text {
   font-size: 1.5rem;
-  font-weight: 800;
-  background: var(--gradient-primary);
+  font-weight: 700;
+  background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -377,62 +334,46 @@ onUnmounted(() => {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--primary-500);
-  box-shadow: 0 0 10px var(--primary-500);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.2);
-  }
+  background: #2563eb;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
 }
 
 /* 桌面端导航 */
 .header__nav {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--us-space-2);
 }
 
 .header__nav-link {
   position: relative;
-  padding: 0.75rem 1rem;
+  padding: var(--us-space-3) var(--us-space-4);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: #475569;
   text-decoration: none;
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-md);
+  transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header__nav-link:hover {
-  background: var(--primary-50);
-  color: var(--primary-600);
-}
-
-:global(.dark) .header__nav-link:hover {
-  background: var(--primary-950);
-  color: var(--primary-400);
+  color: #0f172a;
+  background: #f1f5f9;
+  transform: translateY(var(--us-lift-xs));
 }
 
 .header__nav-link--active {
-  background: var(--gradient-primary);
-  color: white;
+  color: #2563eb;
+  background: #eff6ff;
   font-weight: 600;
-  box-shadow: var(--shadow-sm);
 }
 
 /* 操作按钮 */
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--us-space-2);
 }
 
 .header__action-btn {
@@ -442,38 +383,25 @@ onUnmounted(() => {
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
-  background: transparent;
-  border: 1px solid var(--border-default);
-  border-radius: 0.75rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  color: #475569;
+  transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header__action-btn:hover {
-  background: var(--primary-50);
-  color: var(--primary-600);
-  border-color: var(--primary-300);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  transform: translateY(var(--us-lift-xs));
 }
 
-:global(.dark) .header__action-btn:hover {
-  background: var(--primary-950);
-  color: var(--primary-400);
-  border-color: var(--primary-700);
-}
-
-.header__action-btn--theme {
-  background: var(--surface-2);
-}
-
-.header__action-btn--theme:hover {
-  background: var(--primary-100);
-}
-
-:global(.dark) .header__action-btn--theme:hover {
-  background: var(--primary-900);
+.header__action-btn:active {
+  transform: scale(0.95);
 }
 
 .header__menu-btn {
@@ -483,25 +411,17 @@ onUnmounted(() => {
 /* 遮罩层 */
 .header__backdrop {
   position: fixed;
-  top: 4.5rem;
+  top: var(--us-header-height);
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
+  background: rgba(15, 23, 42, 0.2);
+  z-index: calc(var(--z-header) - 1);
+  opacity: 1;
+  transition: opacity var(--us-duration-fast) var(--us-easing);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* 移动端菜单 */
+/* 移动端菜单 — Solid background */
 .header__mobile-menu {
   position: absolute;
   top: 100%;
@@ -509,95 +429,88 @@ onUnmounted(() => {
   right: 0;
   max-height: 0;
   overflow: hidden;
-  background: white;
-  border-bottom: 1px solid var(--border-default);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-lg);
-  z-index: 1001;
-}
-
-:global(.dark) .header__mobile-menu {
-  background: var(--surface-1);
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+  z-index: var(--z-header-elevated);
+  transition: max-height var(--us-duration-normal) var(--us-easing);
 }
 
 .header__mobile-menu--open {
   max-height: 500px;
-  padding: 1rem;
+  padding: var(--us-space-4);
 }
 
 .mobile-menu__content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--us-space-2);
 }
 
 .mobile-menu__link {
   display: block;
-  padding: 0.875rem 1rem;
+  padding: var(--us-space-4) var(--us-space-4);
   font-size: 1rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: #475569;
   text-decoration: none;
-  border-radius: 0.75rem;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-md);
+  transition: color var(--us-duration-fast) var(--us-easing),
+    background var(--us-duration-fast) var(--us-easing);
 }
 
 .mobile-menu__link:hover,
-.mobile-menu__link:focus {
-  background: var(--primary-50);
-  color: var(--primary-600);
+.mobile-menu__link:focus-visible {
+  color: #2563eb;
+  background: #eff6ff;
   outline: none;
 }
 
-:global(.dark) .mobile-menu__link:hover,
-:global(.dark) .mobile-menu__link:focus {
-  background: var(--primary-950);
-  color: var(--primary-400);
+.mobile-menu__link:active {
+  transform: scale(0.95);
 }
 
 .mobile-menu__link--active {
-  background: var(--gradient-primary);
-  color: white;
+  color: #1d4ed8;
+  background: #eff6ff;
   font-weight: 600;
 }
 
 .mobile-menu__actions {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-subtle);
+  gap: var(--us-space-2);
+  padding-top: var(--us-space-4);
+  border-top: 1px solid #e2e8f0;
 }
 
 .mobile-menu__btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  gap: var(--us-space-2);
+  padding: var(--us-space-3) var(--us-space-4);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--surface-2);
-  border: 1px solid var(--border-default);
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  color: #475569;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  transition: color var(--us-duration-fast) var(--us-easing),
+    background var(--us-duration-fast) var(--us-easing),
+    border-color var(--us-duration-fast) var(--us-easing);
 }
 
 .mobile-menu__btn:hover,
-.mobile-menu__btn:focus {
-  background: var(--primary-50);
-  color: var(--primary-600);
-  border-color: var(--primary-300);
+.mobile-menu__btn:focus-visible {
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: #bfdbfe;
   outline: none;
 }
 
-:global(.dark) .mobile-menu__btn:hover,
-:global(.dark) .mobile-menu__btn:focus {
-  background: var(--primary-950);
-  color: var(--primary-400);
-  border-color: var(--primary-700);
+.mobile-menu__btn:active {
+  transform: scale(0.95);
 }
 
 /* 响应式 */
@@ -605,7 +518,7 @@ onUnmounted(() => {
   .header__nav {
     display: none;
   }
-  
+
   .header__menu-btn {
     display: flex;
   }
@@ -619,6 +532,7 @@ onUnmounted(() => {
 
 /* 减少动画 */
 @media (prefers-reduced-motion: reduce) {
+
   .header,
   .header__logo,
   .header__nav-link,
@@ -627,10 +541,6 @@ onUnmounted(() => {
   .mobile-menu__btn,
   .header__backdrop {
     transition-duration: 0.01ms !important;
-  }
-  
-  .logo-dot {
-    animation-duration: 0.01ms !important;
   }
 }
 </style>

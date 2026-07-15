@@ -98,7 +98,7 @@ export function useMagneticButton(config: MagneticButtonConfig = {}) {
       x: 0,
       y: 0,
       duration: 0.5,
-      ease: 'elastic.out(1, 0.5)'
+      ease: 'power3.out'
     })
 
     // 恢复大小

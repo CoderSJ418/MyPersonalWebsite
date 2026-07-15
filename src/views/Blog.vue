@@ -1,111 +1,195 @@
 <template>
-  <main class="blog-page">
-    <PageHero
-title="分享知识 · 记录成长" :subtitle="'分享 Vue 3、TypeScript、前端工程化等技术文章，记录开发过程中的思考和心得'"
-      :stats="blogHeroStats"
-    />
+  <div class="blog-page">
+    <SEOHead title="技术博客" description="分享 Vue 3、TypeScript、前端工程化等技术文章" />
 
-    <!-- 搜索和筛选区域 -->
-    <section class="blog-controls">
-      <div class="container mx-auto px-4 sm:px-6">
-        <!-- 搜索框 -->
-        <div class="search-section">
-          <div class="search-wrapper">
-            <Search class="search-icon" />
-            <input
-              v-model="blogStore.searchQuery"
-              type="text"
-              placeholder="搜索文章标题、内容或标签..."
-              class="search-input"
-              @input="handleSearch"
-            />
-            <button
-              v-if="blogStore.searchQuery"
-              type="button"
-              class="search-clear"
-              @click="clearSearch"
-            >
-              <X class="w-5 h-5" />
-            </button>
-          </div>
-          <div v-if="blogStore.searchQuery" class="search-result">
-            找到 <span class="result-count">{{ blogStore.filteredPosts.length }}</span> 篇相关文章
-          </div>
+    <!-- ═══════════════════════════════════════════════════════════
+         Blog Hero — Visual Anchor · Section级光源投影
+         ═══════════════════════════════════════════════════════════
+         Blog Hero = Section级光效 (intensity 0.6)
+         光源: --global-light-x/y (viewport %)
+         由 useCursorInteraction 统一设置 on <html>
+         禁止独立 mouse tracking
+         ═══════════════════════════════════════════════════════════ -->
+    <section ref="heroRef" class="blog-hero vs-light-section">
+      <!-- Layer 0: Background Canvas — Max 2 visual effects per element (unified-system.css)
+           REMOVED: Canvas noise texture — exceeded Max 2 rule
+           REMOVED: Mesh gradient cursor distortion — exceeded Max 2 rule
+           KEPT: Global light follow — core interaction sense -->
+      <div class="blog-hero__canvas" aria-hidden="true" data-parallax="slow">
+        <!-- Global Light Follow — uses --global-light-x/y from <html> -->
+        <div class="blog-hero__mouse-light"></div>
+      </div>
+
+      <!-- Layer 1: Ambient Motion — single subtle blob -->
+      <div class="blog-hero__ambient" aria-hidden="true" data-parallax="slow">
+        <div class="blog-hero__blob"></div>
+      </div>
+
+      <!-- Layer 2: Content — floats above the light field -->
+      <div class="blog-hero__container">
+        <!-- Glassmorphism Badge -->
+        <div class="blog-hero__badge vs-reveal" style="--stagger-delay: 0ms">
+          <span class="blog-hero__badge-dot"></span>
+          <span class="blog-hero__badge-text">Engineering Notes</span>
         </div>
 
-        <!-- 标签筛选 -->
-        <div v-if="blogStore.allTags.length > 0" class="tags-section">
-          <div class="tags-wrapper">
-            <button
-              type="button"
-              class="tag-btn"
-              :class="{ 'tag-btn--active': blogStore.selectedTag === null }"
-              @click="handleTagClick(null)"
-            >
-              全部
-            </button>
-            <button
-              v-for="tag in blogStore.allTags"
-              :key="tag"
-              type="button"
-              class="tag-btn"
-              :class="{ 'tag-btn--active': blogStore.selectedTag === tag }"
-              @click="handleTagClick(tag)"
-            >
-              {{ tag }}
-            </button>
+        <!-- Gradient Title -->
+        <h1 class="blog-hero__title vs-reveal vs-reveal--stagger" style="--stagger-delay: 60ms">
+          分享知识<span class="blog-hero__accent">·</span>记录成长
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="blog-hero__subtitle vs-reveal vs-reveal--stagger" style="--stagger-delay: 120ms">
+          Vue 3、TypeScript、前端工程化 — 每篇文章都是一次 Engineering Breakdown
+        </p>
+
+        <!-- Proof Chips — glassmorphism stat cards -->
+        <div class="blog-hero__chips vs-reveal vs-reveal--stagger" style="--stagger-delay: 180ms">
+          <div class="blog-hero__chip">
+            <span class="blog-hero__chip-value">{{ blogStore.posts.length }}</span>
+            <span class="blog-hero__chip-label">篇文章</span>
+          </div>
+          <div class="blog-hero__chip">
+            <span class="blog-hero__chip-value">{{ blogStore.allTags.length }}</span>
+            <span class="blog-hero__chip-label">个标签</span>
+          </div>
+          <div class="blog-hero__chip">
+            <span class="blog-hero__chip-value">{{ totalReadTime }}</span>
+            <span class="blog-hero__chip-label">分钟阅读</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 博客列表区域 -->
-    <section class="blog-list">
-      <div class="container mx-auto px-4 sm:px-6">
+    <!-- ═══════════════════════════════════════════════════════════
+         Filters — Sticky Header
+         ═══════════════════════════════════════════════════════════ -->
+    <section ref="filtersRef" class="blog-page__filters vs-sticky-header" :class="{ 'is-scrolled': isScrolled }">
+      <div class="blog-page__filters-inner">
+        <div class="blog-page__search">
+          <Search class="blog-page__search-icon" :size="16" />
+          <input
+v-model="blogStore.searchQuery" type="text" placeholder="搜索文章..." class="blog-page__search-input"
+            @input="handleSearch" />
+          <button
+v-if="blogStore.searchQuery" type="button" class="blog-page__search-clear" aria-label="清除搜索"
+            @click="clearSearch">
+            <X :size="14" />
+          </button>
+          <transition name="fade">
+            <span v-if="blogStore.searchQuery" class="blog-page__search-count">
+              {{ blogStore.filteredPosts.length }} 篇
+            </span>
+          </transition>
+        </div>
+
+        <div v-if="blogStore.selectedCategory" class="blog-page__category-filter">
+          <span class="blog-page__category-label">分类：</span>
+          <span class="blog-page__category-pill">
+            {{ blogStore.selectedCategory }}
+            <button
+type="button" class="blog-page__category-clear" aria-label="清除分类筛选"
+              @click="handleCategoryClick(null as any)">
+              <X :size="12" />
+            </button>
+          </span>
+        </div>
+
+        <div v-if="blogStore.allTags.length > 0" class="blog-page__tags">
+          <button
+type="button" class="blog-page__tag"
+            :class="{ 'blog-page__tag--active': blogStore.selectedTag === null }" @click="handleTagClick(null)">
+            全部
+          </button>
+          <button
+v-for="tag in blogStore.allTags" :key="tag" type="button" class="blog-page__tag"
+            :class="{ 'blog-page__tag--active': blogStore.selectedTag === tag }" @click="handleTagClick(tag)">
+            {{ tag }}
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Blog List — Timeline Layout
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="blog-page__content">
+      <div class="blog-page__content-inner">
         <BlogList
-          :posts="blogStore.paginatedPosts"
-          :current-page="blogStore.currentPage"
-          :total-pages="blogStore.totalPages"
-          :loading="blogStore.loading"
-          :error="blogStore.error"
-          :items-per-page="blogStore.itemsPerPage"
-          @post-click="handlePostClick"
-          @tag-click="handleTagClick"
-          @page-change="handlePageChange"
-          @retry="blogStore.loadPosts"
-        />
+:posts="blogStore.paginatedPosts" :current-page="blogStore.currentPage"
+          :total-pages="blogStore.totalPages" :loading="blogStore.loading" :error="blogStore.error"
+          :items-per-page="blogStore.itemsPerPage" @post-click="handlePostClick" @tag-click="handleTagClick"
+          @category-click="handleCategoryClick" @page-change="handlePageChange" @retry="blogStore.loadPosts" />
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+/**
+ * Blog — Section级光源投影 · Unified Visual System v6.0
+ *
+ * Blog Hero = Section级光效 (intensity 0.6)
+ * 光源: --global-light-x/y (viewport %)
+ * 由 useCursorInteraction 统一设置 on <html>
+ * 禁止独立 mouse tracking
+ *
+ * Max 2 visual effects per element (unified-system.css):
+ * Effect 1: Global Light Follow — core interaction sense
+ * Effect 2: Ambient Blob Float — atmosphere layer
+ *
+ * REMOVED (exceeded Max 2 rule):
+ * - Canvas noise texture
+ * - Mesh gradient cursor distortion
+ * - Badge pulse animation
+ */
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useBlogStore } from '@/stores/useBlogStore'
 import { Search, X } from 'lucide-vue-next'
+import SEOHead from '@/components/common/SEOHead.vue'
 import BlogList from '@/components/blog/BlogList.vue'
+import { useScrollReveal } from '@/composables/useScrollReveal'
 import type { BlogPost } from '@/types/blog'
 
 const router = useRouter()
+const route = useRoute()
 const blogStore = useBlogStore()
 
+// ── Hero ref for scroll reveal only ──
+const heroRef = ref<HTMLElement | null>(null)
+
+const { observeChildren, disconnect: disconnectReveal } = useScrollReveal({
+  threshold: 0.1,
+  rootMargin: '0px 0px 0px 0px',
+  once: true,
+  staggerDelay: 60,
+  maxStaggerDelay: 300,
+})
+
+// ── Sticky Filters ──
+const isScrolled = ref(false)
+const filtersRef = ref<HTMLElement | null>(null)
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10
+}
+
+// ── Stats ──
 const totalReadTime = computed(() => {
   return blogStore.posts.reduce((sum: number, post: { readTime: number }) => sum + post.readTime, 0)
 })
 
-const blogHeroStats = computed(() => [
-  { number: String(blogStore.posts.length), label: '篇文章' },
-  { number: String(blogStore.allTags.length), label: '个标签' },
-  { number: `${totalReadTime.value} 分钟`, label: '分钟阅读' }
-])
-
+// ── Event Handlers ──
 const handlePostClick = (post: BlogPost) => {
   router.push(`/blog/${post.id}`)
 }
 
 const handleTagClick = (tag: string | null) => {
   blogStore.filterByTag(tag)
+}
+
+const handleCategoryClick = (category: string) => {
+  blogStore.filterByCategory(category)
 }
 
 const handleSearch = () => {
@@ -120,379 +204,526 @@ const handlePageChange = (page: number) => {
   blogStore.setPage(page)
 }
 
+// ── URL Sync ──
+const restoreFiltersFromUrl = () => {
+  blogStore.filterByTag(null)
+  blogStore.filterByCategory(null)
+  blogStore.searchPosts('')
+  blogStore.setPage(1)
+
+  const { tag, category, q, page } = route.query
+  if (tag && typeof tag === 'string') blogStore.filterByTag(tag)
+  if (category && typeof category === 'string') blogStore.filterByCategory(category)
+  if (q && typeof q === 'string') blogStore.searchPosts(q)
+  if (page && typeof page === 'string') {
+    const pageNum = parseInt(page, 10)
+    if (!isNaN(pageNum) && pageNum >= 1) blogStore.setPage(pageNum)
+  }
+}
+
+const syncFiltersToUrl = () => {
+  const query: Record<string, string> = {}
+  if (blogStore.selectedTag) query.tag = blogStore.selectedTag
+  if (blogStore.selectedCategory) query.category = blogStore.selectedCategory
+  if (blogStore.searchQuery) query.q = blogStore.searchQuery
+  if (blogStore.currentPage > 1) query.page = String(blogStore.currentPage)
+  router.replace({ query })
+}
+
+watch(
+  () => [blogStore.selectedTag, blogStore.selectedCategory, blogStore.searchQuery, blogStore.currentPage],
+  () => { syncFiltersToUrl() }
+)
+
+// ── Initialize blog data synchronously (from static blog-meta.json) ──
+blogStore.loadPosts()
+restoreFiltersFromUrl()
+
+// ── Lifecycle ──
 onMounted(() => {
-  blogStore.loadPosts()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+
+  if (heroRef.value) {
+    observeChildren(heroRef.value)
+  }
+
   document.title = '技术博客 - 佘杰'
   window.scrollTo({ top: 0, behavior: 'smooth' })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  disconnectReveal()
 })
 </script>
 
 <style scoped>
-/* 博客页面 */
+/* ═══════════════════════════════════════════════════════════════
+   Blog — Section级光源投影 · Unified Visual System v6.0
+   ═══════════════════════════════════════════════════════════════
+   Max 2 visual effects per element (unified-system.css):
+   Effect 1: Global Light Follow — core interaction sense
+   Effect 2: Ambient Blob Float — atmosphere layer
+
+   REMOVED (exceeded Max 2 rule):
+   - Canvas noise texture
+   - Mesh gradient cursor distortion
+   - Badge pulse animation
+   ═══════════════════════════════════════════════════════════════ */
+
 .blog-page {
   min-height: 100vh;
-  background: var(--bg-primary);
+  /* fallback for older browsers */
+  min-height: 100dvh;
+  /* dynamic viewport height for mobile */
+  background: linear-gradient(180deg, var(--us-bg-start), var(--us-bg-end));
 }
 
-/* 英雄区域 */
+/* ═══════════════════════════════════════════════════════════════
+   HERO — 3-Layer Depth
+   ═══════════════════════════════════════════════════════════════ */
 .blog-hero {
   position: relative;
-  padding: 6rem 0 3rem;
-  background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 50%, var(--primary-200) 100%);
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--us-space-24) + var(--us-space-8)) var(--us-space-6) var(--us-space-16);
   overflow: hidden;
+  z-index: var(--z-sticky);
 }
 
-.dark .blog-hero {
-  background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%);
-}
-
-.blog-hero::before {
-  content: '';
+/* ── Layer 1: Background Canvas ── */
+.blog-hero__canvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
 }
 
-.blog-hero__content {
-  position: relative;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-  z-index: 1;
+/* REMOVED: .blog-hero__noise — exceeded Max 2 visual effects per element (unified-system.css) */
+/* REMOVED: .blog-hero__mesh — exceeded Max 2 visual effects per element (unified-system.css) */
+
+/* Global Light Follow — uses --global-light-x/y from <html>
+   Blog Hero = Section级光效 (intensity 0.6, 比Hero暗) */
+.blog-hero__mouse-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(500px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+      var(--us-light-color) 0%,
+      transparent 70%);
+  opacity: var(--global-light-active, 0);
+  transition: opacity var(--us-duration-normal) var(--us-easing);
+  pointer-events: none;
 }
 
+/* ── Layer 2: Ambient Motion ── */
+.blog-hero__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-local-elevated);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blog-hero__blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+  top: 20%;
+  right: -10%;
+  animation: blog-blob-float 25s ease-in-out infinite;
+}
+
+@keyframes blog-blob-float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(-30px, 20px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(20px, -15px) scale(0.95);
+  }
+}
+
+/* ── Layer 3: Content ── */
+.blog-hero__container {
+  position: relative;
+  z-index: var(--z-overlay-subtle);
+  max-width: 1200px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* ── Glassmorphism Badge ── */
 .blog-hero__badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  margin-bottom: 1.5rem;
-  background: white;
-  border: 1px solid var(--border-color);
+  gap: var(--us-space-2);
+  padding: var(--us-space-2) var(--us-space-4);
+  background: var(--us-glass-bg);
+  border: 1px solid var(--us-glass-border);
   border-radius: 9999px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+  margin-bottom: var(--us-space-8);
 }
 
-.dark .blog-hero__badge {
-  background: var(--bg-secondary);
-}
-
-.blog-hero__badge:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.badge-icon {
-  font-size: 1.25rem;
-}
-
-.badge-text {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.blog-hero__title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0 0 1.5rem 0;
-  letter-spacing: -0.02em;
-}
-
-.text-gradient {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.blog-hero__subtitle {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  line-height: 1.7;
-}
-
-.blog-hero__stats {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.9375rem;
-  color: var(--text-tertiary);
-  font-weight: 500;
-}
-
-/* 装饰性元素 */
-.blog-hero__decoration {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.decoration-circle {
-  position: absolute;
+/* REMOVED: badge-pulse animation — exceeded Max 2 visual effects per element (unified-system.css)
+   Badge dot is now static, no animation */
+.blog-hero__badge-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  opacity: 0.3;
-  filter: blur(60px);
-  animation: float-circle 20s ease-in-out infinite;
+  background: var(--us-accent);
 }
 
-.decoration-circle--1 {
-  width: 300px;
-  height: 300px;
-  background: var(--primary-500);
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
+.blog-hero__badge-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--us-accent);
 }
 
-.decoration-circle--2 {
-  width: 200px;
-  height: 200px;
-  background: var(--accent-500);
-  top: 60%;
-  right: 15%;
-  animation-delay: -5s;
+/* ── Gradient Title ── */
+.blog-hero__title {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: var(--leading-none);
+  margin: 0 0 var(--us-space-4);
+  color: var(--us-text-primary);
 }
 
-.decoration-circle--3 {
-  width: 250px;
-  height: 250px;
-  background: var(--warning);
-  bottom: 20%;
-  left: 20%;
-  animation-delay: -10s;
+.blog-hero__accent {}
+
+/* ── Subtitle ── */
+.blog-hero__subtitle {
+  font-size: 1rem;
+  color: var(--us-text-secondary);
+  max-width: 520px;
+  margin: 0 0 var(--us-space-12);
+  line-height: var(--leading-relaxed);
 }
 
-@keyframes float-circle {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+/* ── Proof Chips — glassmorphism stat cards ── */
+.blog-hero__chips {
+  display: flex;
+  gap: var(--us-space-4);
+  flex-wrap: wrap;
+}
+
+.blog-hero__chip {
+  display: flex;
+  align-items: center;
+  gap: var(--us-space-2);
+  padding: var(--us-space-2) var(--us-space-4);
+  background: var(--us-surface);
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--us-depth-1);
+  cursor: default;
+  transition: transform, box-shadow, background-color, border-color, opacity var(--us-duration-normal) var(--us-easing);
+}
+
+.blog-hero__chip:hover {
+  background: var(--us-surface-hover);
+  box-shadow: var(--us-depth-2);
+  transform: translateY(var(--us-lift-sm));
+}
+
+.blog-hero__chip:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.blog-hero__chip-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--us-text-primary);
+}
+
+.blog-hero__chip-label {
+  font-size: 0.75rem;
+  color: var(--us-text-tertiary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FILTERS — Sticky Header
+   ═══════════════════════════════════════════════════════════════ */
+.blog-page__filters {
+  position: sticky;
+  top: 64px;
+  z-index: var(--z-sticky-filter);
+  padding: var(--us-space-4) 0;
+  margin-bottom: var(--us-space-8);
+  transition: box-shadow var(--us-duration-normal) var(--us-easing);
+}
+
+.blog-page__filters.is-scrolled {
+  box-shadow: var(--us-depth-2);
+}
+
+.blog-page__filters-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--us-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--us-space-3);
+}
+
+@media (min-width: 768px) {
+  .blog-page__filters-inner {
+    padding: 0 var(--us-space-6);
   }
-  33% {
-    transform: translate(30px, -30px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
 }
 
-/* 搜索和筛选区域 */
-.blog-controls {
-  padding: 3rem 0 2rem;
-  background: var(--bg-primary);
-}
-
-/* 搜索部分 */
-.search-section {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-}
-
-.search-wrapper {
+/* ── Search ── */
+.blog-page__search {
   position: relative;
   display: flex;
   align-items: center;
+  max-width: 480px;
 }
 
-.search-icon {
+.blog-page__search-icon {
   position: absolute;
-  left: 1rem;
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--text-tertiary);
+  left: 0.75rem;
+  color: var(--us-text-tertiary);
   pointer-events: none;
 }
 
-.search-input {
+.blog-page__search-input {
   width: 100%;
-  padding: 0.875rem 3rem 0.875rem 3.5rem;
-  font-size: 1rem;
-  color: var(--text-primary);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-.search-input::placeholder {
-  color: var(--text-tertiary);
-}
-
-.search-input:focus {
+  padding: var(--us-space-2) var(--us-space-10) var(--us-space-2) var(--us-space-8);
+  font-size: 0.875rem;
+  color: var(--us-text-primary);
+  background: var(--us-surface);
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-md);
   outline: none;
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transition: border-color, box-shadow, color var(--us-duration-fast) var(--us-easing);
 }
 
-.search-clear {
+.blog-page__search-input::placeholder {
+  color: var(--us-text-tertiary);
+}
+
+.blog-page__search-input:focus-visible {
+  border-color: var(--us-accent);
+  box-shadow: 0 0 0 2px var(--us-accent-border);
+}
+
+.blog-page__search-clear {
   position: absolute;
-  right: 1rem;
+  right: 0.375rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-sm);
+  color: var(--us-text-tertiary);
   background: transparent;
   border: none;
-  border-radius: 0.5rem;
-  color: var(--text-tertiary);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color, background-color, opacity var(--us-duration-fast) var(--us-easing);
 }
 
-.search-clear:hover {
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
+.blog-page__search-clear:hover {
+  color: var(--us-text-primary);
+  background: var(--us-border);
 }
 
-.search-result {
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
+.blog-page__search-clear:active {
+  transform: scale(0.95);
 }
 
-.result-count {
-  font-weight: 600;
-  color: var(--primary-600);
+.blog-page__search-count {
+  position: absolute;
+  right: 1.75rem;
+  font-size: 0.75rem;
+  color: var(--us-text-tertiary);
+  font-variant-numeric: tabular-nums;
 }
 
-.dark .result-count {
-  color: var(--primary-400);
+/* ── Category Filter ── */
+.blog-page__category-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--us-space-2);
 }
 
-/* 标签部分 */
-.tags-section {
-  max-width: 800px;
-  margin: 0 auto;
+.blog-page__category-label {
+  font-size: 0.75rem;
+  color: var(--us-text-tertiary);
 }
 
-.tags-wrapper {
+.blog-page__category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--us-space-1);
+  padding: var(--us-space-1) var(--us-space-2);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--us-accent);
+  background: var(--us-accent-subtle);
+  border: 1px solid var(--us-accent-border);
+  border-radius: 9999px;
+}
+
+.blog-page__category-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  color: var(--us-text-tertiary);
+  background: transparent;
+  border: none;
+  transition: color, background-color, opacity var(--us-duration-fast) var(--us-easing);
+}
+
+.blog-page__category-clear:hover {
+  color: var(--us-accent);
+  background: var(--us-accent-border);
+}
+
+/* ── Tags ── */
+.blog-page__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: var(--us-space-1);
 }
 
-.tag-btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.9375rem;
+.blog-page__tag {
+  padding: var(--us-space-1) var(--us-space-3);
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  color: var(--us-text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color, background-color, border-color, opacity var(--us-duration-fast) var(--us-easing);
 }
 
-.tag-btn:hover {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  border-color: var(--primary-300);
+.blog-page__tag:hover {
+  color: var(--us-accent);
+  background: var(--us-accent-subtle);
 }
 
-.dark .tag-btn:hover {
-  border-color: var(--primary-700);
+.blog-page__tag--active {
+  color: var(--us-accent);
+  background: var(--us-accent-subtle);
+  border-color: var(--us-accent-border);
 }
 
-.tag-btn--active {
-  background: var(--gradient-primary);
-  color: white;
-  border-color: transparent;
-  box-shadow: var(--shadow-sm);
+.blog-page__tag--active:hover {
+  color: var(--us-accent);
+  background: var(--us-accent-border);
+  border-color: var(--us-accent);
 }
 
-/* 博客列表区域 */
-.blog-list {
-  padding: 2rem 0 4rem;
-  background: var(--bg-primary);
+/* ═══════════════════════════════════════════════════════════════
+   CONTENT
+   ═══════════════════════════════════════════════════════════════ */
+.blog-page__content {
+  padding: 0 0 calc(var(--us-space-24) + var(--us-space-16));
 }
 
-/* 响应式 */
-@media (max-width: 768px) {
-  .blog-hero {
-    padding: 4rem 0 3rem;
-  }
-  
-  .blog-hero__stats {
-    gap: 2rem;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .blog-controls {
-    padding: 2rem 0 1.5rem;
-  }
-  
-  .blog-list {
-    padding: 1.5rem 0 3rem;
+.blog-page__content-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .blog-page__content-inner {
+    padding: 0 var(--us-space-6);
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .blog-hero__blob {
+    animation: none;
+  }
+
+  /* REMOVED: .blog-hero__badge-dot animation none — badge-pulse already removed */
+  /* REMOVED: .blog-hero__mesh transform none — mesh already removed */
+
+  .blog-hero__chip {
+    translate: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE
+   ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
-  .blog-hero__stats {
-    gap: 1.5rem;
+  .blog-hero {
+    min-height: 340px;
+    padding: var(--us-space-24) var(--us-space-4) var(--us-space-12);
   }
-  
-  .stat-number {
+
+  .blog-hero__title {
     font-size: 1.75rem;
   }
-  
-  .search-input {
-    font-size: 0.9375rem;
+
+  .blog-hero__chips {
+    gap: var(--us-space-2);
   }
-  
-  .decoration-circle {
-    opacity: 0.2;
+
+  .blog-hero__chip {
+    padding: var(--us-space-2) var(--us-space-3);
+  }
+
+  .blog-hero__chip-value {
+    font-size: 1rem;
+  }
+
+  .blog-hero__blob {
+    width: 300px;
+    height: 300px;
+  }
+
+  .blog-page__filters-inner {
+    gap: var(--us-space-2);
+  }
+
+  .blog-page__tags {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+  }
+
+  .blog-page__tags::-webkit-scrollbar {
+    display: none;
   }
 }
 
-/* 减少动画 */
-@media (prefers-reduced-motion: reduce) {
-  .blog-hero__badge,
-  .decoration-circle,
-  .search-input,
-  .search-clear,
-  .tag-btn {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   TRANSITIONS
+   ═══════════════════════════════════════════════════════════════ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--us-duration-fast) var(--us-easing);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

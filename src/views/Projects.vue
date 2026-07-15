@@ -1,28 +1,22 @@
 <template>
-  <main class="projects-page">
-    <PageHero
-title="项目作品" subtitle="从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路"
-      :stats="[
-        { number: '50+', label: '完成项目' },
-        { number: '15+', label: '技术栈' },
-        { number: '100%', label: '客户满意' }
-      ]"
-    />
+  <main class="page-container" style="background: linear-gradient(180deg, var(--us-bg-start), var(--us-bg-end))">
+    <SEOHead title="项目作品" description="从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路" />
+    <PageHero title="项目作品" subtitle="从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路" />
 
     <!-- 筛选器区域 -->
-    <section class="projects-filter">
-      <div class="container mx-auto px-4 sm:px-6">
+    <section class="page-section">
+      <div class="page-section__inner">
         <div class="filter-header">
-          <h2 class="filter-title">筛选项目</h2>
-          <p class="filter-description">按技术栈或类型筛选项目</p>
+          <h2 class="page-section__title">筛选项目</h2>
+          <p class="page-section__desc">按技术栈或类型筛选项目</p>
         </div>
         <TechStackFilter />
       </div>
     </section>
 
     <!-- 项目列表区域 -->
-    <section class="projects-list">
-      <div class="container mx-auto px-4 sm:px-6">
+    <section class="page-section page-section--last">
+      <div class="page-section__inner">
         <ProjectList />
       </div>
     </section>
@@ -32,6 +26,8 @@ title="项目作品" subtitle="从企业官网到 SaaS 平台，从微信小程�
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useProjectStore } from '@/stores/useProjectStore'
+import SEOHead from '@/components/common/SEOHead.vue'
+import PageHero from '@/components/templates/PageHero.vue'
 import TechStackFilter from '@/components/projects/TechStackFilter.vue'
 import ProjectList from '@/components/projects/ProjectList.vue'
 
@@ -45,74 +41,33 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 项目页面 */
-.projects-page {
+.page-container {
   min-height: 100vh;
-  background: var(--bg-primary);
+  /* fallback for older browsers */
+  min-height: 100dvh;
+  /* dynamic viewport height for mobile */
+  padding-top: 72px;
+  color: var(--us-text-primary);
 }
 
-/* 英雄区域 */
-.projects-hero {
-  position: relative;
-  padding: 6rem 0 3rem;
-  background: var(--bg-secondary);
+.page-section {
+  padding: var(--us-space-8) 0;
 }
 
-@media (max-width: 768px) {
-  .projects-hero {
-    padding: 4rem 0 2rem;
-  }
+.page-section--last {
+  padding-bottom: var(--us-space-20);
 }
 
-.projects-hero__content {
-  text-align: center;
-  max-width: 700px;
+.page-section__inner {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.projects-hero__title {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 1rem 0;
-  color: var(--text-primary);
-}
-
-.projects-hero__subtitle {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-}
-
-.projects-hero__stats {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-}
-
-/* 筛选器区域 */
-.projects-filter {
-  padding: 2rem 0;
-  background: var(--bg-primary);
+@media (min-width: 768px) {
+  .page-section__inner {
+    padding: 0 1.5rem;
+  }
 }
 
 .filter-header {
@@ -120,53 +75,16 @@ onMounted(() => {
   margin-bottom: 1.5rem;
 }
 
-.filter-title {
+.page-section__title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
-  margin: 0 0 0.25rem 0;
+  color: var(--us-text-primary);
+  letter-spacing: -0.01em;
 }
 
-.filter-description {
+.page-section__desc {
   font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-/* 项目列表区域 */
-.projects-list {
-  padding: 1rem 0 4rem;
-  background: var(--bg-primary);
-}
-
-/* 响应式 */
-@media (max-width: 768px) {
-  .projects-hero {
-    padding: 3rem 0 2rem;
-  }
-  
-  .projects-hero__stats {
-    gap: 2rem;
-  }
-  
-  .stat-number {
-    font-size: 1.5rem;
-  }
-  
-  .projects-filter {
-    padding: 1.5rem 0;
-  }
-  
-  .filter-title {
-    font-size: 1.125rem;
-  }
-}
-
-/* 减少动画 */
-@media (prefers-reduced-motion: reduce) {
-  .projects-hero__badge {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
+  color: var(--us-text-tertiary);
+  margin-top: 0.25rem;
 }
 </style>

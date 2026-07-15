@@ -31,6 +31,7 @@ export interface Project {
   order?: number
   createdAt: string
   updatedAt: string
+  narrative?: ProjectNarrative
 }
 
 /**
@@ -40,6 +41,16 @@ export interface ProjectFilter {
   category?: string
   searchQuery?: string
   techStacks?: string[]
+}
+
+/**
+ * 项目叙事（MVP Schema）
+ */
+export interface ProjectNarrative {
+  challenge: string
+  approach: string
+  impact: string
+  metrics?: Array<{ label: string; value: string }>
 }
 
 /**
@@ -66,6 +77,7 @@ export interface ProjectDetail extends Project {
     docs?: string[]
     articles?: string[]
   }
+  narrative?: ProjectNarrative
 }
 
 /**
@@ -132,14 +144,18 @@ export interface PersonalInfo {
 export interface WorkExperience {
   id: string
   company: string
+  logo?: string
   position: string
   location?: string
   startDate: string
   endDate?: string
-  current: boolean
+  duration?: string
+  current?: boolean
   description: string
-  achievements: string[]
-  technologies: string[]
+  achievements: Array<{ title: string; description: string }>
+  techStack: string[]
+  responsibilities?: string[]
+  projects?: string[]
 }
 
 /**

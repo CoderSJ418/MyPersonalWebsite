@@ -2,23 +2,22 @@
    MyPersonalWebsite 设计系统 CSS v3.0
    风格：Bento Box Grid + Aurora UI
    创建日期: 2026年1月25日
-   更新日期: 2026年2月25日
+   更新日期: 2026年7月5日
    ======================================== */
 
-/* 字体预加载 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* 字体加载由 index.html 处理（非阻塞 media=print + onload），此处不再重复导入 */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
 
 /* 导入设计令牌 */
 @import './design-tokens.css';
-
-/* 导入 Aurora Bento 组件样式 */
-@import './aurora-bento.css';
 
 /* ========================================
    1. 基础重置样式
    ======================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -26,34 +25,29 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  /* 默认instant，键盘友好 */
+  scroll-padding-top: var(--us-header-height, 4.5rem);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 仅鼠标用户启用smooth scroll，键盘导航时保持instant */
+:root[data-scroll-smooth] {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-primary);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--us-text-primary);
+  background: var(--us-bg-start);
+  transition: background-color var(--us-duration-normal) var(--us-easing), color var(--us-duration-normal) var(--us-easing);
 }
 
-/* ========================================
-   2. 深色模式
-   ======================================== */
-
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme]) {
-    color-scheme: dark;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html:not([data-theme]) {
-    color-scheme: light;
-  }
+html {
+  color-scheme: light;
 }
 
 /* ========================================
@@ -64,194 +58,54 @@ body {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-4);
-}
-
-.container-sm {
-  max-width: 640px;
-}
-
-.container-md {
-  max-width: 768px;
-}
-
-.container-lg {
-  max-width: 1024px;
-}
-
-.container-xl {
-  max-width: 1280px;
+  padding: 0 var(--us-space-4);
 }
 
 @media (min-width: 640px) {
   .container {
-    padding: 0 var(--space-6);
+    padding: 0 var(--us-space-6);
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    padding: 0 var(--space-8);
+    padding: 0 var(--us-space-8);
   }
 }
 
 /* ========================================
-   4. 网格系统
+   4. 语义色类
+   （使用 CSS 变量，与 Tailwind text-* 类不同）
    ======================================== */
 
-.grid {
-  display: grid;
-  gap: var(--space-6);
+.text-primary {
+  color: var(--us-text-primary);
 }
 
-.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
-.grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
-
-/* 响应式网格 */
-@media (min-width: 640px) {
-  .grid-cols-sm-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-cols-sm-3 { grid-template-columns: repeat(3, 1fr); }
+.text-secondary {
+  color: var(--us-text-secondary);
 }
 
-@media (min-width: 768px) {
-  .grid-cols-md-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-cols-md-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-cols-md-4 { grid-template-columns: repeat(4, 1fr); }
+.text-tertiary {
+  color: var(--us-text-tertiary);
 }
 
-@media (min-width: 1024px) {
-  .grid-cols-lg-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-cols-lg-4 { grid-template-columns: repeat(4, 1fr); }
-  .grid-cols-lg-6 { grid-template-columns: repeat(6, 1fr); }
+.text-muted {
+  color: var(--us-text-tertiary);
+}
+
+/* 行宽平衡 — 防止标题孤行 */
+.text-balance {
+  text-wrap: balance;
 }
 
 /* ========================================
-   5. Flexbox 工具
-   ======================================== */
-
-.flex { display: flex; }
-.inline-flex { display: inline-flex; }
-.flex-col { flex-direction: column; }
-.flex-row { flex-direction: row; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-nowrap { flex-wrap: nowrap; }
-
-.items-start { align-items: flex-start; }
-.items-center { align-items: center; }
-.items-end { align-items: flex-end; }
-.items-stretch { align-items: stretch; }
-.items-baseline { align-items: baseline; }
-
-.justify-start { justify-content: flex-start; }
-.justify-center { justify-content: center; }
-.justify-end { justify-content: flex-end; }
-.justify-between { justify-content: space-between; }
-.justify-around { justify-content: space-around; }
-.justify-evenly { justify-content: space-evenly; }
-
-.gap-1 { gap: var(--space-1); }
-.gap-2 { gap: var(--space-2); }
-.gap-3 { gap: var(--space-3); }
-.gap-4 { gap: var(--space-4); }
-.gap-6 { gap: var(--space-6); }
-.gap-8 { gap: var(--space-8); }
-
-/* ========================================
-   6. 间距工具
-   ======================================== */
-
-/* Margin */
-.m-auto { margin: auto; }
-.m-0 { margin: 0; }
-.m-1 { margin: var(--space-1); }
-.m-2 { margin: var(--space-2); }
-.m-4 { margin: var(--space-4); }
-.m-6 { margin: var(--space-6); }
-.m-8 { margin: var(--space-8); }
-
-.mt-0 { margin-top: 0; }
-.mt-1 { margin-top: var(--space-1); }
-.mt-2 { margin-top: var(--space-2); }
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
-.mt-8 { margin-top: var(--space-8); }
-
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: var(--space-1); }
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-4 { margin-bottom: var(--space-4); }
-.mb-6 { margin-bottom: var(--space-6); }
-.mb-8 { margin-bottom: var(--space-8); }
-
-.mx-auto { margin-left: auto; margin-right: auto; }
-.my-auto { margin-top: auto; margin-bottom: auto; }
-
-/* Padding */
-.p-0 { padding: 0; }
-.p-1 { padding: var(--space-1); }
-.p-2 { padding: var(--space-2); }
-.p-4 { padding: var(--space-4); }
-.p-6 { padding: var(--space-6); }
-.p-8 { padding: var(--space-8); }
-
-.pt-0 { padding-top: 0; }
-.pt-1 { padding-top: var(--space-1); }
-.pt-2 { padding-top: var(--space-2); }
-.pt-4 { padding-top: var(--space-4); }
-.pt-6 { padding-top: var(--space-6); }
-.pt-8 { padding-top: var(--space-8); }
-
-.pb-0 { padding-bottom: 0; }
-.pb-1 { padding-bottom: var(--space-1); }
-.pb-2 { padding-bottom: var(--space-2); }
-.pb-4 { padding-bottom: var(--space-4); }
-.pb-6 { padding-bottom: var(--space-6); }
-.pb-8 { padding-bottom: var(--space-8); }
-
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
-.px-6 { padding-left: var(--space-6); padding-right: var(--space-6); }
-.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
-.py-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-
-/* ========================================
-   7. 文字工具
-   ======================================== */
-
-.text-xs { font-size: var(--text-xs); }
-.text-sm { font-size: var(--text-sm); }
-.text-base { font-size: var(--text-base); }
-.text-lg { font-size: var(--text-lg); }
-.text-xl { font-size: var(--text-xl); }
-.text-2xl { font-size: var(--text-2xl); }
-.text-3xl { font-size: var(--text-3xl); }
-.text-4xl { font-size: var(--text-4xl); }
-.text-5xl { font-size: var(--text-5xl); }
-
-.font-light { font-weight: var(--font-light); }
-.font-normal { font-weight: var(--font-normal); }
-.font-medium { font-weight: var(--font-medium); }
-.font-semibold { font-weight: var(--font-semibold); }
-.font-bold { font-weight: var(--font-bold); }
-
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-tertiary { color: var(--text-tertiary); }
-.text-muted { color: var(--text-muted); }
-
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-/* ========================================
-   8. 交互工具
+   5. 交互工具
    ======================================== */
 
 /* 焦点指示器 */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--aurora-cyan);
+  outline: 2px solid var(--us-accent);
   outline-offset: 2px;
 }
 
@@ -265,12 +119,110 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: var(--aurora-glow-cyan);
+  box-shadow: var(--us-depth-1-hover);
 }
 
 /* 点击反馈 */
 .press-scale:active {
-  transform: scale(0.98);
+  transform: scale(0.95);
+}
+
+/* ========================================
+   6a. 基础组件样式 — Vertical Timeline Design System
+   rounded-xl / shadow-sm / border-zinc-100 / font-semibold
+   ======================================== */
+
+/* 基础卡片样式 — Phase C 升级：层次感 + accent边线 + hover戏剧性 */
+.base-card {
+  position: relative;
+  background: var(--us-surface);
+  border: 1px solid var(--us-border);
+  border-radius: var(--us-card-radius, 0.75rem);
+  box-shadow: var(--us-depth-1), var(--us-accent-glow);
+  transition:
+    transform var(--us-duration-normal, 280ms) var(--us-easing-exit, cubic-bezier(0.4, 0, 1, 1)),
+    box-shadow var(--us-duration-normal, 280ms) var(--us-easing-exit, cubic-bezier(0.4, 0, 1, 1)),
+    border-color var(--us-duration-normal, 280ms) var(--us-easing-exit, cubic-bezier(0.4, 0, 1, 1));
+  overflow: hidden;
+}
+
+/* Accent边线 — 顶部2px */
+.base-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--us-accent);
+  border-radius: var(--us-card-radius, 0.75rem) var(--us-card-radius, 0.75rem) 0 0;
+  transition: height var(--us-duration-normal, 280ms) var(--us-easing-exit, cubic-bezier(0.4, 0, 1, 1));
+  z-index: 1;
+}
+
+.base-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: var(--us-depth-3-hover), var(--us-accent-glow-strong);
+  border-color: var(--us-accent-border);
+  transition:
+    transform var(--us-duration-normal, 280ms) var(--us-easing-enter, cubic-bezier(0, 0, 0.2, 1)),
+    box-shadow var(--us-duration-normal, 280ms) var(--us-easing-enter, cubic-bezier(0, 0, 0.2, 1)),
+    border-color var(--us-duration-normal, 280ms) var(--us-easing-enter, cubic-bezier(0, 0, 0.2, 1));
+}
+
+.base-card:hover::before {
+  height: 3px;
+  transition: height var(--us-duration-normal, 280ms) var(--us-easing-enter, cubic-bezier(0, 0, 0.2, 1));
+}
+
+/* 输入框样式 */
+.base-input {
+  border: 1px solid rgba(228, 228, 231, 1);
+  /* zinc-200 */
+  border-radius: 0.5rem;
+  /* rounded-lg = 8px */
+  color: rgba(24, 24, 27, 1);
+  /* zinc-900 */
+  background: white;
+  padding: var(--us-space-2) var(--us-space-3);
+  font-size: 0.875rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.base-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  /* ring-blue-500/20 */
+  border-color: rgba(59, 130, 246, 1);
+  /* blue-500 */
+}
+
+/* 按钮样式 */
+.base-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--us-space-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--us-accent);
+  /* blue-600 */
+  background: transparent;
+  border: 1px solid var(--us-glass-border);
+  border-radius: 0.75rem;
+  padding: var(--us-space-2) var(--us-space-4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.base-btn:hover {
+  background: rgba(37, 99, 235, 0.06);
+  border-color: rgba(37, 99, 235, 0.2);
+  transform: translateY(-1px);
+  box-shadow: var(--us-depth-1-hover);
+}
+
+.base-btn:active {
+  transform: scale(0.95);
 }
 
 /* 状态类 */
@@ -286,36 +238,7 @@ body {
 }
 
 /* ========================================
-   9. 显示/隐藏工具
-   ======================================== */
-
-.hidden { display: none !important; }
-.block { display: block; }
-.inline { display: inline; }
-.inline-block { display: inline-block; }
-
-@media (max-width: 639px) {
-  .hidden-sm { display: none !important; }
-}
-
-@media (max-width: 767px) {
-  .hidden-md { display: none !important; }
-}
-
-@media (max-width: 1023px) {
-  .hidden-lg { display: none !important; }
-}
-
-@media (min-width: 640px) {
-  .hidden-sm-up { display: none !important; }
-}
-
-@media (min-width: 768px) {
-  .hidden-md-up { display: none !important; }
-}
-
-/* ========================================
-   10. 可访问性
+   6. 可访问性
    ======================================== */
 
 /* 屏幕阅读器专用 */
@@ -336,13 +259,13 @@ body {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: var(--aurora-cyan);
+  background: var(--us-accent);
   color: var(--bg-dark-primary);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--us-space-2) var(--us-space-4);
   text-decoration: none;
   border-radius: var(--radius-md);
   z-index: var(--z-tooltip);
-  transition: top var(--duration-fast) ease;
+  transition: top var(--us-duration-fast) var(--us-easing);
 }
 
 .skip-link:focus {
@@ -350,29 +273,38 @@ body {
 }
 
 /* ========================================
-   11. 性能优化
+   7. 性能优化
    ======================================== */
 
-/* GPU 加速 */
+/* GPU 加速 — will-change仅在交互态激活，避免持续占用GPU内存 */
 .gpu-accelerate {
-  will-change: transform, opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
   contain: layout style paint;
 }
 
-/* 减少重绘 */
+.gpu-accelerate:hover,
+.gpu-accelerate:focus-visible {
+  will-change: transform, opacity;
+}
+
+/* 减少重绘 — will-change仅在交互态激活 */
 .no-repaint {
-  will-change: transform, box-shadow;
   transform: translateZ(0);
   contain: layout style paint;
 }
 
+.no-repaint:hover,
+.no-repaint:focus-visible {
+  will-change: transform, box-shadow;
+}
+
 /* ========================================
-   12. 减少运动偏好
+   8. 减少运动偏好
    ======================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -384,23 +316,23 @@ body {
 }
 
 /* ========================================
-   13. 高对比度模式
+   9. 高对比度模式
    ======================================== */
 
 @media (prefers-contrast: high) {
   :root {
-    --text-primary: #FFFFFF;
-    --text-secondary: #E0E0E0;
-    --text-tertiary: #BDBDBD;
+    --us-text-primary: #FFFFFF;
+    --us-text-secondary: #E0E0E0;
+    --us-text-tertiary: #BDBDBD;
   }
-  
+
   .bento-card {
     border-width: 2px;
   }
 }
 
 /* ========================================
-   14. 安全区域适配
+   10. 安全区域适配
    ======================================== */
 
 .safe-top {
@@ -420,16 +352,14 @@ body {
 }
 
 /* ========================================
-   15. 加载状态
+   11. 加载状态
    ======================================== */
 
 .loading-skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--bg-secondary) 25%,
-    var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%
-  );
+  background: linear-gradient(90deg,
+      var(--us-surface) 25%,
+      var(--us-surface-hover) 50%,
+      var(--us-surface) 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
   border-radius: var(--radius-md);
@@ -439,13 +369,14 @@ body {
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
   }
 }
 
 /* ========================================
-   16. 滚动条样式
+   12. 滚动条样式
    ======================================== */
 
 ::-webkit-scrollbar {
@@ -454,53 +385,39 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--us-surface);
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--aurora-purple);
+  background: var(--us-accent);
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--aurora-cyan);
+  background: var(--us-accent);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--aurora-purple) var(--bg-secondary);
+  scrollbar-color: var(--us-accent) var(--us-surface);
 }
 
 /* ========================================
-   17. 选择样式
-   ======================================== */
-
-::selection {
-  background: var(--aurora-cyan);
-  color: var(--bg-dark-primary);
-}
-
-::-moz-selection {
-  background: var(--aurora-cyan);
-  color: var(--bg-dark-primary);
-}
-
-/* ========================================
-   18. 打印样式
+   14. 打印样式
    ======================================== */
 
 @media print {
   .no-print {
     display: none !important;
   }
-  
+
   body {
     background: white;
     color: black;
   }
-  
+
   .bento-card {
     break-inside: avoid;
     border: 1px solid #ccc;
@@ -509,7 +426,7 @@ body {
 }
 
 /* ========================================
-   19. 版本信息
+   15. 版本信息
    ======================================== */
 
 /*

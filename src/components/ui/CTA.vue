@@ -1,28 +1,16 @@
 <template>
   <component
-    :is="isLink ? 'a' : 'button'"
-    :class="ctaClasses"
-    :href="isLink ? href : undefined"
-    :target="target"
-    :rel="target === '_blank' ? 'noopener noreferrer' : undefined"
-    :disabled="disabled || loading"
-    :aria-label="label || (isLink ? `访问 ${label}` : undefined)"
-    :aria-busy="loading"
-    @click="handleClick"
-  >
+:is="isLink ? 'a' : 'button'" :class="ctaClasses" :href="isLink ? href : undefined" :target="target"
+    :rel="target === '_blank' ? 'noopener noreferrer' : undefined" :disabled="disabled || loading"
+    :aria-label="label || (isLink ? `访问 ${label}` : undefined)" :aria-busy="loading" @click="handleClick">
     <!-- 加载动画 -->
     <span v-if="loading" class="cta__spinner" aria-hidden="true">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"></circle>
         <path d="M12 2A10 10 0 0 1 22 12" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round">
           <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from="0 12 12"
-            to="360 12 12"
-            dur="1s"
-            repeatCount="indefinite"
-          />
+attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s"
+            repeatCount="indefinite" />
         </path>
       </svg>
     </span>
@@ -44,7 +32,9 @@
 
     <!-- 箭头图标（当 size="large" 时显示） -->
     <span v-if="size === 'large' && !icon" class="cta__arrow" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
         <line x1="5" y1="12" x2="19" y2="12"></line>
         <polyline points="12 5 19 12 12 19"></polyline>
       </svg>
@@ -113,35 +103,33 @@ function handleClick(event: Event) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
+  gap: var(--us-space-2);
+  padding: var(--us-space-4) var(--us-space-8);
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   border: 2px solid transparent;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  border-radius: var(--radius-xl);
+  transition: transform, box-shadow, opacity, color, background-color, border-color var(--us-duration-normal) var(--us-easing);
 }
 
 /* 尺寸变体 */
 .cta--small {
-  padding: 0.5rem 1rem;
+  padding: var(--us-space-2) var(--us-space-4);
   font-size: 0.875rem;
 }
 
 .cta--medium {
-  padding: 0.75rem 1.5rem;
+  padding: var(--us-space-3) var(--us-space-6);
   font-size: 0.9375rem;
 }
 
 .cta--large {
-  padding: 1rem 2rem;
+  padding: var(--us-space-4) var(--us-space-8);
   font-size: 1.125rem;
 }
 
@@ -150,74 +138,96 @@ function handleClick(event: Event) {
   width: 100%;
 }
 
-/* Primary 变体 */
+/* Primary 变体 — Solid blue-600
+   Semantic: Primary action on page (e.g., "Submit", "Confirm") */
 .cta--primary {
-  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-  color: white;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background: var(--us-accent);
+  color: var(--text-on-accent);
+  box-shadow: var(--us-depth-1);
 }
 
 .cta--primary:hover:not(.cta--disabled):not(.cta--loading) {
-  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background: var(--us-accent-dark);
+  transform: translateY(var(--us-lift-xs));
+  box-shadow: var(--us-depth-2-hover);
 }
 
 .cta--primary:active:not(.cta--disabled):not(.cta--loading) {
-  transform: translateY(0);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: scale(var(--us-press-scale));
+  box-shadow: var(--us-depth-1);
 }
 
-/* Secondary 变体 */
+/* Secondary 变体 — Solid zinc-700 */
 .cta--secondary {
-  background: linear-gradient(135deg, var(--secondary-500) 0%, var(--secondary-600) 100%);
-  color: white;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background: var(--secondary-600);
+  color: var(--text-on-accent);
+  box-shadow: var(--us-depth-1);
 }
 
 .cta--secondary:hover:not(.cta--disabled):not(.cta--loading) {
-  background: linear-gradient(135deg, var(--secondary-600) 0%, var(--secondary-700) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background: var(--secondary-700);
+  transform: translateY(var(--us-lift-xs));
+  box-shadow: var(--us-depth-2-hover);
 }
 
-/* Accent 变体 */
+.cta--secondary:active:not(.cta--disabled):not(.cta--loading) {
+  transform: scale(var(--us-press-scale));
+  box-shadow: var(--us-depth-1);
+}
+
+/* Accent 变体 — Solid accent
+   Semantic: Secondary emphasis action (e.g., "Learn More", "Explore")
+   Visual same as primary — differentiated by usage context, not color */
 .cta--accent {
-  background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-600) 100%);
-  color: white;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background: var(--us-accent);
+  color: var(--text-on-accent);
+  box-shadow: var(--us-depth-1);
 }
 
 .cta--accent:hover:not(.cta--disabled):not(.cta--loading) {
-  background: linear-gradient(135deg, var(--accent-600) 0%, var(--accent-700) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background: var(--us-accent-dark);
+  transform: translateY(var(--us-lift-xs));
+  box-shadow: var(--us-depth-2-hover);
+}
+
+.cta--accent:active:not(.cta--disabled):not(.cta--loading) {
+  transform: scale(var(--us-press-scale));
+  box-shadow: var(--us-depth-1);
 }
 
 /* Outline 变体 */
 .cta--outline {
   background: transparent;
-  color: var(--primary-500);
-  border-color: var(--primary-500);
+  color: var(--us-accent);
+  border-color: var(--us-accent);
 }
 
 .cta--outline:hover:not(.cta--disabled):not(.cta--loading) {
-  background: var(--primary-50);
-  border-color: var(--primary-600);
-  color: var(--primary-600);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: var(--us-accent-subtle);
+  border-color: var(--us-accent);
+  color: var(--us-accent);
+  transform: translateY(var(--us-lift-xs));
+  box-shadow: var(--us-depth-2-hover);
+}
+
+.cta--outline:active:not(.cta--disabled):not(.cta--loading) {
+  transform: scale(var(--us-press-scale));
+  box-shadow: var(--us-depth-1);
 }
 
 /* Ghost 变体 */
 .cta--ghost {
   background: transparent;
-  color: var(--text-primary);
+  color: var(--us-text-primary);
 }
 
 .cta--ghost:hover:not(.cta--disabled):not(.cta--loading) {
-  background: var(--surface-2);
-  transform: translateY(-2px);
+  background: var(--us-surface-hover);
+  transform: translateY(var(--us-lift-xs));
+}
+
+.cta--ghost:active:not(.cta--disabled):not(.cta--loading) {
+  transform: scale(var(--us-press-scale));
 }
 
 /* 禁用状态 */
@@ -247,14 +257,7 @@ function handleClick(event: Event) {
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 
 /* 图标 */
 .cta__icon {
@@ -266,11 +269,11 @@ function handleClick(event: Event) {
 }
 
 .cta__icon--left {
-  margin-right: 0.5rem;
+  margin-right: var(--us-space-2);
 }
 
 .cta__icon--right {
-  margin-left: 0.5rem;
+  margin-left: var(--us-space-2);
 }
 
 .cta__icon svg {
@@ -281,7 +284,7 @@ function handleClick(event: Event) {
 /* 内容 */
 .cta__content {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-local);
 }
 
 /* 箭头 */
@@ -291,8 +294,8 @@ function handleClick(event: Event) {
   justify-content: center;
   width: 1.25em;
   height: 1.25em;
-  margin-left: 0.5rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: var(--us-space-2);
+  transition: transform var(--us-duration-normal) var(--us-easing);
 }
 
 .cta:hover:not(.cta--disabled):not(.cta--loading) .cta__arrow {
@@ -313,23 +316,12 @@ function handleClick(event: Event) {
   .cta--primary,
   .cta--secondary,
   .cta--accent {
-    background: var(--primary-500);
+    background: var(--us-accent);
   }
 
   .cta--outline {
-    background: var(--surface-1);
+    background: var(--us-surface);
     border-width: 3px;
-  }
-}
-
-/* 暗黑模式 */
-@media (prefers-color-scheme: dark) {
-  .cta--outline:hover:not(.cta--disabled):not(.cta--loading) {
-    background: var(--primary-900);
-  }
-
-  .cta--ghost:hover:not(.cta--disabled):not(.cta--loading) {
-    background: var(--surface-3);
   }
 }
 
@@ -344,7 +336,7 @@ function handleClick(event: Event) {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition: width var(--duration-slower) var(--us-easing), height var(--duration-slower) var(--us-easing);
   pointer-events: none;
 }
 
@@ -355,7 +347,14 @@ function handleClick(event: Event) {
 
 /* 无障碍焦点样式 */
 .cta:focus-visible {
-  outline: 3px solid var(--primary-500);
+  outline: 3px solid var(--us-accent);
+  outline-offset: 2px;
+}
+
+/* Primary/Accent变体：蓝色背景上蓝色outline不可见，使用白色outline */
+.cta--primary:focus-visible,
+.cta--accent:focus-visible {
+  outline: 3px solid #ffffff;
   outline-offset: 2px;
 }
 

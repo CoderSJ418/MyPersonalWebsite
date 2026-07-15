@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Theme } from '@/types/app'
+import { logger } from '@/utils/logger'
 
 /**
  * Toast 消息类型
@@ -62,11 +62,6 @@ function throttle<T extends (...args: unknown[]) => unknown>(fn: T, delay: numbe
  */
 export const useAppStore = defineStore('app', () => {
   // ==================== 核心状态 ====================
-
-  /**
-   * 当前主题 (light/dark)
-   */
-  const theme = ref<Theme>('light')
 
   /**
    * 语言设置
@@ -138,11 +133,6 @@ export const useAppStore = defineStore('app', () => {
   // ==================== 计算属性 ====================
 
   /**
-   * 是否是暗色模式
-   */
-  const isDark = computed(() => theme.value === 'dark')
-
-  /**
    * 是否是移动端
    */
   const isMobile = computed(() => breakpoint.value === 'xs' || breakpoint.value === 'sm')
@@ -156,55 +146,6 @@ export const useAppStore = defineStore('app', () => {
    * 是否有打开的模态框
    */
   const hasOpenModals = computed(() => Object.values(modals.value).some((m) => m.isOpen))
-
-  // ==================== 主题方法 ====================
-
-  /**
-   * 初始化主题
-   */
-  const initTheme = () => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null
-    if (savedTheme) {
-      theme.value = savedTheme
-      applyThemeToDom(savedTheme)
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      theme.value = 'dark'
-      applyThemeToDom('dark')
-    }
-  }
-
-  /**
-   * 应用主题到 DOM
-   */
-  const applyThemeToDom = (newTheme: Theme) => {
-    const root = document.documentElement
-    root.setAttribute('data-theme', newTheme)
-    if (newTheme === 'dark') {
-      root.classList.add('dark')
-      root.classList.remove('light')
-    } else {
-      root.classList.add('light')
-      root.classList.remove('dark')
-    }
-  }
-
-  /**
-   * 设置主题
-   */
-  const setTheme = (newTheme: Theme) => {
-    theme.value = newTheme
-    applyThemeToDom(newTheme)
-    localStorage.setItem('theme', newTheme)
-    savePreferences()
-  }
-
-  /**
-   * 切换主题
-   */
-  const toggleTheme = () => {
-    const newTheme = theme.value === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-  }
 
   // ==================== 菜单方法 ====================
 
@@ -393,12 +334,11 @@ export const useAppStore = defineStore('app', () => {
   const savePreferences = () => {
     try {
       const data = {
-        theme: theme.value,
         isNavFixed: isNavFixed.value,
       }
       localStorage.setItem('app_preferences', JSON.stringify(data))
     } catch (error) {
-      console.error('Failed to save app preferences:', error)
+      logger.error('Failed to save app preferences:', error)
     }
   }
 
@@ -407,18 +347,16 @@ export const useAppStore = defineStore('app', () => {
       const data = localStorage.getItem('app_preferences')
       if (data) {
         const parsed = JSON.parse(data)
-        if (parsed.theme) theme.value = parsed.theme
         if (typeof parsed.isNavFixed === 'boolean') isNavFixed.value = parsed.isNavFixed
       }
     } catch (error) {
-      console.error('Failed to load app preferences:', error)
+      logger.error('Failed to load app preferences:', error)
     }
   }
 
   // ==================== 重置和清理 ====================
 
   const reset = () => {
-    theme.value = 'light'
     language.value = 'zh'
     loading.value = false
     menuOpen.value = false
@@ -445,14 +383,12 @@ export const useAppStore = defineStore('app', () => {
 
   const initialize = () => {
     loadPreferences()
-    initTheme()
     initScrollListener()
     initFullscreenListener()
   }
 
   return {
     // 核心状态
-    theme,
     language,
     loading,
     menuOpen,
@@ -469,14 +405,9 @@ export const useAppStore = defineStore('app', () => {
     breadcrumbs,
 
     // 计算属性
-    isDark,
     isMobile,
     hasToasts,
     hasOpenModals,
-
-    // 主题方法
-    setTheme,
-    toggleTheme,
 
     // 菜单方法
     toggleMenu,

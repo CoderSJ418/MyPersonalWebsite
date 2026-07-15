@@ -3,13 +3,16 @@ import NProgress from 'nprogress'
 import '@/assets/styles/nprogress.css'
 import { useAppStore } from '@/stores/useAppStore'
 
-// 配置 NProgress
 NProgress.configure({
-  showSpinner: false, // 隐藏加载旋转器
-  trickleSpeed: 200, // 自动递增间隔
-  minimum: 0.1, // 最小百分比
-  easing: 'ease', // 动画方式
-  speed: 500, // 递增进度条的速度
+  showSpinner: false,
+  trickleSpeed: 200,
+  minimum: 0.1,
+  easing: 'ease',
+  speed: 500,
+  barSelector: '[role="progressbar"]',
+  spinnerSelector: '[role="status"]',
+  template:
+    '<div class="bar" role="progressbar" aria-label="页面加载进度"><div class="peg"></div></div><div class="spinner" role="status"><div class="spinner-icon"></div></div>'
 })
 
 const routes: RouteRecordRaw[] = [
@@ -20,15 +23,6 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '首页',
       description: '佘杰 - 前端开发工程师个人网站'
-    }
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/About.vue'),
-    meta: {
-      title: '关于我',
-      description: '我的个人信息、工作经历、教育背景和技能'
     }
   },
   {
@@ -51,33 +45,6 @@ const routes: RouteRecordRaw[] = [
     props: true
   },
   {
-    path: '/skills',
-    name: 'Skills',
-    component: () => import('@/views/Skills.vue'),
-    meta: {
-      title: '技能展示',
-      description: '我的技术栈和技能'
-    }
-  },
-  {
-    path: '/experience',
-    name: 'Experience',
-    component: () => import('@/views/Experience.vue'),
-    meta: {
-      title: '工作经历',
-      description: '我的工作经历和职业发展'
-    }
-  },
-  {
-    path: '/education',
-    name: 'Education',
-    component: () => import('@/views/Education.vue'),
-    meta: {
-      title: '教育背景',
-      description: '我的教育背景和学习经历'
-    }
-  },
-  {
     path: '/blog',
     name: 'Blog',
     component: () => import('@/views/Blog.vue'),
@@ -97,12 +64,22 @@ const routes: RouteRecordRaw[] = [
     props: true
   },
   {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import('@/views/Contact.vue'),
+    path: '/lab',
+    name: 'Lab',
+    component: () => import('@/views/Lab/LabIndex.vue'),
     meta: {
-      title: '联系方式',
-      description: '联系我'
+      title: '交互实验室',
+      description: '12 个可调参数、可复制源码的 Vue 交互效果'
+    }
+  },
+  {
+    path: '/lab/:id',
+    name: 'LabDemo',
+    component: () => import('@/views/Lab/LabLayout.vue'),
+    props: true,
+    meta: {
+      title: '交互实验室',
+      description: '可调参数并复制完整 Vue SFC 源码'
     }
   },
   {
@@ -129,72 +106,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // 开始进度条
   NProgress.start()
-  
   const appStore = useAppStore()
-  const title = to.meta.title as string
-  const description = to.meta.description as string
-  
-  // 更新页面标题
-  document.title = `${title} - 佘杰`
-  
-  // 更新 Meta 标签
-  updateMetaTags({
-    title,
-    description,
-    url: window.location.href
-  })
-  
   appStore.closeMenu()
   next()
 })
 
-// 路由加载完成后关闭进度条
 router.afterEach(() => {
   NProgress.done()
 })
-
-function updateMetaTags(meta: { title: string; description: string; url: string }) {
-  // 更新 description
-  const descriptionTag = document.querySelector('meta[name="description"]')
-  if (descriptionTag && meta.description) {
-    descriptionTag.setAttribute('content', meta.description)
-  }
-
-  // 更新 keywords
-  const keywordsTag = document.querySelector('meta[name="keywords"]')
-  if (keywordsTag) {
-    const baseKeywords = '前端开发工程师, Vue.js, TypeScript, JavaScript, 前端工程化, 性能优化, 佘杰'
-    keywordsTag.setAttribute('content', `${baseKeywords}, ${meta.title}`)
-  }
-
-  // 更新 Open Graph 标签
-  const ogTitle = document.querySelector('meta[property="og:title"]')
-  if (ogTitle) {
-    ogTitle.setAttribute('content', `${meta.title} - 佘杰`)
-  }
-
-  const ogDescription = document.querySelector('meta[property="og:description"]')
-  if (ogDescription && meta.description) {
-    ogDescription.setAttribute('content', meta.description)
-  }
-
-  const ogUrl = document.querySelector('meta[property="og:url"]')
-  if (ogUrl) {
-    ogUrl.setAttribute('content', meta.url)
-  }
-
-  // 更新 Twitter Card 标签
-  const twitterTitle = document.querySelector('meta[name="twitter:title"]')
-  if (twitterTitle) {
-    twitterTitle.setAttribute('content', `${meta.title} - 佘杰`)
-  }
-
-  const twitterDescription = document.querySelector('meta[name="twitter:description"]')
-  if (twitterDescription && meta.description) {
-    twitterDescription.setAttribute('content', meta.description)
-  }
-}
 
 export default router

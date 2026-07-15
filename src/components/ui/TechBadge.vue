@@ -10,15 +10,15 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const colorMap = {
-  primary: { bg: 'bg-primary-500/10', text: 'text-primary-600 dark:text-primary-400' },
-  secondary: { bg: 'bg-cyan-500/10', text: 'text-cyan-600 dark:text-cyan-400' },
-  accent: { bg: 'bg-orange-500/10', text: 'text-orange-600 dark:text-orange-400' }
+  primary: { bg: 'bg-primary-500/10', text: 'text-primary-600' },
+  secondary: { bg: 'bg-cyan-500/10', text: 'text-cyan-600' },
+  accent: { bg: 'bg-orange-500/10', text: 'text-orange-600' }
 }
 const colors = computed(() => colorMap[props.variant])
 </script>
 
 <template>
-  <span :class="['px-3 py-1 rounded-lg text-sm font-medium', colors.bg, colors.text]">
+  <span :class="['px-3 py-1 rounded-xl text-sm font-medium', colors.bg, colors.text]">
     {{ name }}
   </span>
 </template>

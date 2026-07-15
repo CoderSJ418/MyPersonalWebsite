@@ -1,15 +1,8 @@
 <template>
   <div class="social-links">
     <a
-      v-for="link in socialLinks"
-      :key="link.platform"
-      :href="link.url"
-      :aria-label="link.label"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="social-links__link"
-      :title="link.label"
-    >
+v-for="link in socialLinks" :key="link.platform" :href="link.url" :aria-label="link.label" target="_blank"
+      rel="noopener noreferrer" class="social-links__link" :title="link.label">
       <component :is="link.icon" :size="24" />
       <span class="social-links__label">{{ link.label }}</span>
     </a>
@@ -141,35 +134,39 @@ const socialLinks = computed<SocialLink[]>(() => {
 .social-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--us-space-4);
 }
 
 .social-links__link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: var(--surface-1);
-  border: 2px solid var(--border-default);
-  border-radius: 8px;
-  color: var(--text-primary);
+  gap: var(--us-space-2);
+  padding: var(--us-space-3) var(--us-space-5);
+  background: var(--us-surface);
+  border: 1px solid var(--us-border);
+  border-radius: var(--radius-md);
+  color: var(--us-text-primary);
   text-decoration: none;
-  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 14px;
+  transition: transform var(--us-duration-normal) var(--us-easing),
+    box-shadow var(--us-duration-normal) var(--us-easing),
+    color var(--us-duration-fast) var(--us-easing),
+    background-color var(--us-duration-fast) var(--us-easing),
+    border-color var(--us-duration-fast) var(--us-easing),
+    opacity var(--us-duration-fast) var(--us-easing);
   font-weight: 500;
 }
 
 .social-links__link:hover {
-  border-color: var(--primary-500);
-  background: var(--primary-500);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  border-color: var(--us-accent);
+  background: var(--us-accent);
+  color: var(--text-on-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--us-depth-2-hover);
 }
 
 .social-links__link:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  transform: scale(0.95);
+  box-shadow: var(--us-depth-1);
 }
 
 .social-links__label {
@@ -178,12 +175,12 @@ const socialLinks = computed<SocialLink[]>(() => {
 
 @media (max-width: 768px) {
   .social-links {
-    gap: 12px;
+    gap: var(--us-space-3);
   }
 
   .social-links__link {
-    padding: 10px 16px;
-    font-size: 13px;
+    padding: var(--us-space-3) var(--us-space-4);
+    font-size: var(--text-sm);
   }
 
   .social-links__label {
@@ -191,7 +188,7 @@ const socialLinks = computed<SocialLink[]>(() => {
   }
 
   .social-links__link {
-    padding: 12px;
+    padding: var(--us-space-3);
   }
 }
 </style>

@@ -198,7 +198,7 @@ const afterLeave = (_el: Element) => {
 /* Fade 过渡 */
 .page-fade-enter-active,
 .page-fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity var(--us-duration-enter) var(--us-easing);
 }
 
 .page-fade-enter-from,
@@ -209,7 +209,7 @@ const afterLeave = (_el: Element) => {
 /* Slide Left 过渡 */
 .page-slide-left-enter-active,
 .page-slide-left-leave-active {
-  transition: all 0.5s ease;
+  transition: opacity, transform var(--us-duration-enter) var(--us-easing);
 }
 
 .page-slide-left-enter-from {
@@ -225,7 +225,7 @@ const afterLeave = (_el: Element) => {
 /* Slide Right 过渡 */
 .page-slide-right-enter-active,
 .page-slide-right-leave-active {
-  transition: all 0.5s ease;
+  transition: opacity, transform var(--us-duration-enter) var(--us-easing);
 }
 
 .page-slide-right-enter-from {
@@ -241,7 +241,7 @@ const afterLeave = (_el: Element) => {
 /* Zoom 过渡 */
 .page-zoom-enter-active,
 .page-zoom-leave-active {
-  transition: all 0.5s ease;
+  transition: opacity, transform var(--us-duration-enter) var(--us-easing);
 }
 
 .page-zoom-enter-from,
@@ -253,7 +253,7 @@ const afterLeave = (_el: Element) => {
 /* Flip 过渡 */
 .page-flip-enter-active,
 .page-flip-leave-active {
-  transition: all 0.5s ease;
+  transition: opacity, transform var(--us-duration-enter) var(--us-easing);
 }
 
 .page-flip-enter-from,

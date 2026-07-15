@@ -1,0 +1,764 @@
+/**
+ * Stripe-Level Visual Effects System v2.0
+ *
+ * Comprehensive CSS effect system matching Stripe's visual quality.
+ * All effects are:
+ * - GPU-accelerated (transform/opacity only for animations)
+ * - Reduced-motion safe
+ * - Single light visual mode
+ * - Zero JS required for core effects
+ *
+ * v2.0 Changes — Pixel-perfect Stripe alignment:
+ * - Stripe-standard cubic-bezier timing curves
+ * - Refined hover micro-interactions with spring-like feel
+ * - Smoother gradient border rotation
+ * - Natural shimmer sweep timing
+ * - Press/active states with proper feedback
+ * - Focus-visible accessibility states
+ * - CSS custom properties for timing standardization
+ *
+ * Effect Categories:
+ * 1. Gradient Borders — rotating animated borders on cards
+ * 2. Shimmer — light sweep on hover
+ * 3. Gradient Text — animated gradient headings
+ * 4. Glow Shadows — colored outer glow on hover
+ * 5. Section Themes — per-section gradient backgrounds
+ * 6. Gradient Dividers — between sections
+ * 7. Glowing Timeline — for blog reading flow
+ * 8. Skill Tag Glow — for about section tags
+ * 9. Micro-interactions — hover/press/focus timing
+ */
+
+/* ============================================
+   0. TIMING TOKENS — Unified system references
+   ============================================
+   All timing tokens now reference unified-system.css
+   for cross-system consistency.
+   */
+:root {
+  /* ── Entrance animations — via unified system ── */
+  --stripe-ease-enter: var(--us-easing-overshoot);
+  /* Overshoot entrance — Stripe hero */
+  --stripe-ease-enter-smooth: var(--us-easing-enter);
+  /* Editorial smooth */
+  --stripe-ease-exit: var(--us-easing-exit);
+  /* Fast exit */
+
+  /* ── Micro-interactions — via unified system ── */
+  --stripe-ease-hover: var(--us-easing-hover);
+  /* Spring-like hover lift */
+  --stripe-ease-press: var(--us-easing-press);
+  /* Quick press settle */
+  --stripe-ease-settle: var(--us-easing-settle);
+  /* Natural settle */
+
+  /* ── Duration tokens — via unified system ── */
+  --stripe-duration-instant: var(--us-duration-instant);
+  --stripe-duration-fast: var(--us-duration-fast);
+  --stripe-duration-normal: var(--us-duration-smooth);
+  --stripe-duration-smooth: var(--us-duration-slow);
+  --stripe-duration-slow: var(--us-duration-lazy);
+
+  /* ── Transform tokens — via unified system ── */
+  --stripe-lift-sm: var(--us-lift-sm);
+  --stripe-lift-md: var(--us-lift-md);
+  --stripe-lift-lg: var(--us-lift-lg);
+  --stripe-press-scale: var(--us-press-scale);
+  --stripe-hover-scale: 1.005;
+}
+
+/* ============================================
+   1. GRADIENT BORDERS — Rotating animated borders
+   ============================================
+   Usage: Add .stripe-border to any card element.
+   The border rotates continuously, creating a
+   living, breathing card effect like Stripe.
+   */
+.stripe-border {
+  position: relative;
+  border: none !important;
+  z-index: 0;
+}
+
+.stripe-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(var(--stripe-border-angle, 135deg),
+      var(--stripe-color-1, rgba(99, 102, 241, 0.4)),
+      var(--stripe-color-2, rgba(6, 182, 212, 0.3)),
+      var(--stripe-color-3, rgba(139, 92, 246, 0.4)),
+      var(--stripe-color-1, rgba(99, 102, 241, 0.4)));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  opacity: 0.5;
+  transition: opacity var(--stripe-duration-smooth) var(--stripe-ease-settle);
+}
+
+.stripe-border:hover::before {
+  opacity: 1;
+}
+
+/* Animated rotating border — smoother 6s rotation */
+.stripe-border--animated::before {
+  animation: stripe-border-rotate 6s linear infinite;
+  opacity: 0.7;
+}
+
+.stripe-border--animated:hover::before {
+  opacity: 1;
+  animation-duration: 3s;
+  transition: opacity var(--stripe-duration-fast) var(--stripe-ease-settle);
+}
+
+@keyframes stripe-border-rotate {
+  0% {
+    --stripe-border-angle: 0deg;
+  }
+
+  100% {
+    --stripe-border-angle: 360deg;
+  }
+}
+
+/* Register the custom property for animation
+   NOTE: @property requires Safari 15.4+, Chrome 85+, Firefox 128+.
+   In unsupported browsers, gradient border rotation silently degrades
+   to static border — no visual breakage, just no animation. */
+@property --stripe-border-angle {
+  syntax: '<angle>';
+  initial-value: 135deg;
+  inherits: false;
+}
+
+/* ============================================
+   2. RESERVED — Shimmer removed (v3.0)
+   ============================================
+   The CSS shimmer sweep effect has been removed.
+   Stripe's actual card hover uses only border gradient
+   animation + elevation, not light sweep.
+   */
+
+/* ============================================
+   3. GRADIENT TEXT — Animated gradient headings
+   ============================================
+   Usage: Add .stripe-text-gradient to any text element.
+   v2.0: Slower, more subtle animation (8s instead of 6s).
+   */
+.stripe-text-gradient {
+  background: linear-gradient(135deg,
+      var(--us-accent) 0%,
+      #06b6d4 25%,
+      #8b5cf6 50%,
+      var(--us-accent) 75%,
+      #06b6d4 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: stripe-gradient-shift 8s ease infinite;
+}
+
+@keyframes stripe-gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ============================================
+   4. GLOW SHADOWS — Colored outer glow on hover
+   ============================================
+   Usage: Add .stripe-glow to any interactive element.
+   v2.0: Spring-like hover timing, smoother glow expansion.
+   */
+.stripe-glow {
+  transition:
+    box-shadow var(--stripe-duration-normal) var(--stripe-ease-hover),
+    border-color var(--stripe-duration-fast) var(--stripe-ease-settle),
+    transform var(--stripe-duration-normal) var(--stripe-ease-hover);
+}
+
+.stripe-glow:hover {
+  border-color: var(--us-accent-border) !important;
+  transform: translateY(var(--stripe-lift-sm));
+  box-shadow:
+    0 0 20px -5px rgba(99, 102, 241, 0.2),
+    0 0 60px -15px rgba(99, 102, 241, 0.1);
+}
+
+/* Press state — quick settle back */
+.stripe-glow:active {
+  transform: translateY(0) scale(var(--stripe-press-scale));
+  transition-duration: var(--stripe-duration-instant);
+}
+
+/* Focus-visible — accessibility */
+.stripe-glow:focus-visible {
+  outline: 2px solid var(--us-accent);
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.15),
+    0 0 20px -5px rgba(99, 102, 241, 0.2);
+}
+
+/* ============================================
+   5. SECTION THEMES — Per-section gradient accents
+   ============================================
+   Each section gets a unique subtle gradient overlay
+   that gives it visual identity while maintaining cohesion.
+   v2.0: Smoother fade-in on section enter.
+   */
+.stripe-section {
+  position: relative;
+}
+
+.stripe-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity var(--stripe-duration-slow) var(--stripe-ease-settle);
+}
+
+/* Sections become visible when they enter viewport —
+   this works with the GSAP ScrollTrigger system or
+   can be triggered by adding .stripe-section--visible */
+.stripe-section--visible::before,
+.stripe-section:hover::before {
+  opacity: 1;
+}
+
+/* Projects section — indigo/violet theme */
+.stripe-section--projects::before {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%,
+      rgba(99, 102, 241, 0.04) 0%,
+      transparent 70%);
+}
+
+/* Blog section — cyan/teal theme */
+.stripe-section--blog::before {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%,
+      rgba(6, 182, 212, 0.04) 0%,
+      transparent 70%);
+}
+
+/* About section — violet/purple theme */
+.stripe-section--about::before {
+  background: radial-gradient(ellipse 80% 50% at 50% 100%,
+      rgba(139, 92, 246, 0.04) 0%,
+      transparent 70%);
+}
+
+/* ============================================
+   6. GRADIENT DIVIDERS — Between sections
+   ============================================
+   Usage: Add .stripe-divider between sections.
+   v2.0: Subtle pulse animation for living feel.
+   */
+.stripe-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(99, 102, 241, 0.15) 20%,
+      rgba(6, 182, 212, 0.25) 50%,
+      rgba(139, 92, 246, 0.15) 80%,
+      transparent 100%);
+  margin: 0 auto;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle shimmer along the divider */
+.stripe-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
+  animation: stripe-divider-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes stripe-divider-shimmer {
+  0% {
+    left: -100%;
+  }
+
+  50% {
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+/* ============================================
+   7. GLOWING TIMELINE — For blog reading flow
+   ============================================
+   Usage: Add .stripe-timeline to the timeline container.
+   */
+.stripe-timeline::before {
+  background: linear-gradient(180deg,
+      rgba(99, 102, 241, 0.1) 0%,
+      rgba(6, 182, 212, 0.3) 50%,
+      rgba(139, 92, 246, 0.1) 100%) !important;
+  width: 2px !important;
+}
+
+/* Timeline dot glow — v2.0: Spring-like hover */
+.stripe-timeline-dot {
+  position: relative;
+}
+
+.stripe-timeline-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.3);
+  filter: blur(4px);
+  opacity: 0;
+  transition:
+    opacity var(--stripe-duration-normal) var(--stripe-ease-settle),
+    transform var(--stripe-duration-normal) var(--stripe-ease-hover);
+  transform: scale(0.8);
+}
+
+.stripe-timeline-dot:hover::after {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* ============================================
+   8. SKILL TAG GLOW — For about section tags
+   ============================================
+   v2.0: Spring-like hover with scale.
+   */
+.stripe-tag {
+  transition:
+    color var(--stripe-duration-fast) var(--stripe-ease-settle),
+    border-color var(--stripe-duration-fast) var(--stripe-ease-settle),
+    background var(--stripe-duration-fast) var(--stripe-ease-settle),
+    box-shadow var(--stripe-duration-normal) var(--stripe-ease-hover),
+    transform var(--stripe-duration-normal) var(--stripe-ease-hover);
+}
+
+.stripe-tag:hover {
+  color: var(--us-accent) !important;
+  border-color: var(--us-accent-border) !important;
+  background: var(--us-accent-subtle) !important;
+  box-shadow: 0 0 12px -2px rgba(99, 102, 241, 0.25);
+  transform: translateY(-1px) scale(1.03);
+}
+
+.stripe-tag:active {
+  transform: translateY(0) scale(var(--stripe-press-scale));
+  transition-duration: var(--stripe-duration-instant);
+}
+
+/* ============================================
+   9. MICRO-INTERACTIONS — Card hover/press/focus
+   ============================================
+   Stripe-level card interactions with precise timing.
+   Usage: Add .stripe-card to any card element.
+   */
+.stripe-card {
+  position: relative;
+  transition:
+    transform var(--stripe-duration-normal) var(--stripe-ease-hover),
+    box-shadow var(--stripe-duration-normal) var(--stripe-ease-settle),
+    border-color var(--stripe-duration-fast) var(--stripe-ease-settle);
+}
+
+/* Hover — spring-like lift with glow expansion */
+.stripe-card:hover {
+  transform: translateY(var(--stripe-lift-md));
+  border-color: var(--us-accent-border);
+}
+
+/* Press — quick settle with slight scale */
+.stripe-card:active {
+  transform: translateY(var(--stripe-lift-sm)) scale(var(--stripe-press-scale));
+  transition-duration: var(--stripe-duration-instant);
+}
+
+/* Focus-visible — accessibility ring */
+.stripe-card:focus-visible {
+  outline: 2px solid var(--us-accent);
+  outline-offset: 2px;
+}
+
+/* ── Card inner content shift on hover ── */
+.stripe-card .stripe-card__arrow {
+  transition:
+    transform var(--stripe-duration-normal) var(--stripe-ease-hover),
+    color var(--stripe-duration-fast) var(--stripe-ease-settle),
+    background var(--stripe-duration-fast) var(--stripe-ease-settle);
+}
+
+.stripe-card:hover .stripe-card__arrow {
+  transform: translate(2px, -2px);
+  color: var(--us-accent);
+}
+
+/* ============================================
+   10. BUTTON MICRO-INTERACTIONS
+   ============================================
+   Stripe-level button interactions.
+   Usage: Add .stripe-btn to any button/CTA.
+   */
+.stripe-btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--stripe-duration-normal) var(--stripe-ease-hover),
+    box-shadow var(--stripe-duration-normal) var(--stripe-ease-settle),
+    background var(--stripe-duration-fast) var(--stripe-ease-settle);
+}
+
+/* Hover — subtle lift + glow */
+.stripe-btn:hover {
+  transform: translateY(var(--stripe-lift-sm));
+}
+
+/* Press — quick press down */
+.stripe-btn:active {
+  transform: translateY(0) scale(var(--stripe-press-scale));
+  transition-duration: var(--stripe-duration-instant);
+}
+
+/* Focus-visible */
+.stripe-btn:focus-visible {
+  outline: 2px solid var(--us-accent);
+  outline-offset: 2px;
+}
+
+/* Button shimmer sweep */
+.stripe-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%);
+  transition: none;
+  pointer-events: none;
+}
+
+.stripe-btn:hover::after {
+  animation: stripe-btn-sweep 0.6s var(--stripe-ease-settle);
+}
+
+@keyframes stripe-btn-sweep {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* ============================================
+   11. SECTION GRADIENT ORBS — Animated floating light blobs
+   ============================================
+   Each section gets colored blurred circles that float
+   behind the content, creating Stripe's signature
+   "alive" background effect.
+   Usage: Add .stripe-orbs to any section element.
+   Add .stripe-orbs--indigo, .stripe-orbs--cyan, etc.
+   for section-specific color themes.
+   ============================================ */
+.stripe-orbs {
+  position: relative;
+  overflow: hidden;
+}
+
+.stripe-orbs::before,
+.stripe-orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* ── Primary Orb ── */
+.stripe-orbs::before {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -100px;
+  animation: orb-float-1 20s ease-in-out infinite;
+}
+
+/* ── Secondary Orb ── */
+.stripe-orbs::after {
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  right: -100px;
+  animation: orb-float-2 25s ease-in-out infinite;
+}
+
+/* ── Color Themes ── */
+.stripe-orbs--indigo::before {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%);
+}
+.stripe-orbs--indigo::after {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+}
+
+.stripe-orbs--cyan::before {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.5) 0%, transparent 70%);
+}
+.stripe-orbs--cyan::after {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%);
+}
+
+.stripe-orbs--violet::before {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+}
+.stripe-orbs--violet::after {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+}
+
+.stripe-orbs--blue::before {
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.5) 0%, transparent 70%);
+}
+.stripe-orbs--blue::after {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+}
+
+/* ── Third Orb (via inner element) ── */
+.stripe-orb-extra {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+  width: 400px;
+  height: 400px;
+  will-change: transform;
+  animation: orb-float-3 30s ease-in-out infinite;
+}
+
+.stripe-orb-extra--indigo {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%);
+}
+.stripe-orb-extra--cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.5) 0%, transparent 70%);
+}
+.stripe-orb-extra--violet {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+}
+
+/* ── Orb Float Animations ── */
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(100px, 50px) scale(1.1); }
+  50% { transform: translate(50px, 100px) scale(0.9); }
+  75% { transform: translate(-30px, 60px) scale(1.05); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-80px, -40px) scale(1.15); }
+  50% { transform: translate(-40px, -80px) scale(0.85); }
+  75% { transform: translate(60px, -30px) scale(1.1); }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -80px) scale(1.2); }
+  66% { transform: translate(-60px, 40px) scale(0.8); }
+}
+
+/* ============================================
+   12. GLOBAL LIGHT PATCH — Mouse-following section light
+   ============================================
+   A large soft radial gradient that follows the cursor
+   at the section level, creating Stripe's signature
+   "light follows your attention" effect.
+   ============================================ */
+.stripe-light-patch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    800px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
+    rgba(99, 102, 241, 0.06) 0%,
+    transparent 100%
+  );
+}
+
+.stripe-light-patch.is-active {
+  opacity: 1;
+}
+
+/* ── Card Spotlight — mouse-following radial glow ── */
+/* JS sets --mouse-x / --mouse-y / --spotlight-opacity on the card element */
+/* Card must have: position:relative + overflow:hidden + spotlight-enabled class */
+.spotlight-enabled {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-enabled::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    var(--spotlight-radius, 600px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(var(--spotlight-color, 99, 102, 241), 0.08),
+    transparent 40%
+  );
+  opacity: var(--spotlight-opacity, 0);
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Rotating Gradient Border — conic-gradient + @property ── */
+.stripe-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  background: var(--us-material-elevated-bg, rgba(255,255,255,0.06));
+  z-index: 0;
+}
+
+.stripe-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    transparent 0%,
+    rgba(var(--spotlight-color, 99, 102, 241), 0.3) 10%,
+    transparent 20%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.stripe-card:hover::after {
+  opacity: 1;
+  animation: rotate-border 3s linear infinite;
+}
+
+@keyframes rotate-border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* Border color variants */
+.stripe-border--indigo { --spotlight-color: 99, 102, 241; }
+.stripe-border--cyan { --spotlight-color: 6, 182, 212; }
+.stripe-border--violet { --spotlight-color: 139, 92, 246; }
+.stripe-border--blue { --spotlight-color: 37, 99, 235; }
+
+/* ── Reduced Motion — all stripe effects disabled ── */
+@media (prefers-reduced-motion: reduce) {
+  /* New orbs/light-patch */
+  .stripe-orbs::before,
+  .stripe-orbs::after,
+  .stripe-orb-extra {
+    animation: none !important;
+  }
+  .stripe-light-patch {
+    display: none !important;
+  }
+
+  /* Original stripe reduced-motion rules */
+  .stripe-border--animated::before {
+    animation: none !important;
+  }
+  .stripe-text-gradient {
+    animation: none !important;
+    background-size: 100% 100% !important;
+  }
+  .stripe-glow:hover {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .stripe-section::before {
+    display: none !important;
+  }
+  .stripe-divider::after {
+    animation: none !important;
+  }
+  .stripe-timeline-dot::after {
+    transition: none !important;
+  }
+  .stripe-tag:hover {
+    transform: none !important;
+  }
+  .stripe-card:hover {
+    transform: none !important;
+  }
+  .stripe-card:active {
+    transform: none !important;
+  }
+  .stripe-btn:hover {
+    transform: none !important;
+  }
+  .stripe-btn:active {
+    transform: none !important;
+  }
+  .stripe-btn::after {
+    display: none !important;
+  }
+  :root {
+    --stripe-duration-instant: 0ms;
+    --stripe-duration-fast: 0ms;
+    --stripe-duration-normal: 0ms;
+    --stripe-duration-smooth: 0ms;
+    --stripe-duration-slow: 0ms;
+  }
+}

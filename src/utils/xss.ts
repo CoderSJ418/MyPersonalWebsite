@@ -31,14 +31,16 @@ const DEFAULT_CONFIG: DOMPurify.Config = {
     'article', 'section', 'aside', 'header', 'footer', 'nav', 'main', 'address',
     'details', 'summary', 'dialog',
     // 表单（只读展示）
-    'label',
+    'label', 'button',
+    // SVG（代码块复制按钮图标）
+    'svg', 'path', 'rect', 'circle', 'line', 'polyline', 'polygon', 'g',
     // 自定义容器
     'div',
   ],
   // 允许的属性
   ALLOWED_ATTR: [
     // 全局属性
-    'id', 'class', 'title', 'lang', 'dir', 'hidden', 'tabindex',
+    'id', 'class', 'style', 'title', 'lang', 'dir', 'hidden', 'tabindex',
     'data-*',  // 支持 data-* 属性
     // 链接属性
     'href', 'target', 'rel', 'download',
@@ -55,6 +57,12 @@ const DEFAULT_CONFIG: DOMPurify.Config = {
     'name', 'value', 'type', 'placeholder',
     // 媒体属性
     'controls', 'autoplay', 'loop', 'muted', 'playsinline',
+    // SVG 属性
+    'viewbox', 'viewBox', 'fill', 'stroke', 'stroke-width',
+    'stroke-linecap', 'stroke-linejoin', 'stroke-dasharray',
+    'd', 'rx', 'ry', 'cx', 'cy', 'r', 'x1', 'y1', 'x2', 'y2',
+    'points', 'transform', 'xmlns', 'preserveAspectRatio',
+    'opacity', 'clip-path', 'mask',
   ],
   // 允许的 URI 协议
   ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
