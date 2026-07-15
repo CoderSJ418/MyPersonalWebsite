@@ -57,6 +57,13 @@ const resetGlow = () => Object.assign(position, { x: 50, y: 35 })
   min-height: 0;
   width: 100%;
   place-items: stretch;
+  background: var(--us-border);
+  box-shadow: var(--us-depth-1);
+  transition: background var(--us-duration-normal) var(--us-easing), box-shadow var(--us-duration-normal) var(--us-easing);
+}
+.magic-card--embedded:hover {
+  background: radial-gradient(circle at var(--x) var(--y), var(--us-accent-border), var(--us-border) 58%);
+  box-shadow: var(--us-depth-1-hover);
 }
 .magic-card__content {
   width: 100%;
@@ -67,6 +74,9 @@ const resetGlow = () => Object.assign(position, { x: 50, y: 35 })
 }
 .magic-card__content--showcase {
   padding: 2.5rem;
+}
+.magic-card--embedded .magic-card__content {
+  background: radial-gradient(circle at var(--x) var(--y), var(--us-accent-subtle), transparent 38%), #fff;
 }
 .magic-card span {
   display: block;

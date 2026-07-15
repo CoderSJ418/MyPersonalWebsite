@@ -60,7 +60,8 @@ v-if="nextPost" class="post-navigation__item post-navigation__item--next" :href=
 <style scoped>
 .post-navigation {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
   gap: var(--us-space-6);
   margin-top: var(--us-space-12);
   padding: var(--us-space-8) 0;
@@ -70,6 +71,7 @@ v-if="nextPost" class="post-navigation__item post-navigation__item--next" :href=
 
 .post-navigation__item {
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: var(--us-space-4);
   padding: var(--us-space-5);
@@ -151,7 +153,7 @@ v-if="nextPost" class="post-navigation__item post-navigation__item--next" :href=
 /* 响应式 */
 @media (max-width: 768px) {
   .post-navigation {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--us-space-4);
     padding: var(--us-space-6) 0;
   }

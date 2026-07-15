@@ -111,6 +111,13 @@ test.describe('FeaturedProjects 展开卡片', () => {
     expect(tagTexts).toContain('Vite')
   })
 
+  test('首页项目卡片默认使用轻量边界而非整圈渐变', async ({ page }) => {
+    const backgroundImage = await page.locator('[data-effect-consumer="magic-card"]').first().evaluate((element) =>
+      getComputedStyle(element).backgroundImage
+    )
+    expect(backgroundImage).not.toContain('conic-gradient')
+  })
+
   test('首页真实复用四个 Lab 旗舰效果并保持可操作', async ({ page }) => {
     await expect(page.locator('[data-effect-consumer="aurora"]')).toBeVisible()
     await expect(page.getByRole('link', { name: '查看作品集' })).toBeVisible()

@@ -5,10 +5,10 @@
 ## 当前状态
 
 - **宪法版本**: v1.1（已冻结）
-- **阶段**: P1全流程 — PRD v0.6 Phase 4 已正式发布，进入真实流量观察
-- **Sprint Goal**: 交互实验室已完成实现、公开入口、Vercel Production 部署与 GA4 同意门生产冒烟；下一步是累计真实合格会话
-- **验证Feature**: 交互实验室 MVP（12个效果）
-- **Sprint Planning**: ✅ PRD v0.6、Phase 3.5 与 Phase 4 代码已完成
+- **阶段**: P1全流程 — 博客内容与构建流水线重构已完成本地验证
+- **Sprint Goal**: 首页项目卡片视觉减重；博客成为 2024–2026 每年 6 篇、可校验和按需渲染的个人工程知识库
+- **验证Feature**: 工程化博客内容流水线 + 首页精选项目卡片视觉减重
+- **Sprint Planning**: ✅ Feature Brief 方案 A 已确认并完成本地实现
 
 ## 当前进行中任务
 
@@ -28,6 +28,8 @@
 | T3 Owner Acceptance | ✅ 代理执行 8/8 | 用户授权 Codex 自主代跑；明确不等同独立用户研究 |
 | Phase 3.5          | ✅ 完成 | 体验、内容、旗舰、真实应用与重新验证均完成 |
 | Phase 4            | ✅ 正式发布 | 导航、首页次 CTA、Sitemap/index、六类事件、Vercel Production 与 GA4 生产冒烟完成 |
+| Blog 内容重构      | ✅ 本地完成 | 删除 10 篇低价值稿，重写/新增为 2024–2026 各 6 篇，2026 旧视觉稿已去除暗色与未经证实表述 |
+| Blog 工程化        | ✅ 本地完成 | Markdown 单一内容源、元数据/年度质量门、RSS/Sitemap 同源、长文按需展开、移动端导航修复 |
 
 ## 阻塞项
 
@@ -37,10 +39,15 @@
 
 ## 最新自动化证据
 
+- 当前分支：`codex/blog-content-rebuild`；等待提交、推送与人工审核。
+- `npm run content:check`：18/18；2024、2025、2026 各 6 篇，旧占位文本和重复索引已清除。
+- `npm run test:coverage`：160/160；Statements 79.71%、Branches 70.33%、Functions 75.48%、Lines 80.99%。
+- `npm run test:e2e`：24/24；覆盖年度时间线、长文延迟渲染、移动端无横向滚动与首页轻量卡片边界。
+- `npm run build`：通过；生产 Sitemap 含 18 个博客详情 URL，RSS 含 18 个条目，均直接生成到当前 `dist`。
 - 发布分支：`codex/interaction-lab-release`；发布提交：`bbb0d73`；生产证据提交：`cdef3eb`；人工审核入口：[GitHub PR #1](https://github.com/CoderSJ418/MyPersonalWebsite/pull/1)。
-- `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
+- Phase 4 发布基线 `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
-- `npm run test:e2e`：20/20；新增 Hero 两类 CTA 在 SPA 导航中保留 GA 事件的浏览器回归；`npm run build` 与强化后的 `npm run validate:lab` 通过。
+- Phase 4 发布基线 `npm run test:e2e`：20/20；新增 Hero 两类 CTA 在 SPA 导航中保留 GA 事件的浏览器回归；`npm run build` 与强化后的 `npm run validate:lab` 通过。
 - 正式 `dataLayer` 已验证六类 PRD 事件及参数白名单；Hero CTA 的普通 anchor 整页导航丢事件问题已改为 Vue Router SPA 导航并重新部署。
 - 生产本地冒烟：首页 + Lab 首页 + 12 详情共 14 页全部 200，0 pageerror；13 个 Lab URL 全部进入 Sitemap。
 - 首页 Lighthouse 三次中位数：Performance 97、Accessibility 100、Best Practices 100、LCP 2.286s、CLS 0、TBT 26ms。

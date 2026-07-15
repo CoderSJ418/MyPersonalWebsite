@@ -1,13 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 
-const OUTPUT_FILE = path.resolve('public/rss.xml')
+const OUTPUT_FILE = path.resolve('dist/rss.xml')
 
-const BASE_URL = process.env.VITE_SITE_URL || 'https://shejie.github.io'
+const BASE_URL = process.env.VITE_SITE_URL || 'https://my-personal-website-eta-murex.vercel.app'
 const SITE_NAME = '佘杰 - 前端开发工程师'
 const SITE_DESCRIPTION = '分享 Vue 3、TypeScript、前端工程化等技术文章'
 
-const indexPath = path.resolve('src/assets/data/blog-index.json')
+const indexPath = path.resolve('src/assets/data/blog-meta.json')
 const posts = JSON.parse(fs.readFileSync(indexPath, 'utf-8'))
 
 const items = posts
@@ -36,6 +36,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
   </channel>
 </rss>`
 
+fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true })
 fs.writeFileSync(OUTPUT_FILE, rss, 'utf-8')
 console.log(`RSS feed generated: ${OUTPUT_FILE} (${posts.length} posts)`)
 

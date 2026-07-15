@@ -11,6 +11,9 @@ const today = new Date().toISOString().split('T')[0]
 const labEffects = JSON.parse(
   readFileSync(resolve(process.cwd(), 'src/assets/data/lab-effects.json'), 'utf-8')
 )
+const blogPosts = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'src/assets/data/blog-meta.json'), 'utf-8')
+)
 
 const routes = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
@@ -26,7 +29,13 @@ const routes = [
     path: `/lab/${effect.id}`,
     priority: 0.7,
     changefreq: 'monthly'
-  }))
+  })),
+  ...blogPosts.map((post) => ({
+    path: `/blog/${post.id}`,
+    priority: 0.7,
+    changefreq: 'monthly',
+    lastmod: post.updatedAt || post.publishedAt
+  })),
 ]
 
 // ---- Sitemap ----
@@ -38,7 +47,7 @@ function generateSitemap() {
   routes.forEach((route) => {
     xml.push('  <url>')
     xml.push(`    <loc>${baseUrl}${route.path}</loc>`)
-    xml.push(`    <lastmod>${today}</lastmod>`)
+    xml.push(`    <lastmod>${route.lastmod || today}</lastmod>`)
     xml.push(`    <changefreq>${route.changefreq}</changefreq>`)
     xml.push(`    <priority>${route.priority}</priority>`)
     xml.push('  </url>')
@@ -60,10 +69,7 @@ function escapeXml(str) {
 }
 
 function generateRss() {
-  const blogIndex = resolve(process.cwd(), 'src/assets/data/blog-index.json')
-  const posts = JSON.parse(readFileSync(blogIndex, 'utf-8'))
-
-  const items = posts
+  const items = blogPosts
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .map((post) => `  <item>
     <title>${escapeXml(post.title)}</title>
@@ -95,6 +101,6 @@ const sitemapPath = resolve(process.cwd(), 'dist', 'sitemap.xml')
 writeFileSync(sitemapPath, generateSitemap(), 'utf-8')
 console.log(`Sitemap generated: ${sitemapPath}`)
 
-const rssPath = resolve(process.cwd(), 'public', 'rss.xml')
+const rssPath = resolve(process.cwd(), 'dist', 'rss.xml')
 writeFileSync(rssPath, generateRss(), 'utf-8')
 console.log(`RSS feed generated: ${rssPath}`)

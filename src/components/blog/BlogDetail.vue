@@ -10,12 +10,11 @@
  * - 保留博客特有：Markdown渲染 + 目录 + 版权 + PostNavigation + RelatedPosts + Toast
  */
 
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Share2, Link as LinkIcon } from 'lucide-vue-next'
 import { useBlogStore } from '@/stores/useBlogStore'
 import type { BlogPost } from '@/types/blog'
-import { renderMarkdown, renderMarkdownSync, extractHeadings } from '@/utils/markdown'
 import { formatDate } from '@/utils/format'
 import DetailNav from '@/components/common/DetailNav.vue'
 import Breadcrumb from '@/components/common/Breadcrumb.vue'
@@ -23,7 +22,7 @@ import type { BreadcrumbItem } from '@/components/common/Breadcrumb.vue'
 import DetailHeader from '@/components/common/DetailHeader.vue'
 import type { MetaItem } from '@/components/common/DetailMeta.vue'
 import TableOfContents from './TableOfContents.vue'
-import BlogMarkdown from './BlogMarkdown.vue'
+import BlogArticleContent from './BlogArticleContent.vue'
 import BlogCopyright from './BlogCopyright.vue'
 import RelatedPosts from './RelatedPosts.vue'
 import PostNavigation from './PostNavigation.vue'
@@ -38,17 +37,8 @@ const props = defineProps<Props>()
 const router = useRouter()
 const blogStore = useBlogStore()
 
-// 渲染后的 Markdown 内容（异步加载）
-const renderedContent = ref('')
-const isLoadingContent = ref(true)
 const showShareToast = ref(false)
-
-// 提取的标题（用于目录）— 仅在 content 可用时提取
-const headings = computed(() => {
-  const content = props.post.content
-  if (!content) return []
-  return extractHeadings(content)
-})
+const headings = ref<Array<{ level: number; text: string; id: string }>>([])
 
 // 元数据项
 const metaItems = computed<MetaItem[]>(() => {
@@ -69,45 +59,9 @@ const metaItems = computed<MetaItem[]>(() => {
   return items
 })
 
-// 异步渲染 Markdown 内容 — 支持 content 可选（两级加载）
-onMounted(async () => {
+onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
-
-  // If content is not loaded yet, show skeleton
-  const content = props.post.content
-  if (!content) {
-    isLoadingContent.value = true
-    return
-  }
-
-  try {
-    renderedContent.value = await renderMarkdown(content)
-  } catch (_error) {
-    renderedContent.value = renderMarkdownSync(content)
-  } finally {
-    isLoadingContent.value = false
-  }
 })
-
-// Watch for content changes (when content is loaded async after mount)
-watch(
-  () => props.post.content,
-  async (newContent) => {
-    if (!newContent) {
-      isLoadingContent.value = true
-      renderedContent.value = ''
-      return
-    }
-
-    try {
-      renderedContent.value = await renderMarkdown(newContent)
-    } catch (_error) {
-      renderedContent.value = renderMarkdownSync(newContent)
-    } finally {
-      isLoadingContent.value = false
-    }
-  }
-)
 
 // 代码复制处理（事件委托）
 const handleContentClick = async (event: MouseEvent) => {
@@ -204,7 +158,12 @@ layout="centered" :category="post.category" :title="post.title" :meta-items="met
       </aside>
 
       <!-- 文章正文 -->
-      <BlogMarkdown :content="renderedContent" :is-loading="isLoadingContent" @content-click="handleContentClick" />
+      <BlogArticleContent
+        :content="post.content"
+        :read-time="post.readTime"
+        @content-click="handleContentClick"
+        @headings-change="headings = $event"
+      />
     </div>
 
     <!-- 版权声明 -->

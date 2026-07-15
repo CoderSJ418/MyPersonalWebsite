@@ -3,6 +3,24 @@ import anchor from 'markdown-it-anchor'
 import toc from 'markdown-it-table-of-contents'
 import { sanitizeHtml } from './xss'
 
+export const ARTICLE_FOLD_MARKER = '<!-- article-fold -->'
+
+/** Split an intentionally long article before rendering its deferred body. */
+export function splitExpandableMarkdown(content: string) {
+  const markerIndex = content.indexOf(ARTICLE_FOLD_MARKER)
+  if (markerIndex === -1) {
+    return { preview: content, full: content, isExpandable: false }
+  }
+
+  const preview = content.slice(0, markerIndex).trim()
+  const remainder = content.slice(markerIndex + ARTICLE_FOLD_MARKER.length).trim()
+  return {
+    preview,
+    full: `${preview}\n\n${remainder}`,
+    isExpandable: remainder.length > 0,
+  }
+}
+
 // 按需导入 highlight.js — 仅注册博客实际使用的5种语言，体积从304KB降至49KB gzip
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let hljs: any = null

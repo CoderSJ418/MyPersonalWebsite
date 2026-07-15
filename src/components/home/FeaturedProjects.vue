@@ -346,7 +346,6 @@ onMounted(async () => {
   padding: var(--us-space-4);
   border-radius: var(--radius-lg);
   background: var(--us-surface);
-  border: 1px solid var(--us-border);
 }
 
 .fp__narrative-label {
@@ -403,9 +402,8 @@ onMounted(async () => {
   padding: var(--us-space-1) var(--us-space-3);
   min-height: 28px;
   border-radius: var(--radius-md);
-  background: rgba(99, 102, 241, 0.12);
-  color: rgba(99, 102, 241, 0.9);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: var(--us-accent-subtle);
+  color: var(--us-accent);
 }
 
 .fp__card-actions {

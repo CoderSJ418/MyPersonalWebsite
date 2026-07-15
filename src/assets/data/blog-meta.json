@@ -1,345 +1,290 @@
 [
   {
-    "id": "21",
-    "title": "Stripe/Framer/Raycast视觉特效深度拆解与落地实施",
-    "excerpt": "深度拆解Stripe/Framer/Raycast三大竞品15个标志性视觉特效的底层技术逻辑，结合Vue3+GSAP+TypeScript技术栈提供可复用代码示例、组件拆分方案、集成步骤，以及完整的性能优化与低端设备降级策略。",
+    "id": "20",
+    "title": "从 PRD 到 Production：Interaction Lab 的完整交付链",
+    "excerpt": "复盘本项目如何把 12 个交互 Demo 从“效果集合”推进到可调参数、可复制源码、真实页面复用、隐私埋点、自动门禁和正式部署的产品能力。",
     "author": "佘杰",
-    "publishedAt": "2026-07-04",
-    "updatedAt": "2026-07-04",
+    "publishedAt": "2026-07-15",
+    "updatedAt": "2026-07-15",
     "tags": [
-      "视觉特效",
-      "GSAP",
-      "CSS动画",
-      "前端架构",
+      "Vue 3",
+      "Interaction Lab",
+      "产品工程"
+    ],
+    "readTime": 13,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "项目复盘"
+  },
+  {
+    "id": "21",
+    "title": "长文章不该一次性渲染：Markdown 按需展开架构",
+    "excerpt": "从一篇 7.1 万字符旧稿暴露的问题出发，把 Markdown 内容拆成元数据、按文章加载、摘要预渲染与正文按需展开四层，并说明这种方案解决和没有解决什么。",
+    "author": "佘杰",
+    "publishedAt": "2026-07-15",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "Markdown",
+      "Vue 3",
       "性能优化"
     ],
-    "readTime": 35,
+    "readTime": 11,
     "coverImage": "/images/projects/blog-system.svg",
-    "category": "视觉工程"
+    "category": "内容工程"
   },
   {
-    "id": "16",
-    "title": "Stripe级光效系统工程设计",
-    "excerpt": "深入解析如何用纯CSS Custom Properties构建Stripe级别的鼠标追踪光效系统，包括radial-gradient渲染、CSS变量驱动、性能优化策略，以及从设计意图到工程落地的完整决策链。",
+    "id": "19",
+    "title": "亮色界面的视觉层次：不用暗色也能建立深度",
+    "excerpt": "用文字、表面、边界、间距和运动五个维度建立亮色界面层次，避免依赖深色背景、重阴影和高饱和描边制造“技术感”。",
     "author": "佘杰",
-    "publishedAt": "2026-07-02",
-    "updatedAt": "2026-07-02",
+    "publishedAt": "2026-05-22",
+    "updatedAt": "2026-07-15",
     "tags": [
-      "CSS",
-      "视觉系统",
-      "光效设计",
-      "工程实践"
+      "亮色设计",
+      "视觉层次",
+      "Design Tokens"
     ],
-    "readTime": 18,
-    "coverImage": "/images/projects/blog-system.svg",
-    "category": "视觉工程"
-  },
-  {
-    "id": "17",
-    "title": "卡片交互物理模型设计",
-    "excerpt": "解析卡片交互的统一物理模型设计——从hover位移、阴影深度、边框光效到按压反馈，构建一套自洽的卡片交互物理系统，让每个微交互都遵循同一套物理法则。",
-    "author": "佘杰",
-    "publishedAt": "2026-07-02",
-    "updatedAt": "2026-07-02",
-    "tags": [
-      "CSS",
-      "交互设计",
-      "物理模型",
-      "视觉系统"
-    ],
-    "readTime": 15,
-    "coverImage": "/images/projects/blog-system.svg",
+    "readTime": 8,
+    "coverImage": "/images/projects/blog-1.svg",
     "category": "视觉工程"
   },
   {
     "id": "18",
-    "title": "Framer级滚动叙事系统设计",
-    "excerpt": "从Framer Motion的滚动动画中汲取灵感，用IntersectionObserver+CSS transition构建零依赖的滚动叙事系统，包括stagger延迟策略、一次性触发机制和composable+directive双模式API设计。",
+    "title": "滚动叙事不是逐个淡入：可读性、节奏与性能预算",
+    "excerpt": "把滚动效果拆成进入提示、进度表达和叙事控制三类，说明何时使用 IntersectionObserver、CSS 或 GSAP，以及如何避免内容被动画阻塞。",
     "author": "佘杰",
-    "publishedAt": "2026-07-02",
-    "updatedAt": "2026-07-02",
+    "publishedAt": "2026-04-09",
+    "updatedAt": "2026-07-15",
     "tags": [
-      "CSS",
-      "滚动动画",
+      "滚动交互",
       "IntersectionObserver",
-      "视觉系统"
+      "GSAP"
     ],
-    "readTime": 16,
-    "coverImage": "/images/projects/blog-system.svg",
+    "readTime": 9,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "交互工程"
+  },
+  {
+    "id": "17",
+    "title": "卡片为什么显得重：边框、阴影与层级的减法",
+    "excerpt": "用边界、表面、间距和交互四个信号分析卡片“太重”的原因，并给出适合亮色作品集的视觉减法与组件验收方法。",
+    "author": "佘杰",
+    "publishedAt": "2026-03-14",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "UI 设计",
+      "卡片组件",
+      "设计系统"
+    ],
+    "readTime": 8,
+    "coverImage": "/images/projects/blog-2.svg",
     "category": "视觉工程"
   },
   {
-    "id": "19",
-    "title": "视觉层次工程设计",
-    "excerpt": "从Stripe和Vercel的视觉层次中提炼设计原则，用CSS Custom Properties构建可编程的视觉层次系统——Typography Scale、Color Hierarchy、Spacing Model，让每个像素都有存在的理由。",
+    "id": "16",
+    "title": "局部光效的工程边界：让指针成为提示，而不是噪声",
+    "excerpt": "从指针坐标、CSS 自定义属性和径向渐变实现局部光效，并重点说明触摸降级、更新频率、视觉强度和真实页面复用的边界。",
     "author": "佘杰",
-    "publishedAt": "2026-07-02",
-    "updatedAt": "2026-07-02",
+    "publishedAt": "2026-02-18",
+    "updatedAt": "2026-07-15",
     "tags": [
       "CSS",
-      "视觉层次",
-      "设计系统",
-      "Typography"
-    ],
-    "readTime": 14,
-    "coverImage": "/images/projects/blog-system.svg",
-    "category": "视觉工程"
-  },
-  {
-    "id": "20",
-    "title": "构建统一视觉交互系统",
-    "excerpt": "从零到一构建统一视觉交互系统的完整工程记录——5大模型（Light/Surface/Motion/Hierarchy/Spacing）、CSS @layer架构、双系统共存迁移策略、composable抽取，以及从392处旧token到统一系统的渐进式迁移路径。",
-    "author": "佘杰",
-    "publishedAt": "2026-07-02",
-    "updatedAt": "2026-07-02",
-    "tags": [
-      "CSS",
-      "设计系统",
-      "视觉系统",
-      "工程架构"
-    ],
-    "readTime": 20,
-    "coverImage": "/images/projects/blog-system.svg",
-    "category": "视觉工程"
-  },
-  {
-    "id": "15",
-    "title": "谈谈我对2025年前端技术的思考和理解",
-    "excerpt": "资深前端工程师对2025年前端技术的深度思考，包括AI影响、技术趋势、职业发展等前瞻性观点。",
-    "author": "三桥sankyu",
-    "publishedAt": "2025-01-29",
-    "updatedAt": "2025-01-29",
-    "tags": [
-      "思考",
-      "前端",
-      "2025"
-    ],
-    "readTime": 20,
-    "coverImage": "/images/projects/blog-3.svg",
-    "category": "思考"
-  },
-  {
-    "id": "14",
-    "title": "启动与搭建Vue3工程极简脚手架教程(2025超详细教程)",
-    "excerpt": "2025年超详细Vue3工程脚手架搭建教程，包含命令行启动、IDEA配置、项目瘦身等完整实践指南。",
-    "author": "CSDN博主",
-    "publishedAt": "2025-01-28",
-    "updatedAt": "2025-01-28",
-    "tags": [
-      "Vue3",
-      "脚手架",
-      "教程"
-    ],
-    "readTime": 16,
-    "coverImage": "/images/projects/blog-2.svg",
-    "category": "Vue3"
-  },
-  {
-    "id": "13",
-    "title": "【2025最新版】3小时学会Vue3，小白零基础视频教程",
-    "excerpt": "2025最新版Vue3零基础视频教程，3小时快速掌握Vue3核心语法、组件开发、状态管理等关键技能。",
-    "author": "邓瑞编程",
-    "publishedAt": "2025-01-27",
-    "updatedAt": "2025-01-27",
-    "tags": [
-      "Vue3",
-      "教程",
-      "视频"
-    ],
-    "readTime": 18,
-    "coverImage": "/images/projects/blog-1.svg",
-    "category": "Vue3"
-  },
-  {
-    "id": "12",
-    "title": "2025新版Vue3基础实践与项目实战",
-    "excerpt": "2025新版Vue3基础实践与项目实战教程，包含Vite脚手架工程化搭建、组件实战、UI框架整合等完整内容。",
-    "author": "Java小卷",
-    "publishedAt": "2025-01-26",
-    "updatedAt": "2025-01-26",
-    "tags": [
-      "Vue3",
-      "实战",
-      "项目"
-    ],
-    "readTime": 22,
-    "coverImage": "/images/projects/blog-system.svg",
-    "category": "Vue3"
-  },
-  {
-    "id": "11",
-    "title": "2025年前端性能优化实战指南：从加载到渲染的全链路优化",
-    "excerpt": "2025年前端性能优化实战指南，涵盖资源加载优化、代码执行优化、渲染性能优化等核心维度，打造秒开级Web应用。",
-    "author": "fruge365",
-    "publishedAt": "2025-01-25",
-    "updatedAt": "2025-01-25",
-    "tags": [
-      "性能优化",
-      "前端",
-      "实战"
-    ],
-    "readTime": 28,
-    "coverImage": "/images/projects/blog-3.svg",
-    "category": "性能优化"
-  },
-  {
-    "id": "10",
-    "title": "2025最新Web前端开发系统学习图文教程",
-    "excerpt": "2025年最新Web前端开发系统学习教程，从VSCode安装到HTML/CSS/JavaScript，再到Vue、TypeScript、Node.js全栈开发。",
-    "author": "艾编程",
-    "publishedAt": "2025-01-24",
-    "updatedAt": "2025-01-24",
-    "tags": [
-      "教程",
-      "前端",
-      "系统学习"
-    ],
-    "readTime": 35,
-    "coverImage": "/images/projects/blog-2.svg",
-    "category": "教程"
-  },
-  {
-    "id": "9",
-    "title": "前端开发学习路线2025版",
-    "excerpt": "黑马程序员出品的前端学习路线图，包含基础入门、技术进阶、Vue开发、小程序、鸿蒙应用开发等完整学习路径。",
-    "author": "黑马程序员",
-    "publishedAt": "2025-01-23",
-    "updatedAt": "2025-01-23",
-    "tags": [
-      "学习路线",
-      "前端",
-      "黑马"
-    ],
-    "readTime": 20,
-    "coverImage": "/images/projects/blog-1.svg",
-    "category": "学习路线"
-  },
-  {
-    "id": "8",
-    "title": "2025年最新超详细的前端学习路线",
-    "excerpt": "2025年最新前端学习路线图，从HTML/CSS基础到Vue/React框架，再到工程化、性能优化，全面指导前端学习路径。",
-    "author": "沉默王二",
-    "publishedAt": "2025-01-22",
-    "updatedAt": "2025-01-22",
-    "tags": [
-      "学习路线",
-      "前端",
-      "2025"
-    ],
-    "readTime": 25,
-    "coverImage": "/images/projects/blog-system.svg",
-    "category": "学习路线"
-  },
-  {
-    "id": "7",
-    "title": "2025年资深前端面试心得",
-    "excerpt": "资深前端工程师分享2025年面试经验，包括技术准备、项目展示、沟通技巧等，帮助你顺利通过面试。",
-    "author": "匿名作者",
-    "publishedAt": "2025-01-21",
-    "updatedAt": "2025-01-21",
-    "tags": [
-      "面试",
-      "心得",
-      "前端"
-    ],
-    "readTime": 15,
-    "coverImage": "/images/projects/blog-3.svg",
-    "category": "面试"
-  },
-  {
-    "id": "6",
-    "title": "2025年前端面试题库大全",
-    "excerpt": "2025年前端面试最全面试题库，涵盖HTML、CSS、JavaScript、Vue、React、性能优化、工程化等核心知识点，帮助前端开发者系统准备面试。",
-    "author": "社区整理",
-    "publishedAt": "2025-01-20",
-    "updatedAt": "2025-01-20",
-    "tags": [
-      "面试",
-      "前端",
-      "题库"
-    ],
-    "readTime": 30,
-    "coverImage": "/images/projects/blog-2.svg",
-    "category": "面试"
-  },
-  {
-    "id": "5",
-    "title": "Pinia 状态管理最佳实践",
-    "excerpt": "深入探讨 Pinia 状态管理的使用技巧和最佳实践，包括 Store 设计、状态持久化、模块化等，帮助你构建可维护的状态管理方案。",
-    "author": "佘杰",
-    "publishedAt": "2024-05-15",
-    "updatedAt": "2024-05-15",
-    "tags": [
-      "Pinia",
-      "状态管理",
-      "Vue 3"
-    ],
-    "readTime": 16,
-    "coverImage": "/images/projects/blog-1.svg",
-    "category": "Vue3"
-  },
-  {
-    "id": "4",
-    "title": "前端性能优化实战指南",
-    "excerpt": "全面解析前端性能优化的各个方面，包括资源加载优化、渲染性能优化、网络优化等，帮助你打造极速的 Web 应用。",
-    "author": "佘杰",
-    "publishedAt": "2024-04-20",
-    "updatedAt": "2024-04-20",
-    "tags": [
-      "性能优化",
-      "前端",
-      "Web 性能"
-    ],
-    "readTime": 25,
-    "coverImage": "/images/projects/blog-system.svg",
-    "category": "性能优化"
-  },
-  {
-    "id": "3",
-    "title": "Vite 构建工具深度实践",
-    "excerpt": "探索 Vite 的核心原理和高级配置，包括插件开发、构建优化、性能调优等，帮助你构建更快的开发体验和生产构建。",
-    "author": "佘杰",
-    "publishedAt": "2024-03-05",
-    "updatedAt": "2024-03-05",
-    "tags": [
-      "Vite",
-      "构建工具",
+      "Pointer Events",
       "性能优化"
     ],
-    "readTime": 18,
-    "coverImage": "/images/projects/blog-3.svg",
-    "category": "构建工具"
+    "readTime": 9,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "视觉工程"
   },
   {
-    "id": "2",
-    "title": "TypeScript 高级类型技巧",
-    "excerpt": "掌握 TypeScript 高级类型系统，包括泛型、条件类型、映射类型、模板字面量类型等，提升代码的类型安全性和可维护性。",
+    "id": "ai-code-quality-gates-2025",
+    "title": "AI 生成代码的验收链：模型说“完成”之后才是真正开始",
+    "excerpt": "建立从任务分级、上下文约束、最小改动、自动门禁到人工验收的 AI 编程闭环，避免把模型自述、截图和一次构建成功当成交付证据。",
     "author": "佘杰",
-    "publishedAt": "2024-02-10",
-    "updatedAt": "2024-02-10",
+    "publishedAt": "2025-11-20",
+    "updatedAt": "2026-07-15",
     "tags": [
-      "TypeScript",
-      "类型系统",
-      "泛型"
+      "AI 编程",
+      "质量门禁",
+      "Code Review"
     ],
-    "readTime": 20,
+    "readTime": 11,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "AI 工程"
+  },
+  {
+    "id": "vite-7-baseline-2025",
+    "title": "Vite 7 与 Baseline：构建目标终于开始表达真实浏览器能力",
+    "excerpt": "解析 Vite 7 的 Node 要求和 baseline-widely-available 默认目标，并给出从业务浏览器矩阵反推构建目标、polyfill 与降级策略的方法。",
+    "author": "佘杰",
+    "publishedAt": "2025-06-24",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "Vite 7",
+      "Baseline",
+      "浏览器兼容"
+    ],
+    "readTime": 9,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "构建工程"
+  },
+  {
+    "id": "mcp-boundaries-2025",
+    "title": "MCP 工程化入门：协议解决连接，产品仍要解决信任",
+    "excerpt": "从 Host、Client、Server、Tools、Resources 与 Prompts 的职责出发理解 MCP，并用权限、输入校验、用户确认和审计规则约束真实工具连接。",
+    "author": "佘杰",
+    "publishedAt": "2025-04-15",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "MCP",
+      "AI Agent",
+      "安全边界"
+    ],
+    "readTime": 10,
+    "coverImage": "/images/projects/blog-2.svg",
+    "category": "AI 工程"
+  },
+  {
+    "id": "responses-agents-2025",
+    "title": "Responses API 与 Agents SDK：先画清边界，再让 Agent 调工具",
+    "excerpt": "用状态、工具权限、确认点和追踪信息拆解 Agent 工程，说明 Responses API 与 Agents SDK 解决了什么，以及哪些安全与业务责任仍属于应用。",
+    "author": "佘杰",
+    "publishedAt": "2025-03-11",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "AI Agent",
+      "Responses API",
+      "工具调用"
+    ],
+    "readTime": 11,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "AI 工程"
+  },
+  {
+    "id": "typescript-5-8-2025",
+    "title": "TypeScript 5.8 模块系统笔记：别再用“能编译”判断 ESM 配置",
+    "excerpt": "以 NodeNext、条件导出、verbatimModuleSyntax 和 erasableSyntaxOnly 为线索，建立浏览器应用、Node 脚本与库项目各自清晰的 TypeScript 模块边界。",
+    "author": "佘杰",
+    "publishedAt": "2025-02-28",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "TypeScript 5.8",
+      "ESM",
+      "Node.js"
+    ],
+    "readTime": 9,
     "coverImage": "/images/projects/blog-2.svg",
     "category": "TypeScript"
   },
   {
-    "id": "1",
-    "title": "Vue 3 Composition API 最佳实践",
-    "excerpt": "深入探讨 Vue 3 Composition API 的使用技巧和最佳实践，包括响应式原理、组合式函数设计、依赖注入等核心概念，帮助你写出更优雅的 Vue 3 代码。",
+    "id": "tailwind-v4-2025",
+    "title": "Tailwind CSS v4：CSS-first 之后，配置应该放在哪里",
+    "excerpt": "从 Tailwind CSS v4 的 CSS-first 配置、自动内容检测和现代 CSS 能力出发，讨论已有 Vue 项目何时值得升级，以及如何避免同时维护两套 Token。",
     "author": "佘杰",
-    "publishedAt": "2024-01-15",
-    "updatedAt": "2024-01-15",
+    "publishedAt": "2025-01-22",
+    "updatedAt": "2026-07-15",
     "tags": [
-      "Vue 3",
-      "Composition API",
-      "TypeScript"
+      "Tailwind CSS",
+      "CSS",
+      "设计系统"
     ],
-    "readTime": 15,
+    "readTime": 9,
     "coverImage": "/images/projects/blog-1.svg",
-    "category": "Vue3"
+    "category": "CSS 工程"
+  },
+  {
+    "id": "3",
+    "title": "Vite 6 升级笔记：Environment API 之外，更该关注迁移边界",
+    "excerpt": "从一次真实升级应检查的 Node、插件、Sass、构建产物和性能预算出发理解 Vite 6，并说明实验性 Environment API 解决的边界问题。",
+    "author": "佘杰",
+    "publishedAt": "2024-11-26",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "Vite 6",
+      "构建工具",
+      "工程化"
+    ],
+    "readTime": 9,
+    "coverImage": "/images/projects/blog-3.svg",
+    "category": "构建工程"
+  },
+  {
+    "id": "4",
+    "title": "TypeScript 5.5 与 5.6：让类型系统更早暴露真实错误",
+    "excerpt": "通过推断类型谓词、常量条件检查和迭代器返回类型三个变化，说明 TypeScript 升级如何减少无效断言，并给出适合 Vue 项目的迁移步骤。",
+    "author": "佘杰",
+    "publishedAt": "2024-09-09",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "TypeScript",
+      "类型安全",
+      "工程化"
+    ],
+    "readTime": 10,
+    "coverImage": "/images/projects/blog-2.svg",
+    "category": "TypeScript"
+  },
+  {
+    "id": "2",
+    "title": "Vue 3.5 值得带走的四个工程变化",
+    "excerpt": "不做 Vue 3.5 API 清单，而是聚焦响应式内核、响应式 Props 解构、模板引用和副作用清理四个会改变日常组件写法的工程能力。",
+    "author": "佘杰",
+    "publishedAt": "2024-09-03",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "Vue 3.5",
+      "TypeScript",
+      "性能优化"
+    ],
+    "readTime": 10,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "Vue 工程"
+  },
+  {
+    "id": "ai-structured-output-2024",
+    "title": "Structured Outputs：让 AI 返回值从“像 JSON”变成可验证接口",
+    "excerpt": "从 2024 年 Structured Outputs 的发布理解 AI 功能的接口设计：模型负责生成候选结果，Schema 负责约束结构，业务代码仍负责权限、事实和副作用验证。",
+    "author": "佘杰",
+    "publishedAt": "2024-08-06",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "AI 工程",
+      "Structured Outputs",
+      "类型安全"
+    ],
+    "readTime": 10,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "AI 工程"
+  },
+  {
+    "id": "1",
+    "title": "INP 替代 FID：把“页面能点”升级为“交互真正及时”",
+    "excerpt": "从 INP 替代 FID 的变化出发，建立可复用的交互性能诊断方法：先判断输入延迟、处理耗时还是渲染延迟，再决定拆任务、减 DOM 或调整交互反馈。",
+    "author": "佘杰",
+    "publishedAt": "2024-03-12",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "Web Vitals",
+      "性能优化",
+      "INP"
+    ],
+    "readTime": 9,
+    "coverImage": "/images/projects/blog-system.svg",
+    "category": "性能工程"
+  },
+  {
+    "id": "5",
+    "title": "Interop 2024 给前端工程师的启示：先确认能力，再决定兼容方案",
+    "excerpt": "从 Interop 2024 理解浏览器兼容不再只是查一个百分比，而是结合 Baseline、目标用户、能力检测和降级路径做可维护的工程决策。",
+    "author": "佘杰",
+    "publishedAt": "2024-02-01",
+    "updatedAt": "2026-07-15",
+    "tags": [
+      "Web Platform",
+      "浏览器兼容",
+      "渐进增强"
+    ],
+    "readTime": 8,
+    "coverImage": "/images/projects/blog-1.svg",
+    "category": "Web 平台"
   }
 ]

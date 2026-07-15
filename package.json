@@ -6,7 +6,7 @@
   "author": "佘杰",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode production && node scripts/inline-critical-css.mjs && node scripts/build-sitemap.js",
+    "build": "npm run content:check && vite build --mode production && node scripts/inline-critical-css.mjs && node scripts/build-sitemap.js",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
@@ -20,7 +20,9 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "audit:lab-runtime": "node scripts/audit-lab-runtime.mjs",
-    "validate:lab": "node scripts/validate-lab.mjs"
+    "validate:lab": "node scripts/validate-lab.mjs",
+    "content:generate": "node scripts/generate-blog-meta.mjs",
+    "content:check": "node scripts/generate-blog-meta.mjs --check"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

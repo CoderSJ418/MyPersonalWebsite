@@ -8,7 +8,8 @@ import {
   extractExcerpt,
   extractHeadings,
   renderMarkdown,
-  renderMarkdownSync
+  renderMarkdownSync,
+  splitExpandableMarkdown
 } from '@/utils/markdown'
 
 describe('markdown utilities', () => {
@@ -38,5 +39,15 @@ describe('markdown utilities', () => {
     expect(calculateReadingTime('word '.repeat(500))).toBeGreaterThanOrEqual(1)
     expect(extractExcerpt(source, 20)).toContain('...')
     expect(extractExcerpt('Short text', 200)).toBe('Short text')
+  })
+
+  it('splits long-form markdown at the explicit fold marker', () => {
+    const folded = splitExpandableMarkdown('摘要\n\n<!-- article-fold -->\n\n## 完整正文')
+    expect(folded.preview).toBe('摘要')
+    expect(folded.full).toContain('## 完整正文')
+    expect(folded.isExpandable).toBe(true)
+
+    const short = splitExpandableMarkdown('普通文章')
+    expect(short).toEqual({ preview: '普通文章', full: '普通文章', isExpandable: false })
   })
 })

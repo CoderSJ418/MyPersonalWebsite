@@ -16,7 +16,8 @@ export const useBlogStore = defineStore('blog', () => {
   const loading = ref(false)
   const error = ref<string | null>(null)
   const currentPage = ref(1)
-  const itemsPerPage = ref(10)
+  // Keep complete annual groups together for the current 3-year archive.
+  const itemsPerPage = ref(24)
 
   // Track which posts have their content loaded
   const loadedContentIds = ref<Set<string>>(new Set())
