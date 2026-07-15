@@ -100,6 +100,7 @@
 - 生产审计发现 canonical 错写为 `meta` 且存在两条 description；已改为标准 canonical `link`，并在应用挂载后由 `SEOHead` 接管静态 description 兜底。复测 canonical 与 description 均唯一。
 - GA4：同意前脚本数 0；同意后加载 `https://www.googletagmanager.com/gtag/js?id=G-1GBKPV4YRF`；撤回后脚本数 0 且保存 `denied`；DNT 下无提示、无 GA 脚本。
 - 375×812 生产检查无横向滚动；面包屑和重置按钮均为 44px；首页同时保留 Projects 主 CTA 与 Lab 次 CTA；无效 Demo ID 有专属恢复入口。
+- 正式 `/lab` Lighthouse：Performance 90、Accessibility 100、Best Practices 100、SEO 100、FCP 0.999s、LCP 1.466s、CLS 0、TBT 87.5ms；原始 JSON 位于 `C:\tmp\lighthouse-lab-production-final.json`。
 
 ## 当前结论
 
