@@ -41,7 +41,7 @@
 
 - 当前分支：`codex/blog-content-rebuild`；远端分支与 `main` 均已快进至证据提交 `fdcae37`。
 - Vercel Preview：`dpl_6gJsN5cbGaj7k37KrxwPLtP18jde`，状态 Ready；URL：`https://my-personal-website-d3uaqpqeh-codersj418s-projects.vercel.app`。Preview 启用了 Vercel Deployment Protection，匿名浏览器会进入登录页。
-- Vercel Production：main 自动部署 `dpl_9aLHSFGGvUKPxN2CnnPeVd2edkiW` 已 Ready，并绑定 `https://my-personal-website-eta-murex.vercel.app`；手动发布仅作为同代码基线的前置验证。
+- Vercel Production：main 自动 Production 已 Ready，并绑定 `https://my-personal-website-eta-murex.vercel.app`；手动发布仅作为同代码基线的前置验证。部署 ID 不写入本文件，避免证据提交再次触发部署后自我过期。
 - `npm run content:check`：18/18；2024、2025、2026 各 6 篇，旧占位文本和重复索引已清除。
 - 内容门禁已统一 CRLF/LF 后再比较；Windows 干净检出、本地 `vercel build` 与 Vercel Linux 无缓存构建均通过，真实元数据漂移仍保持失败。
 - `npm run test:coverage`：164/164；Statements 79.80%、Branches 70.60%、Functions 75.75%、Lines 81.14%。
