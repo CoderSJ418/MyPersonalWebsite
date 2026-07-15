@@ -48,3 +48,4 @@
 | 2026-07-15 | 仅在直接访问 `/lab` 时预加载 Aurora 代表图 | Lighthouse 证明 SPA 挂载后才发现 LCP 图产生约 522ms 延迟；条件预加载使 LCP discovery 满分且中位 LCP 2.317s | 全站预加载（否决：污染其他路由流量）；缩小卡片或推到首屏外（否决：牺牲产品呈现） |
 | 2026-07-15 | Vercel Production 使用 SPA history fallback | 首次正式部署中 `/` 和静态资源正常但 `/lab`、`/projects` 直链 404；`vercel.json` rewrite 与回归测试恢复所有 history 路由 | 仅依赖站内点击（否决：刷新和外部直链继续失败）；改 hash 路由（否决：破坏既有 URL 与 SEO） |
 | 2026-07-15 | SEOHead 接管 canonical 与 description 唯一性 | 生产冒烟发现 canonical 错用 `meta` 且静态兜底与路由 description 重复；标准 `link` 和挂载后移除兜底恢复单一权威 | 删除首屏静态 description（否决：无 JS 首屏失去兜底）；容忍重复（否决：违反 SEO 单一事实来源） |
+| 2026-07-15 | Hero 内部 CTA 使用 Vue Router SPA 导航 | 生产 `dataLayer` 审计发现普通 anchor 整页重载会丢失刚入队的 CTA 事件；先埋点再 SPA 跳转可保留同一会话事件 | 依赖卸载前网络发送（否决：不稳定且自动化无法证明）；全局改写 CTA API（否决：扩大 P2 修复范围） |

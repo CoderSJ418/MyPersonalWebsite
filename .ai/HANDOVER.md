@@ -38,9 +38,10 @@
 ## 最新自动化证据
 
 - 发布分支：`codex/interaction-lab-release`；发布提交：`bbb0d73`；生产证据提交：`cdef3eb`；人工审核入口：[GitHub PR #1](https://github.com/CoderSJ418/MyPersonalWebsite/pull/1)。
-- `npm run test:coverage`：155/155；Statements 79.67%、Branches 70.61%、Functions 75.37%、Lines 80.92%。
+- `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
-- `npm run test:e2e`：19/19；`npm run build` 与强化后的 `npm run validate:lab` 通过。
+- `npm run test:e2e`：20/20；新增 Hero 两类 CTA 在 SPA 导航中保留 GA 事件的浏览器回归；`npm run build` 与强化后的 `npm run validate:lab` 通过。
+- 正式 `dataLayer` 已验证六类 PRD 事件及参数白名单；Hero CTA 的普通 anchor 整页导航丢事件问题已改为 Vue Router SPA 导航并重新部署。
 - 生产本地冒烟：首页 + Lab 首页 + 12 详情共 14 页全部 200，0 pageerror；13 个 Lab URL 全部进入 Sitemap。
 - 首页 Lighthouse 三次中位数：Performance 97、Accessibility 100、Best Practices 100、LCP 2.286s、CLS 0、TBT 26ms。
 - `/lab` 当前构建 Lighthouse 三次中位数：Performance 98、Accessibility 100、Best Practices 100、SEO 100、FCP 0.641s、LCP 2.317s、CLS 0、TBT 32ms、初始脚本 126.8KB。

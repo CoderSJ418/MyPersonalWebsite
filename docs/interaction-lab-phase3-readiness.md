@@ -25,9 +25,9 @@
 ## 最新自动化证据
 
 - `npm run typecheck`：通过；`npm run lint:check`：0 error、28 条既有 warning。
-- `npm run test:coverage`：155/155；Statements 79.67%、Branches 70.61%、Functions 75.37%、Lines 80.92%。
+- `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
-- `npm run test:e2e`：19/19；覆盖独立标签筛选、固定 Header/面包屑、10 次 SPA Demo 切换、公开入口、GA 同意/DNT/撤回、跨视口、Selection 恢复、canonical 复用和 reduced-motion。
+- `npm run test:e2e`：20/20；覆盖独立标签筛选、固定 Header/面包屑、10 次 SPA Demo 切换、公开入口、六类 GA 事件、GA 同意/DNT/撤回、跨视口、Selection 恢复、canonical 复用和 reduced-motion。
 - `npm run build && npm run validate:lab`：通过；Sitemap 包含 Lab 首页和 12 个详情，生产冒烟 14 页全部 200、0 pageerror。
 - 首页移动 Lighthouse 三次中位数：Performance 97、Accessibility 100、Best Practices 100、FCP 1.836s、LCP 2.286s、CLS 0、TBT 26ms。
 - `/lab` 当前构建三次移动 Lighthouse 中位数：Performance 98、Accessibility 100、Best Practices 100、SEO 100、FCP 0.641s、LCP 2.317s、CLS 0、TBT 32ms、初始脚本 126.8KB。
@@ -98,7 +98,8 @@
 - 生产浏览器验证 12/12 Demo 详情直链均返回 200、渲染正确 H1，Lab 首页发现 12 个唯一详情链接，0 `pageerror`。
 - Sitemap 含 Lab 首页与 12 个详情共 13 个 URL；`robots.txt` 未禁止 `/lab`；合法 Lab 页面为 `index,follow`。
 - 生产审计发现 canonical 错写为 `meta` 且存在两条 description；已改为标准 canonical `link`，并在应用挂载后由 `SEOHead` 接管静态 description 兜底。复测 canonical 与 description 均唯一。
-- GA4：同意前脚本数 0；同意后加载 `https://www.googletagmanager.com/gtag/js?id=G-1GBKPV4YRF`；撤回后脚本数 0 且保存 `denied`；DNT 下无提示、无 GA 脚本。
+- GA4：同意前脚本数 0；同意后加载 `https://www.googletagmanager.com/gtag/js?id=G-1GBKPV4YRF`；撤回后脚本数 0 且保存 `denied`；DNT 下无提示、无 GA 脚本。生产 `dataLayer` 已端到端验证 `projects_cta_click`、`lab_cta_click`、`lab_view`、`demo_open`、`code_expand`、`code_copy` 六类事件及白名单参数。
+- 首次生产事件审计发现 Hero CTA 使用普通 anchor 整页导航，导致 CTA 事件在当前会话的 `dataLayer` 中丢失。修复为先埋点再通过 Vue Router SPA 导航，并新增真实浏览器回归测试；保留 Ctrl/⌘/中键原生新页行为。
 - 375×812 生产检查无横向滚动；面包屑和重置按钮均为 44px；首页同时保留 Projects 主 CTA 与 Lab 次 CTA；无效 Demo ID 有专属恢复入口。
 - 正式 `/lab` Lighthouse：Performance 90、Accessibility 100、Best Practices 100、SEO 100、FCP 0.999s、LCP 1.466s、CLS 0、TBT 87.5ms；原始 JSON 位于 `C:\tmp\lighthouse-lab-production-final.json`。
 

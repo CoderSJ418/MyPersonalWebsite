@@ -161,3 +161,36 @@ test('footer preference entry can revoke a prior grant', async ({ page }) => {
   const stored = await page.evaluate(() => localStorage.getItem('analytics-consent-v1'))
   expect(stored).toContain('denied')
 })
+
+test('home CTAs retain analytics events across SPA navigation', async ({ page }) => {
+  await page.route('https://www.googletagmanager.com/**', (route) => route.abort())
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      'analytics-consent-v1',
+      JSON.stringify({ decision: 'granted', savedAt: Date.now() })
+    )
+  })
+  await page.goto('/')
+
+  await page.getByRole('link', { name: /查看作品集/ }).click()
+  await expect(page).toHaveURL(/\/projects$/)
+  await page.getByRole('link', { name: '首页', exact: true }).first().click()
+  await page.getByRole('link', { name: /探索交互实验室/ }).click()
+  await expect(page).toHaveURL(/\/lab\?source=home_cta$/)
+
+  const events = await page.evaluate(() =>
+    (window.dataLayer ?? [])
+      .map((entry) => (Array.isArray(entry) ? entry : Array.from(entry)))
+      .filter((entry) => entry[0] === 'event')
+  )
+  expect(events).toContainEqual([
+    'event',
+    'projects_cta_click',
+    { placement: 'home_hero' }
+  ])
+  expect(events).toContainEqual([
+    'event',
+    'lab_cta_click',
+    { placement: 'home_hero' }
+  ])
+})

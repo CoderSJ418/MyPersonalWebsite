@@ -33,7 +33,7 @@
             variant="primary"
             size="large"
             label="查看作品集"
-            @click="trackHeroCta('projects')"
+            @click="trackHeroCta('projects', $event)"
           >
             查看作品集
           </CTA>
@@ -42,7 +42,7 @@
             variant="outline"
             size="large"
             label="探索交互实验室"
-            @click="trackHeroCta('lab')"
+            @click="trackHeroCta('lab', $event)"
           >
             探索交互实验室
           </CTA>
@@ -53,14 +53,32 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+
 import CTA from '@/components/ui/CTA.vue'
 import { trackLabAnalytics } from '@/services/privacyAnalytics'
 import AuroraDemo from '@/views/Lab/demos/AuroraDemo.vue'
 
-const trackHeroCta = (target: 'projects' | 'lab') => {
+const router = useRouter()
+
+const trackHeroCta = (target: 'projects' | 'lab', event: Event) => {
   trackLabAnalytics({
     event: target === 'projects' ? 'projects_cta_click' : 'lab_cta_click',
     placement: 'home_hero'
   })
+
+  if (
+    !(event instanceof MouseEvent) ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return
+  }
+
+  event.preventDefault()
+  void router.push(target === 'projects' ? '/projects' : '/lab?source=home_cta')
 }
 </script>

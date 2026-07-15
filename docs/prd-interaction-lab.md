@@ -523,5 +523,6 @@ Phase 测试必须在对应实现开始前定义。验证脚本应使用项目�
 - 2026-07-15 用户随后授权 Codex 自主代跑剩余验收；Phase 3.5 代理执行 8/8 通过并完成 Phase 4 本地代码切换。该记录是 Owner-delegated Codex Acceptance，不是独立用户研究。
 - Phase 4 本地生产冒烟已覆盖首页、Lab 首页与 12 个详情；正式 Measurement ID 和 GA4 管理后台设置仍属于仓库外发布条件，未取得证据前不得声称已开始 50 会话观察。
 - 2026-07-15 发布前只读核验曾确认正式站点仍为旧部署：首页返回 200，但 `/lab` 返回 404、线上 Sitemap 不含 Lab、首页 HTML 未发现 GA Measurement ID。该历史状态已被同日后续 Vercel Production 部署、SPA fallback 修复和正式生产冒烟取代，不能再作为当前状态引用。
+- 2026-07-15 发布后生产事件审计发现 Hero 两个内部 CTA 使用普通 anchor 整页导航，导致 `projects_cta_click` 与 `lab_cta_click` 无法在同一 `dataLayer` 会话中保留。修复为埋点后通过 Vue Router SPA 跳转，正式环境已逐项验证六类事件与参数白名单。
 - 2026-07-15 最终逐项审计补齐独立标签筛选、View 挂载滚顶、异步失败恢复、Lab 卡片 SafeImage、固定 Header 遮挡和 10 次 SPA 切换回归；强化校验器覆盖 Phase 3.5 元数据与动画清理契约。
 - 6 个时间驱动 Demo 在移动视口、DPR 2、4× CPU 下各运行 30 秒，56.3–60fps、0 个 >200ms 长任务、0 pageerror；当前 `/lab` 三次 Lighthouse 中位 LCP 为 2.317s，满足 2.5s 门。
