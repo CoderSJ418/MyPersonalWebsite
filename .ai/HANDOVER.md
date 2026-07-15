@@ -39,7 +39,7 @@
 
 ## 最新自动化证据
 
-- 当前分支：`codex/blog-content-rebuild`；博客提交已推送，真实项目案例与最新回归正在同一内容重构分支收口。
+- 当前分支：`codex/blog-content-rebuild`；博客与真实项目案例提交 `b8fd01d` 已推送，可通过 GitHub compare 创建统一内容重构 PR。
 - Vercel Preview：`dpl_7zbanHXjgxXDJyxzcDtYYd7SZV7f`，状态 Ready；URL：`https://my-personal-website-h0qefvj6o-codersj418s-projects.vercel.app`。
 - `npm run content:check`：18/18；2024、2025、2026 各 6 篇，旧占位文本和重复索引已清除。
 - `npm run test:coverage`：164/164；Statements 79.81%、Branches 70.59%、Functions 75.77%、Lines 81.14%。
