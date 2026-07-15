@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 
 import SEOHead from '@/components/common/SEOHead.vue'
 import LabDemoPage from '@/components/lab/LabDemoPage.vue'
@@ -21,8 +20,12 @@ import { findLabEffect } from '@/config/labRegistry'
 import { labEffectStructuredData } from '@/utils/structuredData'
 import LabNotFound from './LabNotFound.vue'
 
-const route = useRoute()
-const routeId = computed(() => (typeof route.params.id === 'string' ? route.params.id : ''))
+interface Props {
+  id: string
+}
+
+const props = defineProps<Props>()
+const routeId = computed(() => props.id)
 const effect = computed(() => findLabEffect(routeId.value))
 const structuredData = computed(() =>
   effect.value ? labEffectStructuredData(effect.value) : undefined

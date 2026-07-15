@@ -32,12 +32,12 @@
  * - 静态背景渐变 + 简单vignette
  */
 import { defineAsyncComponent } from 'vue'
+import FeaturedProjects from '@/components/home/FeaturedProjects.vue'
 import HeroSection from '@/components/home/HeroSection.vue'
 import SEOHead from '@/components/common/SEOHead.vue'
 import { personStructuredData } from '@/utils/structuredData'
 
-// 首屏下方组件懒加载 — 减少首屏JS体积，用户滚动时按需加载
-const FeaturedProjects = defineAsyncComponent(() => import('@/components/home/FeaturedProjects.vue'))
+// Projects 是首页核心转化路径，必须先参与布局，避免下方观察点在异步占位前误触发。
 const DeferredHomeSections = defineAsyncComponent(() => import('@/components/home/DeferredHomeSections.vue'))
 </script>
 
