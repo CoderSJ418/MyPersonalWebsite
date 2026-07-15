@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
 
+const testPort = Number(process.env.PLAYWRIGHT_PORT ?? 4175)
+const testBaseUrl = `http://127.0.0.1:${testPort}`
+
 /**
  * Playwright E2E 测试配置
  *
@@ -10,29 +13,30 @@ import { defineConfig, devices } from '@playwright/test'
  */
 export default defineConfig({
   testDir: './tests/e2e',
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: testBaseUrl,
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    screenshot: 'only-on-failure'
   },
 
   // 启动 dev server 进行测试
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
+    command: `npm run dev -- --host 127.0.0.1 --port ${testPort} --strictPort`,
+    env: { ...process.env, VITE_GA_MEASUREMENT_ID: 'G-TEST123' },
+    url: testBaseUrl,
+    reuseExistingServer: false,
+    timeout: 120 * 1000
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+      use: { ...devices['Desktop Chrome'] }
+    }
+  ]
 })

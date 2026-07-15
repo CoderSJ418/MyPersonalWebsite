@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="佘杰的个人网站 - 7年前端开发经验，Vue 专家，专注于构建高性能、可维护的前端应用" />
+  <meta id="app-default-description" name="description" content="佘杰的个人网站 - 7年前端开发经验，Vue 专家，专注于构建高性能、可维护的前端应用" />
   <meta name="keywords" content="佘杰,前端开发,Vue.js,TypeScript,JavaScript,Web开发" />
   <meta name="author" content="佘杰" />
-  <meta name="robots" content="index,follow" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="佘杰 - 前端开发工程师" />
@@ -21,29 +20,37 @@
   <link rel="icon" type="image/svg+xml" href="/images/avatar.svg" />
   <link rel="apple-touch-icon" href="/images/avatar.svg" />
 
-  <!-- Preconnect to external domains - 使用国内 CDN 镜像 -->
-  <link rel="preconnect" href="https://fonts.loli.net" />
-  <link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+  <script>
+    if (window.location.pathname.replace(/\/+$/, '') === '/lab') {
+      const previewPreload = document.createElement('link')
+      previewPreload.rel = 'preload'
+      previewPreload.as = 'image'
+      previewPreload.href = '/images/lab/aurora.webp'
+      previewPreload.setAttribute('fetchpriority', 'high')
+      document.head.appendChild(previewPreload)
+    }
+  </script>
 
-  <!-- Google Fonts - 非阻塞加载：media=print + onload 切换，避免CSS阻塞渲染 -->
-  <link
-    href="https://fonts.loli.net/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript>
-    <link
-      href="https://fonts.loli.net/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet" />
-  </noscript>
-
-  <!-- DNS Prefetch for potential API endpoints -->
-  <link rel="dns-prefetch" href="https://fonts.loli.net" />
-  <link rel="dns-prefetch" href="https://gstatic.loli.net" />
+  <style>
+    .boot-shell {
+      display: flex;
+      min-height: 72px;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+      padding: 0 2rem;
+      color: #1e3a8a;
+      font: 700 1.25rem/1 system-ui, sans-serif;
+    }
+  </style>
 
   <title>佘杰 - 前端开发工程师</title>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div class="boot-shell" aria-hidden="true">佘杰&nbsp;·</div>
+  </div>
   <script type="module" src="/src/main.ts"></script>
 </body>
 

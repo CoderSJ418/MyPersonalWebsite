@@ -114,7 +114,6 @@ Reusable logic extracted into composables in `src/composables/`:
 - `useGSAPAnimations.ts` — Animation helpers
 - `useFormValidation.ts` — Form validation logic
 - `useScrollAnimations.ts` — Scroll-based animations
-- `useTheme.ts` — Theme management
 
 **3. Store-Based State Management**
 Pinia stores follow the `useXxxStore` pattern:
@@ -122,7 +121,6 @@ Pinia stores follow the `useXxxStore` pattern:
 - `useBlogStore` — Blog posts and metadata
 - `useProjectStore` — Project data
 - `useSkillStore` — Skills and proficiency data
-- `useThemeStore` — Dark/light theme toggle
 - `useAnalyticsStore` — Analytics tracking state
 - `useSearchStore` — Search functionality
 
@@ -282,7 +280,7 @@ import { ProjectCard } from '@/components/projects/ProjectCard.vue'
 
 - **Primary:** Tailwind CSS utility classes
 - **Secondary:** Custom CSS in `src/assets/styles/` or component `<style>` blocks
-- **Dark mode:** Use Tailwind's `dark:` prefix
+- **Visual mode:** Single light presentation; do not add `dark:` variants or theme switching
 - **Responsive:** Mobile-first with Tailwind breakpoints
 - **Avoid:** `<style scoped>` unless absolutely necessary
 
@@ -332,14 +330,14 @@ Routes defined in `src/router/index.ts` with lazy loading:
 }
 ```
 
-Current routes include: Home, About, Projects, Blog, Skills, Contact, InteractiveDemo, PixelDemo, Education, Experience, NotFound.
+Current routes include: Home, About, Projects, Blog, Skills, Contact, Interaction Lab, InteractiveDemo, PixelDemo, Education, Experience, NotFound.
 
 ---
 
 ## Design System
 
 - **Design tokens:** `src/design-system/tokens/`
-- **Themes:** `src/design-system/themes/` (dark/light mode)
+- **Visual mode:** Single light presentation with `#2563EB` as the primary accent
 - **Tailwind config:** `tailwind.config.js` (colors, spacing, typography)
 - **Global styles:** `src/assets/styles/` (main.css, design-system.css, design-tokens.css)
 
@@ -405,7 +403,7 @@ The build configuration includes:
 
 Follow **Conventional Commits**:
 ```bash
-feat: add dark mode toggle
+feat: add interaction lab
 fix: resolve mobile navigation issue
 docs: update API documentation
 refactor: simplify component structure

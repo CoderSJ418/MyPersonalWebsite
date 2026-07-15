@@ -1,63 +1,69 @@
-<script setup lang="ts">
-import { computed, onUnmounted, inject } from 'vue'
-import type { Reactive } from 'vue'
-import { useMobilePerformance } from '@/composables/useMobilePerformance'
-
-const { prefersReducedMotion } = useMobilePerformance()
-const params = inject<Reactive<Record<string, string | number>>>('labParams')
-
-const opacity = computed(() => Number(params?.opacity ?? 0.1))
-
-const filterId = 'noise-texture-demo'
-
-const reducedMotionClass = computed(() =>
-  prefersReducedMotion.value ? 'reduced-motion' : ''
-)
-
-onUnmounted(() => {
-  // SVG filter 无事件监听，无需清理
-})
-</script>
-
 <template>
-  <div class="demo-container">
-    <div class="demo-preview" :class="reducedMotionClass">
-      <svg class="noise-svg" :style="{ opacity }" aria-hidden="true">
-        <defs>
-          <filter :id="filterId">
-            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-        </defs>
-        <rect width="100%" height="100%" :filter="`url(#${filterId})`" />
-      </svg>
+  <div class="noise-shell">
+    <svg class="noise" :style="{ opacity }" aria-hidden="true">
+      <filter id="lab-noise-filter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.72"
+          numOctaves="3"
+          seed="24"
+          stitchTiles="stitch"
+        />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#lab-noise-filter)" />
+    </svg>
+    <div class="noise-shell__sample">
+      <strong>Subtle Texture</strong>
+      <span>SVG · deterministic seed</span>
     </div>
   </div>
 </template>
 
+<script setup lang="ts">
+interface Props {
+  opacity?: number
+}
+
+withDefaults(defineProps<Props>(), {
+  opacity: 0.1
+})
+</script>
+
 <style scoped>
-.demo-container {
-  width: 100%;
-  min-height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.demo-preview {
-  width: 100%;
-  height: 240px;
-  border-radius: 12px;
-  overflow: hidden;
+.noise-shell {
   position: relative;
-  background: var(--surface, #111);
+  display: grid;
+  min-height: 20rem;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #dbeafe, #fff);
 }
-
-.noise-svg {
+.noise {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  display: block;
-  mix-blend-mode: overlay;
+  mix-blend-mode: multiply;
   pointer-events: none;
+}
+.noise-shell__sample {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  border: 1px solid rgb(255 255 255 / 80%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 72%);
+  padding: 2rem;
+  color: #0f172a;
+  box-shadow: 0 18px 50px rgb(37 99 235 / 12%);
+}
+.noise-shell__sample strong {
+  font-size: 1.4rem;
+}
+.noise-shell__sample span {
+  font-size: 0.85rem;
+  color: #64748b;
 }
 </style>

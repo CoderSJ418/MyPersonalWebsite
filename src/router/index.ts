@@ -9,6 +9,10 @@ NProgress.configure({
   minimum: 0.1,
   easing: 'ease',
   speed: 500,
+  barSelector: '[role="progressbar"]',
+  spinnerSelector: '[role="status"]',
+  template:
+    '<div class="bar" role="progressbar" aria-label="页面加载进度"><div class="peg"></div></div><div class="spinner" role="status"><div class="spinner-icon"></div></div>'
 })
 
 const routes: RouteRecordRaw[] = [
@@ -64,8 +68,8 @@ const routes: RouteRecordRaw[] = [
     name: 'Lab',
     component: () => import('@/views/Lab/LabIndex.vue'),
     meta: {
-      title: '效果实验室',
-      description: '交互式前端效果演示 — Aurora、Spotlight、Marquee 等 20+ 效果'
+      title: '交互实验室',
+      description: '12 个可调参数、可复制源码的 Vue 交互效果'
     }
   },
   {
@@ -74,8 +78,8 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Lab/LabLayout.vue'),
     props: true,
     meta: {
-      title: '效果演示',
-      description: '交互式前端效果演示'
+      title: '交互实验室',
+      description: '可调参数并复制完整 Vue SFC 源码'
     }
   },
   {

@@ -1,62 +1,57 @@
-<script setup lang="ts">
-import { computed, onUnmounted, inject } from 'vue'
-import type { Reactive } from 'vue'
-import { useMobilePerformance } from '@/composables/useMobilePerformance'
-
-const { prefersReducedMotion } = useMobilePerformance()
-const params = inject<Reactive<Record<string, string | number>>>('labParams')
-
-const dotSize = computed(() => Number(params?.dotSize ?? 2))
-const spacing = computed(() => Number(params?.spacing ?? 20))
-
-const patternId = 'dot-pattern-demo'
-
-const reducedMotionClass = computed(() =>
-  prefersReducedMotion.value ? 'reduced-motion' : ''
-)
-
-onUnmounted(() => {
-  // SVG pattern 无事件监听，无需清理
-})
-</script>
-
 <template>
-  <div class="demo-container">
-    <div class="demo-preview" :class="reducedMotionClass">
-      <svg class="dot-pattern-svg" aria-hidden="true">
-        <defs>
-          <pattern :id="patternId" :width="spacing" :height="spacing" patternUnits="userSpaceOnUse">
-            <circle :cx="spacing / 2" :cy="spacing / 2" :r="dotSize" fill="currentColor" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" :fill="`url(#${patternId})`" />
-      </svg>
-    </div>
+  <div class="pattern-shell">
+    <svg class="pattern" aria-hidden="true">
+      <defs>
+        <pattern
+          id="lab-dot-pattern"
+          :width="spacing"
+          :height="spacing"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle :cx="spacing / 2" :cy="spacing / 2" :r="dotSize" fill="currentColor" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#lab-dot-pattern)" />
+    </svg>
+    <p>Precise by design</p>
   </div>
 </template>
 
+<script setup lang="ts">
+interface Props {
+  dotSize?: number
+  spacing?: number
+}
+
+withDefaults(defineProps<Props>(), {
+  dotSize: 2,
+  spacing: 20
+})
+</script>
+
 <style scoped>
-.demo-container {
-  width: 100%;
-  min-height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.demo-preview {
-  width: 100%;
-  height: 240px;
-  border-radius: 12px;
-  overflow: hidden;
+.pattern-shell {
   position: relative;
-  color: var(--text-secondary, #888);
-  background: var(--surface, #111);
+  display: grid;
+  min-height: 20rem;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #fff, #eff6ff);
+  color: #60a5fa;
 }
-
-.dot-pattern-svg {
+.pattern {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  display: block;
+  mask-image: radial-gradient(circle, black 20%, transparent 75%);
+}
+.pattern-shell p {
+  position: relative;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #0f172a;
 }
 </style>

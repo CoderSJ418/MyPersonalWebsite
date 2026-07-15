@@ -6,7 +6,7 @@
  * - 统一详情页 max-width 居中 + padding
  * - 提供 ReadingProgress 插槽
  * - 统一 loading / error / not-found 三种状态
- * - 深色模式支持（.dark 选择器）
+ * - 单一亮色视觉模式
  *
  * 设计灵感：
  * - Stripe: 极简边框 + 微妙光影

@@ -168,11 +168,6 @@
   }
 }
 
-/* ===== 暗色模式 ===== */
-.dark .route-skeleton {
-  opacity: 0.4;
-}
-
 /* ===== 响应式 ===== */
 @media (max-width: 768px) {
   .rs-content__cards {

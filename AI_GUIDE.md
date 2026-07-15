@@ -54,11 +54,11 @@ MyPersonalWebsite/
 │   │   ├── ui/             # UI组件库
 │   │   └── [功能目录]/      # 按功能分类的组件
 │   ├── stores/             # Pinia 状态管理
-│   │   ├── useAppStore.ts        # 应用状态（菜单、主题等）
+│   │   ├── useAppStore.ts        # 应用状态（菜单等）
 │   │   ├── useProjectStore.ts    # 项目数据
 │   │   ├── useBlogStore.ts       # 博客数据
 │   │   ├── useSkillStore.ts      # 技能数据
-│   │   ├── useThemeStore.ts      # 主题切换
+│   │   ├── useThemeStore.ts      # 遗留主题状态（Phase 0 删除）
 │   │   └── ...
 │   ├── router/             # Vue Router 配置
 │   ├── api/                # API 接口
@@ -99,8 +99,7 @@ import { useBlogStore } from '@/stores/useBlogStore'
 // 技能数据
 import { useSkillStore } from '@/stores/useSkillStore'
 
-// 主题切换
-import { useThemeStore } from '@/stores/useThemeStore'
+// 不新增主题 Store 依赖；项目正在迁移为单一亮色模式
 ```
 
 ### 2. 路由配置
@@ -244,7 +243,7 @@ npm run test:coverage    # 测试覆盖率
 | 项目数据 | `src/stores/useProjectStore.ts` |
 | 博客数据 | `src/stores/useBlogStore.ts` |
 | 技能数据 | `src/stores/useSkillStore.ts` |
-| 主题切换 | `src/stores/useThemeStore.ts` |
+| 遗留主题状态（Phase 0 删除） | `src/stores/useThemeStore.ts` |
 | 全局样式 | `src/styles/` |
 | 类型定义 | `src/types/` |
 | 工具函数 | `src/utils/` |

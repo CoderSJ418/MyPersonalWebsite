@@ -175,16 +175,6 @@ function handleClick(event: Event) {
   box-shadow: var(--us-depth-1);
 }
 
-/* Dark mode: 确保secondary按钮文字对比度≥4.5:1 */
-:root.dark .cta--secondary {
-  background: #475569;
-  color: #ffffff;
-}
-
-:root.dark .cta--secondary:hover:not(.cta--disabled):not(.cta--loading) {
-  background: #334155;
-}
-
 /* Accent 变体 — Solid accent
    Semantic: Secondary emphasis action (e.g., "Learn More", "Explore")
    Visual same as primary — differentiated by usage context, not color */
@@ -218,10 +208,6 @@ function handleClick(event: Event) {
   color: var(--us-accent);
   transform: translateY(var(--us-lift-xs));
   box-shadow: var(--us-depth-2-hover);
-}
-
-:root.dark .cta--outline:hover:not(.cta--disabled):not(.cta--loading) {
-  background: var(--us-accent-subtle);
 }
 
 .cta--outline:active:not(.cta--disabled):not(.cta--loading) {
@@ -370,11 +356,6 @@ function handleClick(event: Event) {
 .cta--accent:focus-visible {
   outline: 3px solid #ffffff;
   outline-offset: 2px;
-}
-
-:root.dark .cta--primary:focus-visible,
-:root.dark .cta--accent:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.9);
 }
 
 /* 减少动画（用户偏好） */

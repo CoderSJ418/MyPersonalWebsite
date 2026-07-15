@@ -2,129 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>佘杰 - 前端开发工程师</title>
-    <link>https://shejie1995.gitee.io/my-personal-website</link>
+    <link>https://my-personal-website-eta-murex.vercel.app</link>
     <description>分享 Vue 3、TypeScript、前端工程化等技术文章</description>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 13 Jul 2026 11:50:43 GMT</lastBuildDate>
-    <atom:link href="https://shejie1995.gitee.io/my-personal-website/rss.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Wed, 15 Jul 2026 00:00:55 GMT</lastBuildDate>
+    <atom:link href="https://my-personal-website-eta-murex.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
       <item>
     <title>谈谈我对2025年前端技术的思考和理解</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/15</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/15</link>
     <description>资深前端工程师对2025年前端技术的深度思考，包括AI影响、技术趋势、职业发展等前瞻性观点。</description>
     <pubDate>Wed, 29 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/15</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/15</guid>
     <author>三桥sankyu</author>
   </item>
   <item>
     <title>启动与搭建Vue3工程极简脚手架教程(2025超详细教程)</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/14</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/14</link>
     <description>2025年超详细Vue3工程脚手架搭建教程，包含命令行启动、IDEA配置、项目瘦身等完整实践指南。</description>
     <pubDate>Tue, 28 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/14</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/14</guid>
     <author>CSDN博主</author>
   </item>
   <item>
     <title>【2025最新版】3小时学会Vue3，小白零基础视频教程</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/13</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/13</link>
     <description>2025最新版Vue3零基础视频教程，3小时快速掌握Vue3核心语法、组件开发、状态管理等关键技能。</description>
     <pubDate>Mon, 27 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/13</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/13</guid>
     <author>邓瑞编程</author>
   </item>
   <item>
     <title>2025新版Vue3基础实践与项目实战</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/12</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/12</link>
     <description>2025新版Vue3基础实践与项目实战教程，包含Vite脚手架工程化搭建、组件实战、UI框架整合等完整内容。</description>
     <pubDate>Sun, 26 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/12</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/12</guid>
     <author>Java小卷</author>
   </item>
   <item>
     <title>2025年前端性能优化实战指南：从加载到渲染的全链路优化</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/11</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/11</link>
     <description>2025年前端性能优化实战指南，涵盖资源加载优化、代码执行优化、渲染性能优化等核心维度，打造秒开级Web应用。</description>
     <pubDate>Sat, 25 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/11</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/11</guid>
     <author>fruge365</author>
   </item>
   <item>
     <title>2025最新Web前端开发系统学习图文教程</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/10</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/10</link>
     <description>2025年最新Web前端开发系统学习教程，从VSCode安装到HTML/CSS/JavaScript，再到Vue、TypeScript、Node.js全栈开发。</description>
     <pubDate>Fri, 24 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/10</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/10</guid>
     <author>艾编程</author>
   </item>
   <item>
     <title>前端开发学习路线2025版</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/9</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/9</link>
     <description>黑马程序员出品的前端学习路线图，包含基础入门、技术进阶、Vue开发、小程序、鸿蒙应用开发等完整学习路径。</description>
     <pubDate>Thu, 23 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/9</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/9</guid>
     <author>黑马程序员</author>
   </item>
   <item>
     <title>2025年最新超详细的前端学习路线</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/8</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/8</link>
     <description>2025年最新前端学习路线图，从HTML/CSS基础到Vue/React框架，再到工程化、性能优化，全面指导前端学习路径。</description>
     <pubDate>Wed, 22 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/8</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/8</guid>
     <author>沉默王二</author>
   </item>
   <item>
     <title>2025年资深前端面试心得</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/7</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/7</link>
     <description>资深前端工程师分享2025年面试经验，包括技术准备、项目展示、沟通技巧等，帮助你顺利通过面试。</description>
     <pubDate>Tue, 21 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/7</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/7</guid>
     <author>匿名作者</author>
   </item>
   <item>
     <title>2025年前端面试题库大全</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/6</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/6</link>
     <description>2025年前端面试最全面试题库，涵盖HTML、CSS、JavaScript、Vue、React、性能优化、工程化等核心知识点，帮助前端开发者系统准备面试。</description>
     <pubDate>Mon, 20 Jan 2025 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/6</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/6</guid>
     <author>社区整理</author>
   </item>
   <item>
     <title>Pinia 状态管理最佳实践</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/5</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/5</link>
     <description>深入探讨 Pinia 状态管理的使用技巧和最佳实践，包括 Store 设计、状态持久化、模块化等，帮助你构建可维护的状态管理方案。</description>
     <pubDate>Wed, 15 May 2024 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/5</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/5</guid>
     <author>佘杰</author>
   </item>
   <item>
     <title>前端性能优化实战指南</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/4</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/4</link>
     <description>全面解析前端性能优化的各个方面，包括资源加载优化、渲染性能优化、网络优化等，帮助你打造极速的 Web 应用。</description>
     <pubDate>Sat, 20 Apr 2024 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/4</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/4</guid>
     <author>佘杰</author>
   </item>
   <item>
     <title>Vite 构建工具深度实践</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/3</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/3</link>
     <description>探索 Vite 的核心原理和高级配置，包括插件开发、构建优化、性能调优等，帮助你构建更快的开发体验和生产构建。</description>
     <pubDate>Tue, 05 Mar 2024 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/3</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/3</guid>
     <author>佘杰</author>
   </item>
   <item>
     <title>TypeScript 高级类型技巧</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/2</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/2</link>
     <description>掌握 TypeScript 高级类型系统，包括泛型、条件类型、映射类型、模板字面量类型等，提升代码的类型安全性和可维护性。</description>
     <pubDate>Sat, 10 Feb 2024 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/2</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/2</guid>
     <author>佘杰</author>
   </item>
   <item>
     <title>Vue 3 Composition API 最佳实践</title>
-    <link>https://shejie1995.gitee.io/my-personal-website/blog/1</link>
+    <link>https://my-personal-website-eta-murex.vercel.app/blog/1</link>
     <description>深入探讨 Vue 3 Composition API 的使用技巧和最佳实践，包括响应式原理、组合式函数设计、依赖注入等核心概念，帮助你写出更优雅的 Vue 3 代码。</description>
     <pubDate>Mon, 15 Jan 2024 00:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://shejie1995.gitee.io/my-personal-website/blog/1</guid>
+    <guid isPermaLink="true">https://my-personal-website-eta-murex.vercel.app/blog/1</guid>
     <author>佘杰</author>
   </item>
   </channel>

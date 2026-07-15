@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { BlogPost } from '@/types/blog'
-import { loadBlogPosts, loadBlogPost } from '@/utils/blogLoader'
+import {
+  loadBlogPosts,
+  loadBlogPost,
+  loadPostContent as loadBlogPostContent
+} from '@/utils/blogLoader'
 import { logger } from '@/utils/logger'
 
 export const useBlogStore = defineStore('blog', () => {
@@ -98,7 +102,7 @@ export const useBlogStore = defineStore('blog', () => {
     }
 
     try {
-      const content = await loadPostContent(id)
+      const content = await loadBlogPostContent(id)
       if (content !== null) {
         // Update the post in the store with the loaded content
         const postIndex = posts.value.findIndex((p) => p.id === id)

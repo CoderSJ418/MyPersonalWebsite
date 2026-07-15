@@ -46,18 +46,8 @@ body {
   transition: background-color var(--us-duration-normal) var(--us-easing), color var(--us-duration-normal) var(--us-easing);
 }
 
-/* ========================================
-   2. 深色模式
-   ======================================== */
-
-.dark {
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  html:not([data-theme]) {
-    color-scheme: light;
-  }
+html {
+  color-scheme: light;
 }
 
 /* ========================================
@@ -185,17 +175,6 @@ body {
   transition: height var(--us-duration-normal, 280ms) var(--us-easing-enter, cubic-bezier(0, 0, 0.2, 1));
 }
 
-/* 暗色模式 — accent glow增强 */
-.dark .base-card {
-  background: var(--us-surface);
-  border-color: var(--us-border);
-  box-shadow: var(--us-depth-1), var(--us-accent-glow);
-}
-
-.dark .base-card:hover {
-  box-shadow: var(--us-depth-3-hover), var(--us-accent-glow-strong);
-}
-
 /* 输入框样式 */
 .base-input {
   border: 1px solid rgba(228, 228, 231, 1);
@@ -216,20 +195,6 @@ body {
   /* ring-blue-500/20 */
   border-color: rgba(59, 130, 246, 1);
   /* blue-500 */
-}
-
-.dark .base-input {
-  background: #18181b;
-  /* zinc-900 */
-  border-color: rgba(63, 63, 70, 1);
-  /* zinc-700 */
-  color: rgba(244, 244, 245, 1);
-  /* zinc-100 */
-}
-
-.dark .base-input:focus-visible {
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3), var(--us-accent-glow);
-  border-color: rgba(59, 130, 246, 1);
 }
 
 /* 按钮样式 */
@@ -258,16 +223,6 @@ body {
 
 .base-btn:active {
   transform: scale(0.95);
-}
-
-.dark .base-btn {
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-.dark .base-btn:hover {
-  background: rgba(37, 99, 235, 0.1);
-  border-color: rgba(37, 99, 235, 0.3);
-  box-shadow: var(--us-depth-2-hover), var(--us-accent-glow);
 }
 
 /* 状态类 */
@@ -408,14 +363,6 @@ body {
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
   border-radius: var(--radius-md);
-}
-
-.dark .loading-skeleton {
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0.06) 25%,
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0.06) 75%);
-  background-size: 200% 100%;
 }
 
 @keyframes loading {

@@ -31,6 +31,7 @@ export interface Project {
   order?: number
   createdAt: string
   updatedAt: string
+  narrative?: ProjectNarrative
 }
 
 /**

@@ -1,5 +1,4 @@
 export { useAppStore } from './useAppStore'
-export { useThemeStore } from './useThemeStore'
 export { useProjectStore } from './useProjectStore'
 export { useBlogStore } from './useBlogStore'
 export { useSearchStore } from './useSearchStore'

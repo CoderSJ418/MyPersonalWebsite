@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <SEOHead
-title="佘杰 - 前端开发工程师" description="7年前端开发经验，Vue 专家" keywords="佘杰,前端开发,Vue.js" type="profile"
+      title="佘杰 - 前端开发工程师" description="7年前端开发经验，Vue 专家" keywords="佘杰,前端开发,Vue.js" type="profile"
       :structured-data="personStructuredData()" />
 
     <HeroSection />
@@ -14,13 +14,7 @@ title="佘杰 - 前端开发工程师" description="7年前端开发经验，Vue
       <div class="stripe-divider"></div>
     </div>
 
-    <FeaturedBlog />
-
-    <div class="home__gap">
-      <div class="stripe-divider"></div>
-    </div>
-
-    <AboutSnapshot />
+    <DeferredHomeSections />
 
     <!-- Static vignette for depth framing -->
     <div class="home__vignette home__vignette--top" aria-hidden="true"></div>
@@ -44,8 +38,7 @@ import { personStructuredData } from '@/utils/structuredData'
 
 // 首屏下方组件懒加载 — 减少首屏JS体积，用户滚动时按需加载
 const FeaturedProjects = defineAsyncComponent(() => import('@/components/home/FeaturedProjects.vue'))
-const FeaturedBlog = defineAsyncComponent(() => import('@/components/home/FeaturedBlog.vue'))
-const AboutSnapshot = defineAsyncComponent(() => import('@/components/home/AboutSnapshot.vue'))
+const DeferredHomeSections = defineAsyncComponent(() => import('@/components/home/DeferredHomeSections.vue'))
 </script>
 
 <style scoped>

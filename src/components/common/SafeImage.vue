@@ -1,8 +1,19 @@
 <template>
   <div class="image-wrapper" :class="{ 'image-wrapper--loading': loading, 'image-wrapper--error': error }">
     <img
-v-if="!error" :src="src" :alt="alt" :loading="props.nativeLoading" :class="imageClass" :style="imageStyle"
-      @load="onLoad" @error="onError" />
+      v-if="!error"
+      :key="retryKey"
+      :src="src"
+      :alt="alt"
+      :loading="props.nativeLoading"
+      :fetchpriority="props.fetchPriority"
+      :width="props.intrinsicWidth"
+      :height="props.intrinsicHeight"
+      :class="imageClass"
+      :style="imageStyle"
+      @load="onLoad"
+      @error="onError"
+    />
     <!-- 加载中状态：pulse 动画占位块 -->
     <div v-if="loading" class="image-skeleton" :class="skeletonClass" :style="skeletonStyle"></div>
     <!-- 加载失败状态：SVG图标 + 文字 + 重试按钮 -->
@@ -37,6 +48,9 @@ interface Props {
   src: string
   alt?: string
   nativeLoading?: 'lazy' | 'eager'
+  fetchPriority?: 'high' | 'low' | 'auto'
+  intrinsicWidth?: number
+  intrinsicHeight?: number
   imageClass?: string
   fallbackClass?: string
   skeletonClass?: string
@@ -48,6 +62,9 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   alt: '',
   nativeLoading: 'lazy',
+  fetchPriority: 'auto',
+  intrinsicWidth: undefined,
+  intrinsicHeight: undefined,
   imageClass: '',
   fallbackClass: '',
   skeletonClass: '',
@@ -195,25 +212,6 @@ const retry = () => {
 .image-fallback__retry:focus-visible {
   outline: 2px solid var(--us-accent, #2563EB);
   outline-offset: 2px;
-}
-
-/* ===== 暗色模式 ===== */
-.dark .image-skeleton {
-  background: var(--us-surface-hover, rgba(255, 255, 255, 0.08));
-}
-
-.dark .image-fallback {
-  background: var(--us-surface, rgba(255, 255, 255, 0.06));
-  border: 1px solid var(--us-border, rgba(255, 255, 255, 0.12));
-}
-
-.dark .image-fallback__icon {
-  color: var(--us-text-tertiary, rgba(255, 255, 255, 0.3));
-  opacity: 0.6;
-}
-
-.dark .image-fallback__retry:hover {
-  box-shadow: var(--us-depth-2-hover), var(--us-accent-glow);
 }
 
 /* ===== Reduced Motion ===== */

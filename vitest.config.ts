@@ -10,7 +10,7 @@ export default defineConfig({
     // 全局变量配置
     globals: true,
     // 测试文件匹配模式
-    include: ['tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    include: ['tests/unit/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     // 排除目录
     exclude: ['node_modules', 'dist'],
     // 覆盖率配置
@@ -27,12 +27,7 @@ export default defineConfig({
       // 包含的文件
       include: ['src/**/*.{ts,vue}'],
       // 排除的文件
-      exclude: [
-        'src/main.ts',
-        'src/vite-env.d.ts',
-        'src/**/*.d.ts',
-        'src/types/**'
-      ]
+      exclude: ['src/main.ts', 'src/vite-env.d.ts', 'src/**/*.d.ts', 'src/types/**']
     },
     // 设置超时时间
     testTimeout: 10000,

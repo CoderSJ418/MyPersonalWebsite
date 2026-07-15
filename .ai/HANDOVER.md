@@ -5,10 +5,10 @@
 ## 当前状态
 
 - **宪法版本**: v1.1（已冻结）
-- **阶段**: P1全流程 — Feature Brief
-- **Sprint Goal**: 验证v1.1宪法能否驱动交付一个让招聘经理在90秒内判断候选人技术深度的产品增强
-- **验证Feature**: 项目案例叙事重构（Challenge/Approach/Impact三段叙事）
-- **Sprint Planning v2**: ✅ 已确认通过
+- **阶段**: P1全流程 — PRD v0.6 Phase 4 已正式发布，进入真实流量观察
+- **Sprint Goal**: 交互实验室已完成实现、公开入口、Vercel Production 部署与 GA4 同意门生产冒烟；下一步是累计真实合格会话
+- **验证Feature**: 交互实验室 MVP（12个效果）
+- **Sprint Planning**: ✅ PRD v0.6、Phase 3.5 与 Phase 4 代码已完成
 
 ## 当前进行中任务
 
@@ -16,21 +16,42 @@
 | ------------------ | -------- | ----------------------------------------------------- |
 | C1-C4 Critical迁移 | ✅ 完成   | 宪法引用、决策日志、交接文档                          |
 | Sprint Planning v1 | ⚠️ 已推翻 | Blog优先→从技术角度排序，错误                         |
-| Sprint Planning v2 | ✅ 已确认 | Projects优先→从产品/招聘角度排序，正确                |
-| P1 Feature Brief   | ✅ 已确认 | 项目案例叙事重构，方案C混合方案，首推企业后台管理系统 |
-| P1 IA              | ✅ 已确认 | 收敛后：MVP数据模型+仅Narrative组件+10秒看懂目标      |
-| P1 UI Design       | 🔄 待确认 | Hero/StoryFlow/ProofLayer三层结构，去封面图+指标前置  |
+| Projects案例叙事   | ⏸️ 暂停   | 用户选择Lab优先；不得与Lab同时标记为进行中             |
+| Lab 初版全面审批   | ✅ 完成   | v0.5 决策已确认；v0.6 已完成实现与本地验收               |
+| Lab PRD v0.6       | ✅ 已实现 | Phase 3.5、Owner Acceptance 例外、真实页面复用和 Phase 5 增长规则已落地 |
+| Phase 0亮色迁移    | ✅ 完成   | 主题、旧 Shader 与 whatamesh 运行时已移除               |
+| Phase 1基础设施    | ✅ 完成   | JSON 元数据、类型注册表、raw 源码、noindex 与恢复边界   |
+| Phase 2固定12 Demo | ✅ 完成   | 三批门禁、24 张预览、MIT 与最小宿主测试                 |
+| Phase 3预发布体验  | ✅ 代码完成 | 搜索、参数、源码复制、同意门、DNT、撤回与 E2E          |
+| Phase 3技术审计    | ✅ 自动门通过 | 全仓覆盖率四项 ≥70%、E2E 19/19、生产审计 0 漏洞        |
+| T3-Proxy 修复      | ✅ 完成 | NumberTicker、44px 触控、可见复制状态、依赖标签与宿主构建已复验 |
+| T3 Owner Acceptance | ✅ 代理执行 8/8 | 用户授权 Codex 自主代跑；明确不等同独立用户研究 |
+| Phase 3.5          | ✅ 完成 | 体验、内容、旗舰、真实应用与重新验证均完成 |
+| Phase 4            | ✅ 正式发布 | 导航、首页次 CTA、Sitemap/index、六类事件、Vercel Production 与 GA4 生产冒烟完成 |
 
 ## 阻塞项
 
-无
+- 独立 5 人研究改为未来研究债务；不得宣称已经完成。
+- GA4 管理后台 2 个月保留期、Signals 与广告个性化关闭仍需站点所有者人工确认；仓库和生产冒烟无法代替该后台设置证据。
+- 50 次合格 Lab 会话必须来自正式发布后的真实、已同意统计且未启用 DNT 的外部会话；不得使用自动化流量补数。
+
+## 最新自动化证据
+
+- `npm run test:coverage`：155/155；Statements 79.67%、Branches 70.61%、Functions 75.37%、Lines 80.92%。
+- `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
+- `npm run test:e2e`：19/19；`npm run build` 与强化后的 `npm run validate:lab` 通过。
+- 生产本地冒烟：首页 + Lab 首页 + 12 详情共 14 页全部 200，0 pageerror；13 个 Lab URL 全部进入 Sitemap。
+- 首页 Lighthouse 三次中位数：Performance 97、Accessibility 100、Best Practices 100、LCP 2.286s、CLS 0、TBT 26ms。
+- `/lab` 当前构建 Lighthouse 三次中位数：Performance 98、Accessibility 100、Best Practices 100、SEO 100、FCP 0.641s、LCP 2.317s、CLS 0、TBT 32ms、初始脚本 126.8KB。
+- 6 个时间驱动 Demo 在 390×844、DPR 2、4× CPU 下各运行 30 秒：56.3–60fps、0 个 >200ms 长任务、0 pageerror；冷/热导航均已记录。
+- 真实生产域名已从 GitHub 仓库主页与线上响应交叉确认；源码、robots、Sitemap 构建基址已统一为该 Vercel URL，活跃源码不再引用旧 Gitee URL。
 
 ## 下次启动第一步
 
-1. 继续P1全流程：当前在UI Design步骤，待用户确认
-2. 确认后更新Task List → Coding → Self Review → Optimization → Update Docs → Complete
-3. 核心设计决策：Hero去封面图+指标前置，StoryFlow渐变分隔线，ProofLayer复用现有数据
-4. MVP收敛：仅新建ProjectNarrative，不拆分TechHighlights/Screenshots
+1. 在 GA4 管理后台确认数据保留期为 2 个月，并关闭 Google Signals 与广告个性化；这一步需要账号持有人人工核验。
+2. 发布后累计至少 50 次合格 Lab 会话，再按 PRD 公式评估打开、展开、复制和 Projects 主路径占比。
+3. 独立 5 人研究继续作为未来研究债务，不得把 Owner-delegated Codex Acceptance 改写成真实用户研究。
+4. Phase 5 仅按每批最多 4 个推进；每个候选必须先证明复用场景、差异和真实消费方向。
 
 ## 重要提醒
 

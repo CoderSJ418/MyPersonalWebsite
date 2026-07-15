@@ -56,7 +56,7 @@ id="search-modal-title" ref="searchInput" v-model="searchStore.query" type="text
               <div class="sm__history-tags">
                 <button
 v-for="(item, index) in searchStore.history" :key="index" class="sm__history-tag"
-                  @click="searchFromHistory(item.query)">
+                  @click="searchFromHistory(item)">
                   {{ item.query }}
                 </button>
               </div>

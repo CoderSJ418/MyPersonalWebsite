@@ -1,7 +1,7 @@
 <template>
   <section
-    ref="sectionRef"
     class="py-16 md:py-24 relative overflow-hidden cta-section stripe-orbs stripe-orbs--indigo"
+    data-effect-consumer="shimmer-button"
   >
     <div class="stripe-orb-extra stripe-orb-extra--violet" style="bottom:-10%;left:30%;" aria-hidden="true"></div>
     <!-- 背景装饰 - 纯色块 -->
@@ -15,32 +15,26 @@
     <div class="container mx-auto px-4 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
         <!-- 个性化文案 -->
-        <h2
-          ref="titleRef"
-          class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight cta-section__title"
-        >
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight cta-section__title">
           有项目想法？<br />
           <span class="cta-section__title-accent">让我们聊聊</span>
         </h2>
 
-        <p
-          ref="descriptionRef"
-          class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed cta-section__desc"
-        >
+        <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed cta-section__desc">
           从企业官网到 SaaS 平台，从微信小程序到数据可视化，我都能提供专业的技术方案。
           如果您有项目想法，或者想了解更多，欢迎随时联系。
         </p>
 
         <!-- CTA 按钮 - 纯色背景 -->
-        <div ref="ctaRef" class="flex flex-col sm:flex-row gap-4 justify-center">
-          <CTA
-            href="mailto:912999051@qq.com"
-            variant="accent"
-            size="large"
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <ShimmerButtonDemo
+            :href="`mailto:${contact.email}`"
+            :duration="0.8"
             label="联系我"
+            embedded
           >
             联系我
-          </CTA>
+          </ShimmerButtonDemo>
           <CTA
             href="/resume.pdf"
             variant="secondary"
@@ -53,7 +47,7 @@
         </div>
 
         <!-- 联系方式 -->
-        <div ref="contactRef" class="mt-12 flex flex-wrap justify-center gap-6">
+        <div class="mt-12 flex flex-wrap justify-center gap-6">
           <a
             :href="'mailto:' + contact.email"
             class="flex items-center transition-colors duration-300"
@@ -75,52 +69,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
 import contactInfo from '@/assets/data/contact-info.json'
-import { useGSAPAnimations } from '@/composables/useGSAPAnimations'
 import { Mail, Phone } from 'lucide-vue-next'
 import CTA from '@/components/ui/CTA.vue'
+import ShimmerButtonDemo from '@/views/Lab/demos/ShimmerButtonDemo.vue'
 
 const contact = contactInfo
-
-const sectionRef = ref<HTMLElement | null>(null)
-const titleRef = ref<HTMLElement | null>(null)
-const descriptionRef = ref<HTMLElement | null>(null)
-const ctaRef = ref<HTMLElement | null>(null)
-const contactRef = ref<HTMLElement | null>(null)
-
-const { fadeInUp, staggerIn } = useGSAPAnimations()
-
-onMounted(() => {
-  // 在 DOM 更新后执行动画
-  nextTick(() => {
-    // 标题动画
-    if (titleRef.value) {
-      fadeInUp(titleRef.value, { duration: 0.8, delay: 0.1 })
-    }
-
-    // 描述动画
-    if (descriptionRef.value) {
-      fadeInUp(descriptionRef.value, { duration: 0.8, delay: 0.2 })
-    }
-
-    // CTA 按钮动画
-    if (ctaRef.value) {
-      const buttons = ctaRef.value.querySelectorAll('.cta-button')
-      if (buttons.length > 0) {
-        staggerIn(buttons, { duration: 0.6, delay: 0.3 })
-      }
-    }
-
-    // 联系方式动画
-    if (contactRef.value) {
-      const contacts = contactRef.value.querySelectorAll('a')
-      if (contacts.length > 0) {
-        staggerIn(contacts, { duration: 0.6, delay: 0.5 })
-      }
-    }
-  })
-})
 </script>
 
 <style scoped>

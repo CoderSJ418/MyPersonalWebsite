@@ -10,7 +10,6 @@
  * - Vibrant multi-hue palette: purple, blue, teal, cyan
  * - Smooth sine-wave organic motion
  * - Mouse attraction pulls blobs toward cursor
- * - Dark mode uses brighter, more saturated colors
  */
 import { onMounted, onUnmounted, type Ref } from 'vue'
 
@@ -31,27 +30,17 @@ interface GradientMeshOptions {
   speed?: number
   /** Mouse influence strength 0-1 (default: 0.3) */
   mouseStrength?: number
-  /** Custom colors for blobs (light mode) */
-  lightColors?: string[]
-  /** Custom colors for blobs (dark mode) */
-  darkColors?: string[]
+  /** Custom colors for blobs */
+  colors?: string[]
 }
 
 // Stripe-inspired vivid palette — these are BOLD, not subtle
-const DEFAULT_LIGHT_COLORS = [
+const DEFAULT_COLORS = [
   'rgba(99, 102, 241, 0.55)',    // vivid indigo
   'rgba(59, 130, 246, 0.50)',    // vivid blue
   'rgba(6, 182, 212, 0.45)',     // vivid cyan
   'rgba(139, 92, 246, 0.50)',    // vivid violet
   'rgba(79, 70, 229, 0.45)',     // vivid indigo-dark
-]
-
-const DEFAULT_DARK_COLORS = [
-  'rgba(129, 140, 248, 0.60)',   // bright indigo
-  'rgba(96, 165, 250, 0.55)',    // bright blue
-  'rgba(34, 211, 238, 0.50)',    // bright cyan
-  'rgba(167, 139, 250, 0.55)',   // bright violet
-  'rgba(99, 102, 241, 0.50)',    // bright indigo-dark
 ]
 
 export function useGradientMesh(
@@ -63,8 +52,7 @@ export function useGradientMesh(
     blobCount = 5,
     speed = 1,
     mouseStrength = 0.3,
-    lightColors = DEFAULT_LIGHT_COLORS,
-    darkColors = DEFAULT_DARK_COLORS,
+    colors = DEFAULT_COLORS,
   } = options
 
   let ctx: CanvasRenderingContext2D | null = null
@@ -75,17 +63,11 @@ export function useGradientMesh(
   let width = 0
   let height = 0
   let time = 0
-  let isDarkMode = false
 
   const prefersReducedMotion = () =>
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  const checkDarkMode = () => {
-    isDarkMode = document.documentElement.classList.contains('dark')
-  }
-
   const initBlobs = () => {
-    const colors = isDarkMode ? darkColors : lightColors
     blobs = Array.from({ length: blobCount }, (_, i) => ({
       x: 0.15 + Math.random() * 0.7,  // Start more centered
       y: 0.15 + Math.random() * 0.7,
@@ -175,26 +157,11 @@ export function useGradientMesh(
     mouseY = 0.5
   }
 
-  let darkModeObserver: MutationObserver | null = null
-
   const start = () => {
     if (prefersReducedMotion()) return
 
-    checkDarkMode()
     initBlobs()
     resize()
-
-    darkModeObserver = new MutationObserver(() => {
-      const wasDark = isDarkMode
-      checkDarkMode()
-      if (wasDark !== isDarkMode) {
-        initBlobs()
-      }
-    })
-    darkModeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    })
 
     animationId = requestAnimationFrame(draw)
   }
@@ -203,10 +170,6 @@ export function useGradientMesh(
     if (animationId !== null) {
       cancelAnimationFrame(animationId)
       animationId = null
-    }
-    if (darkModeObserver) {
-      darkModeObserver.disconnect()
-      darkModeObserver = null
     }
   }
 

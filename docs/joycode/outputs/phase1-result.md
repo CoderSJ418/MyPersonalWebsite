@@ -1,5 +1,7 @@
 # Phase 1 执行结果
 
+> **HISTORICAL（2026-07-14）**：这是 v0.4 的历史结果，不代表 v0.5 Phase 0/1 已完成。
+
 ## 验证命令结果
 - `npm run validate:lab`: ✅ 通过
   - lint: ✅ 通过

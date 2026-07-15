@@ -39,7 +39,7 @@ export function highlightText(text: string, query: string): string {
   const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi')
   return text.replace(
     regex,
-    '<mark class="bg-yellow-200 dark:bg-yellow-700 px-0.5 rounded font-semibold">$1</mark>'
+    '<mark class="bg-yellow-200 px-0.5 rounded font-semibold">$1</mark>'
   )
 }
 

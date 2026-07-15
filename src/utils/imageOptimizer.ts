@@ -3,6 +3,8 @@
  * 支持 WebP 格式、渐进式加载、虚拟滚动等优化
  */
 
+import { ref } from 'vue'
+
 import { logger } from '@/utils/logger'
 
 // 图片优化配置

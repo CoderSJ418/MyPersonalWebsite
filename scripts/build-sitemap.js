@@ -6,8 +6,11 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
 
-const baseUrl = 'https://shejie1995.gitee.io/my-personal-website'
+const baseUrl = 'https://my-personal-website-eta-murex.vercel.app'
 const today = new Date().toISOString().split('T')[0]
+const labEffects = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'src/assets/data/lab-effects.json'), 'utf-8')
+)
 
 const routes = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
@@ -17,7 +20,13 @@ const routes = [
   { path: '/experience', priority: 0.8, changefreq: 'monthly' },
   { path: '/education', priority: 0.7, changefreq: 'monthly' },
   { path: '/blog', priority: 0.9, changefreq: 'weekly' },
-  { path: '/contact', priority: 0.7, changefreq: 'monthly' }
+  { path: '/contact', priority: 0.7, changefreq: 'monthly' },
+  { path: '/lab', priority: 0.8, changefreq: 'monthly' },
+  ...labEffects.map((effect) => ({
+    path: `/lab/${effect.id}`,
+    priority: 0.7,
+    changefreq: 'monthly'
+  }))
 ]
 
 // ---- Sitemap ----

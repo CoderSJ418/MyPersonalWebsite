@@ -16,7 +16,13 @@ Vue 3 + TypeScript + Tailwind portfolio and blog platform. Frontend-focused, wit
 - **Tailwind First** — reach for Tailwind classes before any CSS
 - **GSAP Animation** — use GSAP 3.14.2 for complex animations (scroll triggers, morphs, etc.)
 - **Design System** — colors, spacing, typography defined in `tailwind.config.ts`
-- **Dark Mode** — Tailwind's `dark:` prefix for theme switching
+- **Single Light Presentation** — the portfolio has one light visual mode with blue `#2563EB` as its primary accent; theme variants are outside the current product model
+
+### Product Language
+
+- **Interaction Lab（交互实验室）** — the portfolio area for independently previewing interactive UI effects, tuning parameters, and examining reusable source code. Avoid: Effects Lab, Shader Lab.
+- **Demo** — one self-contained interaction presented by the Interaction Lab, with a live preview, parameters, usage example, complete source, compatibility notes, and license metadata.
+- **MVP Demo Set** — the fixed group of 12 Demos approved for the first public Interaction Lab release. Avoid: 20+ effects, Phase 4 effects.
 
 ### Quality Gates (all must pass before merged)
 1. **ESLint** — no errors, auto-fix on save

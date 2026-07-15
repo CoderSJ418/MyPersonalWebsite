@@ -6,45 +6,50 @@
   "author": "佘杰",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode production && node scripts/build-sitemap.js",
+    "build": "vite build --mode production && node scripts/inline-critical-css.mjs && node scripts/build-sitemap.js",
     "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
     "format": "prettier --write src/",
     "analyze": "vite-bundle-visualizer",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:coverage:lab": "vitest run --coverage --config vitest.lab.config.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "validate:lab": "npm run lint && npm run build && npx tsx scripts/validateLabRegistry.ts"
+    "audit:lab-runtime": "node scripts/audit-lab-runtime.mjs",
+    "validate:lab": "node scripts/validate-lab.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@types/dompurify": "^3.0.5",
     "@types/highlight.js": "^9.12.4",
-    "axios": "^1.13.3",
+    "axios": "^1.18.1",
     "buffer": "^6.0.3",
-    "dompurify": "^3.3.1",
+    "dompurify": "3.4.11",
     "gray-matter": "^4.0.3",
     "gsap": "^3.14.2",
     "highlight.js": "^11.11.1",
     "loglevel": "^1.9.2",
     "lucide-vue-next": "^0.312.0",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.3.0",
     "markdown-it-table-of-contents": "^1.1.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
-    "whatamesh": "^0.2.0"
+    "web-vitals": "3.5.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "@types/nprogress": "^0.2.3",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "@vitejs/plugin-vue": "^5.0.3",
-    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/coverage-v8": "4.0.18",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.17",
@@ -52,16 +57,34 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^9.20.1",
     "happy-dom": "^20.7.0",
+    "jsdom": "^29.1.1",
+    "lighthouse": "^13.4.0",
     "markdown-it-anchor": "^9.2.0",
-    "postcss": "^8.4.33",
+    "postcss": "^8.5.19",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.1",
     "terser": "^5.46.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
     "vite-plugin-compression": "^0.5.1",
-    "vitest": "^4.0.18",
+    "vitest": "4.0.18",
     "vue-tsc": "^3.2.4"
-  }
+  },
+  "main": "postcss.config.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoderSJ418/MyPersonalWebsite.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CoderSJ418/MyPersonalWebsite/issues"
+  },
+  "homepage": "https://github.com/CoderSJ418/MyPersonalWebsite#readme"
 }

@@ -105,3 +105,6 @@ AGENTS.md.backup*
 .joycode/*
 !.joycode/rules/
 !.joycode/rules/project-rules.md
+
+.vercel
+.env*.local

@@ -3,6 +3,8 @@
  * 专门针对 MyPersonalWebsite 的字体系统进行优化
  */
 
+import { onUnmounted, ref } from 'vue'
+
 import { logger } from '@/utils/logger'
 
 export interface FontOptimizationConfig {
@@ -235,9 +237,7 @@ export class FontOptimizer {
    */
   onFontLoaded(callback: (family: string) => void): () => void {
     const eventListener = (event: CustomEvent) => {
-      if (event.detail.family === 'font-loaded') {
-        callback(event.detail.family)
-      }
+      callback(event.detail.family)
     }
 
     document.addEventListener('font-loaded', eventListener as EventListener)
@@ -252,9 +252,7 @@ export class FontOptimizer {
    */
   onFontFailed(callback: (family: string, error: Error) => void): () => void {
     const eventListener = (event: CustomEvent) => {
-      if (event.detail.family === 'font-failed') {
-        callback(event.detail.family, event.detail.error)
-      }
+      callback(event.detail.family, event.detail.error)
     }
 
     document.addEventListener('font-failed', eventListener as EventListener)

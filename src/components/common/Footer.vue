@@ -114,6 +114,7 @@ v-if="contact.social.twitter" :href="contact.social.twitter" target="_blank"
       <!-- Bottom — Copyright + Tech badges (tier-4, farthest) -->
       <div class="sf__bottom">
         <p class="sf__copyright">&copy; {{ currentYear }} 佘杰. All rights reserved.</p>
+        <button type="button" class="sf__privacy" @click="openAnalyticsPreferences">统计偏好</button>
         <div class="sf__tech">
           <span class="sf__tech-chip">
             <Zap class="w-3 h-3" />
@@ -137,6 +138,7 @@ v-if="contact.social.twitter" :href="contact.social.twitter" target="_blank"
 import { computed, onMounted, ref } from 'vue'
 import contactInfo from '@/assets/data/contact-info.json'
 import { useSpringPhysics } from '@/composables/useSpringPhysics'
+import { openAnalyticsPreferences } from '@/services/privacyAnalytics'
 import { Mail, MapPin, Zap, Palette, Monitor } from 'lucide-vue-next'
 
 const contact = contactInfo
@@ -342,7 +344,7 @@ onMounted(() => {
   background: var(--us-surface);
   border: 1px solid var(--us-border);
   /* Interactive Preservation: spring-driven opacity */
-  opacity: var(--chip-o, 0.5);
+  opacity: 1;
   /* REMOVED: translateZ/perspective/will-change — Depth Fade removed per Max 2 rule */
   transition:
     color var(--us-duration-fast) var(--us-easing),
@@ -445,9 +447,24 @@ onMounted(() => {
 
 .sf__copyright {
   font-size: var(--text-xs);
-  color: var(--us-text-tertiary);
-  opacity: 0.7;
+  color: var(--us-text-secondary);
+  opacity: 1;
   margin: 0;
+}
+
+.sf__privacy {
+  min-height: 44px;
+  padding: var(--us-space-2) var(--us-space-3);
+  border-radius: var(--radius-md);
+  color: var(--us-text-secondary);
+  font-size: var(--text-xs);
+}
+
+.sf__privacy:hover,
+.sf__privacy:focus-visible {
+  color: var(--us-accent);
+  outline: 2px solid var(--us-accent);
+  outline-offset: 2px;
 }
 
 .sf__tech {

@@ -162,12 +162,8 @@
       --vag-background-opacity: 0.35;
    }
 
-   /* ═══════════════════════════════════════════════════════════════
-      Light Mode Overrides — :root:not(.dark)
-      所有 --us-* 变量的亮色等价值
-      暗色值定义在上方 :root 中，此处仅覆盖亮色值
-      ═══════════════════════════════════════════════════════════════ */
-   :root:not(.dark) {
+   /* 单一亮色视觉模式：此块覆盖早期兼容 token，作为运行时唯一值。 */
+   :root {
       /* === BASE COLORS — 暗色→亮色反转 === */
       --us-bg-start: #FAFAFA;
       --us-bg-end: #F5F5F7;
@@ -212,7 +208,7 @@
       --us-material-elevated-bg: #ffffff;
       --us-material-elevated-border: rgba(0, 0, 0, 0.06);
 
-      /* === SPACING SCALE — 8px grid aligned (same as dark) === */
+      /* === SPACING SCALE — 8px grid aligned === */
       --us-space-1: 0.25rem;
       --us-space-2: 0.5rem;
       --us-space-3: 0.75rem;
@@ -229,7 +225,7 @@
       --us-space-24: 6rem;
       --us-space-32: 8rem;
 
-      /* === COMPONENT SPACING — semantic tokens (same as dark) === */
+      /* === COMPONENT SPACING — semantic tokens === */
       --us-header-height: 4.5rem;
       --us-page-top-offset: calc(var(--us-header-height) + var(--us-space-4));
       --us-card-radius: 1.25rem;

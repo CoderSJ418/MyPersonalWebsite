@@ -10,7 +10,7 @@ Disallow: /api/
 Disallow: /private/
 
 # Sitemap 位置
-Sitemap: https://shejie1995.gitee.io/my-personal-website/sitemap.xml
+Sitemap: https://my-personal-website-eta-murex.vercel.app/sitemap.xml
 
 # 爬取延迟（可选）
 Crawl-delay: 1

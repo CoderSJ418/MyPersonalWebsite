@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta v-if="config.title" :content="fullTitle" property="og:title" />
     <meta v-if="config.description" :content="config.description" name="description" />
+    <meta :content="robots" name="robots" />
     <meta v-if="config.description" :content="config.description" property="og:description" />
     <meta v-if="config.keywords" :content="config.keywords" name="keywords" />
     <meta v-if="config.url" :content="config.url" property="og:url" />
-    <meta v-if="config.url" :href="config.url" rel="canonical" />
+    <link v-if="config.url" :href="config.url" rel="canonical" />
 
     <!-- Open Graph 标签 -->
     <meta :content="config.type || 'website'" property="og:type" />
@@ -61,18 +62,26 @@ interface Props {
   tags?: string[]
   locale?: string
   structuredData?: Record<string, unknown>
+  robots?: 'index,follow' | 'noindex,nofollow'
   siteName?: string
   titleSuffix?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   keywords: '',
+  image: undefined,
+  url: undefined,
   type: 'website',
   author: '佘杰',
+  publishDate: undefined,
+  modifiedDate: undefined,
+  category: undefined,
   locale: 'zh_CN',
   tags: () => [],
+  structuredData: undefined,
+  robots: 'index,follow',
   siteName: '佘杰 - 前端开发工程师',
-  titleSuffix: ' - 佘杰'
+  titleSuffix: ' - 佘杰',
 })
 
 const route = useRoute()
@@ -119,6 +128,7 @@ watch(() => props.title, updatePageTitle, { immediate: true })
 watch(() => props.structuredData, injectStructuredData, { deep: true })
 
 onMounted(() => {
+  document.getElementById('app-default-description')?.remove()
   injectStructuredData()
 })
 

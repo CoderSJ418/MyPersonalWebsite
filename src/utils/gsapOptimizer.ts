@@ -7,6 +7,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { Draggable } from 'gsap/Draggable'
+import { onUnmounted, ref } from 'vue'
+
 import { logger } from '@/utils/logger'
 
 // 注册插件

@@ -1,10 +1,30 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useProjectStore } from '@/stores/useProjectStore'
 import { ChevronDown } from 'lucide-vue-next'
+import MagicCardDemo from '@/views/Lab/demos/MagicCardDemo.vue'
+import NumberTickerDemo from '@/views/Lab/demos/NumberTickerDemo.vue'
 
-// Guard against lazy-loaded component timing (Pinia may not be ready on first render)
-const projectStore = inject('$pinia') ? useProjectStore() : null
+interface FeaturedMetric {
+  label: string
+  value: string
+}
+
+interface FeaturedProject {
+  id: string
+  title: string
+  category?: string
+  description: string
+  techStack: Array<string | { name: string }>
+  narrative?: {
+    challenge: string
+    approach: string
+    impact: string
+    metrics?: FeaturedMetric[]
+  } | null
+}
+
+const projectStore = useProjectStore()
 
 const expandedId = ref<string | null>(null)
 
@@ -14,46 +34,52 @@ const fallbackProjects = [
     id: '1', title: '澳斯康生物官网重构项目', category: '企业官网',
     description: 'Vue 3 + TypeScript 重构的生物制药企业官网，首屏加载从 3.5s 降至 1.5s，Lighthouse Performance 96 分。',
     techStack: ['Vue', 'TypeScript', 'Vite', 'Element Plus'],
-    narrative: { challenge: '原官网技术栈老旧，首屏加载超过 3.5 秒', approach: 'Vue 3 Composition API + TypeScript + Vite 全量重构', impact: '首屏从3.5s降至1.5s，Performance 96、SEO 98' },
-    metrics: [{ label: '首屏加载', value: '1.5s' }, { label: 'Lighthouse', value: '96分' }]
+    narrative: { challenge: '原官网技术栈老旧，首屏加载超过 3.5 秒', approach: 'Vue 3 Composition API + TypeScript + Vite 全量重构', impact: '首屏从3.5s降至1.5s，Performance 96、SEO 98', metrics: [{ label: '首屏加载', value: '1.5s' }, { label: 'Lighthouse', value: '96分' }] }
   },
   {
     id: '2', title: '企业后台管理系统', category: 'SaaS',
     description: '基于 Vue 3 + Element Plus 的企业级后台管理系统，支持 20+ 业务模块，权限系统被多个项目复用。',
     techStack: ['Vue', 'TypeScript', 'Pinia', 'Element Plus'],
-    narrative: { challenge: '多业务线管理混乱，权限系统零散', approach: '模块化架构 + RBAC 权限系统', impact: '开发效率提升 40%，维护成本降低 60%' },
-    metrics: [{ label: '业务模块', value: '20+' }, { label: '效率提升', value: '40%' }]
+    narrative: { challenge: '多业务线管理混乱，权限系统零散', approach: '模块化架构 + RBAC 权限系统', impact: '开发效率提升 40%，维护成本降低 60%', metrics: [{ label: '业务模块', value: '20+' }, { label: '效率提升', value: '40%' }] }
   },
   {
     id: '3', title: 'Rixoptics 光学品牌官网', category: '品牌官网',
     description: '基于 WordPress 主题定制的精密光学产品官网，首屏加载从 4 秒优化到 2 秒以内。',
     techStack: ['WordPress', 'JavaScript', 'jQuery'],
-    narrative: null, metrics: []
+    narrative: null
   }
 ]
 
-const featuredProjects = computed(() => {
-  if (projectStore) {
-    try {
-      const raw = projectStore.featuredProjects
-      if (raw && raw.length > 0) return raw.slice(0, 5)
-    } catch { /* fall through */ }
-  }
+const featuredProjects = computed<FeaturedProject[]>(() => {
+  const raw = projectStore.featuredProjects
+  if (raw.length > 0) return raw.slice(0, 5)
   return fallbackProjects
 })
 
-const _getTechNames = (project: { techStack?: string[] }): string[] => {
-  return project.techStack || []
+const getTechName = (tech: string | { name: string }) => typeof tech === 'string' ? tech : tech.name
+const getMetrics = (project: FeaturedProject) => project.narrative?.metrics ?? []
+const parseMetric = (value: string) => {
+  const match = value.match(/^([+-]?)(\d+(?:\.\d+)?)(.*)$/)
+  if (!match || /\d/.test(match[3] ?? '')) return null
+  return {
+    prefix: match[1] ?? '',
+    value: Number(match[2]),
+    suffix: match[3] ?? '',
+    precision: (match[2]?.split('.')[1] ?? '').length
+  }
 }
+const canAnimateMetric = (value: string) => parseMetric(value) !== null
+const getMetricNumber = (value: string) => parseMetric(value)?.value ?? 0
+const getMetricPrefix = (value: string) => parseMetric(value)?.prefix ?? ''
+const getMetricSuffix = (value: string) => parseMetric(value)?.suffix ?? ''
+const getMetricPrecision = (value: string) => parseMetric(value)?.precision ?? 0
 
 const toggleExpand = (id: string) => {
   expandedId.value = expandedId.value === id ? null : id
 }
 
 onMounted(async () => {
-  if (projectStore) {
-    try { await projectStore.loadProjects() } catch { /* store handles error */ }
-  }
+  try { await projectStore.loadProjects() } catch { /* store handles error */ }
 })
 </script>
 
@@ -66,20 +92,36 @@ onMounted(async () => {
       </div>
 
       <div class="fp__field">
-        <div
-v-for="project in featuredProjects" :key="project.id"
-          class="fp__card stripe-card stripe-border stripe-border--indigo" @click="toggleExpand(project.id)">
-          <div class="fp__card-header">
+        <MagicCardDemo
+          v-for="project in featuredProjects"
+          :key="project.id"
+          class="fp__card"
+          :border-width="1"
+          embedded
+          data-effect-consumer="magic-card"
+          @click="toggleExpand(project.id)"
+        >
+          <button
+            type="button"
+            class="fp__card-header"
+            :aria-expanded="expandedId === project.id"
+            :aria-controls="`project-details-${project.id}`"
+            @click.stop="toggleExpand(project.id)"
+          >
             <div class="fp__card-title-group">
               <h3 class="fp__card-title">{{ project.title }}</h3>
               <span v-if="project.category" class="fp__card-category">{{ project.category }}</span>
             </div>
-            <div class="fp__card-arrow" :class="{ 'fp__card-arrow--open': expandedId === project.id }">
+            <span class="fp__card-arrow" :class="{ 'fp__card-arrow--open': expandedId === project.id }">
               <ChevronDown :size="20" />
-            </div>
-          </div>
+            </span>
+          </button>
 
-          <div class="fp__expandable" :class="{ 'fp__expandable--open': expandedId === project.id }">
+          <div
+            :id="`project-details-${project.id}`"
+            class="fp__expandable"
+            :class="{ 'fp__expandable--open': expandedId === project.id }"
+          >
             <div class="fp__expandable-inner">
               <p class="fp__card-desc">{{ project.description }}</p>
 
@@ -98,15 +140,31 @@ v-for="project in featuredProjects" :key="project.id"
                 </div>
               </div>
 
-              <div v-if="project.metrics && project.metrics.length > 0" class="fp__metrics">
-                <div v-for="m in project.metrics" :key="m.label" class="fp__metric">
-                  <span class="fp__metric-value">{{ m.value }}</span>
-                  <span class="fp__metric-label">{{ m.label }}</span>
+              <div v-if="getMetrics(project).length > 0" class="fp__metrics" data-effect-consumer="number-ticker">
+                <div v-for="metric in getMetrics(project)" :key="metric.label" class="fp__metric">
+                  <NumberTickerDemo
+                    v-if="canAnimateMetric(metric.value)"
+                    :target-value="getMetricNumber(metric.value)"
+                    :prefix="getMetricPrefix(metric.value)"
+                    :suffix="getMetricSuffix(metric.value)"
+                    :precision="getMetricPrecision(metric.value)"
+                    :label="metric.label"
+                    :duration="900"
+                    supporting-text=""
+                    compact
+                    animate-on-visible
+                  />
+                  <template v-else>
+                    <span class="fp__metric-value">{{ metric.value }}</span>
+                    <span class="fp__metric-label">{{ metric.label }}</span>
+                  </template>
                 </div>
               </div>
 
               <div class="fp__card-tags">
-                <span v-for="tag in project.techStack.slice(0, 6)" :key="tag" class="fp__card-tag">{{ tag }}</span>
+                <span v-for="tag in project.techStack.slice(0, 6)" :key="getTechName(tag)" class="fp__card-tag">
+                  {{ getTechName(tag) }}
+                </span>
               </div>
 
               <div class="fp__card-actions">
@@ -125,7 +183,7 @@ v-for="project in featuredProjects" :key="project.id"
               </div>
             </div>
           </div>
-        </div>
+        </MagicCardDemo>
       </div>
 
       <div class="fp__cta">
@@ -189,15 +247,6 @@ v-for="project in featuredProjects" :key="project.id"
   border-radius: var(--radius-xl);
   cursor: pointer;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.fp__card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.2), 0 0 60px rgba(99, 102, 241, 0.06);
 }
 
 .fp__card-header {
@@ -207,7 +256,18 @@ v-for="project in featuredProjects" :key="project.id"
   align-items: center;
   justify-content: space-between;
   gap: var(--us-space-4);
+  width: 100%;
   padding: var(--us-space-6) var(--us-space-8);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fp__card-header:focus-visible {
+  outline: 3px solid var(--us-accent);
+  outline-offset: -3px;
 }
 
 .fp__card-title-group {
@@ -265,7 +325,7 @@ v-for="project in featuredProjects" :key="project.id"
 
 .fp__expandable-inner {
   padding: 0 var(--us-space-8) var(--us-space-8) var(--us-space-8);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--us-border);
 }
 
 .fp__card-desc {
@@ -285,8 +345,8 @@ v-for="project in featuredProjects" :key="project.id"
 .fp__narrative-item {
   padding: var(--us-space-4);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--us-surface);
+  border: 1px solid var(--us-border);
 }
 
 .fp__narrative-label {

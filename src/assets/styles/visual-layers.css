@@ -184,109 +184,52 @@
   opacity: 1;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   Dark Mode Overrides
-   ═══════════════════════════════════════════════════════════════ */
-.dark .vs-sticky-header {
-  background: #18181b;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
-.dark .vs-noise-overlay {
-  opacity: 0.06;
-}
-
-/* 暗色模式 — 光效跟踪增强 */
-.dark .vs-light-section::before {
-  background: radial-gradient(800px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
-      rgba(37, 99, 235, 0.06) 0%,
-      transparent 100%);
-}
-
-.dark .vs-light-surface::after {
-  background: radial-gradient(400px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
-      rgba(37, 99, 235, 0.05) 0%,
-      transparent 100%);
-}
-
-.dark .vs-code-glow {
-  border-color: rgba(37, 99, 235, 0.25);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), var(--us-accent-glow);
-}
-
-.dark .vs-code-glow::before {
-  background: linear-gradient(135deg,
-      rgba(37, 99, 235, 0.06) 0%,
-      transparent 50%,
-      rgba(37, 99, 235, 0.03) 100%);
-}
-
-.dark .vs-code-glow__header {
-  border-bottom-color: rgba(37, 99, 235, 0.12);
-  background: rgba(37, 99, 235, 0.05);
-}
-
-.dark .vs-grid-overlay {
-  opacity: 0.05;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-}
-
-.dark .vs-vignette-overlay {
-  background: radial-gradient(ellipse at center,
-      transparent 25%,
-      rgba(0, 0, 0, 0.7) 100%);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Light Mode Overrides
-   ═══════════════════════════════════════════════════════════════ */
-:root:not(.dark) .vs-bg-layered {
+/* 单一亮色视觉模式 */
+.vs-bg-layered {
   background: linear-gradient(160deg, #FAFAFA 0%, #F5F5F7 100%);
 }
 
-:root:not(.dark) .vs-noise-overlay {
+.vs-noise-overlay {
   opacity: 0.015;
 }
 
-:root:not(.dark) .vs-grid-overlay {
+.vs-grid-overlay {
   opacity: 0.02;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
 
-:root:not(.dark) .vs-vignette-overlay {
+.vs-vignette-overlay {
   background: radial-gradient(ellipse at center,
       transparent 60%,
       rgba(0, 0, 0, 0.08) 100%);
 }
 
-:root:not(.dark) .vs-sticky-header {
+.vs-sticky-header {
   background: white;
   border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
-:root:not(.dark) .vs-code-glow {
+.vs-code-glow {
   border-color: rgba(37, 99, 235, 0.12);
   background: #fafafa;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-:root:not(.dark) .vs-code-glow::before {
+.vs-code-glow::before {
   background: linear-gradient(135deg,
       rgba(37, 99, 235, 0.02) 0%,
       transparent 50%,
       rgba(37, 99, 235, 0.01) 100%);
 }
 
-:root:not(.dark) .vs-code-glow__header {
+.vs-code-glow__header {
   border-bottom-color: rgba(37, 99, 235, 0.06);
   background: rgba(37, 99, 235, 0.02);
 }
 
-:root:not(.dark) .vs-light-surface::after {
+.vs-light-surface::after {
   background: radial-gradient(400px circle at var(--global-light-x, 50%) var(--global-light-y, 50%),
       rgba(37, 99, 235, 0.02) 0%,
       transparent 100%);

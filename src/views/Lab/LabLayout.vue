@@ -1,37 +1,32 @@
+<template>
+  <template v-if="effect">
+    <SEOHead
+      :title="effect.name"
+      :description="effect.description"
+      type="website"
+      :structured-data="structuredData"
+    />
+    <LabDemoPage :effect="effect" />
+  </template>
+  <LabNotFound v-else :id="routeId" />
+</template>
+
 <script setup lang="ts">
-import { computed, reactive, provide } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
-import { labRegistry } from '@/config/labRegistry'
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+
 import SEOHead from '@/components/common/SEOHead.vue'
-import CodeBlock from '@/components/blog/CodeBlock.vue'
-import LabParamPanel from '@/components/lab/LabParamPanel.vue'
+import LabDemoPage from '@/components/lab/LabDemoPage.vue'
+import { findLabEffect } from '@/config/labRegistry'
+import { labEffectStructuredData } from '@/utils/structuredData'
 import LabNotFound from './LabNotFound.vue'
 
 const route = useRoute()
-const effect = computed(() => labRegistry.find(e => e.id === route.params.id))
+const routeId = computed(() => (typeof route.params.id === 'string' ? route.params.id : ''))
+const effect = computed(() => findLabEffect(routeId.value))
+const structuredData = computed(() =>
+  effect.value ? labEffectStructuredData(effect.value) : undefined
+)
 
-const labParams = reactive<Record<string, string | number>>({})
-provide('labParams', labParams)
+onMounted(() => window.scrollTo({ top: 0 }))
 </script>
-
-<template>
-  <SEOHead v-if="effect" :title="effect.name" :description="effect.description" type="webpage" />
-  <div v-if="effect" class="lab-layout">
-    <nav aria-label="Breadcrumb" class="lab-breadcrumb">
-      <RouterLink to="/lab">效果实验室</RouterLink>
-      <span class="lab-breadcrumb-sep">/</span>
-      <span>{{ effect.name }}</span>
-    </nav>
-    <Suspense>
-      <template #default>
-        <component :is="effect.component" />
-      </template>
-      <template #fallback>
-        <div class="lab-loading">加载效果中...</div>
-      </template>
-    </Suspense>
-    <LabParamPanel v-if="effect.params?.length" v-model:model-value="labParams" :params="effect.params" />
-    <CodeBlock :code="effect.code" :language="effect.language" :show-copy="true" :show-line-numbers="true" />
-  </div>
-  <LabNotFound v-else :id="route.params.id as string" />
-</template>

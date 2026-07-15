@@ -1,5 +1,7 @@
 # Phase 3 任务清单 — Hero 改造 + 材质统一
 
+> **OBSOLETE（2026-07-14）**：本任务基于 PRD v0.4，不得执行。Hero 与单一亮色迁移已改由 v0.5 Phase 0 管理。
+
 > **执行前确保 Phase 2 全部通过。先读 `docs/joycode/MASTER.md`。**
 
 ---

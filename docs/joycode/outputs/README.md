@@ -2,6 +2,8 @@
 
 JoyCode 每个任务的执行结果放在这里。
 
+> v0.4 的现有 prompt/result 仅作历史记录。PRD v0.5 最终审批并生成新的 Phase 0 Task List 前，不得继续执行或追加旧 Phase 输出。
+
 ## 目录结构
 
 ```

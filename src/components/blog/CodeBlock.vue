@@ -293,33 +293,6 @@ v-if="showCopy" class="code-block__copy" :class="{
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   DARK MODE
-   ═══════════════════════════════════════════════════════════════ */
-/* Global light dark mode handled by visual-system.css vs-light-surface */
-
-.dark .code-block__lines {
-  border-right-color: var(--code-line-border);
-}
-
-.dark .code-block__line-num {
-  color: var(--code-line-muted);
-}
-
-.dark .code-block__body:hover .code-block__line-num {
-  color: var(--code-line-subtle);
-}
-
-/* 暗色模式 — copy按钮hover增强 */
-.dark .code-block__copy:hover:not(:disabled) {
-  box-shadow: var(--us-accent-glow);
-}
-
-/* 暗色模式 — version pill增强 */
-.dark .code-block__version-pill {
-  box-shadow: 0 0 6px rgba(37, 99, 235, 0.2);
-}
-
-/* ═══════════════════════════════════════════════════════════════
    REDUCED MOTION
    ═══════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {

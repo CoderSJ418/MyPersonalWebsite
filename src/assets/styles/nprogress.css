@@ -31,18 +31,6 @@
   transform: rotate(3deg) translate(0px, -4px);
 }
 
-/* 暗黑模式适配 */
-.dark #nprogress .bar {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(37, 99, 235, 0.75) 50%, rgba(37, 99, 235, 0.6) 100%);
-}
-
-.dark #nprogress .peg {
-  box-shadow: var(--us-depth-1);
-}
-
-/* 亮色模式适配 */
-@media (prefers-color-scheme: light) {
-  :root:not(.dark) #nprogress .bar {
-    background: linear-gradient(135deg, var(--us-accent) 0%, rgba(37, 99, 235, 0.8) 100%);
-  }
+#nprogress .bar {
+  background: linear-gradient(135deg, var(--us-accent) 0%, rgba(37, 99, 235, 0.8) 100%);
 }

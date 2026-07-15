@@ -89,7 +89,7 @@ alwaysApply: true
 - **状态管理**: Pinia Composition API 风格，`defineStore('name', () => {...})`
 - **路由**: createWebHistory + 懒加载 + NProgress + PageTransition
 - **数据**: JSON 静态数据 + Markdown 博客 + dompurify 消毒
-- **设计系统**: darkMode:'class' + Aurora Bento 配色 + CSS 变量语义化颜色
+- **设计系统**: 单一亮色 + `#2563EB` 主色 + Tailwind/设计 Token 语义化颜色；禁止新增 dark mode 分支
 - **动画**: GSAP + ScrollTrigger + Tailwind 自定义动画
 - **博客渲染**: markdown-it + highlight.js（异步）+ dompurify
 

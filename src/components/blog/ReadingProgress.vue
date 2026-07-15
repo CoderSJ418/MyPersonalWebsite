@@ -56,9 +56,4 @@ class="reading-progress" role="progressbar" :aria-valuenow="Math.round(progress)
   will-change: width;
 }
 
-/* 深色模式 — 使用更亮的渐变 + glow效果 */
-.dark .reading-progress__bar {
-  background: linear-gradient(90deg, var(--us-accent), rgba(96, 165, 250, 0.8), rgba(37, 99, 235, 0.6));
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4), 0 0 2px rgba(37, 99, 235, 0.6);
-}
 </style>

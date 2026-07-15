@@ -1,5 +1,7 @@
 # Phase 2 任务清单 — 12 个 Demo
 
+> **OBSOLETE（2026-07-14）**：本任务基于 PRD v0.4，不得执行。Phase 0 与新版 Phase 1 通过后重新生成。
+
 > **执行前确保 Phase 1 全部通过。先读 `docs/joycode/MASTER.md`（铁律和代码规范）。**
 
 **Phase 2 目标**：实现 12 个效果 demo 组件。

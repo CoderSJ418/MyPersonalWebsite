@@ -11,8 +11,8 @@
         <!-- 桌面端导航 -->
         <div class="header__nav">
           <RouterLink
-v-for="item in navItems" :key="item.path" :to="item.path" class="header__nav-link"
-            :class="{ 'header__nav-link--active': isActiveRoute(item.path) }">
+v-for="item in navItems" :key="item.path" :to="item.to" class="header__nav-link"
+            :class="{ 'header__nav-link--active': isActiveRoute(item.path) }" @click="trackNavItem(item)">
             {{ item.name }}
           </RouterLink>
         </div>
@@ -26,20 +26,6 @@ v-for="item in navItems" :key="item.path" :to="item.path" class="header__nav-lin
 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-          </button>
-
-          <!-- 主题切换 -->
-          <button class="header__action-btn header__action-btn--theme" aria-label="Toggle theme" @click="toggleTheme">
-            <Sun v-if="isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 3v1m0 16v1m9-9h.01M12 7h.01" />
-            </Sun>
-            <Moon v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </Moon>
           </button>
 
           <!-- 汉堡菜单 - 移动端 -->
@@ -68,8 +54,8 @@ id="mobile-menu" ref="mobileMenuRef" class="header__mobile-menu"
       <div class="mobile-menu__content">
         <RouterLink
 v-for="(item, index) in navItems" :key="item.path" :ref="el => setNavLinkRef(el, index)"
-          :to="item.path" class="mobile-menu__link" :class="{ 'mobile-menu__link--active': isActiveRoute(item.path) }"
-          role="menuitem" :tabindex="isMenuOpen ? 0 : -1" @click="closeMenu" @keydown="handleMenuKeydown">
+          :to="item.to" class="mobile-menu__link" :class="{ 'mobile-menu__link--active': isActiveRoute(item.path) }"
+          role="menuitem" :tabindex="isMenuOpen ? 0 : -1" @click="handleMobileNavClick(item)" @keydown="handleMenuKeydown">
           {{ item.name }}
         </RouterLink>
 
@@ -85,41 +71,24 @@ stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             搜索
           </button>
 
-          <button
-ref="themeBtnRef" class="mobile-menu__btn" aria-label="切换主题" :tabindex="isMenuOpen ? 0 : -1"
-            @click="toggleTheme" @keydown="handleMenuKeydown">
-            <Sun v-if="isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 3v1m0 16v1m9-9h.01M12 7h.01" />
-            </Sun>
-            <Moon v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </Moon>
-            {{ isDark ? '亮色' : '深色' }}
-          </button>
         </div>
       </div>
     </div>
 
     <!-- 搜索模态框 -->
-    <SearchModal />
+    <SearchModal v-if="searchStore.isOpen" />
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick, defineAsyncComponent } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick, defineAsyncComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAppStore } from '@/stores/useAppStore'
+import { trackLabAnalytics } from '@/services/privacyAnalytics'
 import { useSearchStore } from '@/stores/useSearchStore'
 // SearchModal 懒加载 — 仅在用户触发搜索时加载，避免引入 useBlogStore→blogLoader→yaml-parser 依赖链阻塞首屏
 const SearchModal = defineAsyncComponent(() => import('@/components/common/SearchModal.vue'))
-import { Sun, Moon } from 'lucide-vue-next'
 
 const route = useRoute()
-const appStore = useAppStore()
 const searchStore = useSearchStore()
 const isScrolled = ref(false)
 const isMenuOpen = ref(false)
@@ -128,7 +97,6 @@ const isMenuOpen = ref(false)
 const menuButtonRef = ref<HTMLButtonElement | null>(null)
 const mobileMenuRef = ref<HTMLElement | null>(null)
 const searchBtnRef = ref<HTMLButtonElement | null>(null)
-const themeBtnRef = ref<HTMLButtonElement | null>(null)
 const navLinkRefs = ref<(HTMLAnchorElement | null)[]>([])
 
 // Helper to collect nav link refs
@@ -149,19 +117,32 @@ const getFocusableElements = (): HTMLElement[] => {
 
   // Add action buttons
   if (searchBtnRef.value) elements.push(searchBtnRef.value)
-  if (themeBtnRef.value) elements.push(themeBtnRef.value)
 
   return elements
 }
 
-const navItems = [
-  { name: '首页', path: '/' },
-  { name: '项目', path: '/projects' },
-  { name: '博客', path: '/blog' },
-  { name: '效果实验室', path: '/lab' }
+interface NavItem {
+  name: string
+  path: string
+  to: string
+}
+
+const navItems: NavItem[] = [
+  { name: '首页', path: '/', to: '/' },
+  { name: '项目', path: '/projects', to: '/projects' },
+  { name: '博客', path: '/blog', to: '/blog' },
+  { name: '实验室', path: '/lab', to: '/lab?source=nav' }
 ]
 
-const isDark = computed(() => appStore.theme === 'dark')
+const trackNavItem = (item: NavItem) => {
+  if (item.path !== '/lab') return
+  trackLabAnalytics({ event: 'lab_cta_click', placement: 'header' })
+}
+
+const handleMobileNavClick = (item: NavItem) => {
+  trackNavItem(item)
+  closeMenu()
+}
 
 const isActiveRoute = (path: string) => {
   if (route.path === path) return true
@@ -180,11 +161,6 @@ const handleSearchClick = () => {
   nextTick(() => {
     openSearch()
   })
-}
-
-// 切换主题
-const toggleTheme = () => {
-  appStore.toggleTheme()
 }
 
 // 切换菜单
@@ -283,29 +259,28 @@ onUnmounted(() => {
 
 <style scoped>
 /* ============================================
-   Header — Unified Visual System v6.0
-   Dark mode is PRIMARY, light mode via :global overrides
+   Header — Single Light Visual System
    ============================================ */
 
-/* 导航栏 — Glass morphism matching dark base */
+/* 导航栏 — light glass surface */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: var(--z-header);
-  background: rgba(10, 10, 15, 0.6);
+  background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
   transition: background 300ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header--scrolled {
-  background: rgba(10, 10, 15, 0.85);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 0 rgba(226, 232, 240, 0.9), 0 8px 24px rgba(15, 23, 42, 0.08);
   border-bottom-color: transparent;
 }
 
@@ -319,18 +294,9 @@ onUnmounted(() => {
   height: 1px;
   background: linear-gradient(90deg,
       transparent 0%,
-      rgba(99, 102, 241, 0.3) 20%,
-      rgba(6, 182, 212, 0.4) 50%,
-      rgba(139, 92, 246, 0.3) 80%,
-      transparent 100%);
-}
-
-:root.dark .header--scrolled::after {
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(129, 140, 248, 0.4) 20%,
-      rgba(34, 211, 238, 0.5) 50%,
-      rgba(167, 139, 250, 0.4) 80%,
+      rgba(37, 99, 235, 0.2) 20%,
+      rgba(37, 99, 235, 0.55) 50%,
+      rgba(37, 99, 235, 0.2) 80%,
       transparent 100%);
 }
 
@@ -357,7 +323,7 @@ onUnmounted(() => {
 .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -368,8 +334,8 @@ onUnmounted(() => {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(99, 102, 241, 0.8);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+  background: #2563eb;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
 }
 
 /* 桌面端导航 */
@@ -384,7 +350,7 @@ onUnmounted(() => {
   padding: var(--us-space-3) var(--us-space-4);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  color: #475569;
   text-decoration: none;
   border-radius: var(--radius-md);
   transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -392,14 +358,14 @@ onUnmounted(() => {
 }
 
 .header__nav-link:hover {
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.04);
+  color: #0f172a;
+  background: #f1f5f9;
   transform: translateY(var(--us-lift-xs));
 }
 
 .header__nav-link--active {
-  color: rgba(99, 102, 241, 0.9);
-  background: rgba(99, 102, 241, 0.15);
+  color: #2563eb;
+  background: #eff6ff;
   font-weight: 600;
 }
 
@@ -417,10 +383,10 @@ onUnmounted(() => {
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #fff;
+  border: 1px solid #e2e8f0;
   border-radius: var(--radius-lg);
-  color: rgba(255, 255, 255, 0.5);
+  color: #475569;
   transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1),
     background 300ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -428,22 +394,14 @@ onUnmounted(() => {
 }
 
 .header__action-btn:hover {
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: #bfdbfe;
   transform: translateY(var(--us-lift-xs));
 }
 
 .header__action-btn:active {
   transform: scale(0.95);
-}
-
-.header__action-btn--theme {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.header__action-btn--theme:hover {
-  background: var(--us-accent-subtle);
 }
 
 .header__menu-btn {
@@ -457,7 +415,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--us-bg-start);
+  background: rgba(15, 23, 42, 0.2);
   z-index: calc(var(--z-header) - 1);
   opacity: 1;
   transition: opacity var(--us-duration-fast) var(--us-easing);
@@ -471,14 +429,12 @@ onUnmounted(() => {
   right: 0;
   max-height: 0;
   overflow: hidden;
-  background: var(--us-bg-start);
-  border-bottom: 1px solid var(--us-border);
-  box-shadow: var(--us-depth-2);
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
   z-index: var(--z-header-elevated);
   transition: max-height var(--us-duration-normal) var(--us-easing);
 }
-
-/* Light mode mobile menu removed — dark-only project */
 
 .header__mobile-menu--open {
   max-height: 500px;
@@ -496,7 +452,7 @@ onUnmounted(() => {
   padding: var(--us-space-4) var(--us-space-4);
   font-size: 1rem;
   font-weight: 500;
-  color: var(--us-text-secondary);
+  color: #475569;
   text-decoration: none;
   border-radius: var(--radius-md);
   transition: color var(--us-duration-fast) var(--us-easing),
@@ -505,8 +461,8 @@ onUnmounted(() => {
 
 .mobile-menu__link:hover,
 .mobile-menu__link:focus-visible {
-  color: var(--us-accent);
-  background: var(--us-accent-subtle);
+  color: #2563eb;
+  background: #eff6ff;
   outline: none;
 }
 
@@ -515,8 +471,8 @@ onUnmounted(() => {
 }
 
 .mobile-menu__link--active {
-  color: var(--us-text-primary);
-  background: var(--us-accent-subtle);
+  color: #1d4ed8;
+  background: #eff6ff;
   font-weight: 600;
 }
 
@@ -525,7 +481,7 @@ onUnmounted(() => {
   flex-direction: column;
   gap: var(--us-space-2);
   padding-top: var(--us-space-4);
-  border-top: 1px solid var(--us-border);
+  border-top: 1px solid #e2e8f0;
 }
 
 .mobile-menu__btn {
@@ -536,9 +492,9 @@ onUnmounted(() => {
   padding: var(--us-space-3) var(--us-space-4);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--us-text-secondary);
-  background: var(--us-surface);
-  border: 1px solid var(--us-border);
+  color: #475569;
+  background: #fff;
+  border: 1px solid #e2e8f0;
   border-radius: var(--radius-md);
   transition: color var(--us-duration-fast) var(--us-easing),
     background var(--us-duration-fast) var(--us-easing),
@@ -547,9 +503,9 @@ onUnmounted(() => {
 
 .mobile-menu__btn:hover,
 .mobile-menu__btn:focus-visible {
-  color: var(--us-accent);
-  background: var(--us-accent-subtle);
-  border-color: var(--us-accent-border);
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: #bfdbfe;
   outline: none;
 }
 

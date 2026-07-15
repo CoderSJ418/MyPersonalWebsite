@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 /**
  * XSS 工具函数测试
  */

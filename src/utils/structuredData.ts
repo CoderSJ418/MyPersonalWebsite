@@ -1,5 +1,6 @@
 import type { BlogPost } from '@/types/blog'
 import type { Project } from '@/types/project'
+import type { LabEffect, LabEffectMetadata } from '@/types/lab'
 
 /**
  * Generate JSON-LD structured data for the Person schema
@@ -86,5 +87,34 @@ export function breadcrumbStructuredData(items: Array<{ name: string; url: strin
       name: item.name,
       item: typeof window !== 'undefined' ? `${window.location.origin}${item.url}` : item.url,
     })),
+  }
+}
+
+export function labCollectionStructuredData(effects: LabEffectMetadata[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: '交互实验室',
+    description: '12 个可调参数、可复制源码的 Vue 交互效果。',
+    hasPart: effects.map(effect => ({
+      '@type': 'SoftwareSourceCode',
+      name: effect.name,
+      url: `/lab/${effect.id}`,
+      programmingLanguage: 'Vue',
+      license: 'https://opensource.org/license/mit',
+    })),
+  }
+}
+
+export function labEffectStructuredData(effect: LabEffect) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareSourceCode',
+    name: effect.name,
+    description: effect.description,
+    url: `/lab/${effect.id}`,
+    programmingLanguage: 'Vue',
+    runtimePlatform: 'Web Browser',
+    license: 'https://opensource.org/license/mit',
   }
 }

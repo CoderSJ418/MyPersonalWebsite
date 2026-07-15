@@ -27,6 +27,16 @@ test.describe('FeaturedProjects 展开卡片', () => {
     await expect(cards.nth(2).locator('.fp__card-title')).toHaveText('Rixoptics 光学品牌官网')
   })
 
+  test('正式发布入口保留 Projects 主 CTA 并公开 Lab 次入口', async ({ page }) => {
+    await expect(page.getByRole('navigation').getByRole('link', { name: '实验室' })).toBeVisible()
+    await expect(page.getByRole('link', { name: '查看作品集' })).toBeVisible()
+    const labCta = page.getByRole('link', { name: '探索交互实验室' })
+    await expect(labCta).toBeVisible()
+    await labCta.click()
+    await expect(page).toHaveURL(/\/lab\?source=home_cta$/)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'index,follow')
+  })
+
   test('点击卡片应展开显示详细内容', async ({ page }) => {
     const firstCard = page.locator('.fp__card').first()
 
@@ -99,6 +109,38 @@ test.describe('FeaturedProjects 展开卡片', () => {
     expect(tagTexts).toContain('Vue')
     expect(tagTexts).toContain('TypeScript')
     expect(tagTexts).toContain('Vite')
+  })
+
+  test('首页真实复用四个 Lab 旗舰效果并保持可操作', async ({ page }) => {
+    await expect(page.locator('[data-effect-consumer="aurora"]')).toBeVisible()
+    await expect(page.getByRole('link', { name: '查看作品集' })).toBeVisible()
+    await expect(page.locator('[data-effect-consumer="magic-card"]')).toHaveCount(3)
+
+    const firstCard = page.locator('.fp__card').first()
+    await firstCard.getByRole('button', { name: /澳斯康生物官网重构项目/ }).click()
+    const metrics = firstCard.locator('[data-effect-consumer="number-ticker"]')
+    await expect(metrics).toBeVisible()
+    await expect(metrics.getByText('Performance')).toBeVisible()
+
+    const contact = page.locator('[data-effect-consumer="shimmer-button"]')
+    await expect(contact).toHaveCount(0)
+    await page.locator('[data-home-deferred]').scrollIntoViewIfNeeded()
+    await expect(contact).toHaveCount(1)
+    await expect(contact.getByRole('link', { name: '联系我' })).toHaveAttribute('href', /^mailto:/)
+  })
+
+  test('旗舰效果尊重 reduced-motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.reload()
+    const auroraAnimation = await page.locator('.aurora__band').first().evaluate((element) =>
+      getComputedStyle(element).animationName
+    )
+    await page.locator('[data-home-deferred]').scrollIntoViewIfNeeded()
+    const shimmerDisplay = await page.locator('.shimmer-button').evaluate((element) =>
+      getComputedStyle(element, '::after').display
+    )
+    expect(auroraAnimation).toBe('none')
+    expect(shimmerDisplay).toBe('none')
   })
 
   test('页面应无 JavaScript 错误', async ({ page }) => {

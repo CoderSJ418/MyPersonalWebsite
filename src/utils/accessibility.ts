@@ -152,13 +152,11 @@ export function applyAccessibilityOptimizations(): CleanupFunction {
 export function checkAccessibilityStatus(): {
   prefersReducedMotion: boolean
   prefersHighContrast: boolean
-  prefersColorScheme: 'light' | 'dark'
   keyboardNavigation: boolean
 } {
   return {
     prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     prefersHighContrast: window.matchMedia('(prefers-contrast: high)').matches,
-    prefersColorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
     keyboardNavigation: document.documentElement.classList.contains('keyboard-nav')
   }
 }
@@ -393,10 +391,10 @@ export function validatePageAccessibility(): {
   // 检查标题层级
   const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6')
   let currentLevel = 1
-  headings.forEach((heading) => {
+  headings.forEach((heading, index) => {
     const level = parseInt(heading.tagName[1])
     if (level > currentLevel + 1) {
-      errors.push(`标题层级跳跃: ${heading.tagName} 后跟 ${headings[headings.indexOf(heading) + 1]?.tagName}`)
+      errors.push(`标题层级跳跃: ${heading.tagName} 后跟 ${headings[index + 1]?.tagName}`)
     }
     currentLevel = level
   })

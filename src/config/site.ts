@@ -30,7 +30,7 @@ export const siteConfig = {
   },
 
   // 网站 URL
-  url: 'https://shejie1995.gitee.io/my-personal-website/',
+  url: 'https://my-personal-website-eta-murex.vercel.app/',
 
   // 其他配置
   themeColor: '#3b82f6'

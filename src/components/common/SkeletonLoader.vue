@@ -40,10 +40,6 @@ withDefaults(defineProps<Props>(), {
   border-radius: var(--radius-sm);
 }
 
-.dark .skeleton-loader {
-  background-color: var(--us-surface, rgba(255, 255, 255, 0.08));
-}
-
 /* Shimmer 动画 */
 .skeleton-loader__shimmer {
   position: absolute;
@@ -53,10 +49,6 @@ withDefaults(defineProps<Props>(), {
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   animation: shimmer 1.5s infinite;
-}
-
-.dark .skeleton-loader__shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
 
 @keyframes shimmer {

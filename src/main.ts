@@ -1,6 +1,6 @@
 /**
  * 应用入口
- * 
+ *
  * 职责：创建 Vue 应用实例，注册插件，挂载应用
  * 初始化逻辑已拆分到 src/boot/ 目录
  */
@@ -8,15 +8,18 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-import { initializeApp } from './boot'
+import { enforceLightMode } from './boot/light-mode'
+import { loadVisualEnhancements } from './boot/visual-enhancements'
 import { installRoutePrefetch } from './utils/routePrefetch'
+import { initializePrivacyAnalytics } from './services/privacyAnalytics'
 
 // 样式导入
 import './assets/styles/main.css'
 import './assets/styles/design-system.css'
-import './assets/stripe-effects.css'
 
 // 创建应用实例
+enforceLightMode()
+initializePrivacyAnalytics()
 const app = createApp(App)
 const pinia = createPinia()
 
@@ -33,6 +36,4 @@ app.directive('spotlight', vSpotlight)
 
 // 挂载应用（不阻塞字体加载，优先渲染）
 app.mount('#app')
-
-// 初始化子系统（字体非阻塞加载、Service Worker）
-initializeApp(app)
+loadVisualEnhancements()

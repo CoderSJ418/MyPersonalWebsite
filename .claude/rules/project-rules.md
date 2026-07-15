@@ -166,18 +166,17 @@ New code must use Tailwind CSS utility classes. `<style scoped>` is permitted on
 **Current target:** Zero `<style scoped>` blocks in all `src/views/*.vue` files.
 Components in `components/` are lower priority but should also be migrated.
 
-### 4.2 CSS custom properties (`var(--*)`) are deprecated for new code
+### 4.2 CSS custom properties (`var(--*)`) are reserved for design tokens
 
-The project is migrating from `var(--bg-primary)`, `var(--text-secondary)`, etc.
-to Tailwind `dark:` variants. New code must use `dark:`. Existing `var()` usages
-in `<style scoped>` blocks are tracked but not an immediate blocker — they die
-when the containing component is migrated.
+New component code uses Tailwind utilities or named tokens from `design-system/`.
+Do not introduce component-local color variables or duplicate raw color values.
+Legacy theme-switching variables are removed during the single-light Phase 0 migration.
 
-### 4.3 Every colored element needs a dark mode variant
+### 4.3 New code targets one light visual mode
 
-If you add `text-slate-900` or `bg-white`, you must add `dark:text-slate-100` or
-`dark:bg-slate-900`. There is no "we'll add dark mode later." The site ships with
-dark mode enabled and it is the primary experience for a significant portion of users.
+The product has one light presentation mode. New code must not add `dark:` variants,
+theme-switching branches, or `prefers-color-scheme` behavior. Existing dark-mode code
+is a temporary Phase 0 migration exception: it may be removed, but not extended.
 
 ### 4.4 Responsive is mobile-first, always
 
@@ -245,7 +244,7 @@ create circular dependency risk and make testing impossible.
 
 ### 6.4 useAppStore is the only cross-cutting store
 
-`useAppStore` manages global UI concerns (theme, menu, toasts, modals, breadcrumbs).
+`useAppStore` manages global UI concerns (menu, toasts, modals, breadcrumbs).
 Domain data has its own store. Never add cross-cutting concerns (like "is sidebar
 open" or "current breadcrumb") to a domain store.
 
@@ -349,13 +348,14 @@ doesn't check it, it's not production-ready.
 
 ---
 
-## 10. Theme System
+## 10. Visual Mode
 
-### 10.1 Dark mode toggles via `class` strategy on `<html>`
+### 10.1 The site has one light presentation mode
 
-`tailwind.config.js` sets `darkMode: 'class'`. The `dark` class is added/removed
-on the `<html>` element by `useThemeStore`. Never use `darkMode: 'media'` — it
-prevents manual theme toggling and makes the theme toggle button non-functional.
+The accepted product mode is light-only with `#2563EB` as the primary accent.
+Do not add a theme toggle, theme store, persisted theme preference, `dark` class,
+`data-theme` switch, or alternate color-scheme branch. Phase 0 removes the legacy
+infrastructure and clears or ignores previously persisted dark preferences.
 
 ### 10.2 Design tokens are defined in design-system/, not in components
 
@@ -365,10 +365,9 @@ about to type a color value in a component, stop — that's a design token.
 
 ### 10.3 Don't mix token systems
 
-The project has two parallel systems: Tailwind utilities (new) and CSS custom
-properties (legacy). New code uses Tailwind. When migrating an old component,
-remove the CSS variable usage entirely — do not leave both systems active, which
-creates cascade conflicts.
+New code uses Tailwind utilities and named design tokens. When migrating a legacy
+component, remove theme-switching variables and dark variants instead of leaving
+parallel visual systems active, which creates cascade conflicts.
 
 ---
 
