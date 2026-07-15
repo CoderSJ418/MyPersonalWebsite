@@ -39,9 +39,9 @@
 
 ## 最新自动化证据
 
-- 当前分支：`codex/blog-content-rebuild`；博客、真实项目案例与发布门修复已推送至 `9fbb322`。
+- 当前分支：`codex/blog-content-rebuild`；远端分支与 `main` 均已快进至证据提交 `fdcae37`。
 - Vercel Preview：`dpl_6gJsN5cbGaj7k37KrxwPLtP18jde`，状态 Ready；URL：`https://my-personal-website-d3uaqpqeh-codersj418s-projects.vercel.app`。Preview 启用了 Vercel Deployment Protection，匿名浏览器会进入登录页。
-- Vercel Production：`https://my-personal-website-98fi6t9wb-codersj418s-projects.vercel.app` 已完成并绑定 `https://my-personal-website-eta-murex.vercel.app`。
+- Vercel Production：main 自动部署 `dpl_9aLHSFGGvUKPxN2CnnPeVd2edkiW` 已 Ready，并绑定 `https://my-personal-website-eta-murex.vercel.app`；手动发布仅作为同代码基线的前置验证。
 - `npm run content:check`：18/18；2024、2025、2026 各 6 篇，旧占位文本和重复索引已清除。
 - 内容门禁已统一 CRLF/LF 后再比较；Windows 干净检出、本地 `vercel build` 与 Vercel Linux 无缓存构建均通过，真实元数据漂移仍保持失败。
 - `npm run test:coverage`：164/164；Statements 79.80%、Branches 70.60%、Functions 75.75%、Lines 81.14%。
@@ -66,10 +66,9 @@
 
 ## 下次启动第一步
 
-1. GitHub 443 恢复后推送本地证据提交，并将 `codex/blog-content-rebuild` 快进到 `main`；Production 已从同一代码提交 `9fbb322` 发布，不需重复改代码。
-2. 在 GA4 管理后台确认数据保留期为 2 个月，并关闭 Google Signals 与广告个性化；这一步需要账号持有人人工核验。
-3. 发布后累计至少 50 次合格 Lab 会话，再按 PRD 公式评估打开、展开、复制和 Projects 主路径占比。
-4. 独立 5 人研究继续作为未来研究债务；Phase 5 每批最多 4 个，候选必须先证明复用场景、差异和真实消费方向。
+1. 在 GA4 管理后台确认数据保留期为 2 个月，并关闭 Google Signals 与广告个性化；当前机器无 Google Analytics 管理凭据，仓库检查无法代替后台证据。
+2. 发布后累计至少 50 次合格 Lab 会话，再按 PRD 公式评估打开、展开、复制和 Projects 主路径占比。
+3. 独立 5 人研究继续作为未来研究债务；Phase 5 每批最多 4 个，候选必须先证明复用场景、差异和真实消费方向。
 
 ## 重要提醒
 
