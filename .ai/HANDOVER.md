@@ -37,6 +37,7 @@
 
 ## 最新自动化证据
 
+- 发布分支：`codex/interaction-lab-release`；发布提交：`bbb0d73`；生产证据提交：`cdef3eb`；人工审核入口：[GitHub PR #1](https://github.com/CoderSJ418/MyPersonalWebsite/pull/1)。
 - `npm run test:coverage`：155/155；Statements 79.67%、Branches 70.61%、Functions 75.37%、Lines 80.92%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
 - `npm run test:e2e`：19/19；`npm run build` 与强化后的 `npm run validate:lab` 通过。
