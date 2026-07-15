@@ -90,8 +90,12 @@ const handleClick = (event: MouseEvent) => {
   }
   emit('click')
 }
-const handleTagClick = (tag: string) => { emit('tag-click', tag) }
-const handleCategoryClick = () => { emit('category-click', props.category) }
+const handleTagClick = (tag: string) => {
+  emit('tag-click', tag)
+}
+const handleCategoryClick = () => {
+  emit('category-click', props.category)
+}
 
 const formatShortDate = (dateStr: string): string => {
   if (!dateStr) return ''
@@ -99,7 +103,9 @@ const formatShortDate = (dateStr: string): string => {
     const d = new Date(dateStr)
     if (isNaN(d.getTime())) return dateStr
     return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`
-  } catch { return dateStr }
+  } catch {
+    return dateStr
+  }
 }
 
 import { ref, onUnmounted } from 'vue'
@@ -116,7 +122,22 @@ onUnmounted(() => {
 
 <template>
   <!-- ===== PROJECT VARIANT — Solid Card + Visual Focus ===== -->
-  <a v-if="variant === 'project'" ref="cardRef" class="pc vs-light-surface stripe-border" :href="href || undefined" @click="handleClick">
+  <a
+    v-if="variant === 'project'"
+    ref="cardRef"
+    class="pc vs-light-surface stripe-border"
+    :href="href || undefined"
+    @click="handleClick"
+  >
+    <div v-if="coverImage" class="pc__cover">
+      <SafeImage
+        :src="coverImage"
+        :alt="coverAlt || title"
+        image-class="pc__cover-img"
+        object-fit="cover"
+      />
+    </div>
+
     <!-- Content -->
     <div class="pc__content">
       <!-- Impact Metrics — floating badges -->
@@ -136,14 +157,35 @@ onUnmounted(() => {
       <!-- Footer: Tags pill system + Link -->
       <div class="pc__footer">
         <div v-if="tags.length > 0" class="pc__tags">
-          <span v-for="tag in tags.slice(0, maxTags)" :key="tag" class="pc__tag" @click.stop="handleTagClick(tag)">{{
-            tag }}</span>
-          <span v-if="tags.length > maxTags" class="pc__tag pc__tag--more">+{{ tags.length - maxTags }}</span>
+          <span
+            v-for="tag in tags.slice(0, maxTags)"
+            :key="tag"
+            class="pc__tag"
+            @click.stop="handleTagClick(tag)"
+            >{{ tag }}</span
+          >
+          <span v-if="tags.length > maxTags" class="pc__tag pc__tag--more"
+            >+{{ tags.length - maxTags }}</span
+          >
         </div>
 
-        <a v-if="linkUrl" :href="linkUrl" class="pc__link" target="_blank" rel="noopener noreferrer" @click.stop>
+        <a
+          v-if="linkUrl"
+          :href="linkUrl"
+          class="pc__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click.stop
+        >
           {{ linkLabel }}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>
@@ -152,18 +194,32 @@ onUnmounted(() => {
   </a>
   <!-- ===== BLOG VARIANT — CARD mode (featured) ===== -->
   <a
-v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured ? 'bc--featured' : 'bc--standard'"
-    :href="href || undefined" @click="handleClick">
+    v-else-if="variant === 'blog' && layout === 'card'"
+    class="bc"
+    :class="featured ? 'bc--featured' : 'bc--standard'"
+    :href="href || undefined"
+    @click="handleClick"
+  >
     <!-- 封面图 -->
     <div v-if="coverImage" class="bc__cover">
-      <SafeImage :src="coverImage" :alt="coverAlt || title" image-class="bc__cover-img" object-fit="cover" />
+      <SafeImage
+        :src="coverImage"
+        :alt="coverAlt || title"
+        image-class="bc__cover-img"
+        object-fit="cover"
+      />
     </div>
 
     <!-- 内容区 -->
     <div class="bc__body">
       <!-- Meta: category · date · readTime -->
       <div v-if="category || date || readTime" class="bc__meta">
-        <button v-if="category" type="button" class="bc__category" @click.stop="handleCategoryClick">
+        <button
+          v-if="category"
+          type="button"
+          class="bc__category"
+          @click.stop="handleCategoryClick"
+        >
           {{ category }}
         </button>
         <span v-if="category && (date || readTime)" class="bc__dot">·</span>
@@ -181,12 +237,24 @@ v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured 
       <!-- Footer: Tags + Arrow -->
       <div class="bc__footer">
         <div v-if="tags.length > 0" class="bc__tags">
-          <span v-for="tag in tags.slice(0, maxTags)" :key="tag" class="bc__tag" @click.stop="handleTagClick(tag)">
+          <span
+            v-for="tag in tags.slice(0, maxTags)"
+            :key="tag"
+            class="bc__tag"
+            @click.stop="handleTagClick(tag)"
+          >
             {{ tag }}
           </span>
         </div>
         <span class="bc__arrow" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
             <path d="M3 8h10M9 4l4 4-4 4" />
           </svg>
         </span>
@@ -207,11 +275,19 @@ v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured 
       </div>
     </div>
     <span class="bf__arrow" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
         <path d="M3 8h10M9 4l4 4-4 4" />
       </svg>
     </span>
-  </a></template>
+  </a>
+</template>
 
 <style scoped>
 /* ============================================================
@@ -237,7 +313,6 @@ v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured 
   background: var(--us-surface);
   border: 1px solid var(--us-border);
   border-radius: var(--us-card-radius);
-  padding: var(--us-card-padding-lg);
   /* Hover: lift + shadow expansion */
   transform-style: preserve-3d;
   /* Shadow: base state — depth-1 + subtle accent glow (dark mode) */
@@ -305,6 +380,29 @@ v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured 
   flex-direction: column;
   gap: var(--us-space-3);
   flex: 1;
+  padding: var(--us-card-padding-lg);
+}
+
+.pc__cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--us-bg-subtle);
+}
+
+.pc__cover :deep(.image-wrapper),
+.pc__cover :deep(.pc__cover-img) {
+  width: 100%;
+  height: 100%;
+}
+
+.pc__cover :deep(.pc__cover-img) {
+  object-fit: cover;
+  transition: transform var(--us-duration-slow) var(--us-easing);
+}
+
+.pc:hover .pc__cover :deep(.pc__cover-img) {
+  transform: scale(1.02);
 }
 
 /* ── Impact Metrics — floating badges ── */
@@ -820,8 +918,6 @@ v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured 
   color: var(--us-accent);
 }
 
-
-
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .pc {
@@ -893,7 +989,6 @@ v-else-if="variant === 'blog' && layout === 'card'" class="bc" :class="featured 
 
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
-
   .pc,
   .bc,
   .bf,

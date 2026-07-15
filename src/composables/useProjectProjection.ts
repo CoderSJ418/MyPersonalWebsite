@@ -8,7 +8,7 @@
  */
 
 import type { ProjectDetail } from '@/types/project'
-import type { RecruitView, ReaderView, NarrativeView } from '@/types/view-contract'
+import type { NarrativeView, ProjectCaseView, ReaderView, RecruitView } from '@/types/view-contract'
 
 /** 格式化技术栈标签 — 数据转换在selector层完成 */
 function formatTechLabel(tech: { name: string; version: string }): string {
@@ -23,9 +23,10 @@ export function getRecruitView(project: ProjectDetail): RecruitView | null {
   if (!project.narrative) return null
 
   return {
+    ...toCaseView(project),
     title: project.title,
     description: project.description,
-    techStack: project.techStack.map(t => ({
+    techStack: project.techStack.map((t) => ({
       name: t.name,
       version: t.version,
       displayLabel: formatTechLabel(t)
@@ -42,9 +43,10 @@ export function getRecruitView(project: ProjectDetail): RecruitView | null {
  */
 export function getReaderView(project: ProjectDetail): ReaderView {
   return {
+    ...toCaseView(project),
     title: project.title,
     description: project.description,
-    techStack: project.techStack.map(t => ({
+    techStack: project.techStack.map((t) => ({
       name: t.name,
       version: t.version,
       displayLabel: formatTechLabel(t)
@@ -68,6 +70,18 @@ export function getReaderView(project: ProjectDetail): ReaderView {
       highlights: project.results.highlights
     },
     screenshots: project.screenshots
+  }
+}
+
+/** 内部转换：职责字段保持可选，旧项目无需迁移 */
+function toCaseView(project: ProjectDetail): ProjectCaseView {
+  return {
+    role: project.role,
+    teamContext: project.teamContext,
+    platforms: project.platforms,
+    responsibilities: project.responsibilities,
+    teamResults: project.teamResults,
+    constraints: project.constraints
   }
 }
 

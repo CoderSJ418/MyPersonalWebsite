@@ -54,9 +54,21 @@ export interface ProjectNarrative {
 }
 
 /**
+ * 真实项目中的职责与协作边界
+ */
+export interface ProjectCaseContext {
+  role?: string
+  teamContext?: string
+  platforms?: string[]
+  responsibilities?: string[]
+  teamResults?: string[]
+  constraints?: string[]
+}
+
+/**
  * 项目详情（扩展项目信息）
  */
-export interface ProjectDetail extends Project {
+export interface ProjectDetail extends Project, ProjectCaseContext {
   background: string
   goals: string[]
   features: string[]

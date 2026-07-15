@@ -31,7 +31,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Projects.vue'),
     meta: {
       title: '项目展示',
-      description: '我的项目作品集'
+      description: '真实商业项目中的跨端开发、状态建模、性能优化与组件化实践'
     }
   },
   {
@@ -40,7 +40,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/ProjectDetail.vue'),
     meta: {
       title: '项目详情',
-      description: '项目详细信息'
+      description: '项目职责、工程挑战、技术方案与可验证成果'
     },
     props: true
   },

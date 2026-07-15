@@ -14,6 +14,8 @@ import ProjectDetailHeader from './ProjectDetailHeader.vue'
 import ProjectDetailContent from './ProjectDetailContent.vue'
 import ProjectDetailRelated from './ProjectDetailRelated.vue'
 import ProjectNarrative from './ProjectNarrative.vue'
+import ProjectCaseContext from './ProjectCaseContext.vue'
+import ProjectViewModeSwitch from './ProjectViewModeSwitch.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -28,8 +30,8 @@ const error = computed(() => projectStore.error)
 const relatedProjects = computed(() => projectStore.getRelatedProjects(route.params.id as string))
 
 /** Projection: Source → Contract */
-const recruitView = computed(() => project.value ? getRecruitView(project.value) : null)
-const readerView = computed(() => project.value ? getReaderView(project.value) : null)
+const recruitView = computed(() => (project.value ? getRecruitView(project.value) : null))
+const readerView = computed(() => (project.value ? getReaderView(project.value) : null))
 
 /** 是否有narrative（决定Recruit Mode是否可用） */
 const hasNarrative = computed(() => recruitView.value !== null)
@@ -40,14 +42,17 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
   return [
     { text: '首页', path: '/' },
     { text: '项目', path: '/projects' },
-    { text: project.value.title, path: `/projects/${project.value.id}`, disabled: true },
+    { text: project.value.title, path: `/projects/${project.value.id}`, disabled: true }
   ]
 })
 
 /** 切换项目时重置为recruit模式 */
-watch(() => route.params.id, () => {
-  switchToRecruit()
-})
+watch(
+  () => route.params.id,
+  () => {
+    switchToRecruit()
+  }
+)
 
 const handleBack = () => {
   router.push('/projects')
@@ -77,8 +82,13 @@ onMounted(() => {
 
 <template>
   <DetailLayout
-:loading="loading" :error="error" :not-found="!project && !loading && !error" not-found-text="项目不存在"
-    @back="handleBack" @retry="handleRetry">
+    :loading="loading"
+    :error="error"
+    :not-found="!project && !loading && !error"
+    not-found-text="项目不存在"
+    @back="handleBack"
+    @retry="handleRetry"
+  >
     <template #progress>
       <ReadingProgress />
     </template>
@@ -89,14 +99,35 @@ onMounted(() => {
     <!-- ===== 决策层：招聘者10秒判断信息 ===== -->
 
     <!-- 有narrative + Recruit Mode：Narrative替代Header -->
-    <ProjectNarrative v-if="hasNarrative && isRecruit && recruitView" :data="recruitView" density="recruit" />
+    <ProjectNarrative
+      v-if="hasNarrative && isRecruit && recruitView"
+      :data="recruitView"
+      density="recruit"
+    />
 
     <!-- 无narrative回退：传统Header -->
-    <ProjectDetailHeader v-if="!hasNarrative && project" :project="project" @tech-stack-click="handleTechStackClick" />
+    <ProjectDetailHeader
+      v-if="!hasNarrative && project"
+      :project="project"
+      @tech-stack-click="handleTechStackClick"
+    />
 
     <!-- Reader Mode：Narrative(导读) + Details -->
     <template v-if="hasNarrative && isReader && readerView">
       <ProjectNarrative :data="readerView" density="reader" />
+    </template>
+
+    <ProjectViewModeSwitch
+      v-if="hasNarrative"
+      :is-recruit="isRecruit"
+      :is-reader="isReader"
+      @select-recruit="switchToRecruit"
+      @select-reader="switchToReader"
+    />
+
+    <ProjectCaseContext v-if="isRecruit && recruitView" :data="recruitView" density="recruit" />
+    <template v-if="isReader && readerView">
+      <ProjectCaseContext :data="readerView" density="reader" />
       <ProjectDetailContent :data="readerView" />
     </template>
 
@@ -104,23 +135,15 @@ onMounted(() => {
     <ProjectDetailContent v-if="!hasNarrative && readerView" :data="readerView" />
 
     <ProjectDetailRelated
-v-if="relatedProjects.length > 0" :projects="relatedProjects"
-      @navigate="handleRelatedNavigate" />
+      v-if="relatedProjects.length > 0"
+      :projects="relatedProjects"
+      @navigate="handleRelatedNavigate"
+    />
 
     <!-- ===== 非决策层：行为控制（降级） ===== -->
     <div class="pn-demoted">
       <!-- 导航 — 降级为非决策信息，不抢占第一屏注意力 -->
       <DetailNav back-label="返回作品集" back-aria-label="返回项目列表" @back="handleBack" />
-
-      <!-- 模式切换 — 降级为非决策信息，不抢占第一屏注意力 -->
-      <div v-if="hasNarrative" class="mode-bar">
-        <button class="mode-bar__btn" :class="{ 'mode-bar__btn--active': isRecruit }" @click="switchToRecruit">
-          Recruit
-        </button>
-        <button class="mode-bar__btn" :class="{ 'mode-bar__btn--active': isReader }" @click="switchToReader">
-          Reader
-        </button>
-      </div>
     </div>
   </DetailLayout>
 </template>
@@ -130,52 +153,6 @@ v-if="relatedProjects.length > 0" :projects="relatedProjects"
    Project Detail Container — Unified System v3.0
    us-* tokens + component-level private tokens
    ═══════════════════════════════════════════════════════ */
-
-/* ─── Component-Level Private Tokens ─────────────────── */
-.pn-demoted {
-  --pd-hover-opacity: 0.8;
-}
-
-/* ─── Mode Bar — 视图切换 ────────────────────────────── */
-.mode-bar {
-  display: flex;
-  gap: 0;
-  margin-bottom: 0;
-  border: 1px solid var(--us-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  width: fit-content;
-  align-self: center;
-}
-
-@media (min-width: 768px) {
-  .mode-bar {
-    align-self: auto;
-  }
-}
-
-.mode-bar__btn {
-  padding: var(--us-space-2) var(--us-space-5);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--us-text-secondary);
-  background: var(--us-surface);
-  border: none;
-  transition: opacity var(--us-duration-fast) var(--us-easing),
-    background var(--us-duration-fast) var(--us-easing);
-}
-
-.mode-bar__btn--active {
-  color: var(--us-text-primary);
-  background: var(--us-accent);
-}
-
-.mode-bar__btn:not(.mode-bar__btn--active):hover {
-  color: var(--us-text-primary);
-  background: var(--us-surface-hover);
-  opacity: var(--pd-hover-opacity);
-}
 
 /* ─── Demoted Area — 行为控制不抢占决策注意力 ─────────── */
 .pn-demoted {

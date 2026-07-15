@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">黑桃奢双端多角色平台架构</title>
+  <desc id="desc">消费者端和商家端通过共享状态、时间和列表模型连接业务角色</desc>
+  <rect width="1200" height="675" rx="48" fill="#F8FAFC"/>
+  <path d="M0 520C240 420 380 650 640 530s350-190 560-85v230H0Z" fill="#DBEAFE"/>
+  <circle cx="1010" cy="120" r="150" fill="#E0E7FF"/>
+  <text x="88" y="112" fill="#1E3A8A" font-family="sans-serif" font-size="28" font-weight="700">BLACK PEACH · MULTI-ROLE COMMERCE</text>
+  <text x="88" y="164" fill="#475569" font-family="sans-serif" font-size="22">双端协作 · 状态建模 · 跨端业务组件</text>
+  <g font-family="sans-serif" text-anchor="middle">
+    <rect x="88" y="250" width="250" height="150" rx="28" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="3"/>
+    <text x="213" y="315" fill="#1E40AF" font-size="28" font-weight="700">消费者端</text>
+    <text x="213" y="355" fill="#64748B" font-size="18">回收 · 估价 · 订单</text>
+    <rect x="862" y="250" width="250" height="150" rx="28" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="3"/>
+    <text x="987" y="315" fill="#1E40AF" font-size="28" font-weight="700">商家端</text>
+    <text x="987" y="355" fill="#64748B" font-size="18">6 类角色分区</text>
+    <rect x="426" y="220" width="348" height="210" rx="36" fill="#2563EB"/>
+    <text x="600" y="285" fill="#FFFFFF" font-size="28" font-weight="700">可靠业务基础模型</text>
+    <text x="600" y="335" fill="#DBEAFE" font-size="20">Auction FSM</text>
+    <text x="600" y="370" fill="#DBEAFE" font-size="20">Server Time Sync</text>
+    <text x="600" y="405" fill="#DBEAFE" font-size="20">Request Sequence</text>
+  </g>
+  <path d="M338 325h88M774 325h88" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+</svg>

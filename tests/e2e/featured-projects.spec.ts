@@ -22,9 +22,9 @@ test.describe('FeaturedProjects 展开卡片', () => {
     await expect(cards).toHaveCount(3)
 
     // 验证第一张卡片标题
-    await expect(cards.nth(0).locator('.fp__card-title')).toHaveText('澳斯康生物官网重构项目')
-    await expect(cards.nth(1).locator('.fp__card-title')).toHaveText('企业后台管理系统')
-    await expect(cards.nth(2).locator('.fp__card-title')).toHaveText('Rixoptics 光学品牌官网')
+    await expect(cards.nth(0).locator('.fp__card-title')).toHaveText('黑桃奢多角色奢侈品交易平台')
+    await expect(cards.nth(1).locator('.fp__card-title')).toHaveText('蜂鸟生活跨端商城迁移')
+    await expect(cards.nth(2).locator('.fp__card-title')).toHaveText('澳斯康生物官网重构项目')
   })
 
   test('正式发布入口保留 Projects 主 CTA 并公开 Lab 次入口', async ({ page }) => {
@@ -52,7 +52,7 @@ test.describe('FeaturedProjects 展开卡片', () => {
     await expect(expandable).toHaveCSS('max-height', /[1-9]\d+px/)
 
     // 验证展开内容包含关键信息
-    await expect(firstCard.locator('.fp__card-desc')).toContainText('Vue 3 + TypeScript')
+    await expect(firstCard.locator('.fp__card-desc')).toContainText('竞拍状态建模')
     await expect(firstCard.locator('.fp__narrative')).toBeVisible()
     await expect(firstCard.locator('.fp__metrics')).toBeVisible()
   })
@@ -111,10 +111,40 @@ test.describe('FeaturedProjects 展开卡片', () => {
     expect(tagTexts).toContain('Vite')
   })
 
+  test('真实项目详情区分个人贡献与团队成果', async ({ page }) => {
+    await page.goto('/projects')
+    const cover = page.getByAltText('黑桃奢多角色奢侈品交易平台')
+    await cover.scrollIntoViewIfNeeded()
+    await expect(cover).toBeVisible()
+    expect(await cover.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0)
+
+    await page.goto('/projects/4')
+    await expect(page.getByRole('heading', { name: '黑桃奢多角色奢侈品交易平台' })).toBeVisible()
+    await expect(
+      page.getByText('核心前端开发，负责用户端与商家端关键业务架构和交互落地')
+    ).toBeVisible()
+    await expect(page.getByRole('heading', { name: '我的贡献' })).toBeVisible()
+    await expect(page.getByRole('link', { name: '查看演示' })).toHaveCount(0)
+
+    await page.getByRole('button', { name: 'Reader' }).click()
+    await expect(page.getByRole('heading', { name: '团队成果' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: '案例边界' })).toBeVisible()
+
+    await page.setViewportSize({ width: 375, height: 812 })
+    await page.goto('/projects/5')
+    await expect(page.getByRole('heading', { name: '蜂鸟生活跨端商城迁移' })).toBeVisible()
+    const widths = await page.evaluate(() => ({
+      document: document.documentElement.scrollWidth,
+      viewport: innerWidth
+    }))
+    expect(widths.document).toBe(widths.viewport)
+  })
+
   test('首页项目卡片默认使用轻量边界而非整圈渐变', async ({ page }) => {
-    const backgroundImage = await page.locator('[data-effect-consumer="magic-card"]').first().evaluate((element) =>
-      getComputedStyle(element).backgroundImage
-    )
+    const backgroundImage = await page
+      .locator('[data-effect-consumer="magic-card"]')
+      .first()
+      .evaluate((element) => getComputedStyle(element).backgroundImage)
     expect(backgroundImage).not.toContain('conic-gradient')
   })
 
@@ -124,10 +154,10 @@ test.describe('FeaturedProjects 展开卡片', () => {
     await expect(page.locator('[data-effect-consumer="magic-card"]')).toHaveCount(3)
 
     const firstCard = page.locator('.fp__card').first()
-    await firstCard.getByRole('button', { name: /澳斯康生物官网重构项目/ }).click()
+    await firstCard.getByRole('button', { name: /黑桃奢多角色奢侈品交易平台/ }).click()
     const metrics = firstCard.locator('[data-effect-consumer="number-ticker"]')
     await expect(metrics).toBeVisible()
-    await expect(metrics.getByText('Performance')).toBeVisible()
+    await expect(metrics.getByText('业务端')).toBeVisible()
 
     const contact = page.locator('[data-effect-consumer="shimmer-button"]')
     await expect(contact).toHaveCount(0)
@@ -139,13 +169,14 @@ test.describe('FeaturedProjects 展开卡片', () => {
   test('旗舰效果尊重 reduced-motion', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.reload()
-    const auroraAnimation = await page.locator('.aurora__band').first().evaluate((element) =>
-      getComputedStyle(element).animationName
-    )
+    const auroraAnimation = await page
+      .locator('.aurora__band')
+      .first()
+      .evaluate((element) => getComputedStyle(element).animationName)
     await page.locator('[data-home-deferred]').scrollIntoViewIfNeeded()
-    const shimmerDisplay = await page.locator('.shimmer-button').evaluate((element) =>
-      getComputedStyle(element, '::after').display
-    )
+    const shimmerDisplay = await page
+      .locator('.shimmer-button')
+      .evaluate((element) => getComputedStyle(element, '::after').display)
     expect(auroraAnimation).toBe('none')
     expect(shimmerDisplay).toBe('none')
   })
@@ -158,10 +189,8 @@ test.describe('FeaturedProjects 展开卡片', () => {
     await page.waitForTimeout(3000)
 
     // 过滤掉已知的非关键错误（如 analytics）
-    const criticalErrors = errors.filter(e =>
-      !e.includes('Google Analytics') &&
-      !e.includes('preload') &&
-      !e.includes('favicon')
+    const criticalErrors = errors.filter(
+      (e) => !e.includes('Google Analytics') && !e.includes('preload') && !e.includes('favicon')
     )
 
     expect(criticalErrors).toHaveLength(0)

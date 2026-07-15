@@ -16,6 +16,8 @@ interface FeaturedProject {
   category?: string
   description: string
   techStack: Array<string | { name: string }>
+  demoUrl?: string
+  liveUrl?: string
   narrative?: {
     challenge: string
     approach: string
@@ -31,19 +33,43 @@ const expandedId = ref<string | null>(null)
 // Static fallback data (used when store is unavailable)
 const fallbackProjects = [
   {
-    id: '1', title: '澳斯康生物官网重构项目', category: '企业官网',
-    description: 'Vue 3 + TypeScript 重构的生物制药企业官网，首屏加载从 3.5s 降至 1.5s，Lighthouse Performance 96 分。',
+    id: '1',
+    title: '澳斯康生物官网重构项目',
+    category: '企业官网',
+    description:
+      'Vue 3 + TypeScript 重构的生物制药企业官网，首屏加载从 3.5s 降至 1.5s，Lighthouse Performance 96 分。',
     techStack: ['Vue', 'TypeScript', 'Vite', 'Element Plus'],
-    narrative: { challenge: '原官网技术栈老旧，首屏加载超过 3.5 秒', approach: 'Vue 3 Composition API + TypeScript + Vite 全量重构', impact: '首屏从3.5s降至1.5s，Performance 96、SEO 98', metrics: [{ label: '首屏加载', value: '1.5s' }, { label: 'Lighthouse', value: '96分' }] }
+    narrative: {
+      challenge: '原官网技术栈老旧，首屏加载超过 3.5 秒',
+      approach: 'Vue 3 Composition API + TypeScript + Vite 全量重构',
+      impact: '首屏从3.5s降至1.5s，Performance 96、SEO 98',
+      metrics: [
+        { label: '首屏加载', value: '1.5s' },
+        { label: 'Lighthouse', value: '96分' }
+      ]
+    }
   },
   {
-    id: '2', title: '企业后台管理系统', category: 'SaaS',
-    description: '基于 Vue 3 + Element Plus 的企业级后台管理系统，支持 20+ 业务模块，权限系统被多个项目复用。',
+    id: '2',
+    title: '企业后台管理系统',
+    category: 'SaaS',
+    description:
+      '基于 Vue 3 + Element Plus 的企业级后台管理系统，支持 20+ 业务模块，权限系统被多个项目复用。',
     techStack: ['Vue', 'TypeScript', 'Pinia', 'Element Plus'],
-    narrative: { challenge: '多业务线管理混乱，权限系统零散', approach: '模块化架构 + RBAC 权限系统', impact: '开发效率提升 40%，维护成本降低 60%', metrics: [{ label: '业务模块', value: '20+' }, { label: '效率提升', value: '40%' }] }
+    narrative: {
+      challenge: '多业务线管理混乱，权限系统零散',
+      approach: '模块化架构 + RBAC 权限系统',
+      impact: '开发效率提升 40%，维护成本降低 60%',
+      metrics: [
+        { label: '业务模块', value: '20+' },
+        { label: '效率提升', value: '40%' }
+      ]
+    }
   },
   {
-    id: '3', title: 'Rixoptics 光学品牌官网', category: '品牌官网',
+    id: '3',
+    title: 'Rixoptics 光学品牌官网',
+    category: '品牌官网',
     description: '基于 WordPress 主题定制的精密光学产品官网，首屏加载从 4 秒优化到 2 秒以内。',
     techStack: ['WordPress', 'JavaScript', 'jQuery'],
     narrative: null
@@ -56,7 +82,8 @@ const featuredProjects = computed<FeaturedProject[]>(() => {
   return fallbackProjects
 })
 
-const getTechName = (tech: string | { name: string }) => typeof tech === 'string' ? tech : tech.name
+const getTechName = (tech: string | { name: string }) =>
+  typeof tech === 'string' ? tech : tech.name
 const getMetrics = (project: FeaturedProject) => project.narrative?.metrics ?? []
 const parseMetric = (value: string) => {
   const match = value.match(/^([+-]?)(\d+(?:\.\d+)?)(.*)$/)
@@ -79,7 +106,11 @@ const toggleExpand = (id: string) => {
 }
 
 onMounted(async () => {
-  try { await projectStore.loadProjects() } catch { /* store handles error */ }
+  try {
+    await projectStore.loadProjects()
+  } catch {
+    /* store handles error */
+  }
 })
 </script>
 
@@ -112,7 +143,10 @@ onMounted(async () => {
               <h3 class="fp__card-title">{{ project.title }}</h3>
               <span v-if="project.category" class="fp__card-category">{{ project.category }}</span>
             </div>
-            <span class="fp__card-arrow" :class="{ 'fp__card-arrow--open': expandedId === project.id }">
+            <span
+              class="fp__card-arrow"
+              :class="{ 'fp__card-arrow--open': expandedId === project.id }"
+            >
               <ChevronDown :size="20" />
             </span>
           </button>
@@ -140,7 +174,11 @@ onMounted(async () => {
                 </div>
               </div>
 
-              <div v-if="getMetrics(project).length > 0" class="fp__metrics" data-effect-consumer="number-ticker">
+              <div
+                v-if="getMetrics(project).length > 0"
+                class="fp__metrics"
+                data-effect-consumer="number-ticker"
+              >
                 <div v-for="metric in getMetrics(project)" :key="metric.label" class="fp__metric">
                   <NumberTickerDemo
                     v-if="canAnimateMetric(metric.value)"
@@ -162,21 +200,46 @@ onMounted(async () => {
               </div>
 
               <div class="fp__card-tags">
-                <span v-for="tag in project.techStack.slice(0, 6)" :key="getTechName(tag)" class="fp__card-tag">
+                <span
+                  v-for="tag in project.techStack.slice(0, 6)"
+                  :key="getTechName(tag)"
+                  class="fp__card-tag"
+                >
                   {{ getTechName(tag) }}
                 </span>
               </div>
 
               <div class="fp__card-actions">
-                <a href="#" class="fp__card-link fp__card-link--primary" @click.stop>
+                <a
+                  v-if="project.demoUrl || project.liveUrl"
+                  :href="project.demoUrl || project.liveUrl"
+                  class="fp__card-link fp__card-link--primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.stop
+                >
                   查看演示
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
                     <path d="M7 17L17 7M17 7H7M17 7V17" />
                   </svg>
                 </a>
-                <RouterLink to="/projects" class="fp__card-link" @click.stop>
+                <RouterLink :to="`/projects/${project.id}`" class="fp__card-link" @click.stop>
                   查看详情
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </RouterLink>
@@ -189,7 +252,14 @@ onMounted(async () => {
       <div class="fp__cta">
         <RouterLink to="/projects" class="fp__cta-link">
           查看全部项目
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </RouterLink>
@@ -300,7 +370,9 @@ onMounted(async () => {
   justify-content: center;
   border-radius: var(--radius-lg);
   color: var(--us-text-tertiary);
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
 .fp__card:hover .fp__card-arrow {
@@ -314,7 +386,9 @@ onMounted(async () => {
 .fp__expandable {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition:
+    max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
   opacity: 0;
 }
 
@@ -423,7 +497,10 @@ onMounted(async () => {
   padding: var(--us-space-2) var(--us-space-4);
   border: 1px solid var(--us-border);
   border-radius: var(--radius-lg);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
 }
 
 .fp__card-link:hover {
@@ -455,7 +532,11 @@ onMounted(async () => {
   border: 1px solid var(--us-border);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.04);
-  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
 }
 
 .fp__cta-link:hover {

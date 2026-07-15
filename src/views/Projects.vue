@@ -1,7 +1,13 @@
 <template>
-  <main class="page-container" style="background: linear-gradient(180deg, var(--us-bg-start), var(--us-bg-end))">
-    <SEOHead title="项目作品" description="从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路" />
-    <PageHero title="项目作品" subtitle="从企业官网到 SaaS 平台，从微信小程序到数据可视化，每个项目都承载着独特的技术挑战和创新思路" />
+  <main
+    class="page-container"
+    style="background: linear-gradient(180deg, var(--us-bg-start), var(--us-bg-end))"
+  >
+    <SEOHead
+      title="项目作品"
+      description="真实商业项目中的跨端开发、状态建模、性能优化与组件化实践，明确区分个人贡献和团队成果。"
+    />
+    <PageHero title="项目作品" subtitle="从真实业务挑战出发，记录我的职责、工程取舍和可验证成果" />
 
     <!-- 筛选器区域 -->
     <section class="page-section">
@@ -35,7 +41,6 @@ const projectStore = useProjectStore()
 
 onMounted(() => {
   projectStore.loadProjects()
-  document.title = '项目展示 - 佘杰'
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 </script>

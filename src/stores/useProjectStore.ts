@@ -3,6 +3,9 @@ import { ref, computed } from 'vue'
 import type { Project, ProjectDetail } from '@/types/project'
 import projectsData from '@/assets/data/projects.json'
 
+const byDisplayOrder = (left: Project, right: Project) =>
+  (left.order ?? Number.MAX_SAFE_INTEGER) - (right.order ?? Number.MAX_SAFE_INTEGER)
+
 export const useProjectStore = defineStore('project', () => {
   const projects = ref<Project[]>(projectsData)
   const selectedCategory = ref<string | null>(null)
@@ -13,7 +16,7 @@ export const useProjectStore = defineStore('project', () => {
   const currentProjectDetail = ref<ProjectDetail | null>(null)
 
   const filteredProjects = computed(() => {
-    let filtered = projects.value
+    let filtered = [...projects.value].sort(byDisplayOrder)
 
     if (selectedCategory.value) {
       filtered = filtered.filter((project) => project.category === selectedCategory.value)
@@ -39,7 +42,10 @@ export const useProjectStore = defineStore('project', () => {
   })
 
   const featuredProjects = computed(() => {
-    return projects.value.filter((project) => project.featured).slice(0, 3)
+    return projects.value
+      .filter((project) => project.featured)
+      .sort(byDisplayOrder)
+      .slice(0, 3)
   })
 
   const categories = computed(() => {

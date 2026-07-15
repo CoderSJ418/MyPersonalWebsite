@@ -13,8 +13,18 @@ export interface NarrativeView {
   metrics?: Array<{ label: string; value: string }>
 }
 
+/** 真实项目的职责、协作与公开边界 */
+export interface ProjectCaseView {
+  role?: string
+  teamContext?: string
+  platforms?: string[]
+  responsibilities?: string[]
+  teamResults?: string[]
+  constraints?: string[]
+}
+
 /** 招聘导向展示契约 — 90秒决策最小信息集 */
-export interface RecruitView {
+export interface RecruitView extends ProjectCaseView {
   title: string
   description: string
   techStack: Array<{ name: string; version: string; displayLabel: string }>
@@ -24,7 +34,7 @@ export interface RecruitView {
 }
 
 /** 完整阅读展示契约 — 技术深度阅读 */
-export interface ReaderView {
+export interface ReaderView extends ProjectCaseView {
   title: string
   description: string
   techStack: Array<{ name: string; version: string; displayLabel: string }>

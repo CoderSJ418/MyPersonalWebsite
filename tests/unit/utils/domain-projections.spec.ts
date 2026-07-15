@@ -25,6 +25,23 @@ describe('domain projections', () => {
     expect(getRecruitView({ ...project, narrative: undefined })).toBeNull()
   })
 
+  it('projects verified responsibility boundaries for real client work', () => {
+    const heitaoshe = projects.find((project) => project.id === '4')
+    const fengniao = projects.find((project) => project.id === '5')
+    expect(heitaoshe).toBeDefined()
+    expect(fengniao).toBeDefined()
+    if (!heitaoshe || !fengniao) return
+
+    const recruitView = getRecruitView(heitaoshe)
+    const readerView = getReaderView(fengniao)
+    expect(recruitView?.role).toContain('核心前端开发')
+    expect(recruitView?.responsibilities).toContain(
+      '设计竞拍有限状态机，约束待机、竞价、确认、成功与失败之间的合法转换'
+    )
+    expect(readerView.teamResults?.join(' ')).toContain('4.06MB')
+    expect(JSON.stringify([heitaoshe, fengniao])).not.toMatch(/GMV|月活跃|用户评分/)
+  })
+
   it('generates page-level schema data', () => {
     const project = projects[0]
     const effect = labRegistry[0]
@@ -36,7 +53,9 @@ describe('domain projections', () => {
       'BlogPosting'
     )
     expect(projectStructuredData(project).about).toContain('Vue')
-    expect(breadcrumbStructuredData([{ name: 'Home', url: '/' }]).itemListElement[0]?.position).toBe(1)
+    expect(
+      breadcrumbStructuredData([{ name: 'Home', url: '/' }]).itemListElement[0]?.position
+    ).toBe(1)
     expect(labCollectionStructuredData(metadata).hasPart).toHaveLength(12)
     expect(labEffectStructuredData(effect).programmingLanguage).toBe('Vue')
   })

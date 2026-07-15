@@ -25,13 +25,13 @@
 ## 最新自动化证据
 
 - `npm run typecheck`：通过；`npm run lint:check`：0 error、28 条既有 warning。
-- `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
+- `npm run test:coverage`：164/164；Statements 79.81%、Branches 70.59%、Functions 75.77%、Lines 81.14%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
-- `npm run test:e2e`：20/20；覆盖独立标签筛选、固定 Header/面包屑、10 次 SPA Demo 切换、公开入口、六类 GA 事件、GA 同意/DNT/撤回、跨视口、Selection 恢复、canonical 复用和 reduced-motion。
-- `npm run build && npm run validate:lab`：通过；Sitemap 包含 Lab 首页和 12 个详情，生产冒烟 14 页全部 200、0 pageerror。
+- `npm run test:e2e`：25/25；除 Lab 全链路外，覆盖工程博客、真实项目案例、脱敏封面、职责边界和移动端布局。
+- `npm run build && npm run validate:lab`：通过；Magic Card canonical 样式变化后已重生成预览与源码摘要，12 个冻结条目重新一致。
 - 首页移动 Lighthouse 三次中位数：Performance 97、Accessibility 100、Best Practices 100、FCP 1.836s、LCP 2.286s、CLS 0、TBT 26ms。
 - `/lab` 当前构建三次移动 Lighthouse 中位数：Performance 98、Accessibility 100、Best Practices 100、SEO 100、FCP 0.641s、LCP 2.317s、CLS 0、TBT 32ms、初始脚本 126.8KB。
-- `npm run audit:lab-runtime`：Chromium 149、390×844、DPR 2、4× CPU；6 个时间驱动 Demo 各运行 30 秒，56.3–60fps，0 个 >200ms 长任务，0 pageerror；冷导航 293.5–548ms，热导航 213.2–279.9ms。
+- `npm run audit:lab-runtime`：Chromium 149、390×844、DPR 2、4× CPU；6 个时间驱动 Demo 各运行 30 秒，59.9–60fps，0 个 >200ms 长任务，0 pageerror；冷导航 353.2–446.8ms，热导航 135.7–183.8ms。
 - 预览生成器现在真正固定随机种子；manifest 的 12 项均记录浏览器、viewport/DPR、默认参数、源码 SHA-256 和代表帧，强化校验器同时验证 Phase 3.5 内容字段、搭配引用与清理契约。
 - Lighthouse 复核期间的高 TBT 离群值由旧 Vite 5175 进程持续占用 CPU 与 Windows 临时 Chrome profile 清理延迟共同造成；终止已验证孤儿、逐轮隔离后取得上述三次完整样本，未修改性能门槛。
 - 性能诊断确认下方 GSAP 区提前实例化是原 LCP 3.10s 的根因；改为接近视口再加载后 LCP 回到 2.5s 门内。

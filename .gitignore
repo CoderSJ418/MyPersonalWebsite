@@ -80,6 +80,8 @@ STYLE_ISSUES_*.md
 *.gif
 *.bmp
 *.svg
+!public/images/projects/heitaoshe-platform.svg
+!public/images/projects/fengniao-migration.svg
 
 # 临时备份文件
 *备份*.md

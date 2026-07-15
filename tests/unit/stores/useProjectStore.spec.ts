@@ -21,6 +21,7 @@ describe('useProjectStore', () => {
     store.searchProjects(first.title)
     expect(store.filteredProjects[0]?.id).toBe(first.id)
     expect(store.featuredProjects.length).toBeLessThanOrEqual(3)
+    expect(store.featuredProjects.map((project) => project.id).slice(0, 2)).toEqual(['4', '5'])
     expect(store.categories.length).toBeGreaterThan(0)
     expect(store.allTechStacks.length).toBeGreaterThan(0)
     expect(store.getProjectById(first.id)?.id).toBe(first.id)

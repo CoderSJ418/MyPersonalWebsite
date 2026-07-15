@@ -93,7 +93,7 @@
 ## Remaining non-goals / future work
 
 - No effects beyond the approved 12.
-- No restoration of Projects narrative work.
+- Projects narrative work may resume as a separate P1 after Phase 4; it must not change the frozen Lab registry or duplicate canonical effects.
 - No new animation/UI dependency, dark mode, WebGL restoration or duplicate effect implementation.
 - No claim that Owner Acceptance or AI Proxy is independent five-person user research.
 - Phase 5 remains a post-release batch rule, not an instruction to add unnamed effects now.

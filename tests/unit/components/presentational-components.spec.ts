@@ -119,10 +119,15 @@ describe('Lab code copy feedback', () => {
     expect(usageButton.text()).toBe('复制失败')
     expect(wrapper.get('[role="status"]').text()).toBe('复制失败，请手动选择代码')
 
-    await wrapper.findAll('button').find((button) => button.text().includes('完整 Vue SFC'))?.trigger('click')
+    await wrapper
+      .findAll('button')
+      .find((button) => button.text().includes('完整 Vue SFC'))
+      ?.trigger('click')
     await Promise.resolve()
     await nextTick()
-    const sourceButton = wrapper.findAll('button').find((button) => button.text() === '复制完整源码')
+    const sourceButton = wrapper
+      .findAll('button')
+      .find((button) => button.text() === '复制完整源码')
     if (!sourceButton) throw new Error('Missing source copy button')
     await sourceButton.trigger('click')
     await Promise.resolve()
@@ -263,6 +268,8 @@ describe('content card variants', () => {
         variant: 'project',
         title: 'Project',
         description: 'Impact',
+        coverImage: '/project-cover.svg',
+        coverAlt: 'Project architecture',
         tags: ['Vue', 'TypeScript', 'Vite'],
         maxTags: 2,
         metrics: [
@@ -275,6 +282,7 @@ describe('content card variants', () => {
       }
     })
     expect(wrapper.findAll('.pc__metric')).toHaveLength(2)
+    expect(wrapper.get('img').attributes('alt')).toBe('Project architecture')
     expect(wrapper.find('.pc__tag--more').text()).toContain('+1')
     await wrapper.get('.pc__tag').trigger('click')
     await wrapper.get('.pc').trigger('click')
@@ -313,8 +321,13 @@ describe('content card variants', () => {
   it('renders complete and empty feed rows', async () => {
     const full = mount(ContentCard, {
       props: {
-        title: 'Feed', layout: 'feed', description: 'Insight', category: 'AI',
-        date: '2026-01-02', readTime: 4, href: '/blog/feed'
+        title: 'Feed',
+        layout: 'feed',
+        description: 'Insight',
+        category: 'AI',
+        date: '2026-01-02',
+        readTime: 4,
+        href: '/blog/feed'
       }
     })
     expect(full.findAll('.bf__dot')).toHaveLength(2)
@@ -379,9 +392,11 @@ describe('blog presentation components', () => {
     await wrapper.findAll('a')[0]?.trigger('click')
     await wrapper.findAll('a')[1]?.trigger('click')
     expect(routerPush).toHaveBeenCalledTimes(2)
-    expect(mount(PostNavigation, {
-      props: { previousPost: null, nextPost: null }
-    }).findAll('a')).toHaveLength(0)
+    expect(
+      mount(PostNavigation, {
+        props: { previousPost: null, nextPost: null }
+      }).findAll('a')
+    ).toHaveLength(0)
   })
 
   it('renders related posts and forwards card selection', async () => {

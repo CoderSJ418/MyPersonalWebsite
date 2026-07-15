@@ -5,9 +5,9 @@
 ## 当前状态
 
 - **宪法版本**: v1.1（已冻结）
-- **阶段**: P1全流程 — 博客内容与构建流水线重构已完成本地验证
-- **Sprint Goal**: 首页项目卡片视觉减重；博客成为 2024–2026 每年 6 篇、可校验和按需渲染的个人工程知识库
-- **验证Feature**: 工程化博客内容流水线 + 首页精选项目卡片视觉减重
+- **阶段**: P1全流程 — 作品集内容可信度与博客工程化收口
+- **Sprint Goal**: 用真实项目案例替换不可验证叙事，并保持 2024–2026 每年 6 篇可校验工程博客
+- **验证Feature**: 黑桃奢/蜂鸟证据化项目案例 + 工程化博客内容流水线
 - **Sprint Planning**: ✅ Feature Brief 方案 A 已确认并完成本地实现
 
 ## 当前进行中任务
@@ -16,7 +16,7 @@
 | ------------------ | -------- | ----------------------------------------------------- |
 | C1-C4 Critical迁移 | ✅ 完成   | 宪法引用、决策日志、交接文档                          |
 | Sprint Planning v1 | ⚠️ 已推翻 | Blog优先→从技术角度排序，错误                         |
-| Projects案例叙事   | ⏸️ 暂停   | 用户选择Lab优先；不得与Lab同时标记为进行中             |
+| Projects案例叙事   | ✅ 本地完成 | Lab Phase 4 后恢复；黑桃奢与蜂鸟按个人贡献/团队成果分开展示 |
 | Lab 初版全面审批   | ✅ 完成   | v0.5 决策已确认；v0.6 已完成实现与本地验收               |
 | Lab PRD v0.6       | ✅ 已实现 | Phase 3.5、Owner Acceptance 例外、真实页面复用和 Phase 5 增长规则已落地 |
 | Phase 0亮色迁移    | ✅ 完成   | 主题、旧 Shader 与 whatamesh 运行时已移除               |
@@ -39,12 +39,14 @@
 
 ## 最新自动化证据
 
-- 当前分支：`codex/blog-content-rebuild`；实现提交 `68a13c6` 已推送，等待通过 GitHub compare 页面创建并人工审核 PR。
+- 当前分支：`codex/blog-content-rebuild`；博客提交已推送，真实项目案例与最新回归正在同一内容重构分支收口。
 - Vercel Preview：`dpl_7zbanHXjgxXDJyxzcDtYYd7SZV7f`，状态 Ready；URL：`https://my-personal-website-h0qefvj6o-codersj418s-projects.vercel.app`。
 - `npm run content:check`：18/18；2024、2025、2026 各 6 篇，旧占位文本和重复索引已清除。
-- `npm run test:coverage`：160/160；Statements 79.71%、Branches 70.33%、Functions 75.48%、Lines 80.99%。
-- `npm run test:e2e`：24/24；覆盖年度时间线、长文延迟渲染、移动端无横向滚动与首页轻量卡片边界。
+- `npm run test:coverage`：164/164；Statements 79.81%、Branches 70.59%、Functions 75.77%、Lines 81.14%。
+- `npm run test:e2e`：25/25；覆盖博客、真实项目封面、职责边界、Lab 全链路和移动端无横向滚动。
 - `npm run build`：通过；生产 Sitemap 含 18 个博客详情 URL，RSS 含 18 个条目，均直接生成到当前 `dist`。
+- `npm run validate:lab`：通过；Magic Card canonical 样式更新后的 24 张预览与 manifest 摘要已重新生成。
+- `npm run audit:lab-runtime`：6 个时间驱动 Demo 在 4× CPU 下保持 59.9–60fps，0 个 >200ms 长任务，0 pageerror。
 - 发布分支：`codex/interaction-lab-release`；发布提交：`bbb0d73`；生产证据提交：`cdef3eb`；人工审核入口：[GitHub PR #1](https://github.com/CoderSJ418/MyPersonalWebsite/pull/1)。
 - Phase 4 发布基线 `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。

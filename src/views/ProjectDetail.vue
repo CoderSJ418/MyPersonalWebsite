@@ -1,8 +1,10 @@
 <template>
-  <main class="project-detail-page">
+  <main class="project-detail-page pt-20">
     <SEOHead
-:title="project?.title || '项目详情'" :description="project?.description || '项目详细信息'"
-      :structured-data="project ? projectStructuredData(project) : undefined" />
+      :title="project?.title || '项目详情'"
+      :description="project?.description || '项目详细信息'"
+      :structured-data="project ? projectStructuredData(project) : undefined"
+    />
     <ProjectDetail />
   </main>
 </template>
@@ -17,7 +19,7 @@ import SEOHead from '@/components/common/SEOHead.vue'
 
 const route = useRoute()
 const projectStore = useProjectStore()
-const project = projectStore.projects.find(p => p.id === route.params.id)
+const project = projectStore.projects.find((p) => p.id === route.params.id)
 
 onMounted(() => {
   window.scrollTo(0, 0)
