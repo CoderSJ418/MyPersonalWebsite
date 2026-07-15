@@ -15,6 +15,7 @@ const REQUIRED_YEARS = ['2024', '2025', '2026']
 const MIN_POSTS_PER_YEAR = 6
 const MIN_BODY_LENGTH = 800
 const PLACEHOLDER_PATTERNS = ['由于内容较长，此处为简化版本', '实际内容为从', 'TODO']
+const normalizeLineEndings = (value) => value.replace(/\r\n/g, '\n')
 
 const files = readdirSync(BLOG_DIR)
   .filter((file) => file.endsWith('.md'))
@@ -91,7 +92,7 @@ const output = `${JSON.stringify(posts, null, 2)}\n`
 
 if (CHECK_ONLY) {
   const current = existsSync(OUTPUT_FILE) ? readFileSync(OUTPUT_FILE, 'utf-8') : ''
-  if (current !== output) {
+  if (normalizeLineEndings(current) !== output) {
     console.error('[blog-content] blog-meta.json 已过期，请运行 npm run content:generate')
     process.exit(1)
   }
