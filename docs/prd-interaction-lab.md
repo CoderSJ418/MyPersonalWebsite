@@ -527,3 +527,6 @@ Phase 测试必须在对应实现开始前定义。验证脚本应使用项目�
 - 2026-07-15 发布后生产事件审计发现 Hero 两个内部 CTA 使用普通 anchor 整页导航，导致 `projects_cta_click` 与 `lab_cta_click` 无法在同一 `dataLayer` 会话中保留。修复为埋点后通过 Vue Router SPA 跳转，正式环境已逐项验证六类事件与参数白名单。
 - 2026-07-15 最终逐项审计补齐独立标签筛选、View 挂载滚顶、异步失败恢复、Lab 卡片 SafeImage、固定 Header 遮挡和 10 次 SPA 切换回归；强化校验器覆盖 Phase 3.5 元数据与动画清理契约。
 - 6 个时间驱动 Demo 在移动视口、DPR 2、4× CPU 下各运行 30 秒，56.3–60fps、0 个 >200ms 长任务、0 pageerror；当前 `/lab` 三次 Lighthouse 中位 LCP 为 2.317s，满足 2.5s 门。
+- 2026-07-15 发布后内容分支复核发现首页核心 Projects 与下方延迟区存在异步布局竞态：项目 chunk 较慢时观察点会短暂进入预取范围。Projects 改为首轮稳定布局后，1.6 秒延迟注入不再误触发，原用例 10/10 与全量 E2E 25/25 通过；首页三次移动 Lighthouse 中位 Performance 97、LCP 2.242s、CLS 0。
+- Windows `core.autocrlf=true` 曾使干净 CLI 部署把语义相同的 CRLF `blog-meta.json` 误判为过期；内容门禁现统一换行后比较，Windows 干净 `vercel build` 与 Vercel Linux 无缓存构建均通过，未改为构建期自动修复。
+- 2026-07-15 内容与真实项目案例已重新发布至正式域名。首页、Projects、项目 4/5、Blog、Lab、Aurora 与 Lab Not Found 共 8 条生产路由全部 200，双视口无横向滚动且 0 pageerror；GA4 同意前不加载、同意后使用 `G-1GBKPV4YRF`、撤回后移除，自动化网络请求已拦截且不计入真实会话。生产 Sitemap 为 39 条（Lab 13、博客详情 18），RSS 为 18 条。

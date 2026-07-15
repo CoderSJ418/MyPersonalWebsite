@@ -16,7 +16,7 @@
 | ------------------ | -------- | ----------------------------------------------------- |
 | C1-C4 Critical迁移 | ✅ 完成   | 宪法引用、决策日志、交接文档                          |
 | Sprint Planning v1 | ⚠️ 已推翻 | Blog优先→从技术角度排序，错误                         |
-| Projects案例叙事   | ✅ 本地完成 | Lab Phase 4 后恢复；黑桃奢与蜂鸟按个人贡献/团队成果分开展示 |
+| Projects案例叙事   | ✅ Production完成 | Lab Phase 4 后恢复；黑桃奢与蜂鸟按个人贡献/团队成果分开展示 |
 | Lab 初版全面审批   | ✅ 完成   | v0.5 决策已确认；v0.6 已完成实现与本地验收               |
 | Lab PRD v0.6       | ✅ 已实现 | Phase 3.5、Owner Acceptance 例外、真实页面复用和 Phase 5 增长规则已落地 |
 | Phase 0亮色迁移    | ✅ 完成   | 主题、旧 Shader 与 whatamesh 运行时已移除               |
@@ -28,8 +28,8 @@
 | T3 Owner Acceptance | ✅ 代理执行 8/8 | 用户授权 Codex 自主代跑；明确不等同独立用户研究 |
 | Phase 3.5          | ✅ 完成 | 体验、内容、旗舰、真实应用与重新验证均完成 |
 | Phase 4            | ✅ 正式发布 | 导航、首页次 CTA、Sitemap/index、六类事件、Vercel Production 与 GA4 生产冒烟完成 |
-| Blog 内容重构      | ✅ 本地完成 | 删除 10 篇低价值稿，重写/新增为 2024–2026 各 6 篇，2026 旧视觉稿已去除暗色与未经证实表述 |
-| Blog 工程化        | ✅ 本地完成 | Markdown 单一内容源、元数据/年度质量门、RSS/Sitemap 同源、长文按需展开、移动端导航修复 |
+| Blog 内容重构      | ✅ Production完成 | 删除 10 篇低价值稿，重写/新增为 2024–2026 各 6 篇，2026 旧视觉稿已去除暗色与未经证实表述 |
+| Blog 工程化        | ✅ Production完成 | Markdown 单一内容源、元数据/年度质量门、RSS/Sitemap 同源、长文按需展开、移动端导航修复 |
 
 ## 阻塞项
 
@@ -39,31 +39,37 @@
 
 ## 最新自动化证据
 
-- 当前分支：`codex/blog-content-rebuild`；博客与真实项目案例提交 `b8fd01d` 已推送，可通过 GitHub compare 创建统一内容重构 PR。
-- Vercel Preview：`dpl_7zbanHXjgxXDJyxzcDtYYd7SZV7f`，状态 Ready；URL：`https://my-personal-website-h0qefvj6o-codersj418s-projects.vercel.app`。
+- 当前分支：`codex/blog-content-rebuild`；博客、真实项目案例与发布门修复已推送至 `9fbb322`。
+- Vercel Preview：`dpl_6gJsN5cbGaj7k37KrxwPLtP18jde`，状态 Ready；URL：`https://my-personal-website-d3uaqpqeh-codersj418s-projects.vercel.app`。Preview 启用了 Vercel Deployment Protection，匿名浏览器会进入登录页。
+- Vercel Production：`https://my-personal-website-98fi6t9wb-codersj418s-projects.vercel.app` 已完成并绑定 `https://my-personal-website-eta-murex.vercel.app`。
 - `npm run content:check`：18/18；2024、2025、2026 各 6 篇，旧占位文本和重复索引已清除。
-- `npm run test:coverage`：164/164；Statements 79.81%、Branches 70.59%、Functions 75.77%、Lines 81.14%。
+- 内容门禁已统一 CRLF/LF 后再比较；Windows 干净检出、本地 `vercel build` 与 Vercel Linux 无缓存构建均通过，真实元数据漂移仍保持失败。
+- `npm run test:coverage`：164/164；Statements 79.80%、Branches 70.60%、Functions 75.75%、Lines 81.14%。
 - `npm run test:e2e`：25/25；覆盖博客、真实项目封面、职责边界、Lab 全链路和移动端无横向滚动。
 - `npm run build`：通过；生产 Sitemap 含 18 个博客详情 URL，RSS 含 18 个条目，均直接生成到当前 `dist`。
 - `npm run validate:lab`：通过；Magic Card canonical 样式更新后的 24 张预览与 manifest 摘要已重新生成。
-- `npm run audit:lab-runtime`：6 个时间驱动 Demo 在 4× CPU 下保持 59.9–60fps，0 个 >200ms 长任务，0 pageerror。
+- `npm run audit:lab-runtime`：6 个时间驱动 Demo 在 4× CPU 下保持 59.9–60fps，最大长任务 64ms，0 个 >200ms 长任务，0 pageerror。
+- 首页下方懒加载竞态已通过 1.6 秒延迟注入稳定复现并修复；原 E2E 连跑 10/10 通过，完整 25/25 通过。
+- 生产浏览器冒烟：首页、Projects、项目 4/5、Blog、Lab、Aurora 与 Lab Not Found 共 8 条路由全部 200，标题/H1 正确，1440×900 与 375×812 无横向滚动，0 pageerror；黑桃奢与蜂鸟封面完成加载。
+- 生产 GA4 同意门：同意前无脚本，同意后仅加载 `G-1GBKPV4YRF`，撤回后脚本移除且本地状态写为 denied；自动化请求已拦截，不计入真实会话。
+- 生产 Sitemap 39 条（Lab 13、博客详情 18），RSS 18 条，均返回 200。
 - 发布分支：`codex/interaction-lab-release`；发布提交：`bbb0d73`；生产证据提交：`cdef3eb`；人工审核入口：[GitHub PR #1](https://github.com/CoderSJ418/MyPersonalWebsite/pull/1)。
 - Phase 4 发布基线 `npm run test:coverage`：157/157；Statements 79.61%、Branches 70.36%、Functions 75.37%、Lines 80.86%。
 - `npm run test:coverage:lab`：22/22；Statements 79.23%、Branches 79.71%、Functions 81.35%、Lines 83.10%。
 - Phase 4 发布基线 `npm run test:e2e`：20/20；新增 Hero 两类 CTA 在 SPA 导航中保留 GA 事件的浏览器回归；`npm run build` 与强化后的 `npm run validate:lab` 通过。
 - 正式 `dataLayer` 已验证六类 PRD 事件及参数白名单；Hero CTA 的普通 anchor 整页导航丢事件问题已改为 Vue Router SPA 导航并重新部署。
 - 生产本地冒烟：首页 + Lab 首页 + 12 详情共 14 页全部 200，0 pageerror；13 个 Lab URL 全部进入 Sitemap。
-- 首页 Lighthouse 三次中位数：Performance 97、Accessibility 100、Best Practices 100、LCP 2.286s、CLS 0、TBT 26ms。
+- 首页修复后三次移动 Lighthouse 中位数：Performance 97、Accessibility 100、Best Practices 100、SEO 100、FCP 1.362s、LCP 2.242s、CLS 0、TBT 112ms。
 - `/lab` 当前构建 Lighthouse 三次中位数：Performance 98、Accessibility 100、Best Practices 100、SEO 100、FCP 0.641s、LCP 2.317s、CLS 0、TBT 32ms、初始脚本 126.8KB。
 - 6 个时间驱动 Demo 在 390×844、DPR 2、4× CPU 下各运行 30 秒：56.3–60fps、0 个 >200ms 长任务、0 pageerror；冷/热导航均已记录。
 - 真实生产域名已从 GitHub 仓库主页与线上响应交叉确认；源码、robots、Sitemap 构建基址已统一为该 Vercel URL，活跃源码不再引用旧 Gitee URL。
 
 ## 下次启动第一步
 
-1. 在 GA4 管理后台确认数据保留期为 2 个月，并关闭 Google Signals 与广告个性化；这一步需要账号持有人人工核验。
-2. 发布后累计至少 50 次合格 Lab 会话，再按 PRD 公式评估打开、展开、复制和 Projects 主路径占比。
-3. 独立 5 人研究继续作为未来研究债务，不得把 Owner-delegated Codex Acceptance 改写成真实用户研究。
-4. Phase 5 仅按每批最多 4 个推进；每个候选必须先证明复用场景、差异和真实消费方向。
+1. GitHub 443 恢复后推送本地证据提交，并将 `codex/blog-content-rebuild` 快进到 `main`；Production 已从同一代码提交 `9fbb322` 发布，不需重复改代码。
+2. 在 GA4 管理后台确认数据保留期为 2 个月，并关闭 Google Signals 与广告个性化；这一步需要账号持有人人工核验。
+3. 发布后累计至少 50 次合格 Lab 会话，再按 PRD 公式评估打开、展开、复制和 Projects 主路径占比。
+4. 独立 5 人研究继续作为未来研究债务；Phase 5 每批最多 4 个，候选必须先证明复用场景、差异和真实消费方向。
 
 ## 重要提醒
 
