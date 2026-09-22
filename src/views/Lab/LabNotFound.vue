@@ -10,7 +10,7 @@
   >
     <p class="text-sm font-semibold text-blue-600">404</p>
     <h1 class="mt-3 text-3xl font-bold text-slate-950">没有找到这个效果</h1>
-    <p class="mt-3 text-slate-600">ID“{{ id }}”不在当前 12 个实验中。</p>
+    <p class="mt-3 text-slate-600">ID“{{ id }}”不在当前 14 个实验中。</p>
     <RouterLink to="/lab" class="mt-6 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white">
       返回交互实验室
     </RouterLink>

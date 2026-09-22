@@ -1,16 +1,16 @@
 <template>
   <section
     class="relative isolate overflow-hidden bg-white px-4 pb-20 pt-32 sm:px-6 sm:pb-28 sm:pt-40"
-    data-effect-consumer="aurora"
+    data-effect-consumer="shader-ribbon"
   >
-    <AuroraDemo :speed="1.25" color-theme="indigo" embedded decorative />
+    <HeroMotionScene />
     <div
       class="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/75 to-transparent"
       aria-hidden="true"
     ></div>
 
     <div class="relative z-10 mx-auto max-w-7xl">
-      <div class="max-w-3xl">
+      <div class="max-w-3xl lg:max-w-xl">
         <p class="mb-6 inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
           AI Native Developer Portfolio
         </p>
@@ -57,7 +57,7 @@ import { useRouter } from 'vue-router'
 
 import CTA from '@/components/ui/CTA.vue'
 import { trackLabAnalytics } from '@/services/privacyAnalytics'
-import AuroraDemo from '@/views/Lab/demos/AuroraDemo.vue'
+import HeroMotionScene from '@/components/home/HeroMotionScene.vue'
 
 const router = useRouter()
 

@@ -18,7 +18,9 @@ const ids: LabEffectId[] = [
   'shine-border',
   'shimmer-button',
   'number-ticker',
-  'marquee'
+  'marquee',
+  'shader-ribbon',
+  'agent-flow'
 ]
 const categories: LabCategory[] = ['background', 'card', 'button', 'data', 'layout']
 const origins: LabImplementationOrigin[] = ['original', 'clean-room', 'mit-adaptation']

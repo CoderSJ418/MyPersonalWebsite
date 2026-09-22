@@ -1,0 +1,898 @@
+[
+  {
+    "id": "ms-recipe-01",
+    "title": "Cinematic Developer Hero",
+    "category": "Hero",
+    "summary": "极简开发者首屏，中央视觉主体与可编辑 DOM 文案分层。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Digital Epoch",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Cinematic Developer Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: floating browser shell with code-to-product transformation. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll scrubs the visual from abstract code blocks into a finished interface. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-02",
+    "title": "Orbital Product Hero",
+    "category": "Hero",
+    "summary": "以轨道和空间层级建立第一眼记忆点，不依赖暗色模式。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Aetheris Voyage",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Orbital Product Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: luminous orbital system around a glass product viewport. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer gently shifts depth while scroll collapses orbit rings into the next section. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-03",
+    "title": "Editorial Motion Hero",
+    "category": "Hero",
+    "summary": "大字号编辑排版与单一动态焦点组合，减少无意义装饰。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Impressive Hero",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Editorial Motion Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: oversized editorial typography with one moving visual anchor. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: headline reveals in stages and the anchor crosses behind the copy during scroll. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-04",
+    "title": "AI Native Hero",
+    "category": "Hero",
+    "summary": "把 AI 工程流程直接变成首屏视觉证据。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Codeveil",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium AI Native Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: an input card flowing through inspect, code and verify nodes. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll advances the workflow while each node becomes active and emits verified output. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-05",
+    "title": "Spatial Portfolio Hero",
+    "category": "Hero",
+    "summary": "作品卡片从空间中建立层级，进入页面即展示真实工作。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Nival Cyberspace",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Spatial Portfolio Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: three project windows layered in shallow 3D space. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer parallax is subtle and the front card swaps as the user scrolls. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-06",
+    "title": "Light WebGL Hero",
+    "category": "Hero",
+    "summary": "在亮色体系中使用 WebGL 光带，避免常见黑底霓虹。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Light WebGL Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: soft blue-silver WebGL ribbon on a white atmospheric field. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: ribbon bends toward pointer and compresses into a section divider on scroll. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-07",
+    "title": "Technical Blueprint Hero",
+    "category": "Hero",
+    "summary": "工程蓝图与产品界面融合，强调系统能力。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Nexus IT Solutions",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Technical Blueprint Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: blueprint grid morphing into a real application frame. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: grid lines trace architecture connections before settling into the interface. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-08",
+    "title": "Proof-first Hero",
+    "category": "Hero",
+    "summary": "首屏直接给结果指标与交互证据，而不是长自我介绍。",
+    "tags": [
+      "Hero",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Stellar AI",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Proof-first Hero for an AI-native front-end engineer portfolio.\n\nVisual direction: live metric chips orbiting a product proof panel. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: metrics count in only when visible and the proof panel becomes the first project card. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-09",
+    "title": "Motion Case Grid",
+    "category": "Portfolio",
+    "summary": "案例列表默认就能看到动效预览与结果指标。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Anchor AI",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Motion Case Grid for an AI-native front-end engineer portfolio.\n\nVisual direction: editorial two-column case grid with live previews. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: preview motion starts only on visibility and pauses when offscreen. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-10",
+    "title": "Project Filmstrip",
+    "category": "Portfolio",
+    "summary": "用横向胶片式作品流替代普通卡片堆叠。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "DJ ZakDerdan",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Project Filmstrip for an AI-native front-end engineer portfolio.\n\nVisual direction: wide filmstrip of product frames with captions and metrics. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: vertical scroll drives controlled horizontal travel without trapping the page. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-11",
+    "title": "Recruiter 90s Portfolio",
+    "category": "Portfolio",
+    "summary": "按招聘者 90 秒决策路径组织作品信息。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Menuchi",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Recruiter 90s Portfolio for an AI-native front-end engineer portfolio.\n\nVisual direction: hero, three proof cards, capability evidence and contact CTA. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: use motion only to reveal evidence hierarchy, never to delay information. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-12",
+    "title": "Before After Case Study",
+    "category": "Portfolio",
+    "summary": "以问题到结果的视觉变化表达工程价值。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Before After Case Study for an AI-native front-end engineer portfolio.\n\nVisual direction: split project frame showing before and after states. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: drag or scroll reveals the optimized state while metrics update in sync. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-13",
+    "title": "Stacked Project Windows",
+    "category": "Portfolio",
+    "summary": "多项目窗口以景深堆叠，滚动逐个进入前景。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Nival Cyberspace",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Stacked Project Windows for an AI-native front-end engineer portfolio.\n\nVisual direction: layered browser windows with real screenshots or sanitized reconstructions. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: each scroll segment promotes one window and dims the others. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-14",
+    "title": "Engineering Portfolio",
+    "category": "Portfolio",
+    "summary": "突出状态建模、性能、跨端与验证，而不是只展示 UI。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Codeveil",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Engineering Portfolio for an AI-native front-end engineer portfolio.\n\nVisual direction: system diagram beside a real interface preview. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: hovering a system node highlights the related area inside the interface. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-15",
+    "title": "Mobile Product Reel",
+    "category": "Portfolio",
+    "summary": "以手机设备框连续展示跨端项目。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Mobile Product Reel for an AI-native front-end engineer portfolio.\n\nVisual direction: three phone frames with distinct product scenes. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: phones rotate slightly and autoplay short muted loops only on desktop. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-16",
+    "title": "Evidence Timeline",
+    "category": "Portfolio",
+    "summary": "项目成果与验证证据按时间线展开。",
+    "tags": [
+      "Portfolio",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "React Vision",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Evidence Timeline for an AI-native front-end engineer portfolio.\n\nVisual direction: timeline of commits, browser checks and measurable outcomes. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: line draws as content enters view and each checkpoint activates once. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-17",
+    "title": "Pinned Scroll Story",
+    "category": "Scroll",
+    "summary": "固定视觉舞台，滚动只推进场景状态，不让元素乱飞。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "NOVA AI",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Pinned Scroll Story for an AI-native front-end engineer portfolio.\n\nVisual direction: one pinned canvas with three controlled scenes. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: map scroll progress to explicit scene transitions with scrub smoothing. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-18",
+    "title": "Video Scrub Narrative",
+    "category": "Scroll",
+    "summary": "用短视频或帧序列承担复杂镜头，DOM 保持可编辑。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "ConSentinel",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Video Scrub Narrative for an AI-native front-end engineer portfolio.\n\nVisual direction: full-bleed media layer behind semantic copy. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll controls playback time with requestAnimationFrame interpolation. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-19",
+    "title": "Interface Assembly Scroll",
+    "category": "Scroll",
+    "summary": "产品界面在滚动中从模块逐步组装完成。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Aetheris Voyage",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Interface Assembly Scroll for an AI-native front-end engineer portfolio.\n\nVisual direction: floating navigation, map, data panel and controls. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: components enter in dependency order and lock into a final product frame. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-20",
+    "title": "Exploded UI Scroll",
+    "category": "Scroll",
+    "summary": "把复杂界面拆成空间层，滚动时展示架构关系。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Exploded UI Scroll for an AI-native front-end engineer portfolio.\n\nVisual direction: exploded interface layers in shallow perspective. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: layers separate on entry, annotate responsibilities, then reassemble. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-21",
+    "title": "Metric Story Scroll",
+    "category": "Scroll",
+    "summary": "以指标变化推动叙事，而不是纯视觉过渡。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Digital Epoch",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Metric Story Scroll for an AI-native front-end engineer portfolio.\n\nVisual direction: large metric beside evolving product scene. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: value updates at scene boundaries and stays readable during motion. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-22",
+    "title": "Section Morph Scroll",
+    "category": "Scroll",
+    "summary": "前一屏视觉主体自然变成后一屏组件。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Ancient Oath",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Section Morph Scroll for an AI-native front-end engineer portfolio.\n\nVisual direction: hero object that transforms into the first project card. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: reuse shape, scale and position continuity instead of fade-out/fade-in. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-23",
+    "title": "Map Journey Scroll",
+    "category": "Scroll",
+    "summary": "地图、设备与轨迹作为滚动故事主线。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Frozen Cave",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Map Journey Scroll for an AI-native front-end engineer portfolio.\n\nVisual direction: sanitized map with device markers, route and bottom sheet. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: marker appears, route draws, sheet rises, analytics overlay resolves. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-24",
+    "title": "Code to Runtime Scroll",
+    "category": "Scroll",
+    "summary": "从需求/代码过渡到浏览器运行结果。",
+    "tags": [
+      "Scroll",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Space planet",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Code to Runtime Scroll for an AI-native front-end engineer portfolio.\n\nVisual direction: code fragments converging into a live browser frame. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll dissolves code tokens into UI regions and ends on a verified badge. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-25",
+    "title": "WebGL Ribbon System",
+    "category": "3D / WebGL",
+    "summary": "真实 Shader 光带作为品牌视觉，不依赖图片素材。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium WebGL Ribbon System for an AI-native front-end engineer portfolio.\n\nVisual direction: procedural ribbon with blue-silver iridescence. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer bends the field while time drives slow internal flow. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-26",
+    "title": "Particle Portfolio Field",
+    "category": "3D / WebGL",
+    "summary": "粒子与项目卡片建立空间关系，而不是随机漂移。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Particle Portfolio Field for an AI-native front-end engineer portfolio.\n\nVisual direction: depth-aware particle field surrounding project anchors. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: particles attract to the active card and disperse between sections. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-27",
+    "title": "3D Browser Stack",
+    "category": "3D / WebGL",
+    "summary": "浏览器窗口以真实景深展示多个工程项目。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Alethia",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium 3D Browser Stack for an AI-native front-end engineer portfolio.\n\nVisual direction: three extruded browser planes with soft perspective. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer shifts camera slightly and keyboard focus remains fully usable. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-28",
+    "title": "Interactive Point Cloud",
+    "category": "3D / WebGL",
+    "summary": "点云形成代码、地图与产品轮廓。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Orange Horse",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Interactive Point Cloud for an AI-native front-end engineer portfolio.\n\nVisual direction: point cloud morphing between three recognizable silhouettes. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll selects target shape and interpolation stays smooth at low speed. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-29",
+    "title": "Light Glass Object",
+    "category": "3D / WebGL",
+    "summary": "亮色站点中的玻璃物体主视觉。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Space planet",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Light Glass Object for an AI-native front-end engineer portfolio.\n\nVisual direction: translucent refractive capsule with restrained blue caustics. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: object rotates slowly and stops under reduced-motion preferences. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-30",
+    "title": "3D Data Topology",
+    "category": "3D / WebGL",
+    "summary": "把工程模块关系做成可探索的 3D 拓扑。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Heart Health Dashboard",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium 3D Data Topology for an AI-native front-end engineer portfolio.\n\nVisual direction: nodes on a curved surface with labeled system domains. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: hover isolates one path while the rest recede. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-31",
+    "title": "Spatial Device Showcase",
+    "category": "3D / WebGL",
+    "summary": "多设备框展示跨端项目，不做普通 mockup 排列。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Cast and Render",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Spatial Device Showcase for an AI-native front-end engineer portfolio.\n\nVisual direction: desktop, tablet and phone planes sharing one scene. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll changes the dominant device and syncs the content state. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-32",
+    "title": "Procedural Grid Tunnel",
+    "category": "3D / WebGL",
+    "summary": "工程网格形成轻量 WebGL 空间过渡。",
+    "tags": [
+      "3D",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Future Machine",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Procedural Grid Tunnel for an AI-native front-end engineer portfolio.\n\nVisual direction: white-blue procedural grid tunnel with fog. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: camera advances only during the transition and exits back into flat DOM. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-33",
+    "title": "Liquid Ribbon Shader",
+    "category": "Shader",
+    "summary": "流体光带随鼠标产生局部形变，保持文字区域清晰。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Liquid Ribbon Shader for an AI-native front-end engineer portfolio.\n\nVisual direction: smooth signed-distance ribbon with restrained bloom-like falloff. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: time controls internal flow while pointer only affects nearby curvature. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-34",
+    "title": "Noise Displacement Surface",
+    "category": "Shader",
+    "summary": "利用噪声位移制造技术质感而非随机波浪。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "ConSentinel",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Noise Displacement Surface for an AI-native front-end engineer portfolio.\n\nVisual direction: soft mesh surface displaced by layered simplex noise. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: amplitude responds to scroll velocity then eases back to rest. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-35",
+    "title": "Data Heat Shader",
+    "category": "Shader",
+    "summary": "把数据密度视觉化为热力层，可用于地图/分析案例。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Future Machine",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Data Heat Shader for an AI-native front-end engineer portfolio.\n\nVisual direction: blue-to-cyan heat field over a neutral grid. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: hover reveals local samples and opacity is user-adjustable. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-36",
+    "title": "Fresnel Product Halo",
+    "category": "Shader",
+    "summary": "用 Fresnel 边缘高光建立体积感。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "React Vision",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Fresnel Product Halo for an AI-native front-end engineer portfolio.\n\nVisual direction: minimal geometry with cool edge glow on white background. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: camera and glow remain subtle enough to preserve content contrast. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-37",
+    "title": "Chromatic Flow Field",
+    "category": "Shader",
+    "summary": "用流场表现 AI/数据流，不做廉价彩虹渐变。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Celestix",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Chromatic Flow Field for an AI-native front-end engineer portfolio.\n\nVisual direction: blue, indigo and silver vector flow texture. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: field follows a low-frequency curl pattern with slow temporal evolution. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-38",
+    "title": "Shader Mask Reveal",
+    "category": "Shader",
+    "summary": "用 Shader 遮罩揭示真实截图或项目画面。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Cosmic Mapping",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Shader Mask Reveal for an AI-native front-end engineer portfolio.\n\nVisual direction: organic mask with feathered edges over a product screenshot. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll expands the mask and finishes with the full image accessible. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-39",
+    "title": "Signed Distance Icons",
+    "category": "Shader",
+    "summary": "用 SDF 动态组合技术图形，适合 Lab 小型实验。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Human Machine",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Signed Distance Icons for an AI-native front-end engineer portfolio.\n\nVisual direction: procedural icons and rings drawn in fragment shader. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer changes parameters rather than moving DOM objects. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-40",
+    "title": "Soft Raymarch Scene",
+    "category": "Shader",
+    "summary": "轻量 Raymarch 形成抽象技术空间，移动端自动降级。",
+    "tags": [
+      "Shader",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Digital Persona",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Soft Raymarch Scene for an AI-native front-end engineer portfolio.\n\nVisual direction: simple raymarched capsule and floor plane. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: desktop animates camera drift; low-end devices render a static representative frame. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-41",
+    "title": "Magnetic Navigation",
+    "category": "Interaction",
+    "summary": "磁吸只用于关键 CTA 与导航，不让整页漂移。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Orbit Stickers",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Magnetic Navigation for an AI-native front-end engineer portfolio.\n\nVisual direction: compact header with one magnetic primary action. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer attraction is capped and keyboard focus uses normal geometry. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-42",
+    "title": "Spotlight Case Card",
+    "category": "Interaction",
+    "summary": "卡片追光与真实内容关联，突出项目信息层级。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Spotlight Case Card for an AI-native front-end engineer portfolio.\n\nVisual direction: project card with local radial spotlight. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: spotlight follows pointer inside bounds and never becomes the only hover signal. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-43",
+    "title": "Elastic Filter Chips",
+    "category": "Interaction",
+    "summary": "筛选交互带弹性反馈但保持响应速度。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "ConSentinel",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Elastic Filter Chips for an AI-native front-end engineer portfolio.\n\nVisual direction: category chips with spring-like selection indicator. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: indicator morphs between chips while filters update immediately. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-44",
+    "title": "Drag Compare Panel",
+    "category": "Interaction",
+    "summary": "拖拽比较性能优化前后或不同界面版本。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Playful Idea",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Drag Compare Panel for an AI-native front-end engineer portfolio.\n\nVisual direction: split pane with accessible range control. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer drag updates the reveal; keyboard arrows operate the same control. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-45",
+    "title": "Cursor Lens Preview",
+    "category": "Interaction",
+    "summary": "局部放大真实项目细节，用于技术案例。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Ancient Oath",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Cursor Lens Preview for an AI-native front-end engineer portfolio.\n\nVisual direction: circular lens over a high-resolution interface frame. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: lens activates only on hover-capable devices and disables on touch. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-46",
+    "title": "Reactive Architecture Graph",
+    "category": "Interaction",
+    "summary": "鼠标探索架构节点时同步高亮相关说明。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Digital Persona",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Reactive Architecture Graph for an AI-native front-end engineer portfolio.\n\nVisual direction: node graph paired with concise engineering notes. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: focus and hover share the same active state. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-47",
+    "title": "Velocity Card Deck",
+    "category": "Interaction",
+    "summary": "滚动速度影响卡片倾斜，但有严格幅度限制。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Undr Drift",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Velocity Card Deck for an AI-native front-end engineer portfolio.\n\nVisual direction: stacked cards with shallow perspective. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: scroll velocity maps to a damped rotation and returns to zero quickly. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-48",
+    "title": "Interactive Evidence Rail",
+    "category": "Interaction",
+    "summary": "沿着验证证据轨道逐项展示代码、浏览器与结果。",
+    "tags": [
+      "Interaction",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Fastshot",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Interactive Evidence Rail for an AI-native front-end engineer portfolio.\n\nVisual direction: horizontal evidence rail inside one section. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: hover or focus selects an item and the detail panel updates without layout shift. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-49",
+    "title": "Live Ops Dashboard",
+    "category": "SaaS / Dashboard",
+    "summary": "把实时状态和地图结合成可信的产品展示。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Axle Journey",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Live Ops Dashboard for an AI-native front-end engineer portfolio.\n\nVisual direction: map, device status, latency and task progress in one dashboard. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: status updates animate discretely and the map remains the visual anchor. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-50",
+    "title": "AI Agent Control Room",
+    "category": "SaaS / Dashboard",
+    "summary": "用控制室界面展示 Agent 执行链路。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Global Talent",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium AI Agent Control Room for an AI-native front-end engineer portfolio.\n\nVisual direction: task queue, active agent graph, browser evidence and final result. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: one task advances through states automatically in a short loop. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-51",
+    "title": "Performance Observatory",
+    "category": "SaaS / Dashboard",
+    "summary": "把 Lighthouse、包体积和运行指标变成产品化面板。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Skytrace",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Performance Observatory for an AI-native front-end engineer portfolio.\n\nVisual direction: large performance score with trend and evidence cards. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: numbers animate only once and graphs use transform-based transitions. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-52",
+    "title": "Fleet Monitoring Scene",
+    "category": "SaaS / Dashboard",
+    "summary": "车队/设备状态以地图和列表联动展示。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "JungleMind",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Fleet Monitoring Scene for an AI-native front-end engineer portfolio.\n\nVisual direction: sanitized device map with selected machine details. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: selecting a marker updates the side panel and draws its route. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-53",
+    "title": "Data Analysis Workspace",
+    "category": "SaaS / Dashboard",
+    "summary": "分析型界面强调筛选、地图和指标之间的因果关系。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Intelligent Performance",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Data Analysis Workspace for an AI-native front-end engineer portfolio.\n\nVisual direction: large visualization with right-side filter drawer and metric strip. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: filter changes animate only the affected visual layer. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-54",
+    "title": "Security Status Board",
+    "category": "SaaS / Dashboard",
+    "summary": "高可信状态面板，避免夸张赛博风。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Sellix",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Security Status Board for an AI-native front-end engineer portfolio.\n\nVisual direction: neutral grid, incident rail and verified status chips. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: new events enter softly while severity remains textually explicit. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-55",
+    "title": "Finance Motion Dashboard",
+    "category": "SaaS / Dashboard",
+    "summary": "金融数据动效克制且可读。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Bionova Biotech",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Finance Motion Dashboard for an AI-native front-end engineer portfolio.\n\nVisual direction: clean chart, balance summary and transaction rail. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: chart draws once on entry; hover provides exact values without wobble. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-56",
+    "title": "Operations Bento",
+    "category": "SaaS / Dashboard",
+    "summary": "Bento 不是拼图，而是按业务重要性分配面积。",
+    "tags": [
+      "SaaS",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "AKOR Security",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Operations Bento for an AI-native front-end engineer portfolio.\n\nVisual direction: one dominant live panel plus three supporting modules. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: only the dominant panel runs continuous motion; supporting cards stay mostly static. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-57",
+    "title": "Feature Beam Section",
+    "category": "Section / CTA",
+    "summary": "用一条光束串起三个能力点，代替图标网格。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Glow Features",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Feature Beam Section for an AI-native front-end engineer portfolio.\n\nVisual direction: three feature statements connected by a subtle moving beam. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: beam pauses at each feature as it enters view. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-58",
+    "title": "Proof CTA",
+    "category": "Section / CTA",
+    "summary": "CTA 同时提供作品、GitHub 与联系三条下一步路径。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Community CTA",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Proof CTA for an AI-native front-end engineer portfolio.\n\nVisual direction: large statement with one primary and two quiet secondary actions. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: background motion slows near the actionable content. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-59",
+    "title": "Capability Bento",
+    "category": "Section / CTA",
+    "summary": "能力板块用真实 Demo 作为证据而非抽象图标。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Vize Footer",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Capability Bento for an AI-native front-end engineer portfolio.\n\nVisual direction: one live demo tile, one architecture tile and one measured result tile. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: hover deepens the relevant tile without moving the overall grid. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-60",
+    "title": "Process Timeline Section",
+    "category": "Section / CTA",
+    "summary": "把工作流压缩成清晰四步并显示验证节点。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Kresna Footer",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Process Timeline Section for an AI-native front-end engineer portfolio.\n\nVisual direction: requirements, inspect, implement, verify timeline. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: active line flows left to right then resets after a pause. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-61",
+    "title": "Metrics Bridge Section",
+    "category": "Section / CTA",
+    "summary": "用结果指标连接两个内容章节。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "Zenith Footer",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Metrics Bridge Section for an AI-native front-end engineer portfolio.\n\nVisual direction: three large measured outcomes floating over a quiet gradient band. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: values count once and the band transforms into the next section background. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-62",
+    "title": "Interactive Footer",
+    "category": "Section / CTA",
+    "summary": "Footer 有品牌记忆点但不抢正文。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "What Package Fits You",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Interactive Footer for an AI-native front-end engineer portfolio.\n\nVisual direction: large name mark, concise links and subtle procedural background. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: pointer creates a restrained local distortion behind the mark only. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-63",
+    "title": "Recruiter Contact CTA",
+    "category": "Section / CTA",
+    "summary": "以招聘者路径设计联系区，明确可查看内容和联系方式。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "GSAP"
+    ],
+    "sourcePattern": "HAUL!",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Recruiter Contact CTA for an AI-native front-end engineer portfolio.\n\nVisual direction: availability, role focus, response channel and contact button. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: no continuous animation except a small status pulse. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  },
+  {
+    "id": "ms-recipe-64",
+    "title": "Prompt Library CTA",
+    "category": "Section / CTA",
+    "summary": "在 Lab 末尾引导复制 Prompt 并继续探索 Demo。",
+    "tags": [
+      "Section",
+      "MotionSites-inspired",
+      "Responsive"
+    ],
+    "sourcePattern": "Lumina",
+    "sourceUrl": "https://motionsites.ai/",
+    "prompt": "Build a premium Prompt Library CTA for an AI-native front-end engineer portfolio.\n\nVisual direction: searchable prompt count, categories and copy action. Keep the composition editorial, spacious and recruiter-friendly.\n\nMotion direction: copy feedback uses a short confirmation state with no disruptive toast. Use explicit scene states instead of unrelated looping decoration.\n\nUse Vue 3 + TypeScript + Tailwind CSS. Use GSAP only for timeline or scroll coordination that CSS cannot express cleanly.\n\nKeep all headline, navigation and body copy as real editable DOM text. Do not bake text into video, canvas or images.\n\nRespect prefers-reduced-motion. On touch or low-end devices, reduce pointer tracking and continuous effects.\n\nUse one light presentation mode with #2563EB as the primary accent. Avoid generic purple-gradient AI styling.\n\nPreserve keyboard focus, semantic HTML, readable contrast and stable layout. Motion may enhance hierarchy but must not block content.\n\nDo not add decorative effects that lack product meaning. Every moving element must communicate state, depth, workflow or interaction."
+  }
+]

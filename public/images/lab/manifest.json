@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "browser": "149.0.7827.55",
+  "browser": "153.0.8010.50",
   "viewport": {
     "width": 720,
     "height": 720,
@@ -10,12 +10,20 @@
   "representativeFrame": "CSS animations paused at -1s delay",
   "items": [
     {
+      "id": "agent-flow",
+      "params": {},
+      "sourceSha256": "a2c2b27ed6d5202049c96d181956a74600d3daf816a3a132ff59b51e72053d8e",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/agent-flow.webp",
+      "reducedMotionPreview": "/images/lab/agent-flow-reduced.webp"
+    },
+    {
       "id": "aurora",
       "params": {
         "speed": 2,
         "colorTheme": "blue"
       },
-      "sourceSha256": "6ab123bacf5e1705fa8a36f42d9d670e4ad8dbbd40bce14639aab8c5f4582e86",
+      "sourceSha256": "fd0d094bfb705629c391875e491285b4a9e6dee8d9c033bf32bf30a9826a955e",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/aurora.webp",
       "reducedMotionPreview": "/images/lab/aurora-reduced.webp"
@@ -26,7 +34,7 @@
         "dotSize": 2,
         "spacing": 20
       },
-      "sourceSha256": "95e799a4854efbbd6b822ecac4d454332429d851f6cc9c26a156dda098f459b3",
+      "sourceSha256": "72b89efd142a8230b153a29b858700154db60fff33d64ec8ff6b0c6e2ff96f0b",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/dot-pattern.webp",
       "reducedMotionPreview": "/images/lab/dot-pattern-reduced.webp"
@@ -37,7 +45,7 @@
         "opacity": 0.5,
         "gridSize": 40
       },
-      "sourceSha256": "23c47c7908bcd8361be8cd165802cb959210f93c31ebf25b0f53ad423b11715e",
+      "sourceSha256": "dcd3c056a2aefe404a29a4935e974b72a2bc9bf4032031539a6293367fa40842",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/grid-pattern.webp",
       "reducedMotionPreview": "/images/lab/grid-pattern-reduced.webp"
@@ -47,7 +55,7 @@
       "params": {
         "borderWidth": 1
       },
-      "sourceSha256": "166d6c63d209673df9cb516057dc07ba4995c857119a4eb3668f6da3233dd1a6",
+      "sourceSha256": "393b2eb98814c8858bff95f7962ace07398340dc86f64504229bb81e7a5eff2a",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/magic-card.webp",
       "reducedMotionPreview": "/images/lab/magic-card-reduced.webp"
@@ -58,7 +66,7 @@
         "speed": 30,
         "direction": "left"
       },
-      "sourceSha256": "6a3e047347f34475bfb39af0ad76ec35eea5ac6c813f49b86f472fd7d7c267af",
+      "sourceSha256": "0f7e799f0d21c133af4afa22e2a4857ac4a5eb0455d84725d02ea61abfdf4400",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/marquee.webp",
       "reducedMotionPreview": "/images/lab/marquee-reduced.webp"
@@ -69,7 +77,7 @@
         "count": 15,
         "speed": 2
       },
-      "sourceSha256": "9a113e0ed258bb5632f3fcf0c89a0b08e8212ee0fec155e91a13f371b63ae3bc",
+      "sourceSha256": "f63388d5dc6fd2bb0c81fe40c90f5d360ff3f029cc4a24857ba6659ce9b053a9",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/meteors.webp",
       "reducedMotionPreview": "/images/lab/meteors-reduced.webp"
@@ -79,7 +87,7 @@
       "params": {
         "opacity": 0.1
       },
-      "sourceSha256": "bd6e82e7d5c49e4ae12b8255fa7a76227ee4263662a32f3ded1b811a29cce554",
+      "sourceSha256": "ed411a981d924e962dc5158f33c9c3dde6fca7a8e7751f29b20d6d5a0554512e",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/noise-texture.webp",
       "reducedMotionPreview": "/images/lab/noise-texture-reduced.webp"
@@ -90,17 +98,25 @@
         "targetValue": 98234,
         "duration": 2000
       },
-      "sourceSha256": "abc9f33732ca960825ef4fee4e920515bfd640aacbb1dfb59aeccebdfd8b5695",
+      "sourceSha256": "e93cc9039b306ad14b2f716e3f45ea093079faedaa4d66101444cf084e3f062e",
       "representativeFrameMs": 2200,
       "preview": "/images/lab/number-ticker.webp",
       "reducedMotionPreview": "/images/lab/number-ticker-reduced.webp"
+    },
+    {
+      "id": "shader-ribbon",
+      "params": {},
+      "sourceSha256": "e7f62102bcc07afff4e6b3f2320c0d2e03288a126ab482eea4b2dd12b8bb5444",
+      "representativeFrameMs": 1000,
+      "preview": "/images/lab/shader-ribbon.webp",
+      "reducedMotionPreview": "/images/lab/shader-ribbon-reduced.webp"
     },
     {
       "id": "shimmer-button",
       "params": {
         "duration": 2
       },
-      "sourceSha256": "91ce1db39cdb89f987a568f0bfe1a642c975ce6e74996d6eb9b966f223a6406c",
+      "sourceSha256": "d79a5d0f3aacec386173027c359eb2a479bb1fb5a8fc1f095ee79f028611f594",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/shimmer-button.webp",
       "reducedMotionPreview": "/images/lab/shimmer-button-reduced.webp"
@@ -111,7 +127,7 @@
         "borderWidth": 1,
         "speed": 3
       },
-      "sourceSha256": "93318993e45346242e84da9e2b5584bfb8c66c21203790d93d53daead39d9755",
+      "sourceSha256": "0a599ee684e63ef1d47cb6c0aca789b47807a535f2dffcb41cdea6db2d2e9b1b",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/shine-border.webp",
       "reducedMotionPreview": "/images/lab/shine-border-reduced.webp"
@@ -121,7 +137,7 @@
       "params": {
         "radius": 250
       },
-      "sourceSha256": "2db45a853b04c9fc24f1d79fe9376746bc60a74ece925732b92ad885ad0e4253",
+      "sourceSha256": "30b53bca82d8f2ca4e0bd14c4931c0368d15dc22a7ffe3daac6f37752f1e1c05",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/spotlight.webp",
       "reducedMotionPreview": "/images/lab/spotlight-reduced.webp"
@@ -132,7 +148,7 @@
         "maxTilt": 10,
         "perspective": 500
       },
-      "sourceSha256": "dcf6d6efe9a6412d1e64a6e1516e406f0a08398a90fc2a7b1086f4718e5bd155",
+      "sourceSha256": "a780db22260ba5bee9e5c6e6da722802228a13d49908589e7c2550ac7565c4d5",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/tilt-card.webp",
       "reducedMotionPreview": "/images/lab/tilt-card-reduced.webp"

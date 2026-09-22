@@ -1,0 +1,210 @@
+.agri-shell {
+  position: relative;
+  min-height: 31rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #fff;
+}
+.agri-topbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgb(255 255 255 / 92%);
+}
+.agri-topbar div:first-child {
+  display: grid;
+  gap: 0.2rem;
+}
+.agri-topbar span,
+.agri-device span {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #2563eb;
+}
+.agri-topbar strong {
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+.agri-status {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #166534;
+}
+.agri-status i {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0.3rem rgb(34 197 94 / 10%);
+}
+.agri-map {
+  position: relative;
+  height: 20rem;
+  overflow: hidden;
+}
+.agri-map svg {
+  width: 100%;
+  height: 100%;
+}
+.agri-route {
+  animation: route-flow 7s linear infinite;
+}
+.agri-pulse {
+  transform-origin: 266px 145px;
+  animation: marker-pulse 2s ease-out infinite;
+}
+.agri-toolbar {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 1.1rem;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid #dbeafe;
+  border-radius: 0.75rem;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 12px 28px rgb(15 23 42 / 10%);
+}
+.agri-toolbar span {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2563eb;
+}
+.agri-toolbar span:last-child {
+  border-bottom: 0;
+}
+.agri-device {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid #dbeafe;
+  border-radius: 0.9rem;
+  background: rgb(255 255 255 / 90%);
+  padding: 0.8rem 0.9rem;
+  box-shadow: 0 12px 28px rgb(37 99 235 / 10%);
+  backdrop-filter: blur(12px);
+}
+.agri-device strong {
+  color: #0f172a;
+  font-size: 0.8rem;
+}
+.agri-device small {
+  color: #64748b;
+  font-size: 0.67rem;
+}
+.agri-sheet {
+  position: absolute;
+  z-index: 5;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.2rem;
+  background: rgb(255 255 255 / 95%);
+  padding: 0.8rem 1rem 1rem;
+  box-shadow: 0 20px 50px rgb(15 23 42 / 14%);
+  backdrop-filter: blur(18px);
+  animation: sheet-breathe 6s ease-in-out infinite;
+}
+.agri-handle {
+  width: 2.5rem;
+  height: 0.22rem;
+  margin: 0 auto 0.65rem;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+.agri-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.agri-sheet-head div {
+  display: grid;
+  gap: 0.15rem;
+}
+.agri-sheet-head span,
+.agri-metrics span {
+  color: #64748b;
+  font-size: 0.64rem;
+}
+.agri-sheet-head strong {
+  color: #0f172a;
+  font-size: 0.8rem;
+}
+.agri-badge {
+  border-radius: 999px;
+  background: #dcfce7;
+  padding: 0.3rem 0.55rem;
+  color: #166534 !important;
+  font-weight: 700;
+}
+.agri-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+.agri-metrics div {
+  display: grid;
+  gap: 0.15rem;
+  border-radius: 0.7rem;
+  background: #f8fafc;
+  padding: 0.55rem;
+}
+.agri-metrics strong {
+  color: #0f172a;
+  font-size: 0.72rem;
+}
+.agri-progress {
+  height: 0.3rem;
+  margin-top: 0.75rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dbeafe;
+}
+.agri-progress span {
+  display: block;
+  width: 68%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  animation: progress-shift 4s ease-in-out infinite alternate;
+}
+.agri-note {
+  position: absolute;
+  z-index: 6;
+  left: 1.1rem;
+  bottom: 0.25rem;
+  color: #94a3b8;
+  font-size: 0.58rem;
+}
+@keyframes route-flow {
+  to { stroke-dashoffset: -88; }
+}
+@keyframes marker-pulse {
+  50% { transform: scale(1.45); opacity: 0.45; }
+}
+@keyframes sheet-breathe {
+  50% { transform: translateY(-0.25rem); }
+}
+@keyframes progress-shift {
+  to { width: 82%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agri-route,
+  .agri-pulse,
+  .agri-sheet,
+  .agri-progress span { animation: none; }
+}

@@ -6,6 +6,7 @@ const root = process.cwd()
 const expectedIds = [
   'aurora', 'grid-pattern', 'dot-pattern', 'noise-texture', 'meteors', 'spotlight',
   'tilt-card', 'magic-card', 'shine-border', 'shimmer-button', 'number-ticker', 'marquee',
+  'shader-ribbon', 'agent-flow',
 ]
 const idToFile = id => `${id.split('-').map(part => `${part[0].toUpperCase()}${part.slice(1)}`).join('')}Demo.vue`
 const failures = []
@@ -17,6 +18,7 @@ const contentFields = [
 ]
 const animatedIds = new Set([
   'aurora', 'meteors', 'shine-border', 'shimmer-button', 'number-ticker', 'marquee',
+  'shader-ribbon', 'agent-flow',
 ])
 
 const metadata = JSON.parse(read('src/assets/data/lab-effects.json'))
@@ -66,7 +68,7 @@ for (const effect of metadata) {
 const demosDir = resolve(root, 'src/views/Lab/demos')
 const demoFiles = readdirSync(demosDir).filter(file => file.endsWith('Demo.vue')).sort()
 const expectedFiles = expectedIds.map(idToFile).sort()
-if (JSON.stringify(demoFiles) !== JSON.stringify(expectedFiles)) fail('Demo 文件与 12 项清单不一致')
+if (JSON.stringify(demoFiles) !== JSON.stringify(expectedFiles)) fail(`Demo 文件与 ${expectedIds.length} 项清单不一致`)
 for (const file of demoFiles) {
   const source = read(`src/views/Lab/demos/${file}`)
   if (source.split('\n').length >= 200) fail(`${file} 达到或超过 200 行`)

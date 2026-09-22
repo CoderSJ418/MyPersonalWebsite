@@ -13,6 +13,8 @@ export type LabEffectId =
   | 'shimmer-button'
   | 'number-ticker'
   | 'marquee'
+  | 'shader-ribbon'
+  | 'agent-flow'
 
 export type LabCategory = 'background' | 'card' | 'button' | 'data' | 'layout'
 export type LabLanguage = 'vue'

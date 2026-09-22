@@ -196,5 +196,35 @@
     "accessibilityNotes": ["重复轨道副本从辅助技术隐藏", "reduced-motion 下按正常文档顺序展示全部内容"],
     "usedIn": [],
     "dependencies": ["vue"], "license": "MIT", "sourceUrl": null, "implementationOrigin": "original"
+  },
+  {
+    "id": "shader-ribbon", "name": "WebGL 流体光带", "description": "原生 WebGL fragment shader 驱动的蓝银流体光带，指针会影响局部曲率。", "category": "background",
+    "tags": ["WebGL", "GLSL", "shader"], "params": [],
+    "compatibility": { "browsers": "支持 WebGL 的现代浏览器", "fallback": "WebGL、低性能或减少动态环境显示静态代表帧。" },
+    "preview": { "src": "/images/lab/shader-ribbon.webp", "alt": "蓝银色 WebGL 流体光带预览" },
+    "useCases": ["首页 Hero 的高质量技术主视觉", "Interaction Lab 的真实 Shader 能力证明"],
+    "avoidWhen": ["低端设备需要长时间持续动画时", "同屏已有多个 WebGL canvas 时"],
+    "pairings": ["grid-pattern", "magic-card", "number-ticker"],
+    "stack": ["Vue 3", "WebGL", "GLSL fragment shader", "requestAnimationFrame"],
+    "implementationNotes": ["全屏四边形只运行一个 fragment shader", "指针坐标通过 uniform 影响局部波形而非移动 DOM"],
+    "performanceNotes": ["devicePixelRatio 上限为 2", "reduced-motion 与低性能设备只绘制静态帧"],
+    "accessibilityNotes": ["Canvas 为装饰层，关键文字保持真实 DOM", "减少动态时停止连续帧"],
+    "usedIn": [{ "label": "首页 Interaction Systems", "path": "/" }],
+    "dependencies": ["vue"], "license": "MIT", "sourceUrl": null, "implementationOrigin": "original"
+  },
+  {
+    "id": "agent-flow", "name": "AI 工程工作流", "description": "Requirement → Inspect → Implement → Browser → Verified 的可视化交付链路。", "category": "layout",
+    "tags": ["workflow", "AI", "state"], "params": [],
+    "compatibility": { "browsers": "Chrome 90+ / Firefox 88+ / Safari 14+ / Edge 90+", "fallback": "减少动态时直接展示 Verified 终态。" },
+    "preview": { "src": "/images/lab/agent-flow.webp", "alt": "AI 工程工作流节点与验证结果预览" },
+    "useCases": ["个人作品集展示 AI Native 开发方式", "工程流程、Agent 执行与验证证据的解释型视觉"],
+    "avoidWhen": ["把流程动画当作真实后台执行状态", "节点数量过多导致移动端难以阅读"],
+    "pairings": ["shader-ribbon", "number-ticker", "magic-card"],
+    "stack": ["Vue 3", "state-driven UI", "CSS transitions"],
+    "implementationNotes": ["节点状态由单一 activeStep 驱动", "终态输出 Browser、Typecheck、Diff 与 Result 证据"],
+    "performanceNotes": ["仅更新少量状态与 transform", "卸载时清理 interval"],
+    "accessibilityNotes": ["节点顺序保留 DOM 阅读顺序", "减少动态时直接定位到验证完成态"],
+    "usedIn": [{ "label": "首页 AI 工程工作流", "path": "/" }],
+    "dependencies": ["vue"], "license": "MIT", "sourceUrl": null, "implementationOrigin": "original"
   }
 ]

@@ -69,7 +69,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Lab/LabIndex.vue'),
     meta: {
       title: '交互实验室',
-      description: '12 个可调参数、可复制源码的 Vue 交互效果'
+      description: '可运行的 Vue 交互效果、实时预览与 Motion Design Prompt Library'
     }
   },
   {

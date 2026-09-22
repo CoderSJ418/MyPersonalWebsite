@@ -101,6 +101,16 @@ const runtimeById: Record<LabEffectId, LabRuntimeDefinition> = {
     'MarqueeDemo',
     () => import('@/views/Lab/demos/MarqueeDemo.vue'),
     () => import('@/views/Lab/demos/MarqueeDemo.vue?raw')
+  ),
+  'shader-ribbon': runtime(
+    'ShaderRibbonDemo',
+    () => import('@/views/Lab/demos/ShaderRibbonDemo.vue'),
+    () => import('@/views/Lab/demos/ShaderRibbonDemo.vue?raw')
+  ),
+  'agent-flow': runtime(
+    'AgentFlowDemo',
+    () => import('@/views/Lab/demos/AgentFlowDemo.vue'),
+    () => import('@/views/Lab/demos/AgentFlowDemo.vue?raw')
   )
 }
 

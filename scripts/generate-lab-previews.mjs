@@ -22,7 +22,10 @@ const server = await preview({
   logLevel: 'error',
   preview: { host: '127.0.0.1', port: 4179, open: false },
 })
-const browser = await chromium.launch({ headless: true })
+const browser = await chromium.launch({
+  headless: true,
+  executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH || undefined,
+})
 const context = await browser.newContext({
   viewport: { width: 720, height: 720 },
   deviceScaleFactor: 1,

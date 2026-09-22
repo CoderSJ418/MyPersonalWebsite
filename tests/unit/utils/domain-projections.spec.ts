@@ -56,7 +56,7 @@ describe('domain projections', () => {
     expect(
       breadcrumbStructuredData([{ name: 'Home', url: '/' }]).itemListElement[0]?.position
     ).toBe(1)
-    expect(labCollectionStructuredData(metadata).hasPart).toHaveLength(12)
+    expect(labCollectionStructuredData(metadata).hasPart).toHaveLength(14)
     expect(labEffectStructuredData(effect).programmingLanguage).toBe('Vue')
   })
 

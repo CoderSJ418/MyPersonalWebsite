@@ -7,8 +7,8 @@ import { createLabUsage } from '@/utils/labUsage'
 describe('Lab metadata and usage', () => {
   it('parses the complete frozen metadata document', () => {
     const effects = parseLabMetadata(metadata)
-    expect(effects).toHaveLength(12)
-    expect(new Set(effects.map((effect) => effect.id)).size).toBe(12)
+    expect(effects).toHaveLength(14)
+    expect(new Set(effects.map((effect) => effect.id)).size).toBe(14)
     for (const effect of effects) {
       expect(effect.useCases.length).toBeGreaterThanOrEqual(2)
       expect(effect.avoidWhen.length).toBeGreaterThanOrEqual(1)

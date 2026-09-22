@@ -6,6 +6,8 @@
 
     <HeroSection />
 
+    <HomeMotionShowcase />
+
     <div class="home__gap home__gap--tight"></div>
 
     <FeaturedProjects />
@@ -34,6 +36,7 @@
 import { defineAsyncComponent } from 'vue'
 import FeaturedProjects from '@/components/home/FeaturedProjects.vue'
 import HeroSection from '@/components/home/HeroSection.vue'
+import HomeMotionShowcase from '@/components/home/HomeMotionShowcase.vue'
 import SEOHead from '@/components/common/SEOHead.vue'
 import { personStructuredData } from '@/utils/structuredData'
 
