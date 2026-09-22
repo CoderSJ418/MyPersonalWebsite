@@ -1,7 +1,7 @@
 <template>
   <SEOHead
     title="交互实验室"
-    description="面向招聘经理与 Vue 开发者的交互能力展示：实时调参、可运行源码、真实应用与工程边界。"
+    description="面向招聘经理与 Vue 前端开发者的 Motion Scene Gallery：Three.js、Canvas、GLSL Shader、DOM Motion、实时调参与真实实现源码。"
     type="website"
     :structured-data="structuredData"
   />

@@ -40,6 +40,7 @@
     "markdown-it-table-of-contents": "^1.1.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
+    "three": "^0.186.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
     "web-vitals": "3.5.2"

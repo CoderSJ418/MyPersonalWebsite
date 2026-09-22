@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import projects from '@/assets/data/projects.json'
 import metadata from '@/assets/data/lab-effects.json'
 import { labRegistry } from '@/config/labRegistry'
-import { promptRecipeRegistry, resolvePromptRecipeEffect } from '@/config/promptRecipeRegistry'
+import { promptRecipeRegistry, resolvePromptRecipeScene } from '@/config/promptRecipeRegistry'
 import { getReaderView, getRecruitView } from '@/composables/useProjectProjection'
 import { formatDate, formatYearMonth } from '@/utils/format'
 import {
@@ -64,10 +64,10 @@ describe('domain projections', () => {
     const recipe = promptRecipeRegistry[0]
     expect(recipe).toBeDefined()
     if (!recipe) return
-    const recipeEffect = resolvePromptRecipeEffect(recipe)
-    expect(recipeEffect).toBeDefined()
-    if (!recipeEffect) return
-    expect(promptRecipeStructuredData(recipe, recipeEffect).inLanguage).toBe('zh-CN')
+    const recipeScene = resolvePromptRecipeScene(recipe)
+    expect(recipeScene).toBeDefined()
+    if (!recipeScene) return
+    expect(promptRecipeStructuredData(recipe, recipeScene).inLanguage).toBe('zh-CN')
   })
 
   it('formats supported date variants', () => {

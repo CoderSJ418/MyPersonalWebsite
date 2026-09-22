@@ -1,0 +1,414 @@
+[
+  {
+    "id": "liquid-ribbon",
+    "recipeIds": [
+      "ms-recipe-01",
+      "ms-recipe-25",
+      "ms-recipe-33",
+      "ms-recipe-34",
+      "ms-recipe-37"
+    ],
+    "title": "液态光带场",
+    "subtitle": "Fragment Shader 直接计算多层流体光带，保持亮色体系下的高级技术质感。",
+    "renderer": "shader",
+    "variant": "ribbon",
+    "eyebrow": "GLSL / LIQUID FIELD",
+    "labels": [
+      "FLOW",
+      "DISTORT",
+      "DEPTH"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.45
+      },
+      {
+        "key": "intensity",
+        "value": 0.72
+      },
+      {
+        "key": "scale",
+        "value": 1.15
+      }
+    ]
+  },
+  {
+    "id": "editorial-motion",
+    "recipeIds": [
+      "ms-recipe-03",
+      "ms-recipe-11",
+      "ms-recipe-41",
+      "ms-recipe-42",
+      "ms-recipe-43"
+    ],
+    "title": "编辑式动态排版",
+    "subtitle": "大字号排版、信息标签与单一动态焦点组合，不依赖粒子或 3D 也有强视觉识别。",
+    "renderer": "dom",
+    "variant": "editorial",
+    "eyebrow": "DOM / EDITORIAL MOTION",
+    "labels": [
+      "DESIGN",
+      "ENGINEERING",
+      "MOTION"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.55
+      },
+      {
+        "key": "depth",
+        "value": 0.45
+      },
+      {
+        "key": "intensity",
+        "value": 0.72
+      }
+    ]
+  },
+  {
+    "id": "spatial-browser-stack",
+    "recipeIds": [
+      "ms-recipe-05",
+      "ms-recipe-13",
+      "ms-recipe-15",
+      "ms-recipe-27",
+      "ms-recipe-31"
+    ],
+    "title": "空间浏览器堆叠",
+    "subtitle": "项目窗口进入真实 3D 空间，镜头、景深与指针共同塑造层次。",
+    "renderer": "three",
+    "variant": "browser-stack",
+    "eyebrow": "THREE.JS / PORTFOLIO",
+    "labels": [
+      "PRODUCT",
+      "SYSTEM",
+      "VERIFY"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.35
+      },
+      {
+        "key": "depth",
+        "value": 1.1
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.32
+      }
+    ]
+  },
+  {
+    "id": "particle-field",
+    "recipeIds": [
+      "ms-recipe-08",
+      "ms-recipe-26",
+      "ms-recipe-28",
+      "ms-recipe-45",
+      "ms-recipe-47"
+    ],
+    "title": "响应式粒子场",
+    "subtitle": "Canvas 粒子围绕焦点产生吸引、逃逸与连线，形成高密度技术空间。",
+    "renderer": "canvas",
+    "variant": "particles",
+    "eyebrow": "CANVAS / PARTICLES",
+    "labels": [
+      "ATTRACT",
+      "FLOW",
+      "FOCUS"
+    ],
+    "preset": [
+      {
+        "key": "density",
+        "value": 68
+      },
+      {
+        "key": "speed",
+        "value": 0.7
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.7
+      }
+    ]
+  },
+  {
+    "id": "portal-mask",
+    "recipeIds": [
+      "ms-recipe-12",
+      "ms-recipe-36",
+      "ms-recipe-54",
+      "ms-recipe-61"
+    ],
+    "title": "空间门户遮罩",
+    "subtitle": "径向 SDF、环形折射与遮罩共同形成一个有空间吸力的视觉门户。",
+    "renderer": "shader",
+    "variant": "portal",
+    "eyebrow": "GLSL / SDF PORTAL",
+    "labels": [
+      "MASK",
+      "FRESNEL",
+      "REVEAL"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.38
+      },
+      {
+        "key": "intensity",
+        "value": 0.8
+      },
+      {
+        "key": "scale",
+        "value": 0.92
+      }
+    ]
+  },
+  {
+    "id": "agent-control-room",
+    "recipeIds": [
+      "ms-recipe-04",
+      "ms-recipe-49",
+      "ms-recipe-50",
+      "ms-recipe-55",
+      "ms-recipe-56",
+      "ms-recipe-60"
+    ],
+    "title": "Agent 控制室",
+    "subtitle": "把队列、执行节点、浏览器证据和最终结果组织成真正的 AI 工程控制场景。",
+    "renderer": "dom",
+    "variant": "control-room",
+    "eyebrow": "DOM / AI CONTROL ROOM",
+    "labels": [
+      "QUEUE",
+      "RUNNING",
+      "VERIFIED"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.7
+      },
+      {
+        "key": "depth",
+        "value": 0.7
+      },
+      {
+        "key": "intensity",
+        "value": 0.86
+      }
+    ]
+  },
+  {
+    "id": "data-heat-field",
+    "recipeIds": [
+      "ms-recipe-35",
+      "ms-recipe-38",
+      "ms-recipe-39",
+      "ms-recipe-40",
+      "ms-recipe-53"
+    ],
+    "title": "数据热力场",
+    "subtitle": "Shader 将采样密度转为热力波峰与扫描层，可用于地图、分析和数据产品。",
+    "renderer": "shader",
+    "variant": "heat",
+    "eyebrow": "GLSL / DATA HEAT",
+    "labels": [
+      "SAMPLE",
+      "DENSITY",
+      "SIGNAL"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.32
+      },
+      {
+        "key": "intensity",
+        "value": 0.86
+      },
+      {
+        "key": "scale",
+        "value": 1.35
+      }
+    ]
+  },
+  {
+    "id": "kinetic-filmstrip",
+    "recipeIds": [
+      "ms-recipe-10",
+      "ms-recipe-17",
+      "ms-recipe-18",
+      "ms-recipe-21",
+      "ms-recipe-22",
+      "ms-recipe-23",
+      "ms-recipe-24"
+    ],
+    "title": "动能胶片带",
+    "subtitle": "项目帧以不同速度、尺度和纵深穿过画布，形成电影式横向叙事。",
+    "renderer": "canvas",
+    "variant": "filmstrip",
+    "eyebrow": "CANVAS / KINETIC",
+    "labels": [
+      "CASE 01",
+      "CASE 02",
+      "CASE 03"
+    ],
+    "preset": [
+      {
+        "key": "density",
+        "value": 18
+      },
+      {
+        "key": "speed",
+        "value": 0.9
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.18
+      }
+    ]
+  },
+  {
+    "id": "orbital-product",
+    "recipeIds": [
+      "ms-recipe-02",
+      "ms-recipe-06",
+      "ms-recipe-29",
+      "ms-recipe-32"
+    ],
+    "title": "轨道产品核心",
+    "subtitle": "中心产品核、轨道与空间粒子组成可交互的 Three.js 品牌场景。",
+    "renderer": "three",
+    "variant": "orbital",
+    "eyebrow": "THREE.JS / ORBITAL",
+    "labels": [
+      "CORE",
+      "SIGNAL",
+      "RUNTIME"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.5
+      },
+      {
+        "key": "depth",
+        "value": 0.8
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.22
+      }
+    ]
+  },
+  {
+    "id": "architecture-network",
+    "recipeIds": [
+      "ms-recipe-07",
+      "ms-recipe-16",
+      "ms-recipe-44",
+      "ms-recipe-48",
+      "ms-recipe-52"
+    ],
+    "title": "架构网络",
+    "subtitle": "节点、链路与脉冲沿工程拓扑传播，比普通网格更像真实系统。",
+    "renderer": "canvas",
+    "variant": "network",
+    "eyebrow": "CANVAS / SYSTEM GRAPH",
+    "labels": [
+      "CLIENT",
+      "CORE",
+      "EVIDENCE"
+    ],
+    "preset": [
+      {
+        "key": "density",
+        "value": 36
+      },
+      {
+        "key": "speed",
+        "value": 0.55
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.35
+      }
+    ]
+  },
+  {
+    "id": "data-topology-3d",
+    "recipeIds": [
+      "ms-recipe-14",
+      "ms-recipe-30",
+      "ms-recipe-46",
+      "ms-recipe-51"
+    ],
+    "title": "三维数据拓扑",
+    "subtitle": "节点与连接关系在三维空间中展开，适合架构、Agent 和工程系统表达。",
+    "renderer": "three",
+    "variant": "topology",
+    "eyebrow": "THREE.JS / TOPOLOGY",
+    "labels": [
+      "INPUT",
+      "ORCHESTRATE",
+      "OUTPUT"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.25
+      },
+      {
+        "key": "depth",
+        "value": 1.35
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.28
+      }
+    ]
+  },
+  {
+    "id": "evidence-bento",
+    "recipeIds": [
+      "ms-recipe-09",
+      "ms-recipe-19",
+      "ms-recipe-20",
+      "ms-recipe-57",
+      "ms-recipe-58",
+      "ms-recipe-59",
+      "ms-recipe-62",
+      "ms-recipe-63",
+      "ms-recipe-64"
+    ],
+    "title": "证据型 Bento",
+    "subtitle": "一个主舞台加三类工程证据，利用尺寸与动态优先级而不是卡片数量建立层级。",
+    "renderer": "dom",
+    "variant": "bento",
+    "eyebrow": "DOM / PROOF SYSTEM",
+    "labels": [
+      "LIVE",
+      "PERF",
+      "SOURCE"
+    ],
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.42
+      },
+      {
+        "key": "depth",
+        "value": 0.35
+      },
+      {
+        "key": "intensity",
+        "value": 0.62
+      }
+    ]
+  }
+]

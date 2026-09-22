@@ -1,4 +1,5 @@
-import type { LabEffect, LabParams, LabValue } from '@/types/lab'
+import type { LabEffectId, LabParams, LabValue } from '@/types/lab'
+import type { MotionSceneRuntime } from '@/types/motionScene'
 
 export interface PromptRecipePreset {
   key: string
@@ -13,7 +14,7 @@ export interface PromptRecipe {
   tags: string[]
   sourcePattern: string
   sourceUrl: string
-  effectId: string
+  effectId: LabEffectId
   preset: PromptRecipePreset[]
   visualDirection: string
   motionDirection: string
@@ -21,6 +22,6 @@ export interface PromptRecipe {
 
 export interface PromptRecipeStudioModel {
   recipe: PromptRecipe
-  effect: LabEffect
+  scene: MotionSceneRuntime
   params: LabParams
 }

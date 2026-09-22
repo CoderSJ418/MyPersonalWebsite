@@ -98,6 +98,8 @@ export default defineConfig({
           'vue-vendor': ['vue', 'vue-router', 'pinia'],
           // GSAP 动画库
           gsap: ['gsap'],
+          // Three.js 仅用于 Motion Scene 3D Renderer，独立 chunk 避免污染首页基础包
+          three: ['three'],
           // 图标库
           icons: ['lucide-vue-next'],
           // Markdown 渲染链（highlight.js 按需导入由 Vite 自动 code-split，不纳入 manualChunks）

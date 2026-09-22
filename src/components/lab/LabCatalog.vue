@@ -19,6 +19,16 @@
         <li class="rounded-full bg-blue-50 px-3 py-1.5">场景与性能边界</li>
       </ul>
     </header>
+
+    <MotionSceneGallery />
+
+    <div class="mt-24 border-t border-slate-200 pt-16">
+      <div class="mb-6 max-w-2xl">
+        <p class="text-sm font-semibold tracking-widest text-blue-600">基础交互引擎</p>
+        <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-950">14 个可拆解的底层 Demo</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-600">这些是 Renderer Studio 的基础能力与源码证据，不再承担 64 条配方的视觉展示职责。</p>
+      </div>
+    </div>
     <div class="mb-8 space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
       <label class="block max-w-xl">
         <span class="sr-only">搜索交互效果</span>
@@ -72,7 +82,7 @@
       </button>
     </div>
 
-    <PromptRecipeLibrary />
+    <PromptRecipeIndex />
   </section>
 </template>
 
@@ -81,7 +91,8 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import LabEffectCard from '@/components/lab/LabEffectCard.vue'
-import PromptRecipeLibrary from '@/components/lab/PromptRecipeLibrary.vue'
+import MotionSceneGallery from '@/components/lab/MotionSceneGallery.vue'
+import PromptRecipeIndex from '@/components/lab/PromptRecipeIndex.vue'
 import { labRegistry } from '@/config/labRegistry'
 import { analyticsConsent, trackLabAnalytics } from '@/services/privacyAnalytics'
 import type { LabCategory } from '@/types/lab'

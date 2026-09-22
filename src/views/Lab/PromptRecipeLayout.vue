@@ -3,10 +3,10 @@
     :title="recipe?.title ?? '动效配方不存在'"
     :description="recipe?.summary ?? '没有找到这个动效配方。'"
     type="website"
-    :robots="recipe && effect ? 'index,follow' : 'noindex,nofollow'"
+    :robots="recipe && scene ? 'index,follow' : 'noindex,nofollow'"
     :structured-data="structuredData"
   />
-  <PromptRecipeStudio v-if="recipe && effect" :recipe="recipe" :effect="effect" />
+  <PromptRecipeStudio v-if="recipe && scene" :recipe="recipe" :scene="scene" />
   <PromptRecipeNotFound v-else :id="id" />
 </template>
 
@@ -18,7 +18,7 @@ import PromptRecipeNotFound from '@/components/lab/PromptRecipeNotFound.vue'
 import PromptRecipeStudio from '@/components/lab/PromptRecipeStudio.vue'
 import {
   findPromptRecipe,
-  resolvePromptRecipeEffect
+  resolvePromptRecipeScene
 } from '@/config/promptRecipeRegistry'
 import { promptRecipeStructuredData } from '@/utils/structuredData'
 
@@ -28,12 +28,12 @@ interface Props {
 
 const props = defineProps<Props>()
 const recipe = computed(() => findPromptRecipe(props.id))
-const effect = computed(() => {
+const scene = computed(() => {
   const current = recipe.value
-  return current ? resolvePromptRecipeEffect(current) : undefined
+  return current ? resolvePromptRecipeScene(current) : undefined
 })
 const structuredData = computed(() =>
-  recipe.value && effect.value ? promptRecipeStructuredData(recipe.value, effect.value) : undefined
+  recipe.value && scene.value ? promptRecipeStructuredData(recipe.value, scene.value) : undefined
 )
 
 onMounted(() => window.scrollTo({ top: 0 }))

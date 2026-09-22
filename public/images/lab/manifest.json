@@ -112,7 +112,7 @@
         "amplitude": 0.22,
         "pointerStrength": 0.18
       },
-      "sourceSha256": "95f303e5651c01cde6890228a0fb77a17436c46ca797162a0378d243a2717b20",
+      "sourceSha256": "eb104b0209b6f8c5ee2babe1b58bce7c665e4d714ab28aa4e470d1c3ef1f62fd",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/shader-ribbon.webp",
       "reducedMotionPreview": "/images/lab/shader-ribbon-reduced.webp"

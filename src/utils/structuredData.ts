@@ -1,6 +1,7 @@
 import type { BlogPost } from '@/types/blog'
 import type { Project } from '@/types/project'
 import type { LabEffect, LabEffectMetadata } from '@/types/lab'
+import type { MotionSceneRuntime } from '@/types/motionScene'
 import type { PromptRecipe } from '@/types/promptRecipe'
 
 /**
@@ -96,7 +97,7 @@ export function labCollectionStructuredData(effects: LabEffectMetadata[]) {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: '交互实验室',
-    description: '14 个可运行、可调参数、可复制源码的 Vue 交互效果，并包含 64 条 Motion Design Prompt Recipe。',
+    description: '12 个多渲染器 Motion Scene、14 个可拆解交互 Demo 与 64 条中文 Motion Design Prompt Recipe。',
     hasPart: effects.map(effect => ({
       '@type': 'SoftwareSourceCode',
       name: effect.name,
@@ -107,7 +108,7 @@ export function labCollectionStructuredData(effects: LabEffectMetadata[]) {
   }
 }
 
-export function promptRecipeStructuredData(recipe: PromptRecipe, effect: LabEffect) {
+export function promptRecipeStructuredData(recipe: PromptRecipe, scene: MotionSceneRuntime) {
   return {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -116,7 +117,7 @@ export function promptRecipeStructuredData(recipe: PromptRecipe, effect: LabEffe
     url: `/lab/prompts/${recipe.id}`,
     inLanguage: 'zh-CN',
     isBasedOn: recipe.sourceUrl,
-    about: [recipe.category, effect.name, ...recipe.tags].join(', '),
+    about: [recipe.category, scene.title, scene.renderer, ...recipe.tags].join(', '),
     programmingLanguage: 'Vue',
   }
 }

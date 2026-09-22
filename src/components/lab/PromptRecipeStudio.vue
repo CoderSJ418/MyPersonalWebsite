@@ -42,13 +42,15 @@
             <p class="text-xs font-semibold tracking-widest text-blue-600">实时预览</p>
             <h2 class="mt-1 text-lg font-semibold text-slate-950">实时效果预览</h2>
           </div>
-          <span class="text-xs text-slate-500">引擎：{{ effect.name }}</span>
+          <span class="text-xs text-slate-500">Renderer：{{ scene.renderer.toUpperCase() }} · {{ scene.title }}</span>
         </div>
-        <LabDemoStage
-          :effect-id="effect.id"
-          :component="effect.component"
-          :params="params"
-        />
+        <div class="min-h-[28rem] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <MotionScenePreview
+            :scene="scene"
+            :params="params"
+            force-live
+          />
+        </div>
       </div>
 
       <div>
@@ -57,7 +59,7 @@
           <h2 class="mt-1 text-lg font-semibold text-slate-950">调整效果参数</h2>
         </div>
         <LabParamPanel
-          :params="effect.params"
+          :params="scene.params"
           :model-value="params"
           :has-changes="hasChanges"
           @update="updateParam"
@@ -99,10 +101,10 @@
 
     <div class="mt-6">
       <LabCodePanel
-        :key="effect.id"
-        :effect-id="effect.id"
+        :key="scene.id"
+        :effect-id="recipe.effectId"
         :usage="usage"
-        :source-loader="effect.loadSource"
+        :source-loader="scene.loadSource"
         @interaction="handleInteraction"
       />
     </div>
@@ -114,49 +116,50 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import LabCodePanel from '@/components/lab/LabCodePanel.vue'
-import LabDemoStage from '@/components/lab/LabDemoStage.vue'
+import MotionScenePreview from '@/components/lab/MotionScenePreview.vue'
 import LabParamPanel from '@/components/lab/LabParamPanel.vue'
 import PromptRecipePromptPanel from '@/components/lab/PromptRecipePromptPanel.vue'
 import {
-  buildPromptRecipeText,
-  createPromptRecipeParams
+  buildPromptRecipeSceneText,
+  createPromptRecipeSceneParams
 } from '@/config/promptRecipeRegistry'
 import { trackLabAnalytics } from '@/services/privacyAnalytics'
-import type { LabEffect, LabParams, LabValue } from '@/types/lab'
+import type { LabParams, LabValue } from '@/types/lab'
+import type { MotionSceneRuntime } from '@/types/motionScene'
 import type { PromptRecipe } from '@/types/promptRecipe'
 
 interface Props {
   recipe: PromptRecipe
-  effect: LabEffect
+  scene: MotionSceneRuntime
 }
 
 const props = defineProps<Props>()
 const params = ref<LabParams>({})
 
 const resetParams = () => {
-  params.value = createPromptRecipeParams(props.recipe, props.effect)
+  params.value = createPromptRecipeSceneParams(props.recipe, props.scene)
 }
 
-watch([() => props.recipe.id, () => props.effect.id], resetParams, { immediate: true })
+watch([() => props.recipe.id, () => props.scene.id], resetParams, { immediate: true })
 
 const updateParam = (key: string, value: LabValue) => {
   params.value = { ...params.value, [key]: value }
 }
-const defaults = computed(() => createPromptRecipeParams(props.recipe, props.effect))
+const defaults = computed(() => createPromptRecipeSceneParams(props.recipe, props.scene))
 const hasChanges = computed(() =>
-  props.effect.params.some((param) => params.value[param.key] !== defaults.value[param.key])
+  props.scene.params.some((param) => params.value[param.key] !== defaults.value[param.key])
 )
-const promptText = computed(() => buildPromptRecipeText(props.recipe, props.effect, params.value))
-const usage = computed(() => props.effect.createUsage(params.value))
+const promptText = computed(() => buildPromptRecipeSceneText(props.recipe, props.scene, params.value))
+const usage = computed(() => props.scene.createUsage(params.value))
 
 const handleInteraction = (name: 'code_expand' | 'code_copy', target?: 'usage' | 'source') => {
   if (name === 'code_expand') {
-    trackLabAnalytics({ event: name, effectId: props.effect.id })
+    trackLabAnalytics({ event: name, effectId: props.recipe.effectId })
     return
   }
   trackLabAnalytics({
     event: name,
-    effectId: props.effect.id,
+    effectId: props.recipe.effectId,
     copyTarget: target === 'source' ? 'full_source' : 'usage'
   })
 }

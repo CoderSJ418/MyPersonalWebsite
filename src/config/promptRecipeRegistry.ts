@@ -1,6 +1,8 @@
 import recipeData from '@/assets/data/lab-prompt-recipes.json'
 import { findLabEffect } from '@/config/labRegistry'
+import { createMotionSceneParams, findSceneForRecipe } from '@/config/motionSceneRegistry'
 import type { LabEffect, LabParams } from '@/types/lab'
+import type { MotionSceneRuntime } from '@/types/motionScene'
 import type { PromptRecipe } from '@/types/promptRecipe'
 
 export const promptRecipeRegistry: PromptRecipe[] = recipeData.map((recipe) => ({
@@ -11,7 +13,7 @@ export const promptRecipeRegistry: PromptRecipe[] = recipeData.map((recipe) => (
   tags: [...recipe.tags],
   sourcePattern: recipe.sourcePattern,
   sourceUrl: recipe.sourceUrl,
-  effectId: recipe.effectId,
+  effectId: findLabEffect(recipe.effectId)?.id ?? 'aurora',
   preset: recipe.preset.map((preset) => ({ key: preset.key, value: preset.value })),
   visualDirection: recipe.visualDirection,
   motionDirection: recipe.motionDirection
@@ -69,5 +71,55 @@ export const buildPromptRecipeText = (
     '- 每个运动元素必须表达状态、空间、流程或交互，不添加没有产品意义的循环装饰。',
     `实现基线：当前预览由「${effect.name}」引擎驱动，可继续调整参数并复用其真实 Vue 实现。`,
     `灵感索引：MotionSites 公开案例「${recipe.sourcePattern}」。只借鉴视觉结构与动效方法，不复制付费 Prompt 原文或受保护实现。`
+  ].join('\n\n')
+}
+
+export const resolvePromptRecipeScene = (recipe: PromptRecipe): MotionSceneRuntime | undefined =>
+  findSceneForRecipe(recipe.id)
+
+export const createPromptRecipeSceneParams = (
+  recipe: PromptRecipe,
+  scene: MotionSceneRuntime
+): LabParams => {
+  const params = createMotionSceneParams(scene)
+  if (scene.recipeIds[0] === recipe.id) return params
+
+  const seedText = recipe.id.split('-').pop() ?? '1'
+  const seed = Number.parseInt(seedText, 10) || 1
+  scene.params.forEach((param, index) => {
+    const value = params[param.key]
+    if (typeof value !== 'number' || param.type !== 'range') return
+    const step = param.step ?? 0.05
+    const direction = ((seed + index * 3) % 5) - 2
+    const next = value + direction * step * 2
+    params[param.key] = Math.min(param.max ?? next, Math.max(param.min ?? next, next))
+  })
+  return params
+}
+
+export const buildPromptRecipeSceneText = (
+  recipe: PromptRecipe,
+  scene: MotionSceneRuntime,
+  params: LabParams
+) => {
+  const paramsText = scene.params
+    .map((param) => `- ${param.label}：${params[param.key] ?? param.defaultValue}`)
+    .join('\n')
+
+  return [
+    `请为 AI Native 前端工程师作品集实现「${recipe.title}」。`,
+    `目标：${recipe.summary}`,
+    `视觉方向：${recipe.visualDirection}`,
+    `动态方向：${recipe.motionDirection}`,
+    `Renderer：${scene.renderer.toUpperCase()} / ${scene.title} / ${scene.variant}`,
+    `当前场景参数：\n${paramsText}`,
+    '实现要求：',
+    '- 使用 Vue 3 + TypeScript。Three.js 仅用于真实 3D 场景；Canvas、GLSL 与 DOM Motion 按场景职责选择，不用同一种效果覆盖所有内容。',
+    '- 所有标题、说明和关键状态保留真实 DOM；Canvas/WebGL 只承担视觉和空间层。',
+    '- 单一亮色视觉，以 #2563EB 为主色；保持招聘者可以快速理解内容。',
+    '- 指针交互仅在支持 hover 的设备启用；低性能、触屏与 prefers-reduced-motion 必须有稳定降级。',
+    '- 运动必须表达空间、流程、数据或交互含义，不添加纯装饰循环。',
+    `实现基线：当前页面直接运行「${scene.title}」Renderer，可在 Studio 内实时调参数并查看其真实实现源码。`,
+    `灵感索引：MotionSites 公开案例「${recipe.sourcePattern}」。只借鉴视觉结构和交互方法，不复制其付费 Prompt 或受保护实现。`
   ].join('\n\n')
 }
