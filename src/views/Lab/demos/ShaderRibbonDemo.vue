@@ -22,9 +22,17 @@ import vertexSource from '../../../shaders/labRibbon/vertex.glsl?raw'
 
 interface Props {
   decorative?: boolean
+  speed?: number
+  amplitude?: number
+  pointerStrength?: number
 }
 
-withDefaults(defineProps<Props>(), { decorative: false })
+const props = withDefaults(defineProps<Props>(), {
+  decorative: false,
+  speed: 0.42,
+  amplitude: 0.22,
+  pointerStrength: 0.18
+})
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const shellRef = ref<HTMLElement | null>(null)
@@ -37,6 +45,9 @@ let gl: WebGLRenderingContext | null = null
 let timeLocation: WebGLUniformLocation | null = null
 let resolutionLocation: WebGLUniformLocation | null = null
 let pointerLocation: WebGLUniformLocation | null = null
+let speedLocation: WebGLUniformLocation | null = null
+let amplitudeLocation: WebGLUniformLocation | null = null
+let pointerStrengthLocation: WebGLUniformLocation | null = null
 
 const compile = (context: WebGLRenderingContext, type: number, source: string) => {
   const shader = context.createShader(type)
@@ -66,6 +77,9 @@ const draw = (time: number) => {
   gl.uniform1f(timeLocation, time * 0.001)
   gl.uniform2f(resolutionLocation, canvas.width, canvas.height)
   gl.uniform2f(pointerLocation, pointer.x, pointer.y)
+  gl.uniform1f(speedLocation, props.speed)
+  gl.uniform1f(amplitudeLocation, props.amplitude)
+  gl.uniform1f(pointerStrengthLocation, props.pointerStrength)
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
   if (!prefersReducedMotion.value && !isLowEndDevice.value) {
@@ -123,6 +137,9 @@ onMounted(() => {
   timeLocation = gl.getUniformLocation(program, 'uTime')
   resolutionLocation = gl.getUniformLocation(program, 'uResolution')
   pointerLocation = gl.getUniformLocation(program, 'uPointer')
+  speedLocation = gl.getUniformLocation(program, 'uSpeed')
+  amplitudeLocation = gl.getUniformLocation(program, 'uAmplitude')
+  pointerStrengthLocation = gl.getUniformLocation(program, 'uPointerStrength')
 
   observer = new ResizeObserver(resize)
   if (shellRef.value) observer.observe(shellRef.value)

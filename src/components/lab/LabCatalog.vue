@@ -72,7 +72,7 @@
       </button>
     </div>
 
-    <LabPromptLibrary />
+    <PromptRecipeLibrary />
   </section>
 </template>
 
@@ -81,7 +81,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import LabEffectCard from '@/components/lab/LabEffectCard.vue'
-import LabPromptLibrary from '@/components/lab/LabPromptLibrary.vue'
+import PromptRecipeLibrary from '@/components/lab/PromptRecipeLibrary.vue'
 import { labRegistry } from '@/config/labRegistry'
 import { analyticsConsent, trackLabAnalytics } from '@/services/privacyAnalytics'
 import type { LabCategory } from '@/types/lab'

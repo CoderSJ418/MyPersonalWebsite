@@ -7,9 +7,9 @@
 
 - Interaction Lab 已从首发 12 个扩展为 14 个正式实验，新增 `shader-ribbon` 与 `agent-flow`；原 12 项仍保留，历史 Phase 0–4 证据继续作为当时快照，不回写其数量口径。
 - Lab 列表由静态缩略图升级为可见区实时预览；移动端、低性能设备与 `prefers-reduced-motion` 自动降级到静态代表帧。
-- 新增 64 条原创 Motion Design Prompt Recipe，支持搜索、分类、展开与复制；内容仅提炼 MotionSites 公开案例的方法论和分类，不保存或复刻其付费 Prompt 原文。
+- 64 条原创 Motion Design Prompt Recipe 已升级为中文优先的可运行配方：列表直接预览，点击进入 `/lab/prompts/:id` 工作台，可调参数、同步生成中文提示词，并查看/复制所映射 Lab 引擎的真实 Vue 实现源码；内容仅提炼 MotionSites 公开案例的方法论和分类，不保存或复刻其付费 Prompt 原文。
 - 首页新增脱敏农业机械产品场景、AI 工程工作流与真实 WebGL Shader 展示；农业机械公开案例仅使用重构视觉与演示态数据，不公开客户生产接口、账号、设备编号或业务数据。
-- 2026-09-22 验证：`vue-tsc --noEmit` 通过；ESLint 0 error（28 条既有 warning）；Vitest 164/164；生产构建通过；Lab validator 14/14；桌面与 390px 移动端 Playwright 29/29 检查通过且无 `pageerror` / console error。
+- 2026-09-22 最新验证：`vue-tsc --noEmit` 通过；ESLint 0 error（28 条既有 warning）；Vitest 167/167；生产构建通过；Lab validator 14/14；Sitemap 含 64 个 `/lab/prompts/` 路径；桌面与 390px 移动端 Prompt Studio Playwright 31/31 检查通过且无 `pageerror` / console error。
 - 正式站点 `https://my-personal-website-eta-murex.vercel.app` 已出现新版首页、`/lab` Prompt Library 与 `/projects/6`，生产路由浏览器冒烟通过。
 
 ## 历史权威状态（2026-07-15）

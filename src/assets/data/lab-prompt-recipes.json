@@ -1,0 +1,1666 @@
+[
+  {
+    "id": "ms-recipe-01",
+    "title": "电影感开发者首屏",
+    "category": "首屏",
+    "summary": "极简开发者首屏，中央视觉主体与可编辑 DOM 文案分层。",
+    "tags": [
+      "首屏",
+      "WebGL",
+      "Shader",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Digital Epoch",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shader-ribbon",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.36
+      },
+      {
+        "key": "amplitude",
+        "value": 0.18
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.12
+      }
+    ],
+    "visualDirection": "以大面积留白、浮动浏览器窗口和代码到产品的转换作为首屏主视觉。",
+    "motionDirection": "滚动时从抽象代码块逐步过渡为完整产品界面，标题始终保持真实 DOM。"
+  },
+  {
+    "id": "ms-recipe-02",
+    "title": "轨道式产品首屏",
+    "category": "首屏",
+    "summary": "以轨道和空间层级建立第一眼记忆点，不依赖暗色模式。",
+    "tags": [
+      "首屏",
+      "粒子",
+      "轨迹",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Aetheris Voyage",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "meteors",
+    "preset": [
+      {
+        "key": "count",
+        "value": 10
+      },
+      {
+        "key": "speed",
+        "value": 1.5
+      }
+    ],
+    "visualDirection": "在产品视窗周围组织克制的轨道、节点与景深，不依赖黑底霓虹。",
+    "motionDirection": "鼠标只产生轻微景深变化，滚动时轨道收束并自然衔接下一屏。"
+  },
+  {
+    "id": "ms-recipe-03",
+    "title": "编辑式动态首屏",
+    "category": "首屏",
+    "summary": "大字号编辑排版与单一动态焦点组合，减少无意义装饰。",
+    "tags": [
+      "首屏",
+      "横向滚动",
+      "节奏",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Impressive Hero",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "marquee",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 20
+      },
+      {
+        "key": "direction",
+        "value": "right"
+      }
+    ],
+    "visualDirection": "用超大编辑排版搭配一个明确的动态视觉锚点，保持信息层级清晰。",
+    "motionDirection": "标题分阶段进入，视觉锚点穿过文字后方，但不遮挡阅读。"
+  },
+  {
+    "id": "ms-recipe-04",
+    "title": "AI Native 工程首屏",
+    "category": "首屏",
+    "summary": "把 AI 工程流程直接变成首屏视觉证据。",
+    "tags": [
+      "首屏",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Codeveil",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 900
+      }
+    ],
+    "visualDirection": "把需求、检查、实现、浏览器验证和交付证据直接作为首屏结构。",
+    "motionDirection": "滚动推进工作流节点，每个节点激活后输出可验证结果。"
+  },
+  {
+    "id": "ms-recipe-05",
+    "title": "空间化作品集首屏",
+    "category": "首屏",
+    "summary": "作品卡片从空间中建立层级，进入页面即展示真实工作。",
+    "tags": [
+      "首屏",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Nival Cyberspace",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 8
+      },
+      {
+        "key": "perspective",
+        "value": 700
+      }
+    ],
+    "visualDirection": "用多层项目窗口构成浅景深空间，让真实作品成为首屏主体。",
+    "motionDirection": "鼠标只做轻量视差，滚动逐个把项目窗口推进到前景。"
+  },
+  {
+    "id": "ms-recipe-06",
+    "title": "亮色 WebGL 首屏",
+    "category": "首屏",
+    "summary": "在亮色体系中使用 WebGL 光带，避免常见黑底霓虹。",
+    "tags": [
+      "首屏",
+      "WebGL",
+      "Shader",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shader-ribbon",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.52
+      },
+      {
+        "key": "amplitude",
+        "value": 0.2
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.24
+      }
+    ],
+    "visualDirection": "在白色空间中使用蓝银色 WebGL 光带形成技术主视觉。",
+    "motionDirection": "光带响应指针局部形变，并在滚动时压缩成下一章节的分隔线。"
+  },
+  {
+    "id": "ms-recipe-07",
+    "title": "技术蓝图首屏",
+    "category": "首屏",
+    "summary": "工程蓝图与产品界面融合，强调系统能力。",
+    "tags": [
+      "首屏",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Nexus IT Solutions",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.5
+      },
+      {
+        "key": "gridSize",
+        "value": 32
+      }
+    ],
+    "visualDirection": "把工程网格、连接线和产品界面融合成一张可读的技术蓝图。",
+    "motionDirection": "结构线先描绘依赖关系，再收束为完整应用框架。"
+  },
+  {
+    "id": "ms-recipe-08",
+    "title": "证据优先首屏",
+    "category": "首屏",
+    "summary": "首屏直接给结果指标与交互证据，而不是长自我介绍。",
+    "tags": [
+      "首屏",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Stellar AI",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 98
+      },
+      {
+        "key": "duration",
+        "value": 1200
+      }
+    ],
+    "visualDirection": "首屏优先展示指标、验证结果和可交互产品证据。",
+    "motionDirection": "指标仅在进入视口时计数一次，主证据面板平滑转成第一张项目卡。"
+  },
+  {
+    "id": "ms-recipe-09",
+    "title": "动态案例网格",
+    "category": "作品集",
+    "summary": "案例列表默认就能看到动效预览与结果指标。",
+    "tags": [
+      "作品集",
+      "卡片",
+      "交互",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Anchor AI",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "magic-card",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1.5
+      }
+    ],
+    "visualDirection": "使用两列案例网格，每个卡片直接展示动态预览和结果指标。",
+    "motionDirection": "预览只在可见时运行，离开视口立即暂停，避免无意义后台动画。"
+  },
+  {
+    "id": "ms-recipe-10",
+    "title": "项目胶片带",
+    "category": "作品集",
+    "summary": "用横向胶片式作品流替代普通卡片堆叠。",
+    "tags": [
+      "作品集",
+      "横向滚动",
+      "节奏",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "DJ ZakDerdan",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "marquee",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 25
+      },
+      {
+        "key": "direction",
+        "value": "left"
+      }
+    ],
+    "visualDirection": "把项目组织为横向胶片带，保留清晰标题、结果和技术说明。",
+    "motionDirection": "纵向滚动驱动受控横向移动，不锁死页面滚动。"
+  },
+  {
+    "id": "ms-recipe-11",
+    "title": "招聘者 90 秒作品集",
+    "category": "作品集",
+    "summary": "按招聘者 90 秒决策路径组织作品信息。",
+    "tags": [
+      "作品集",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Menuchi",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 90
+      },
+      {
+        "key": "duration",
+        "value": 1500
+      }
+    ],
+    "visualDirection": "按招聘者 90 秒决策路径组织首屏、三张核心案例、能力证据和联系入口。",
+    "motionDirection": "动效只用于揭示信息层级，不延迟关键内容出现。"
+  },
+  {
+    "id": "ms-recipe-12",
+    "title": "前后对比案例",
+    "category": "作品集",
+    "summary": "以问题到结果的视觉变化表达工程价值。",
+    "tags": [
+      "作品集",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 240
+      }
+    ],
+    "visualDirection": "用左右分屏展示优化前后两个产品状态。",
+    "motionDirection": "拖拽或滚动改变分界位置，并同步更新关键指标。"
+  },
+  {
+    "id": "ms-recipe-13",
+    "title": "叠层项目窗口",
+    "category": "作品集",
+    "summary": "多项目窗口以景深堆叠，滚动逐个进入前景。",
+    "tags": [
+      "作品集",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Nival Cyberspace",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 7
+      },
+      {
+        "key": "perspective",
+        "value": 800
+      }
+    ],
+    "visualDirection": "多个浏览器窗口以空间叠层方式排列，突出真实项目截图。",
+    "motionDirection": "每个滚动阶段把一个窗口提到前景，其余窗口降低对比度。"
+  },
+  {
+    "id": "ms-recipe-14",
+    "title": "工程型作品集",
+    "category": "作品集",
+    "summary": "突出状态建模、性能、跨端与验证，而不是只展示 UI。",
+    "tags": [
+      "作品集",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Codeveil",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.35
+      },
+      {
+        "key": "gridSize",
+        "value": 28
+      }
+    ],
+    "visualDirection": "界面预览旁同步展示状态建模、性能、跨端和验证证据。",
+    "motionDirection": "悬停系统节点时，高亮产品界面中对应区域。"
+  },
+  {
+    "id": "ms-recipe-15",
+    "title": "移动端产品连映",
+    "category": "作品集",
+    "summary": "以手机设备框连续展示跨端项目。",
+    "tags": [
+      "作品集",
+      "横向滚动",
+      "节奏",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "marquee",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 20
+      },
+      {
+        "key": "direction",
+        "value": "right"
+      }
+    ],
+    "visualDirection": "用三台手机设备框连续展示跨端项目场景。",
+    "motionDirection": "桌面端轻微旋转并播放短循环，移动端保持静态稳定。"
+  },
+  {
+    "id": "ms-recipe-16",
+    "title": "证据时间线",
+    "category": "作品集",
+    "summary": "项目成果与验证证据按时间线展开。",
+    "tags": [
+      "作品集",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "React Vision",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 800
+      }
+    ],
+    "visualDirection": "用提交、浏览器检查和结果指标组成工程证据时间线。",
+    "motionDirection": "时间线随进入视口逐段绘制，每个检查点只激活一次。"
+  },
+  {
+    "id": "ms-recipe-17",
+    "title": "固定式滚动叙事",
+    "category": "滚动叙事",
+    "summary": "固定视觉舞台，滚动只推进场景状态，不让元素乱飞。",
+    "tags": [
+      "滚动叙事",
+      "横向滚动",
+      "节奏",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "NOVA AI",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "marquee",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 18
+      },
+      {
+        "key": "direction",
+        "value": "left"
+      }
+    ],
+    "visualDirection": "使用固定视觉舞台承载三个清晰场景，正文独立滚动。",
+    "motionDirection": "滚动进度只映射到明确场景状态，不让元素无目的漂移。"
+  },
+  {
+    "id": "ms-recipe-18",
+    "title": "视频滚动擦洗叙事",
+    "category": "滚动叙事",
+    "summary": "用短视频或帧序列承担复杂镜头，DOM 保持可编辑。",
+    "tags": [
+      "滚动叙事",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "ConSentinel",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 100
+      },
+      {
+        "key": "duration",
+        "value": 1800
+      }
+    ],
+    "visualDirection": "用短视频或帧序列承担复杂镜头，DOM 文案与控制层保持独立。",
+    "motionDirection": "滚动映射播放进度，通过插值平滑 seek，并提供普通播放降级。"
+  },
+  {
+    "id": "ms-recipe-19",
+    "title": "界面组装式滚动",
+    "category": "滚动叙事",
+    "summary": "产品界面在滚动中从模块逐步组装完成。",
+    "tags": [
+      "滚动叙事",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Aetheris Voyage",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 700
+      }
+    ],
+    "visualDirection": "把导航、地图、数据面板和控制模块拆开后逐步组装成产品界面。",
+    "motionDirection": "组件按依赖顺序进入，最后锁定为完整产品框架。"
+  },
+  {
+    "id": "ms-recipe-20",
+    "title": "拆解界面滚动",
+    "category": "滚动叙事",
+    "summary": "把复杂界面拆成空间层，滚动时展示架构关系。",
+    "tags": [
+      "滚动叙事",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 11
+      },
+      {
+        "key": "perspective",
+        "value": 700
+      }
+    ],
+    "visualDirection": "将复杂界面拆成多个空间层，直观展示模块职责。",
+    "motionDirection": "滚动时分离图层并显示说明，最后重新组装。"
+  },
+  {
+    "id": "ms-recipe-21",
+    "title": "指标驱动滚动叙事",
+    "category": "滚动叙事",
+    "summary": "以指标变化推动叙事，而不是纯视觉过渡。",
+    "tags": [
+      "滚动叙事",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Digital Epoch",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 72
+      },
+      {
+        "key": "duration",
+        "value": 1600
+      }
+    ],
+    "visualDirection": "以一个主要指标和不断演化的产品场景推进叙事。",
+    "motionDirection": "指标只在场景边界更新，动态过程中始终保持可读。"
+  },
+  {
+    "id": "ms-recipe-22",
+    "title": "区块形变滚动",
+    "category": "滚动叙事",
+    "summary": "前一屏视觉主体自然变成后一屏组件。",
+    "tags": [
+      "滚动叙事",
+      "边框",
+      "光泽",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Ancient Oath",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shine-border",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1.5
+      },
+      {
+        "key": "speed",
+        "value": 4
+      }
+    ],
+    "visualDirection": "让前一屏的主视觉形状连续变成后一屏真实组件。",
+    "motionDirection": "通过位置、尺寸和形状连续性完成过渡，避免简单淡入淡出。"
+  },
+  {
+    "id": "ms-recipe-23",
+    "title": "地图旅程滚动",
+    "category": "滚动叙事",
+    "summary": "地图、设备与轨迹作为滚动故事主线。",
+    "tags": [
+      "滚动叙事",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Frozen Cave",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.4
+      },
+      {
+        "key": "gridSize",
+        "value": 34
+      }
+    ],
+    "visualDirection": "用脱敏地图、设备标记、轨迹和 BottomSheet 作为滚动主线。",
+    "motionDirection": "标记出现、轨迹绘制、底部面板上升、分析层完成，形成完整业务故事。"
+  },
+  {
+    "id": "ms-recipe-24",
+    "title": "代码到运行态滚动",
+    "category": "滚动叙事",
+    "summary": "从需求/代码过渡到浏览器运行结果。",
+    "tags": [
+      "滚动叙事",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Space planet",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 650
+      }
+    ],
+    "visualDirection": "从需求和代码片段开始，逐步过渡到真实浏览器运行结果。",
+    "motionDirection": "滚动中代码 token 对应到 UI 区域，最终落到 Verified 结果。"
+  },
+  {
+    "id": "ms-recipe-25",
+    "title": "WebGL 光带系统",
+    "category": "三维 / WebGL",
+    "summary": "真实 Shader 光带作为品牌视觉，不依赖图片素材。",
+    "tags": [
+      "3D / WebGL",
+      "WebGL",
+      "Shader",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shader-ribbon",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.42
+      },
+      {
+        "key": "amplitude",
+        "value": 0.22
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.18
+      }
+    ],
+    "visualDirection": "以蓝银色程序化光带作为品牌视觉，不依赖图片素材。",
+    "motionDirection": "时间驱动内部流动，指针只影响附近曲率，保持运动克制。"
+  },
+  {
+    "id": "ms-recipe-26",
+    "title": "粒子作品场",
+    "category": "三维 / WebGL",
+    "summary": "粒子与项目卡片建立空间关系，而不是随机漂移。",
+    "tags": [
+      "3D / WebGL",
+      "粒子",
+      "轨迹",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Future 3D Portfolio",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "meteors",
+    "preset": [
+      {
+        "key": "count",
+        "value": 24
+      },
+      {
+        "key": "speed",
+        "value": 1.5
+      }
+    ],
+    "visualDirection": "让粒子围绕项目锚点形成空间关系，而不是随机漂浮。",
+    "motionDirection": "粒子向当前项目聚集，切换项目时再平滑散开。"
+  },
+  {
+    "id": "ms-recipe-27",
+    "title": "3D 浏览器堆叠",
+    "category": "三维 / WebGL",
+    "summary": "浏览器窗口以真实景深展示多个工程项目。",
+    "tags": [
+      "3D / WebGL",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Alethia",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 12
+      },
+      {
+        "key": "perspective",
+        "value": 750
+      }
+    ],
+    "visualDirection": "三个浏览器平面以浅 3D 景深展示工程项目。",
+    "motionDirection": "鼠标只改变少量相机视角，键盘焦点和可读性不受影响。"
+  },
+  {
+    "id": "ms-recipe-28",
+    "title": "交互式点云",
+    "category": "三维 / WebGL",
+    "summary": "点云形成代码、地图与产品轮廓。",
+    "tags": [
+      "3D / WebGL",
+      "点阵",
+      "粒子",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Orange Horse",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "dot-pattern",
+    "preset": [
+      {
+        "key": "dotSize",
+        "value": 2
+      },
+      {
+        "key": "spacing",
+        "value": 14
+      }
+    ],
+    "visualDirection": "让点云在代码、地图和产品轮廓之间形变。",
+    "motionDirection": "滚动选择目标形状，以平滑插值完成点位重组。"
+  },
+  {
+    "id": "ms-recipe-29",
+    "title": "亮色玻璃物体",
+    "category": "三维 / WebGL",
+    "summary": "亮色站点中的玻璃物体主视觉。",
+    "tags": [
+      "3D / WebGL",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Space planet",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 300
+      }
+    ],
+    "visualDirection": "在亮色页面中使用半透明玻璃物体和克制的蓝色折射。",
+    "motionDirection": "物体缓慢旋转，减少动态偏好下直接显示静态状态。"
+  },
+  {
+    "id": "ms-recipe-30",
+    "title": "3D 数据拓扑",
+    "category": "三维 / WebGL",
+    "summary": "把工程模块关系做成可探索的 3D 拓扑。",
+    "tags": [
+      "3D / WebGL",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Heart Health Dashboard",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.35
+      },
+      {
+        "key": "gridSize",
+        "value": 30
+      }
+    ],
+    "visualDirection": "把工程模块关系映射成可探索的空间节点拓扑。",
+    "motionDirection": "悬停一个节点时突出相关路径，其余节点后退。"
+  },
+  {
+    "id": "ms-recipe-31",
+    "title": "空间化多设备展示",
+    "category": "三维 / WebGL",
+    "summary": "多设备框展示跨端项目，不做普通 mockup 排列。",
+    "tags": [
+      "3D / WebGL",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Cast and Render",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 9
+      },
+      {
+        "key": "perspective",
+        "value": 850
+      }
+    ],
+    "visualDirection": "桌面、平板和手机三个设备平面共享同一个空间场景。",
+    "motionDirection": "滚动切换主设备，并同步界面内容状态。"
+  },
+  {
+    "id": "ms-recipe-32",
+    "title": "程序化网格隧道",
+    "category": "三维 / WebGL",
+    "summary": "工程网格形成轻量 WebGL 空间过渡。",
+    "tags": [
+      "3D / WebGL",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Future Machine",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.7
+      },
+      {
+        "key": "gridSize",
+        "value": 24
+      }
+    ],
+    "visualDirection": "使用白蓝色程序化网格构成轻量空间隧道。",
+    "motionDirection": "镜头只在章节过渡时前进，结束后回到正常 DOM 布局。"
+  },
+  {
+    "id": "ms-recipe-33",
+    "title": "流体光带 Shader",
+    "category": "着色器 / Shader",
+    "summary": "流体光带随鼠标产生局部形变，保持文字区域清晰。",
+    "tags": [
+      "Shader",
+      "WebGL",
+      "Shader",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shader-ribbon",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.48
+      },
+      {
+        "key": "amplitude",
+        "value": 0.26
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.28
+      }
+    ],
+    "visualDirection": "使用 SDF 风格的流体光带，在文字周围保留清晰安全区。",
+    "motionDirection": "时间控制内部流动，鼠标只改变局部曲率和振幅。"
+  },
+  {
+    "id": "ms-recipe-34",
+    "title": "噪声位移曲面",
+    "category": "着色器 / Shader",
+    "summary": "利用噪声位移制造技术质感而非随机波浪。",
+    "tags": [
+      "Shader",
+      "噪声",
+      "纹理",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "ConSentinel",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "noise-texture",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.18
+      }
+    ],
+    "visualDirection": "使用分层噪声驱动网格位移，形成有结构的技术表面。",
+    "motionDirection": "滚动速度短暂提高位移幅度，随后通过阻尼回到稳定状态。"
+  },
+  {
+    "id": "ms-recipe-35",
+    "title": "数据热力 Shader",
+    "category": "着色器 / Shader",
+    "summary": "把数据密度视觉化为热力层，可用于地图/分析案例。",
+    "tags": [
+      "Shader",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Future Machine",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 320
+      }
+    ],
+    "visualDirection": "把数据密度映射成蓝青色热力层，并叠加中性网格。",
+    "motionDirection": "悬停展示局部样本，透明度可调，避免热力层遮挡数据。"
+  },
+  {
+    "id": "ms-recipe-36",
+    "title": "Fresnel 产品光环",
+    "category": "着色器 / Shader",
+    "summary": "用 Fresnel 边缘高光建立体积感。",
+    "tags": [
+      "Shader",
+      "边框",
+      "光泽",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "React Vision",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shine-border",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 2
+      },
+      {
+        "key": "speed",
+        "value": 2
+      }
+    ],
+    "visualDirection": "通过 Fresnel 边缘高光增强产品几何体的体积感。",
+    "motionDirection": "相机移动和边缘光都保持克制，不牺牲正文对比度。"
+  },
+  {
+    "id": "ms-recipe-37",
+    "title": "色彩流场",
+    "category": "着色器 / Shader",
+    "summary": "用流场表现 AI/数据流，不做廉价彩虹渐变。",
+    "tags": [
+      "Shader",
+      "极光",
+      "背景",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Celestix",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "aurora",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 1.5
+      },
+      {
+        "key": "colorTheme",
+        "value": "indigo"
+      }
+    ],
+    "visualDirection": "使用蓝、靛青、银色流场表达 AI 和数据流动。",
+    "motionDirection": "流场遵循低频 curl 结构缓慢演化，不使用廉价彩虹渐变。"
+  },
+  {
+    "id": "ms-recipe-38",
+    "title": "Shader 遮罩揭示",
+    "category": "着色器 / Shader",
+    "summary": "用 Shader 遮罩揭示真实截图或项目画面。",
+    "tags": [
+      "Shader",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Cosmic Mapping",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 260
+      }
+    ],
+    "visualDirection": "使用 Shader 遮罩逐步揭示真实项目截图或产品画面。",
+    "motionDirection": "滚动扩大遮罩，最后完整展示可访问的原图内容。"
+  },
+  {
+    "id": "ms-recipe-39",
+    "title": "SDF 动态图标",
+    "category": "着色器 / Shader",
+    "summary": "用 SDF 动态组合技术图形，适合 Lab 小型实验。",
+    "tags": [
+      "Shader",
+      "点阵",
+      "粒子",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Human Machine",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "dot-pattern",
+    "preset": [
+      {
+        "key": "dotSize",
+        "value": 3
+      },
+      {
+        "key": "spacing",
+        "value": 16
+      }
+    ],
+    "visualDirection": "使用 SDF 在 fragment shader 中组合图标、环形和状态图形。",
+    "motionDirection": "鼠标改变图形参数，不直接移动 DOM 元素。"
+  },
+  {
+    "id": "ms-recipe-40",
+    "title": "轻量 Raymarch 场景",
+    "category": "着色器 / Shader",
+    "summary": "轻量 Raymarch 形成抽象技术空间，移动端自动降级。",
+    "tags": [
+      "Shader",
+      "WebGL",
+      "Shader",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Digital Persona",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shader-ribbon",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.25
+      },
+      {
+        "key": "amplitude",
+        "value": 0.15
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.08
+      }
+    ],
+    "visualDirection": "使用轻量 Raymarch 构造抽象技术空间与简单几何体。",
+    "motionDirection": "桌面端缓慢漂移视角，低性能设备显示代表帧。"
+  },
+  {
+    "id": "ms-recipe-41",
+    "title": "磁吸导航",
+    "category": "交互",
+    "summary": "磁吸只用于关键 CTA 与导航，不让整页漂移。",
+    "tags": [
+      "交互",
+      "CTA",
+      "扫光",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Orbit Stickers",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shimmer-button",
+    "preset": [
+      {
+        "key": "duration",
+        "value": 2
+      }
+    ],
+    "visualDirection": "只对关键 CTA 和导航使用轻度磁吸反馈。",
+    "motionDirection": "吸附幅度有上限，键盘操作保持正常几何位置。"
+  },
+  {
+    "id": "ms-recipe-42",
+    "title": "案例卡片追光",
+    "category": "交互",
+    "summary": "卡片追光与真实内容关联，突出项目信息层级。",
+    "tags": [
+      "交互",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Particle Field",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 220
+      }
+    ],
+    "visualDirection": "让局部追光跟随指针突出案例卡片的信息层级。",
+    "motionDirection": "追光仅在卡片边界内移动，并保留独立的悬停与焦点信号。"
+  },
+  {
+    "id": "ms-recipe-43",
+    "title": "弹性筛选标签",
+    "category": "交互",
+    "summary": "筛选交互带弹性反馈但保持响应速度。",
+    "tags": [
+      "交互",
+      "边框",
+      "光泽",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "ConSentinel",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shine-border",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1
+      },
+      {
+        "key": "speed",
+        "value": 5
+      }
+    ],
+    "visualDirection": "用弹性选中指示器连接多个筛选标签。",
+    "motionDirection": "选中状态在标签之间形变，筛选结果立即更新。"
+  },
+  {
+    "id": "ms-recipe-44",
+    "title": "拖拽对比面板",
+    "category": "交互",
+    "summary": "拖拽比较性能优化前后或不同界面版本。",
+    "tags": [
+      "交互",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Playful Idea",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 8
+      },
+      {
+        "key": "perspective",
+        "value": 600
+      }
+    ],
+    "visualDirection": "通过左右对比面板展示性能优化前后或不同设计版本。",
+    "motionDirection": "拖拽实时更新分界位置，同时提供键盘可操作控制。"
+  },
+  {
+    "id": "ms-recipe-45",
+    "title": "光标镜头预览",
+    "category": "交互",
+    "summary": "局部放大真实项目细节，用于技术案例。",
+    "tags": [
+      "交互",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Ancient Oath",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 160
+      }
+    ],
+    "visualDirection": "在真实项目截图上增加局部放大镜，用于查看技术细节。",
+    "motionDirection": "只在支持 hover 的设备启用，触屏环境自动关闭。"
+  },
+  {
+    "id": "ms-recipe-46",
+    "title": "响应式架构图",
+    "category": "交互",
+    "summary": "鼠标探索架构节点时同步高亮相关说明。",
+    "tags": [
+      "交互",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Digital Persona",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.5
+      },
+      {
+        "key": "gridSize",
+        "value": 30
+      }
+    ],
+    "visualDirection": "架构节点图与简洁工程说明并排展示。",
+    "motionDirection": "悬停或键盘聚焦节点时同步高亮关联说明和产品区域。"
+  },
+  {
+    "id": "ms-recipe-47",
+    "title": "速度感卡片组",
+    "category": "交互",
+    "summary": "滚动速度影响卡片倾斜，但有严格幅度限制。",
+    "tags": [
+      "交互",
+      "3D",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Undr Drift",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "tilt-card",
+    "preset": [
+      {
+        "key": "maxTilt",
+        "value": 14
+      },
+      {
+        "key": "perspective",
+        "value": 500
+      }
+    ],
+    "visualDirection": "卡片倾斜幅度受滚动速度影响，但始终保持浅透视。",
+    "motionDirection": "速度映射到阻尼旋转，并快速回到零位。"
+  },
+  {
+    "id": "ms-recipe-48",
+    "title": "交互证据轨道",
+    "category": "交互",
+    "summary": "沿着验证证据轨道逐项展示代码、浏览器与结果。",
+    "tags": [
+      "交互",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Fastshot",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 750
+      }
+    ],
+    "visualDirection": "沿验证轨道依次展示代码、浏览器检查和最终结果。",
+    "motionDirection": "悬停或聚焦证据项时更新详情面板，布局不跳动。"
+  },
+  {
+    "id": "ms-recipe-49",
+    "title": "实时运维面板",
+    "category": "SaaS / 数据面板",
+    "summary": "把实时状态和地图结合成可信的产品展示。",
+    "tags": [
+      "SaaS / 数据面板",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Axle Journey",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 98
+      },
+      {
+        "key": "duration",
+        "value": 1400
+      }
+    ],
+    "visualDirection": "把地图、设备状态、网络和任务进度组织在同一运维面板。",
+    "motionDirection": "状态更新使用离散过渡，地图始终是主要视觉锚点。"
+  },
+  {
+    "id": "ms-recipe-50",
+    "title": "AI Agent 控制室",
+    "category": "SaaS / 数据面板",
+    "summary": "用控制室界面展示 Agent 执行链路。",
+    "tags": [
+      "SaaS / 数据面板",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Global Talent",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 650
+      }
+    ],
+    "visualDirection": "用任务队列、Agent 节点、浏览器证据和最终结果组成控制室。",
+    "motionDirection": "一条任务按状态自动推进，短循环展示完整交付链。"
+  },
+  {
+    "id": "ms-recipe-51",
+    "title": "性能观测台",
+    "category": "SaaS / 数据面板",
+    "summary": "把 Lighthouse、包体积和运行指标变成产品化面板。",
+    "tags": [
+      "SaaS / 数据面板",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Skytrace",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 97
+      },
+      {
+        "key": "duration",
+        "value": 1200
+      }
+    ],
+    "visualDirection": "把 Lighthouse、包体积和运行指标做成产品化观测面板。",
+    "motionDirection": "数字只计数一次，图表使用 transform 过渡。"
+  },
+  {
+    "id": "ms-recipe-52",
+    "title": "车队监控场景",
+    "category": "SaaS / 数据面板",
+    "summary": "车队/设备状态以地图和列表联动展示。",
+    "tags": [
+      "SaaS / 数据面板",
+      "网格",
+      "结构",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "JungleMind",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "grid-pattern",
+    "preset": [
+      {
+        "key": "opacity",
+        "value": 0.45
+      },
+      {
+        "key": "gridSize",
+        "value": 36
+      }
+    ],
+    "visualDirection": "地图与设备列表联动展示车队或设备状态。",
+    "motionDirection": "选择标记后更新侧栏，并绘制该设备的路径。"
+  },
+  {
+    "id": "ms-recipe-53",
+    "title": "数据分析工作台",
+    "category": "SaaS / 数据面板",
+    "summary": "分析型界面强调筛选、地图和指标之间的因果关系。",
+    "tags": [
+      "SaaS / 数据面板",
+      "追光",
+      "指针",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Intelligent Performance",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "spotlight",
+    "preset": [
+      {
+        "key": "radius",
+        "value": 300
+      }
+    ],
+    "visualDirection": "以大图表、右侧筛选抽屉和指标带组成分析工作台。",
+    "motionDirection": "筛选变化只动画受影响的数据层，不重置整个页面。"
+  },
+  {
+    "id": "ms-recipe-54",
+    "title": "安全状态看板",
+    "category": "SaaS / 数据面板",
+    "summary": "高可信状态面板，避免夸张赛博风。",
+    "tags": [
+      "SaaS / 数据面板",
+      "边框",
+      "光泽",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Sellix",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shine-border",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1.5
+      },
+      {
+        "key": "speed",
+        "value": 3
+      }
+    ],
+    "visualDirection": "使用中性网格、事件轨和明确状态标签构成可信安全看板。",
+    "motionDirection": "新事件轻量进入，严重级别始终用文字明确表达。"
+  },
+  {
+    "id": "ms-recipe-55",
+    "title": "金融动态面板",
+    "category": "SaaS / 数据面板",
+    "summary": "金融数据动效克制且可读。",
+    "tags": [
+      "SaaS / 数据面板",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Bionova Biotech",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 8642
+      },
+      {
+        "key": "duration",
+        "value": 1400
+      }
+    ],
+    "visualDirection": "用简洁图表、余额摘要和交易轨展示金融数据。",
+    "motionDirection": "图表进入时只绘制一次，悬停提供精确值。"
+  },
+  {
+    "id": "ms-recipe-56",
+    "title": "运营 Bento",
+    "category": "SaaS / 数据面板",
+    "summary": "Bento 不是拼图，而是按业务重要性分配面积。",
+    "tags": [
+      "SaaS / 数据面板",
+      "卡片",
+      "交互",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "AKOR Security",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "magic-card",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1.5
+      }
+    ],
+    "visualDirection": "让一个主要实时面板占据最大面积，三个辅助模块支撑信息。",
+    "motionDirection": "只有主面板持续运动，辅助卡片保持稳定。"
+  },
+  {
+    "id": "ms-recipe-57",
+    "title": "能力光束区块",
+    "category": "区块 / CTA",
+    "summary": "用一条光束串起三个能力点，代替图标网格。",
+    "tags": [
+      "区块 / CTA",
+      "边框",
+      "光泽",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Glow Features",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shine-border",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1
+      },
+      {
+        "key": "speed",
+        "value": 4
+      }
+    ],
+    "visualDirection": "用一条光束连接三个能力点，代替普通图标网格。",
+    "motionDirection": "光束按顺序停留在进入视口的能力项上。"
+  },
+  {
+    "id": "ms-recipe-58",
+    "title": "证据型 CTA",
+    "category": "区块 / CTA",
+    "summary": "CTA 同时提供作品、GitHub 与联系三条下一步路径。",
+    "tags": [
+      "区块 / CTA",
+      "CTA",
+      "扫光",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Community CTA",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shimmer-button",
+    "preset": [
+      {
+        "key": "duration",
+        "value": 1.8
+      }
+    ],
+    "visualDirection": "同时提供作品、GitHub 与联系三条明确下一步路径。",
+    "motionDirection": "背景运动在 CTA 附近主动减速，让行动入口保持稳定。"
+  },
+  {
+    "id": "ms-recipe-59",
+    "title": "能力 Bento",
+    "category": "区块 / CTA",
+    "summary": "能力板块用真实 Demo 作为证据而非抽象图标。",
+    "tags": [
+      "区块 / CTA",
+      "卡片",
+      "交互",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Vize Footer",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "magic-card",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1.5
+      }
+    ],
+    "visualDirection": "使用真实 Demo、架构说明和结果指标组成能力 Bento。",
+    "motionDirection": "悬停只增强当前单元，不移动整体网格。"
+  },
+  {
+    "id": "ms-recipe-60",
+    "title": "流程时间线区块",
+    "category": "区块 / CTA",
+    "summary": "把工作流压缩成清晰四步并显示验证节点。",
+    "tags": [
+      "区块 / CTA",
+      "AI 工作流",
+      "状态流",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Kresna Footer",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "agent-flow",
+    "preset": [
+      {
+        "key": "interval",
+        "value": 900
+      }
+    ],
+    "visualDirection": "把需求、检查、实现和验证压缩成四步工作流。",
+    "motionDirection": "激活线从左到右推进，完成后短暂停顿再重置。"
+  },
+  {
+    "id": "ms-recipe-61",
+    "title": "指标桥接区块",
+    "category": "区块 / CTA",
+    "summary": "用结果指标连接两个内容章节。",
+    "tags": [
+      "区块 / CTA",
+      "数据",
+      "计数",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Zenith Footer",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "number-ticker",
+    "preset": [
+      {
+        "key": "targetValue",
+        "value": 92
+      },
+      {
+        "key": "duration",
+        "value": 1100
+      }
+    ],
+    "visualDirection": "用三个主要结果指标连接两个内容章节。",
+    "motionDirection": "数字进入时计数一次，背景带自然变成下一章节背景。"
+  },
+  {
+    "id": "ms-recipe-62",
+    "title": "交互式页脚",
+    "category": "区块 / CTA",
+    "summary": "Footer 有品牌记忆点但不抢正文。",
+    "tags": [
+      "区块 / CTA",
+      "WebGL",
+      "Shader",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "What Package Fits You",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shader-ribbon",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.25
+      },
+      {
+        "key": "amplitude",
+        "value": 0.16
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.12
+      }
+    ],
+    "visualDirection": "页脚使用大型名字标记、精简链接和轻量程序化背景。",
+    "motionDirection": "鼠标只在名字标记后方产生局部形变，不抢正文注意力。"
+  },
+  {
+    "id": "ms-recipe-63",
+    "title": "招聘者联系 CTA",
+    "category": "区块 / CTA",
+    "summary": "以招聘者路径设计联系区，明确可查看内容和联系方式。",
+    "tags": [
+      "区块 / CTA",
+      "CTA",
+      "扫光",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "HAUL!",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "shimmer-button",
+    "preset": [
+      {
+        "key": "duration",
+        "value": 2.2
+      }
+    ],
+    "visualDirection": "明确展示可用状态、目标岗位、联系方式和下一步入口。",
+    "motionDirection": "除小型状态脉冲外不使用持续动画。"
+  },
+  {
+    "id": "ms-recipe-64",
+    "title": "提示词库 CTA",
+    "category": "区块 / CTA",
+    "summary": "在 Lab 末尾引导复制 Prompt 并继续探索 Demo。",
+    "tags": [
+      "区块 / CTA",
+      "卡片",
+      "交互",
+      "MotionSites 灵感"
+    ],
+    "sourcePattern": "Lumina",
+    "sourceUrl": "https://motionsites.ai/",
+    "effectId": "magic-card",
+    "preset": [
+      {
+        "key": "borderWidth",
+        "value": 1
+      }
+    ],
+    "visualDirection": "在 Lab 末尾展示可搜索 Prompt 数量、分类和复制入口。",
+    "motionDirection": "复制操作只使用短暂确认状态，不弹出干扰性 Toast。"
+  }
+]

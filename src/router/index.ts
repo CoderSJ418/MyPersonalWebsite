@@ -69,7 +69,17 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Lab/LabIndex.vue'),
     meta: {
       title: '交互实验室',
-      description: '可运行的 Vue 交互效果、实时预览与 Motion Design Prompt Library'
+      description: '可运行的 Vue 交互效果、实时预览与中文动效提示词库'
+    }
+  },
+  {
+    path: '/lab/prompts/:id',
+    name: 'PromptRecipe',
+    component: () => import('@/views/Lab/PromptRecipeLayout.vue'),
+    props: true,
+    meta: {
+      title: '动效设计提示词配方',
+      description: '中文 Motion Design Prompt、实时预览、参数调节与真实实现源码'
     }
   },
   {

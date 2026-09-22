@@ -41,10 +41,11 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 import SafeImage from '@/components/common/SafeImage.vue'
 import { useMobilePerformance } from '@/composables/useMobilePerformance'
-import type { LabEffect } from '@/types/lab'
+import type { LabEffect, LabParams } from '@/types/lab'
 
 interface Props {
   effect: LabEffect
+  params?: LabParams
 }
 
 const props = defineProps<Props>()
@@ -54,20 +55,22 @@ const { isMobile, isLowEndDevice, prefersReducedMotion } = useMobilePerformance(
 let observer: IntersectionObserver | null = null
 
 const previewProps = computed<Record<string, string | number | boolean>>(() => {
+  const values: Record<string, string | number | boolean> = {}
   if (props.effect.id === 'aurora') {
-    return { embedded: true, decorative: true, speed: 1.4, colorTheme: 'indigo' }
+    Object.assign(values, { embedded: true, decorative: true, speed: 1.4, colorTheme: 'indigo' })
   }
   if (props.effect.id === 'number-ticker') {
-    return {
+    Object.assign(values, {
       targetValue: 96,
       duration: 1100,
       label: 'Runtime score',
       supportingText: 'Measured, not guessed.'
-    }
+    })
   }
-  if (props.effect.id === 'tilt-card') return { maxTilt: 8, perspective: 650 }
-  if (props.effect.id === 'magic-card') return { borderWidth: 1 }
-  return {}
+  if (props.effect.id === 'tilt-card') Object.assign(values, { maxTilt: 8, perspective: 650 })
+  if (props.effect.id === 'magic-card') values.borderWidth = 1
+  for (const [key, value] of Object.entries(props.params ?? {})) values[key] = value
+  return values
 })
 
 const shouldRenderLive = computed(

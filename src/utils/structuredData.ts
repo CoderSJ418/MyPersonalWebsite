@@ -1,6 +1,7 @@
 import type { BlogPost } from '@/types/blog'
 import type { Project } from '@/types/project'
 import type { LabEffect, LabEffectMetadata } from '@/types/lab'
+import type { PromptRecipe } from '@/types/promptRecipe'
 
 /**
  * Generate JSON-LD structured data for the Person schema
@@ -103,6 +104,20 @@ export function labCollectionStructuredData(effects: LabEffectMetadata[]) {
       programmingLanguage: 'Vue',
       license: 'https://opensource.org/license/mit',
     })),
+  }
+}
+
+export function promptRecipeStructuredData(recipe: PromptRecipe, effect: LabEffect) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: recipe.title,
+    description: recipe.summary,
+    url: `/lab/prompts/${recipe.id}`,
+    inLanguage: 'zh-CN',
+    isBasedOn: recipe.sourceUrl,
+    about: [recipe.category, effect.name, ...recipe.tags].join(', '),
+    programmingLanguage: 'Vue',
   }
 }
 

@@ -11,8 +11,10 @@
   "items": [
     {
       "id": "agent-flow",
-      "params": {},
-      "sourceSha256": "a2c2b27ed6d5202049c96d181956a74600d3daf816a3a132ff59b51e72053d8e",
+      "params": {
+        "interval": 1050
+      },
+      "sourceSha256": "df68192ea341f02a96319fe3b2a43abe87e2d82a5a78662ca517ef7f263172af",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/agent-flow.webp",
       "reducedMotionPreview": "/images/lab/agent-flow-reduced.webp"
@@ -105,8 +107,12 @@
     },
     {
       "id": "shader-ribbon",
-      "params": {},
-      "sourceSha256": "e7f62102bcc07afff4e6b3f2320c0d2e03288a126ab482eea4b2dd12b8bb5444",
+      "params": {
+        "speed": 0.42,
+        "amplitude": 0.22,
+        "pointerStrength": 0.18
+      },
+      "sourceSha256": "95f303e5651c01cde6890228a0fb77a17436c46ca797162a0378d243a2717b20",
       "representativeFrameMs": 1000,
       "preview": "/images/lab/shader-ribbon.webp",
       "reducedMotionPreview": "/images/lab/shader-ribbon-reduced.webp"

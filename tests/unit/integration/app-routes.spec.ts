@@ -53,6 +53,7 @@ describe('application route integration', () => {
     ['/blog', '博客'],
     ['/projects/1', '澳斯康'],
     ['/lab/aurora', 'Aurora'],
+    ['/lab/prompts/ms-recipe-01', '电影感开发者首屏'],
     ['/missing-page', '404']
   ])('renders %s through the real application shell', async (path, text) => {
     await router.push(path)
@@ -63,7 +64,7 @@ describe('application route integration', () => {
   it('filters the Lab catalog through its public search control', async () => {
     await router.push('/lab')
     await settleRoute()
-    const search = wrapper.get('input[type="search"]')
+    const search = wrapper.get('input[placeholder="搜索名称、说明或技术标签"]')
     await search.setValue('数字')
     expect(wrapper.text()).toContain('数字滚动')
   })

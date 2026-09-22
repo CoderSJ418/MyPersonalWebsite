@@ -11,6 +11,9 @@ const today = new Date().toISOString().split('T')[0]
 const labEffects = JSON.parse(
   readFileSync(resolve(process.cwd(), 'src/assets/data/lab-effects.json'), 'utf-8')
 )
+const promptRecipes = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'src/assets/data/lab-prompt-recipes.json'), 'utf-8')
+)
 const blogPosts = JSON.parse(
   readFileSync(resolve(process.cwd(), 'src/assets/data/blog-meta.json'), 'utf-8')
 )
@@ -28,6 +31,11 @@ const routes = [
   ...labEffects.map((effect) => ({
     path: `/lab/${effect.id}`,
     priority: 0.7,
+    changefreq: 'monthly'
+  })),
+  ...promptRecipes.map((recipe) => ({
+    path: `/lab/prompts/${recipe.id}`,
+    priority: 0.65,
     changefreq: 'monthly'
   })),
   ...blogPosts.map((post) => ({

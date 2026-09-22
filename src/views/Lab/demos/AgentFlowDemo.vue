@@ -25,26 +25,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-
-interface FlowStep {
-  icon: string
-  label: string
-  detail: string
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+interface Props {
+  interval?: number
 }
-
-const steps: FlowStep[] = [
+const props = withDefaults(defineProps<Props>(), { interval: 1050 })
+const steps = [
   { icon: '01', label: 'Requirement', detail: '理解需求' },
   { icon: '02', label: 'Inspect', detail: '读取事实源' },
   { icon: '03', label: 'Implement', detail: '最小修改' },
   { icon: '04', label: 'Browser', detail: '运行验证' },
   { icon: '05', label: 'Verified', detail: '证据交付' }
 ]
-
 const activeStep = ref(0)
 const prefersReducedMotion = ref(false)
 let timer = 0
-
 const progressWidth = computed(() => {
   const maxIndex = steps.length - 1
   return maxIndex <= 0 ? '0%' : String((activeStep.value / maxIndex) * 100) + '%'
@@ -66,8 +61,19 @@ onMounted(() => {
   }
   timer = window.setInterval(() => {
     activeStep.value = (activeStep.value + 1) % steps.length
-  }, 1050)
+  }, props.interval)
 })
+
+watch(
+  () => props.interval,
+  () => {
+    if (prefersReducedMotion.value) return
+    window.clearInterval(timer)
+    timer = window.setInterval(() => {
+      activeStep.value = (activeStep.value + 1) % steps.length
+    }, props.interval)
+  }
+)
 
 onUnmounted(() => window.clearInterval(timer))
 </script>
