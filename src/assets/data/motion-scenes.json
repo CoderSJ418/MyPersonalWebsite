@@ -1,95 +1,163 @@
 [
   {
-    "id": "liquid-ribbon",
+    "id": "digital-epoch",
     "recipeIds": [
-      "ms-recipe-01",
-      "ms-recipe-25",
-      "ms-recipe-33",
-      "ms-recipe-34",
-      "ms-recipe-37"
+      "ms-recipe-02",
+      "ms-recipe-06",
+      "ms-recipe-32"
     ],
-    "title": "液态光带场",
-    "subtitle": "Fragment Shader 直接计算多层流体光带，保持亮色体系下的高级技术质感。",
-    "renderer": "shader",
-    "variant": "ribbon",
-    "eyebrow": "GLSL / LIQUID FIELD",
+    "title": "Digital Epoch",
+    "subtitle": "复刻其公开预览中的浅色圆角 Hero：左侧超大标题、右侧蓝色 3D 产品核、细轨道线与底部胶囊式品牌列。",
+    "renderer": "three",
+    "variant": "digital-epoch",
+    "eyebrow": "MOTIONSITES / HERO",
     "labels": [
-      "FLOW",
-      "DISTORT",
-      "DEPTH"
+      "LIGHT HERO",
+      "3D PRODUCT",
+      "MARQUEE"
     ],
+    "referenceName": "Digital Epoch",
+    "referenceCategory": "Hero Section",
+    "referenceUrl": "https://motionsites.ai/?prompt=digital-epoch-hero",
     "preset": [
       {
         "key": "speed",
-        "value": 0.45
-      },
-      {
-        "key": "intensity",
-        "value": 0.72
-      },
-      {
-        "key": "scale",
-        "value": 1.15
-      }
-    ]
-  },
-  {
-    "id": "editorial-motion",
-    "recipeIds": [
-      "ms-recipe-03",
-      "ms-recipe-11",
-      "ms-recipe-41",
-      "ms-recipe-42",
-      "ms-recipe-43"
-    ],
-    "title": "编辑式动态排版",
-    "subtitle": "大字号排版、信息标签与单一动态焦点组合，不依赖粒子或 3D 也有强视觉识别。",
-    "renderer": "dom",
-    "variant": "editorial",
-    "eyebrow": "DOM / EDITORIAL MOTION",
-    "labels": [
-      "DESIGN",
-      "ENGINEERING",
-      "MOTION"
-    ],
-    "preset": [
-      {
-        "key": "speed",
-        "value": 0.55
+        "value": 0.38
       },
       {
         "key": "depth",
-        "value": 0.45
+        "value": 0.95
       },
       {
-        "key": "intensity",
-        "value": 0.72
+        "key": "pointerStrength",
+        "value": 0.3
       }
     ]
   },
   {
-    "id": "spatial-browser-stack",
+    "id": "impressive-hero",
     "recipeIds": [
-      "ms-recipe-05",
-      "ms-recipe-13",
-      "ms-recipe-15",
-      "ms-recipe-27",
-      "ms-recipe-31"
+      "ms-recipe-03"
     ],
-    "title": "空间浏览器堆叠",
-    "subtitle": "项目窗口进入真实 3D 空间，镜头、景深与指针共同塑造层次。",
-    "renderer": "three",
-    "variant": "browser-stack",
-    "eyebrow": "THREE.JS / PORTFOLIO",
+    "title": "Impressive Hero",
+    "subtitle": "超大编辑排版与单一动态锚点穿插：文字保持可读，彩色几何体随指针产生克制位移。",
+    "renderer": "dom",
+    "variant": "impressive-hero",
+    "eyebrow": "MOTIONSITES / HERO",
     "labels": [
-      "PRODUCT",
-      "SYSTEM",
-      "VERIFY"
+      "TYPE",
+      "ANCHOR",
+      "DEPTH"
     ],
+    "referenceName": "Impressive Hero",
+    "referenceCategory": "Hero Section",
+    "referenceUrl": "https://motionsites.ai/?prompt=impressive-hero",
     "preset": [
       {
         "key": "speed",
-        "value": 0.35
+        "value": 0.5
+      },
+      {
+        "key": "depth",
+        "value": 0.6
+      },
+      {
+        "key": "intensity",
+        "value": 0.8
+      }
+    ]
+  },
+  {
+    "id": "future-3d-portfolio",
+    "recipeIds": [
+      "ms-recipe-15",
+      "ms-recipe-31"
+    ],
+    "title": "Future 3D Portfolio",
+    "subtitle": "把项目界面变成真正的 3D 空间作品墙：深色舞台、漂浮项目平面、相机景深和鼠标视差。",
+    "renderer": "three",
+    "variant": "future-3d-portfolio",
+    "eyebrow": "MOTIONSITES / PORTFOLIO",
+    "labels": [
+      "PROJECT PLANES",
+      "DEPTH",
+      "CAMERA"
+    ],
+    "referenceName": "Future 3D Portfolio",
+    "referenceCategory": "Portfolio",
+    "referenceUrl": "https://motionsites.ai/?prompt=future-3d-portfolio",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.3
+      },
+      {
+        "key": "depth",
+        "value": 1.3
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.42
+      }
+    ]
+  },
+  {
+    "id": "nival-cyberspace",
+    "recipeIds": [
+      "ms-recipe-05",
+      "ms-recipe-13"
+    ],
+    "title": "Nival Cyberspace",
+    "subtitle": "深色赛博作品集空间：项目平面以更强景深、紫青灯光和指针视差悬浮在三维舞台中。",
+    "renderer": "three",
+    "variant": "nival-cyberspace",
+    "eyebrow": "MOTIONSITES / PERSONAL",
+    "labels": [
+      "PROJECT",
+      "DEPTH",
+      "FOCUS"
+    ],
+    "referenceName": "Nival Cyberspace",
+    "referenceCategory": "Personal",
+    "referenceUrl": "https://motionsites.ai/?prompt=nival-cyberspace",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.32
+      },
+      {
+        "key": "depth",
+        "value": 1.4
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.42
+      }
+    ]
+  },
+  {
+    "id": "cast-and-render",
+    "recipeIds": [
+      "ms-recipe-30",
+      "ms-recipe-51"
+    ],
+    "title": "Cast and Render",
+    "subtitle": "工作室式 3D 产品雕塑：柔和棚拍灯、陶瓷材质、几何体组合与缓慢镜头运动，而不是普通卡片倾斜。",
+    "renderer": "three",
+    "variant": "cast-and-render",
+    "eyebrow": "MOTIONSITES / 3D",
+    "labels": [
+      "SCULPTURE",
+      "STUDIO LIGHT",
+      "MATERIAL"
+    ],
+    "referenceName": "Cast and Render",
+    "referenceCategory": "3D",
+    "referenceUrl": "https://motionsites.ai/?prompt=cast-and-render",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.22
       },
       {
         "key": "depth",
@@ -97,7 +165,40 @@
       },
       {
         "key": "pointerStrength",
-        "value": 0.32
+        "value": 0.2
+      }
+    ]
+  },
+  {
+    "id": "alethia",
+    "recipeIds": [
+      "ms-recipe-27"
+    ],
+    "title": "Alethia",
+    "subtitle": "亮色 3D 玻璃雕塑：透射材质、环形结构、双向灯光与轻量相机视差形成精致产品感。",
+    "renderer": "three",
+    "variant": "alethia",
+    "eyebrow": "MOTIONSITES / 3D",
+    "labels": [
+      "GLASS",
+      "FORM",
+      "REFRACT"
+    ],
+    "referenceName": "Alethia",
+    "referenceCategory": "3D",
+    "referenceUrl": "https://motionsites.ai/?prompt=alethia",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.28
+      },
+      {
+        "key": "depth",
+        "value": 1.05
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.24
       }
     ]
   },
@@ -107,274 +208,180 @@
       "ms-recipe-08",
       "ms-recipe-26",
       "ms-recipe-28",
-      "ms-recipe-45",
       "ms-recipe-47"
     ],
-    "title": "响应式粒子场",
-    "subtitle": "Canvas 粒子围绕焦点产生吸引、逃逸与连线，形成高密度技术空间。",
+    "title": "Particle Field",
+    "subtitle": "WebGL Portfolio 风格的高密度粒子场：暗色空间、粒子流线、焦点吸附与指针扰动。",
     "renderer": "canvas",
-    "variant": "particles",
-    "eyebrow": "CANVAS / PARTICLES",
+    "variant": "particle-field",
+    "eyebrow": "MOTIONSITES / WEBGL PORTFOLIO",
     "labels": [
-      "ATTRACT",
-      "FLOW",
-      "FOCUS"
+      "FIELD",
+      "TRAIL",
+      "POINTER"
     ],
+    "referenceName": "Particle Field",
+    "referenceCategory": "WebGL Portfolio",
+    "referenceUrl": "https://motionsites.ai/?prompt=particle-field",
     "preset": [
       {
         "key": "density",
-        "value": 68
+        "value": 82
       },
       {
         "key": "speed",
-        "value": 0.7
+        "value": 0.62
       },
       {
         "key": "pointerStrength",
-        "value": 0.7
+        "value": 0.78
       }
     ]
   },
   {
-    "id": "portal-mask",
+    "id": "react-vision",
     "recipeIds": [
-      "ms-recipe-12",
-      "ms-recipe-36",
-      "ms-recipe-54",
-      "ms-recipe-61"
+      "ms-recipe-07",
+      "ms-recipe-16",
+      "ms-recipe-48",
+      "ms-recipe-52"
     ],
-    "title": "空间门户遮罩",
-    "subtitle": "径向 SDF、环形折射与遮罩共同形成一个有空间吸力的视觉门户。",
-    "renderer": "shader",
-    "variant": "portal",
-    "eyebrow": "GLSL / SDF PORTAL",
-    "labels": [
-      "MASK",
-      "FRESNEL",
-      "REVEAL"
-    ],
-    "preset": [
-      {
-        "key": "speed",
-        "value": 0.38
-      },
-      {
-        "key": "intensity",
-        "value": 0.8
-      },
-      {
-        "key": "scale",
-        "value": 0.92
-      }
-    ]
-  },
-  {
-    "id": "agent-control-room",
-    "recipeIds": [
-      "ms-recipe-04",
-      "ms-recipe-49",
-      "ms-recipe-50",
-      "ms-recipe-55",
-      "ms-recipe-56",
-      "ms-recipe-60"
-    ],
-    "title": "Agent 控制室",
-    "subtitle": "把队列、执行节点、浏览器证据和最终结果组织成真正的 AI 工程控制场景。",
-    "renderer": "dom",
-    "variant": "control-room",
-    "eyebrow": "DOM / AI CONTROL ROOM",
-    "labels": [
-      "QUEUE",
-      "RUNNING",
-      "VERIFIED"
-    ],
-    "preset": [
-      {
-        "key": "speed",
-        "value": 0.7
-      },
-      {
-        "key": "depth",
-        "value": 0.7
-      },
-      {
-        "key": "intensity",
-        "value": 0.86
-      }
-    ]
-  },
-  {
-    "id": "data-heat-field",
-    "recipeIds": [
-      "ms-recipe-35",
-      "ms-recipe-38",
-      "ms-recipe-39",
-      "ms-recipe-40",
-      "ms-recipe-53"
-    ],
-    "title": "数据热力场",
-    "subtitle": "Shader 将采样密度转为热力波峰与扫描层，可用于地图、分析和数据产品。",
-    "renderer": "shader",
-    "variant": "heat",
-    "eyebrow": "GLSL / DATA HEAT",
-    "labels": [
-      "SAMPLE",
-      "DENSITY",
-      "SIGNAL"
-    ],
-    "preset": [
-      {
-        "key": "speed",
-        "value": 0.32
-      },
-      {
-        "key": "intensity",
-        "value": 0.86
-      },
-      {
-        "key": "scale",
-        "value": 1.35
-      }
-    ]
-  },
-  {
-    "id": "kinetic-filmstrip",
-    "recipeIds": [
-      "ms-recipe-10",
-      "ms-recipe-17",
-      "ms-recipe-18",
-      "ms-recipe-21",
-      "ms-recipe-22",
-      "ms-recipe-23",
-      "ms-recipe-24"
-    ],
-    "title": "动能胶片带",
-    "subtitle": "项目帧以不同速度、尺度和纵深穿过画布，形成电影式横向叙事。",
+    "title": "React Vision",
+    "subtitle": "技术品牌视觉：亮色网格、发光节点、环形扫描和数据连接线持续重组，接近成品科技站而非架构示意图。",
     "renderer": "canvas",
-    "variant": "filmstrip",
-    "eyebrow": "CANVAS / KINETIC",
+    "variant": "react-vision",
+    "eyebrow": "MOTIONSITES / TECHNOLOGY",
     "labels": [
-      "CASE 01",
-      "CASE 02",
-      "CASE 03"
-    ],
-    "preset": [
-      {
-        "key": "density",
-        "value": 18
-      },
-      {
-        "key": "speed",
-        "value": 0.9
-      },
-      {
-        "key": "pointerStrength",
-        "value": 0.18
-      }
-    ]
-  },
-  {
-    "id": "orbital-product",
-    "recipeIds": [
-      "ms-recipe-02",
-      "ms-recipe-06",
-      "ms-recipe-29",
-      "ms-recipe-32"
-    ],
-    "title": "轨道产品核心",
-    "subtitle": "中心产品核、轨道与空间粒子组成可交互的 Three.js 品牌场景。",
-    "renderer": "three",
-    "variant": "orbital",
-    "eyebrow": "THREE.JS / ORBITAL",
-    "labels": [
-      "CORE",
       "SIGNAL",
-      "RUNTIME"
+      "GRID",
+      "REACTIVE"
     ],
+    "referenceName": "React Vision",
+    "referenceCategory": "Technology",
+    "referenceUrl": "https://motionsites.ai/?prompt=react-vision",
     "preset": [
+      {
+        "key": "density",
+        "value": 48
+      },
       {
         "key": "speed",
         "value": 0.5
       },
       {
+        "key": "pointerStrength",
+        "value": 0.5
+      }
+    ]
+  },
+  {
+    "id": "codeveil",
+    "recipeIds": [
+      "ms-recipe-04",
+      "ms-recipe-14"
+    ],
+    "title": "Codeveil",
+    "subtitle": "Developer 风格工程首屏：代码、执行节点和浏览器证据随滚动推进，把开发流程本身变成动态叙事。",
+    "renderer": "dom",
+    "variant": "codeveil",
+    "eyebrow": "MOTIONSITES / DEVELOPER",
+    "labels": [
+      "BUILD",
+      "INSPECT",
+      "VERIFY"
+    ],
+    "referenceName": "Codeveil",
+    "referenceCategory": "Developer",
+    "referenceUrl": "https://motionsites.ai/?prompt=codeveil",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.58
+      },
+      {
+        "key": "depth",
+        "value": 0.7
+      },
+      {
+        "key": "intensity",
+        "value": 0.82
+      }
+    ]
+  },
+  {
+    "id": "consentinel",
+    "recipeIds": [
+      "ms-recipe-10",
+      "ms-recipe-17",
+      "ms-recipe-18",
+      "ms-recipe-21"
+    ],
+    "title": "ConSentinel",
+    "subtitle": "Motion 类成品复刻：单个舞台在滚轮输入下推进多个阶段，文字、扫描面板和状态层在同一空间连续变形。",
+    "renderer": "dom",
+    "variant": "consentinel",
+    "eyebrow": "MOTIONSITES / MOTION",
+    "labels": [
+      "OBSERVE",
+      "ANALYZE",
+      "RESOLVE"
+    ],
+    "referenceName": "ConSentinel",
+    "referenceCategory": "Motion",
+    "referenceUrl": "https://motionsites.ai/?prompt=consentinel",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.58
+      },
+      {
+        "key": "depth",
+        "value": 0.72
+      },
+      {
+        "key": "intensity",
+        "value": 0.82
+      }
+    ]
+  },
+  {
+    "id": "orbit-stickers",
+    "recipeIds": [
+      "ms-recipe-11",
+      "ms-recipe-41",
+      "ms-recipe-42",
+      "ms-recipe-43"
+    ],
+    "title": "Orbit Stickers",
+    "subtitle": "Interactive 风格的贴纸轨道：多张标签围绕中心对象公转，并支持指针拖拽改变轨道相位。",
+    "renderer": "dom",
+    "variant": "orbit-stickers",
+    "eyebrow": "MOTIONSITES / INTERACTIVE",
+    "labels": [
+      "DRAG",
+      "ORBIT",
+      "STICKERS"
+    ],
+    "referenceName": "Orbit Stickers",
+    "referenceCategory": "Interactive",
+    "referenceUrl": "https://motionsites.ai/?prompt=orbit-stickers",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.48
+      },
+      {
         "key": "depth",
         "value": 0.8
       },
       {
-        "key": "pointerStrength",
-        "value": 0.22
+        "key": "intensity",
+        "value": 0.88
       }
     ]
   },
   {
-    "id": "architecture-network",
-    "recipeIds": [
-      "ms-recipe-07",
-      "ms-recipe-16",
-      "ms-recipe-44",
-      "ms-recipe-48",
-      "ms-recipe-52"
-    ],
-    "title": "架构网络",
-    "subtitle": "节点、链路与脉冲沿工程拓扑传播，比普通网格更像真实系统。",
-    "renderer": "canvas",
-    "variant": "network",
-    "eyebrow": "CANVAS / SYSTEM GRAPH",
-    "labels": [
-      "CLIENT",
-      "CORE",
-      "EVIDENCE"
-    ],
-    "preset": [
-      {
-        "key": "density",
-        "value": 36
-      },
-      {
-        "key": "speed",
-        "value": 0.55
-      },
-      {
-        "key": "pointerStrength",
-        "value": 0.35
-      }
-    ]
-  },
-  {
-    "id": "data-topology-3d",
-    "recipeIds": [
-      "ms-recipe-14",
-      "ms-recipe-30",
-      "ms-recipe-46",
-      "ms-recipe-51"
-    ],
-    "title": "三维数据拓扑",
-    "subtitle": "节点与连接关系在三维空间中展开，适合架构、Agent 和工程系统表达。",
-    "renderer": "three",
-    "variant": "topology",
-    "eyebrow": "THREE.JS / TOPOLOGY",
-    "labels": [
-      "INPUT",
-      "ORCHESTRATE",
-      "OUTPUT"
-    ],
-    "preset": [
-      {
-        "key": "speed",
-        "value": 0.25
-      },
-      {
-        "key": "depth",
-        "value": 1.35
-      },
-      {
-        "key": "pointerStrength",
-        "value": 0.28
-      }
-    ]
-  },
-  {
-    "id": "evidence-bento",
+    "id": "liquid-glass-agency",
     "recipeIds": [
       "ms-recipe-09",
       "ms-recipe-19",
@@ -386,16 +393,86 @@
       "ms-recipe-63",
       "ms-recipe-64"
     ],
-    "title": "证据型 Bento",
-    "subtitle": "一个主舞台加三类工程证据，利用尺寸与动态优先级而不是卡片数量建立层级。",
+    "title": "Liquid Glass Agency",
+    "subtitle": "透明液态玻璃卡片、镜面高光和游动光斑组成的 Agency Landing 视觉；指针移动会改变折射高光位置。",
     "renderer": "dom",
-    "variant": "bento",
-    "eyebrow": "DOM / PROOF SYSTEM",
+    "variant": "liquid-glass-agency",
+    "eyebrow": "MOTIONSITES / LANDING PAGE",
     "labels": [
-      "LIVE",
-      "PERF",
-      "SOURCE"
+      "GLASS",
+      "LENS",
+      "LIGHT"
     ],
+    "referenceName": "Liquid Glass Agency",
+    "referenceCategory": "Landing Page",
+    "referenceUrl": "https://motionsites.ai/?prompt=liquid-glass-agency",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.34
+      },
+      {
+        "key": "depth",
+        "value": 0.55
+      },
+      {
+        "key": "intensity",
+        "value": 0.92
+      }
+    ]
+  },
+  {
+    "id": "playful-idea",
+    "recipeIds": [
+      "ms-recipe-44"
+    ],
+    "title": "Playful Idea",
+    "subtitle": "高饱和创意工作室风格：两个完整视觉版本通过拖拽分界实时比较，同时保留键盘可操作 range。",
+    "renderer": "dom",
+    "variant": "playful-idea",
+    "eyebrow": "MOTIONSITES / CREATIVE AGENCY",
+    "labels": [
+      "DRAG",
+      "COMPARE",
+      "PLAY"
+    ],
+    "referenceName": "Playful Idea",
+    "referenceCategory": "Creative Agency",
+    "referenceUrl": "https://motionsites.ai/?prompt=playful-idea",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.5
+      },
+      {
+        "key": "depth",
+        "value": 0.55
+      },
+      {
+        "key": "intensity",
+        "value": 0.92
+      }
+    ]
+  },
+  {
+    "id": "ancient-oath",
+    "recipeIds": [
+      "ms-recipe-22",
+      "ms-recipe-45"
+    ],
+    "title": "Ancient Oath",
+    "subtitle": "羊皮纸编辑视觉、连续形变主体与局部放大镜，强调形状连续性而不是普通淡入淡出。",
+    "renderer": "dom",
+    "variant": "ancient-oath",
+    "eyebrow": "MOTIONSITES / CREATIVE",
+    "labels": [
+      "MORPH",
+      "PARCHMENT",
+      "LENS"
+    ],
+    "referenceName": "Ancient Oath",
+    "referenceCategory": "Creative",
+    "referenceUrl": "https://motionsites.ai/?prompt=ancient-oath",
     "preset": [
       {
         "key": "speed",
@@ -403,11 +480,354 @@
       },
       {
         "key": "depth",
+        "value": 0.7
+      },
+      {
+        "key": "intensity",
+        "value": 0.82
+      }
+    ]
+  },
+  {
+    "id": "space-planet",
+    "recipeIds": [
+      "ms-recipe-24",
+      "ms-recipe-29"
+    ],
+    "title": "Space planet",
+    "subtitle": "真正的 Three.js 行星 Hero：自转星球、轨道、卫星与星场构成沉浸式空间产品舞台。",
+    "renderer": "three",
+    "variant": "space-planet",
+    "eyebrow": "MOTIONSITES / 3D",
+    "labels": [
+      "PLANET",
+      "ORBIT",
+      "RUNTIME"
+    ],
+    "referenceName": "Space planet",
+    "referenceCategory": "3D",
+    "referenceUrl": "https://motionsites.ai/?prompt=space-planet",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.4
+      },
+      {
+        "key": "depth",
+        "value": 1.1
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.24
+      }
+    ]
+  },
+  {
+    "id": "aetheris-voyage",
+    "recipeIds": [
+      "ms-recipe-50",
+      "ms-recipe-56",
+      "ms-recipe-60"
+    ],
+    "title": "Aetheris Voyage",
+    "subtitle": "旅行 Hero 的电影感滚动：云层、地平线和巨大天体随滚动产生分层位移，让场景从封面过渡到目的地章节。",
+    "renderer": "shader",
+    "variant": "aetheris-voyage",
+    "eyebrow": "MOTIONSITES / HERO",
+    "labels": [
+      "HORIZON",
+      "ATMOSPHERE",
+      "SCROLL"
+    ],
+    "referenceName": "Aetheris Voyage",
+    "referenceCategory": "Hero Section",
+    "referenceUrl": "https://motionsites.ai/?prompt=aetheris-voyage",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.24
+      },
+      {
+        "key": "intensity",
+        "value": 0.78
+      },
+      {
+        "key": "scale",
+        "value": 1.08
+      }
+    ]
+  },
+  {
+    "id": "frozen-cave",
+    "recipeIds": [
+      "ms-recipe-23"
+    ],
+    "title": "Frozen Cave",
+    "subtitle": "冰洞式沉浸旅行场景：GLSL 生成层叠冰壁、深度纹理、漂浮冰尘与指针光源。",
+    "renderer": "shader",
+    "variant": "frozen-cave",
+    "eyebrow": "MOTIONSITES / TRAVEL",
+    "labels": [
+      "ICE",
+      "DEPTH",
+      "LIGHT"
+    ],
+    "referenceName": "Frozen Cave",
+    "referenceCategory": "Travel",
+    "referenceUrl": "https://motionsites.ai/?prompt=frozen-cave",
+    "preset": [
+      {
+        "key": "speed",
         "value": 0.35
       },
       {
         "key": "intensity",
-        "value": 0.62
+        "value": 0.9
+      },
+      {
+        "key": "scale",
+        "value": 1.05
+      }
+    ]
+  },
+  {
+    "id": "heart-health-dashboard",
+    "recipeIds": [
+      "ms-recipe-35",
+      "ms-recipe-39",
+      "ms-recipe-53"
+    ],
+    "title": "Heart Health Dashboard",
+    "subtitle": "公开预览里的医疗 Dashboard 结构：左侧旋转 3D 心脏主体，右侧指标、图表与治疗卡片。",
+    "renderer": "three",
+    "variant": "heart-health-dashboard",
+    "eyebrow": "MOTIONSITES / 3D DASHBOARD",
+    "labels": [
+      "HEART",
+      "VITALS",
+      "CARE"
+    ],
+    "referenceName": "Heart Health Dashboard",
+    "referenceCategory": "3D",
+    "referenceUrl": "https://motionsites.ai/?prompt=heart-health-dashboard",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.3
+      },
+      {
+        "key": "depth",
+        "value": 0.9
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.18
+      }
+    ]
+  },
+  {
+    "id": "digital-persona",
+    "recipeIds": [
+      "ms-recipe-40",
+      "ms-recipe-46"
+    ],
+    "title": "Digital Persona",
+    "subtitle": "轻量 Raymarch 数字人格：抽象体积形态、扫描色带与指针相机共同形成社交身份视觉。",
+    "renderer": "shader",
+    "variant": "digital-persona",
+    "eyebrow": "MOTIONSITES / SOCIAL",
+    "labels": [
+      "IDENTITY",
+      "RAYMARCH",
+      "SIGNAL"
+    ],
+    "referenceName": "Digital Persona",
+    "referenceCategory": "Social",
+    "referenceUrl": "https://motionsites.ai/?prompt=digital-persona",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.36
+      },
+      {
+        "key": "intensity",
+        "value": 0.92
+      },
+      {
+        "key": "scale",
+        "value": 1.08
+      }
+    ]
+  },
+  {
+    "id": "cosmic-mapping",
+    "recipeIds": [
+      "ms-recipe-38"
+    ],
+    "title": "Cosmic Mapping",
+    "subtitle": "宇宙数据遮罩揭示：鼠标像探照镜一样打开星图、节点、网格和轨道数据层。",
+    "renderer": "shader",
+    "variant": "cosmic-mapping",
+    "eyebrow": "MOTIONSITES / AI",
+    "labels": [
+      "MASK",
+      "MAP",
+      "REVEAL"
+    ],
+    "referenceName": "Cosmic Mapping",
+    "referenceCategory": "AI",
+    "referenceUrl": "https://motionsites.ai/?prompt=cosmic-mapping",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.34
+      },
+      {
+        "key": "intensity",
+        "value": 0.9
+      },
+      {
+        "key": "scale",
+        "value": 1.05
+      }
+    ]
+  },
+  {
+    "id": "future-machine",
+    "recipeIds": [
+      "ms-recipe-12",
+      "ms-recipe-36",
+      "ms-recipe-54",
+      "ms-recipe-61"
+    ],
+    "title": "Future Machine",
+    "subtitle": "Robotics 风格机械核心：环形骨架、齿轮式分层和冷色工业灯光构成可旋转的未来机器。",
+    "renderer": "three",
+    "variant": "future-machine",
+    "eyebrow": "MOTIONSITES / ROBOTICS",
+    "labels": [
+      "MECHANISM",
+      "ROTOR",
+      "ROBOTICS"
+    ],
+    "referenceName": "Future Machine",
+    "referenceCategory": "Robotics",
+    "referenceUrl": "https://motionsites.ai/?prompt=future-machine",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.5
+      },
+      {
+        "key": "depth",
+        "value": 1.2
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.26
+      }
+    ]
+  },
+  {
+    "id": "mind-ai",
+    "recipeIds": [
+      "ms-recipe-01",
+      "ms-recipe-25",
+      "ms-recipe-33",
+      "ms-recipe-34",
+      "ms-recipe-37"
+    ],
+    "title": "Mind AI",
+    "subtitle": "AI 3D Hero 的抽象神经核心：深色场景、能量脉冲、光带和中心发光体形成有呼吸感的智能视觉。",
+    "renderer": "shader",
+    "variant": "mind-ai",
+    "eyebrow": "MOTIONSITES / 3D AI",
+    "labels": [
+      "NEURAL",
+      "ENERGY",
+      "CORE"
+    ],
+    "referenceName": "Mind AI",
+    "referenceCategory": "3D",
+    "referenceUrl": "https://motionsites.ai/?prompt=mind-ai",
+    "preset": [
+      {
+        "key": "speed",
+        "value": 0.42
+      },
+      {
+        "key": "intensity",
+        "value": 0.95
+      },
+      {
+        "key": "scale",
+        "value": 1.15
+      }
+    ]
+  },
+  {
+    "id": "axle-journey",
+    "recipeIds": [
+      "ms-recipe-49"
+    ],
+    "title": "Axle Journey",
+    "subtitle": "Dashboard 风格实时运维舞台：地图轨迹、任务进度、网络延迟和指标状态同时更新。",
+    "renderer": "canvas",
+    "variant": "axle-journey",
+    "eyebrow": "MOTIONSITES / DASHBOARD",
+    "labels": [
+      "MAP",
+      "TASK",
+      "TELEMETRY"
+    ],
+    "referenceName": "Axle Journey",
+    "referenceCategory": "Dashboard",
+    "referenceUrl": "https://motionsites.ai/?prompt=axle-journey",
+    "preset": [
+      {
+        "key": "density",
+        "value": 36
+      },
+      {
+        "key": "speed",
+        "value": 0.55
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.3
+      }
+    ]
+  },
+  {
+    "id": "bionova-biotech",
+    "recipeIds": [
+      "ms-recipe-55"
+    ],
+    "title": "Bionova Biotech",
+    "subtitle": "生物科技 SaaS 视觉：有机细胞场、生命指标卡和一次性曲线绘制组成明亮实验数据界面。",
+    "renderer": "canvas",
+    "variant": "bionova-biotech",
+    "eyebrow": "MOTIONSITES / SAAS",
+    "labels": [
+      "CELLS",
+      "VIABILITY",
+      "SIGNAL"
+    ],
+    "referenceName": "Bionova Biotech",
+    "referenceCategory": "SaaS",
+    "referenceUrl": "https://motionsites.ai/?prompt=bionova-biotech",
+    "preset": [
+      {
+        "key": "density",
+        "value": 48
+      },
+      {
+        "key": "speed",
+        "value": 0.48
+      },
+      {
+        "key": "pointerStrength",
+        "value": 0.45
       }
     ]
   }

@@ -8,12 +8,32 @@ import type {
   MotionSceneRuntime
 } from '@/types/motionScene'
 
-const rendererComponent = {
-  three: defineAsyncComponent(() => import('@/components/lab/renderers/ThreeSceneRenderer.vue')),
-  canvas: defineAsyncComponent(() => import('@/components/lab/renderers/CanvasSceneRenderer.vue')),
-  shader: defineAsyncComponent(() => import('@/components/lab/renderers/ShaderSceneRenderer.vue')),
-  dom: defineAsyncComponent(() => import('@/components/lab/renderers/DomSceneRenderer.vue'))
-}
+const componentBySceneId = {
+  'digital-epoch': defineAsyncComponent(() => import('@/views/Lab/motionsites/DigitalEpochDemo.vue')),
+  'impressive-hero': defineAsyncComponent(() => import('@/views/Lab/motionsites/ImpressiveHeroDemo.vue')),
+  'future-3d-portfolio': defineAsyncComponent(() => import('@/views/Lab/motionsites/Future3DPortfolioDemo.vue')),
+  'nival-cyberspace': defineAsyncComponent(() => import('@/views/Lab/motionsites/NivalCyberspaceDemo.vue')),
+  'cast-and-render': defineAsyncComponent(() => import('@/views/Lab/motionsites/CastAndRenderDemo.vue')),
+  alethia: defineAsyncComponent(() => import('@/views/Lab/motionsites/AlethiaDemo.vue')),
+  'particle-field': defineAsyncComponent(() => import('@/views/Lab/motionsites/ParticleFieldDemo.vue')),
+  'react-vision': defineAsyncComponent(() => import('@/views/Lab/motionsites/ReactVisionDemo.vue')),
+  codeveil: defineAsyncComponent(() => import('@/views/Lab/motionsites/CodeveilDemo.vue')),
+  consentinel: defineAsyncComponent(() => import('@/views/Lab/motionsites/ConSentinelDemo.vue')),
+  'orbit-stickers': defineAsyncComponent(() => import('@/views/Lab/motionsites/OrbitStickersDemo.vue')),
+  'liquid-glass-agency': defineAsyncComponent(() => import('@/views/Lab/motionsites/LiquidGlassAgencyDemo.vue')),
+  'playful-idea': defineAsyncComponent(() => import('@/views/Lab/motionsites/PlayfulIdeaDemo.vue')),
+  'ancient-oath': defineAsyncComponent(() => import('@/views/Lab/motionsites/AncientOathDemo.vue')),
+  'space-planet': defineAsyncComponent(() => import('@/views/Lab/motionsites/SpacePlanetDemo.vue')),
+  'aetheris-voyage': defineAsyncComponent(() => import('@/views/Lab/motionsites/AetherisVoyageDemo.vue')),
+  'frozen-cave': defineAsyncComponent(() => import('@/views/Lab/motionsites/FrozenCaveDemo.vue')),
+  'heart-health-dashboard': defineAsyncComponent(() => import('@/views/Lab/motionsites/HeartHealthDashboardDemo.vue')),
+  'digital-persona': defineAsyncComponent(() => import('@/views/Lab/motionsites/DigitalPersonaDemo.vue')),
+  'cosmic-mapping': defineAsyncComponent(() => import('@/views/Lab/motionsites/CosmicMappingDemo.vue')),
+  'future-machine': defineAsyncComponent(() => import('@/views/Lab/motionsites/FutureMachineDemo.vue')),
+  'mind-ai': defineAsyncComponent(() => import('@/views/Lab/motionsites/MindAIDemo.vue')),
+  'axle-journey': defineAsyncComponent(() => import('@/views/Lab/motionsites/AxleJourneyDemo.vue')),
+  'bionova-biotech': defineAsyncComponent(() => import('@/views/Lab/motionsites/BionovaBiotechDemo.vue'))
+} as const
 
 const rendererParams: Record<MotionRendererKind, LabParam[]> = {
   three: [
@@ -39,12 +59,9 @@ const rendererParams: Record<MotionRendererKind, LabParam[]> = {
 }
 
 const normalizeRenderer = (value: string): MotionRendererKind => {
-  if (value === 'three' || value === 'canvas' || value === 'shader' || value === 'dom') {
-    return value
-  }
+  if (value === 'three' || value === 'canvas' || value === 'shader' || value === 'dom') return value
   return 'dom'
 }
-
 const normalizeValue = (value: string | number | boolean): LabValue => value
 
 const metadata: MotionSceneMetadata[] = sceneData.map((scene) => ({
@@ -56,27 +73,49 @@ const metadata: MotionSceneMetadata[] = sceneData.map((scene) => ({
   variant: scene.variant,
   eyebrow: scene.eyebrow,
   labels: [...scene.labels],
+  referenceName: scene.referenceName,
+  referenceCategory: scene.referenceCategory,
+  referenceUrl: scene.referenceUrl,
   preset: scene.preset.map((item) => ({ key: item.key, value: normalizeValue(item.value) }))
 }))
 
-const loadRendererSource = async (renderer: MotionRendererKind) => {
-  if (renderer === 'three') {
-    return (await import('@/components/lab/renderers/ThreeSceneRenderer.vue?raw')).default
-  }
-  if (renderer === 'canvas') {
-    return (await import('@/components/lab/renderers/CanvasSceneRenderer.vue?raw')).default
-  }
-  if (renderer === 'shader') {
-    return (await import('@/components/lab/renderers/ShaderSceneRenderer.vue?raw')).default
-  }
-  return (await import('@/components/lab/renderers/DomSceneRenderer.vue?raw')).default
+const sourceBySceneId = {
+  'digital-epoch': () => import('@/views/Lab/motionsites/DigitalEpochDemo.vue?raw'),
+  'impressive-hero': () => import('@/views/Lab/motionsites/ImpressiveHeroDemo.vue?raw'),
+  'future-3d-portfolio': () => import('@/views/Lab/motionsites/Future3DPortfolioDemo.vue?raw'),
+  'nival-cyberspace': () => import('@/views/Lab/motionsites/NivalCyberspaceDemo.vue?raw'),
+  'cast-and-render': () => import('@/views/Lab/motionsites/CastAndRenderDemo.vue?raw'),
+  alethia: () => import('@/views/Lab/motionsites/AlethiaDemo.vue?raw'),
+  'particle-field': () => import('@/views/Lab/motionsites/ParticleFieldDemo.vue?raw'),
+  'react-vision': () => import('@/views/Lab/motionsites/ReactVisionDemo.vue?raw'),
+  codeveil: () => import('@/views/Lab/motionsites/CodeveilDemo.vue?raw'),
+  consentinel: () => import('@/views/Lab/motionsites/ConSentinelDemo.vue?raw'),
+  'orbit-stickers': () => import('@/views/Lab/motionsites/OrbitStickersDemo.vue?raw'),
+  'liquid-glass-agency': () => import('@/views/Lab/motionsites/LiquidGlassAgencyDemo.vue?raw'),
+  'playful-idea': () => import('@/views/Lab/motionsites/PlayfulIdeaDemo.vue?raw'),
+  'ancient-oath': () => import('@/views/Lab/motionsites/AncientOathDemo.vue?raw'),
+  'space-planet': () => import('@/views/Lab/motionsites/SpacePlanetDemo.vue?raw'),
+  'aetheris-voyage': () => import('@/views/Lab/motionsites/AetherisVoyageDemo.vue?raw'),
+  'frozen-cave': () => import('@/views/Lab/motionsites/FrozenCaveDemo.vue?raw'),
+  'heart-health-dashboard': () => import('@/views/Lab/motionsites/HeartHealthDashboardDemo.vue?raw'),
+  'digital-persona': () => import('@/views/Lab/motionsites/DigitalPersonaDemo.vue?raw'),
+  'cosmic-mapping': () => import('@/views/Lab/motionsites/CosmicMappingDemo.vue?raw'),
+  'future-machine': () => import('@/views/Lab/motionsites/FutureMachineDemo.vue?raw'),
+  'mind-ai': () => import('@/views/Lab/motionsites/MindAIDemo.vue?raw'),
+  'axle-journey': () => import('@/views/Lab/motionsites/AxleJourneyDemo.vue?raw'),
+  'bionova-biotech': () => import('@/views/Lab/motionsites/BionovaBiotechDemo.vue?raw')
+} as const
+
+const loadSceneSource = async (sceneId: string) => {
+  const loader = sourceBySceneId[sceneId as keyof typeof sourceBySceneId] ?? sourceBySceneId['digital-epoch']
+  return (await loader()).default
 }
 
 export const motionSceneRegistry: MotionSceneRuntime[] = metadata.map((scene) => ({
   ...scene,
-  component: rendererComponent[scene.renderer],
+  component: componentBySceneId[scene.id as keyof typeof componentBySceneId] ?? componentBySceneId['digital-epoch'],
   params: rendererParams[scene.renderer].map((param) => ({ ...param })),
-  loadSource: () => loadRendererSource(scene.renderer),
+  loadSource: () => loadSceneSource(scene.id),
   createUsage: (params: LabParams) => {
     const paramsText = JSON.stringify(params)
     return [
@@ -94,12 +133,8 @@ export const motionSceneRegistry: MotionSceneRuntime[] = metadata.map((scene) =>
 }))
 
 export const featuredMotionScenes = motionSceneRegistry
-
-export const findMotionScene = (sceneId: string) =>
-  motionSceneRegistry.find((scene) => scene.id === sceneId)
-
-export const findSceneForRecipe = (recipeId: string) =>
-  motionSceneRegistry.find((scene) => scene.recipeIds.includes(recipeId))
+export const findMotionScene = (sceneId: string) => motionSceneRegistry.find((scene) => scene.id === sceneId)
+export const findSceneForRecipe = (recipeId: string) => motionSceneRegistry.find((scene) => scene.recipeIds.includes(recipeId))
 
 export const createMotionSceneParams = (scene: MotionSceneRuntime): LabParams => {
   const params: LabParams = {}

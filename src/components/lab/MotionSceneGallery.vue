@@ -4,10 +4,10 @@
       <div class="max-w-3xl">
         <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">Featured Motion Scenes</p>
         <h2 id="motion-scenes-title" class="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-          不是换参数，是换渲染方式。
+          把 MotionSites 的成品效果真正跑进实验室。
         </h2>
         <p class="mt-4 leading-7 text-slate-600">
-          12 个重点场景分别由 Three.js、Canvas、GLSL Shader 与 DOM Motion 驱动。先看视觉差异，再进入工作台拆参数和实现。
+          24 个重点实验直接对应 MotionSites 公开可见的 Digital Epoch、Future 3D Portfolio、Codeveil、Orbit Stickers、Space planet、Frozen Cave 等成品视觉。每个都有独立实现，不再用一套 Renderer 换参数冒充不同效果；点击后可进入工作台调参和查看源码。
         </p>
       </div>
       <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-600">
@@ -30,11 +30,11 @@
 import MotionSceneCard from '@/components/lab/MotionSceneCard.vue'
 import { featuredMotionScenes } from '@/config/motionSceneRegistry'
 
-const rendererSummary = ['Three.js × 3', 'Canvas × 3', 'Shader × 3', 'DOM × 3']
+const rendererSummary = ['Three.js × 8', 'Canvas × 4', 'Shader × 5', 'DOM Motion × 7']
 
 const cardClass = (index: number) => {
-  if (index === 0 || index === 6) return 'md:col-span-2 xl:col-span-4 min-h-[25rem]'
-  if (index === 1 || index === 7) return 'xl:col-span-2 min-h-[25rem]'
+  if ([0, 5, 12, 17].includes(index)) return 'md:col-span-2 xl:col-span-4 min-h-[25rem]'
+  if ([1, 6, 13, 18].includes(index)) return 'xl:col-span-2 min-h-[25rem]'
   return 'xl:col-span-2'
 }
 </script>

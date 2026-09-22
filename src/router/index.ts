@@ -69,7 +69,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Lab/LabIndex.vue'),
     meta: {
       title: '交互实验室',
-      description: 'Vue 交互实验室：Three.js、Canvas、GLSL Shader 与 DOM Motion 驱动的场景画廊、底层 Demo 与中文提示词配方'
+      description: 'Vue 交互实验室：24 个基于 MotionSites 公开案例原创复刻的 Three.js、Canvas、GLSL Shader 与 DOM Motion 场景，以及中文提示词配方'
     }
   },
   {
@@ -80,6 +80,16 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: '动效设计提示词配方',
       description: '中文 Motion Design Prompt、Renderer Scene 实时预览、场景参数调节与 Three.js/Canvas/Shader/DOM 真实实现源码'
+    }
+  },
+  {
+    path: '/lab/scenes/:id',
+    name: 'MotionScene',
+    component: () => import('@/views/Lab/MotionSceneLayout.vue'),
+    props: true,
+    meta: {
+      title: 'MotionSites 效果复刻',
+      description: '基于 MotionSites 公开预览原创实现的可运行 Three.js、Canvas、Shader 与 DOM Motion 实验'
     }
   },
   {

@@ -18,6 +18,9 @@ export interface MotionSceneMetadata {
   variant: string
   eyebrow: string
   labels: string[]
+  referenceName: string
+  referenceCategory: string
+  referenceUrl: string
   preset: MotionScenePreset[]
 }
 

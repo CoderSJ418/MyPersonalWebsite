@@ -14,6 +14,9 @@ const labEffects = JSON.parse(
 const promptRecipes = JSON.parse(
   readFileSync(resolve(process.cwd(), 'src/assets/data/lab-prompt-recipes.json'), 'utf-8')
 )
+const motionScenes = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'src/assets/data/motion-scenes.json'), 'utf-8')
+)
 const blogPosts = JSON.parse(
   readFileSync(resolve(process.cwd(), 'src/assets/data/blog-meta.json'), 'utf-8')
 )
@@ -36,6 +39,11 @@ const routes = [
   ...promptRecipes.map((recipe) => ({
     path: `/lab/prompts/${recipe.id}`,
     priority: 0.65,
+    changefreq: 'monthly'
+  })),
+  ...motionScenes.map((scene) => ({
+    path: `/lab/scenes/${scene.id}`,
+    priority: 0.75,
     changefreq: 'monthly'
   })),
   ...blogPosts.map((post) => ({

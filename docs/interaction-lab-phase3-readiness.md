@@ -3,6 +3,15 @@
 > 日期：2026-07-15
 > 范围：PRD v0.6；Phase 0–4 实现、自动门、正式部署与生产冒烟。
 
+## 2026-09-23 MotionSites 效果复刻状态
+
+- Featured Motion Scene 从“按 Renderer 抽象的 12 个通用场景”改为 24 个直接对应 MotionSites 公开案例的原创复刻；当前包括 Digital Epoch、Impressive Hero、Future 3D Portfolio、Nival Cyberspace、Cast and Render、Alethia、Particle Field、React Vision、Codeveil、ConSentinel、Orbit Stickers、Liquid Glass Agency、Playful Idea、Ancient Oath、Space planet、Aetheris Voyage、Frozen Cave、Heart Health Dashboard、Digital Persona、Cosmic Mapping、Future Machine、Mind AI、Axle Journey、Bionova Biotech。
+- 每个复刻均为独立 Vue SFC，不再用同一 Renderer 组件换参数冒充不同效果；运行实现分布为 Three.js × 8、Canvas × 4、GLSL Shader × 5、DOM Motion × 7，并包含滚动驱动、指针视差、拖拽比较、轨道拖拽、Shader mask / raymarch 等不同交互方式。
+- 新增独立详情入口 `/lab/scenes/:id`，可实时运行、调场景参数、查看 MotionSites 公开参考信息并展开/复制该复刻本身的真实源码。64 条中文 Prompt Recipe 继续保留，并且 64/64 唯一映射到一个命名复刻，不再主导首页视觉。
+- 移动端、低性能设备与 `prefers-reduced-motion` 使用由真实运行场景生成的 24 张独立 WebP 代表帧，而不是按 Renderer 共用的占位图；静态代表帧总量约 290 KB。
+- 2026-09-23 本地发布门：`npx tsc --noEmit` 通过；ESLint 0 error（28 条既有 warning）；Vitest 171/171；production build 通过；Lab validator 14/14；24 个场景全部进入 manifest 且均有独立 raw source chunk；Sitemap 含 24 个 `/lab/scenes/` 路径；真实 Chrome 桌面、390px 移动端与 reduced-motion 场景验收 201/201，无 `pageerror` / console error。Three.js 保持独立 chunk，首页 HTML 不 preload 该 chunk。
+- 所有复刻仅依据 MotionSites 的公开预览、公开分类和公开教程中的视觉/交互方法重新实现，不保存其付费 Prompt 原文，也不复制第三方站点源码。
+
 ## 2026-09-22 Motion Lab 增量状态
 
 - Interaction Lab 已从首发 12 个扩展为 14 个正式实验，新增 `shader-ribbon` 与 `agent-flow`；原 12 项仍保留，历史 Phase 0–4 证据继续作为当时快照，不回写其数量口径。

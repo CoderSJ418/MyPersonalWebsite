@@ -53,6 +53,7 @@ describe('application route integration', () => {
     ['/blog', '博客'],
     ['/projects/1', '澳斯康'],
     ['/lab/aurora', 'Aurora'],
+    ['/lab/scenes/digital-epoch', 'Digital Epoch'],
     ['/lab/prompts/ms-recipe-01', '电影感开发者首屏'],
     ['/missing-page', '404']
   ])('renders %s through the real application shell', async (path, text) => {
