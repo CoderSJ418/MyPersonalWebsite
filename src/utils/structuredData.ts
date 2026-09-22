@@ -95,7 +95,7 @@ export function labCollectionStructuredData(effects: LabEffectMetadata[]) {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: '交互实验室',
-    description: '12 个可调参数、可复制源码的 Vue 交互效果。',
+    description: '14 个可运行、可调参数、可复制源码的 Vue 交互效果，并包含 64 条 Motion Design Prompt Recipe。',
     hasPart: effects.map(effect => ({
       '@type': 'SoftwareSourceCode',
       name: effect.name,
