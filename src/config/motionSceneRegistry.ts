@@ -1,6 +1,7 @@
 import { defineAsyncComponent } from 'vue'
 
 import sceneData from '@/assets/data/motion-scenes.json'
+import { getSceneParams } from '@/config/motionSceneExperience'
 import type { LabParam, LabParams, LabValue } from '@/types/lab'
 import type {
   MotionRendererKind,
@@ -114,7 +115,7 @@ const loadSceneSource = async (sceneId: string) => {
 export const motionSceneRegistry: MotionSceneRuntime[] = metadata.map((scene) => ({
   ...scene,
   component: componentBySceneId[scene.id as keyof typeof componentBySceneId] ?? componentBySceneId['digital-epoch'],
-  params: rendererParams[scene.renderer].map((param) => ({ ...param })),
+  params: getSceneParams(scene.id, rendererParams[scene.renderer]),
   loadSource: () => loadSceneSource(scene.id),
   createUsage: (params: LabParams) => {
     const paramsText = JSON.stringify(params)

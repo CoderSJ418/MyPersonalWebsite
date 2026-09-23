@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import { getScenePresentation } from '@/config/motionSceneExperience'
 import {
   createMotionSceneParams,
   findSceneForRecipe,
@@ -19,11 +20,12 @@ describe('Motion Scene renderer registry', () => {
     const counts = new Map<string, number>()
     for (const scene of motionSceneRegistry) {
       counts.set(scene.renderer, (counts.get(scene.renderer) ?? 0) + 1)
-      expect(scene.params).toHaveLength(3)
+      expect(scene.params.length).toBeGreaterThan(0)
+      expect(scene.params.length).toBeLessThanOrEqual(3)
       expect(scene.recipeIds.length).toBeGreaterThan(0)
       expect(scene.referenceUrl.startsWith('https://motionsites.ai/')).toBe(true)
       const params = createMotionSceneParams(scene)
-      expect(Object.keys(params)).toHaveLength(3)
+      expect(Object.keys(params)).toHaveLength(scene.params.length)
       expect(scene.createUsage(params)).toContain(`findMotionScene('${scene.id}')`)
     }
 
@@ -31,6 +33,8 @@ describe('Motion Scene renderer registry', () => {
     expect(counts.get('canvas')).toBe(4)
     expect(counts.get('shader')).toBe(5)
     expect(counts.get('dom')).toBe(7)
+    expect(new Set(motionSceneRegistry.map((scene) => getScenePresentation(scene.id).styleGroup)).size).toBeGreaterThan(10)
+    expect(motionSceneRegistry.every((scene) => getScenePresentation(scene.id).interactionHint.length > 4)).toBe(true)
 
     expect(motionSceneRegistry.map((scene) => scene.referenceName)).toEqual([
       'Digital Epoch',
@@ -60,6 +64,23 @@ describe('Motion Scene renderer registry', () => {
     ])
   })
 
+  it('uses real scene-specific controls instead of renderer-wide fake sliders', () => {
+    expect(motionSceneRegistry.find((scene) => scene.id === 'playful-idea')?.params.map((param) => param.key)).toEqual(['position'])
+    expect(motionSceneRegistry.find((scene) => scene.id === 'codeveil')?.params.map((param) => param.key)).toEqual(['speed'])
+    expect(motionSceneRegistry.find((scene) => scene.id === 'orbit-stickers')?.params.map((param) => param.label)).toEqual(['轨道速度', '轨道半径', '拖拽灵敏度'])
+  })
+
+  it('only exposes controls that are consumed by the scene implementation', async () => {
+    for (const scene of motionSceneRegistry) {
+      const source = await scene.loadSource()
+      for (const param of scene.params) {
+        const quotedKey = source.includes(`'${param.key}'`) || source.includes(`"${param.key}"`)
+        const propertyKey = source.includes(`params.${param.key}`)
+        expect(quotedKey || propertyKey, `${scene.id}:${param.key}`).toBe(true)
+      }
+    }
+  })
+
   it('maps every recipe exactly once to one named recreation', () => {
     const mappedIds = motionSceneRegistry.flatMap((scene) => scene.recipeIds)
     expect(mappedIds).toHaveLength(64)
@@ -69,6 +90,8 @@ describe('Motion Scene renderer registry', () => {
       const scene = findSceneForRecipe(recipe.id)
       expect(scene).toBeDefined()
       expect(resolvePromptRecipeScene(recipe)?.id).toBe(scene?.id)
+      expect(recipe.sourcePattern).toBe(scene?.referenceName)
+      expect(recipe.sourceUrl).toBe(scene?.referenceUrl)
     }
   })
 
@@ -87,7 +110,7 @@ describe('Motion Scene renderer registry', () => {
     const prompt = buildPromptRecipeSceneText(recipe, scene, params)
 
     expect(prompt).toContain('Renderer：THREE')
-    expect(prompt).toContain('空间深度：1.55')
+    expect(prompt).toContain('项目纵深：1.55')
     expect(prompt).toContain('不用同一种效果覆盖所有内容')
   })
 })

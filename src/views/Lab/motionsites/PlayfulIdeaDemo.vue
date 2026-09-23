@@ -15,11 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed,ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { LabParams } from '@/types/lab'
 import type { MotionSceneRuntime } from '@/types/motionScene'
 
-defineProps<{scene:MotionSceneRuntime;params:LabParams}>()
-const position=ref(52)
-const containerWidth=computed(()=>`${100/(1-position.value/100)}%`)
+const props = defineProps<{ scene: MotionSceneRuntime; params: LabParams }>()
+const resolvedPosition = () => typeof props.params.position === 'number' ? props.params.position : 52
+const position = ref(resolvedPosition())
+const containerWidth = computed(() => `${100 / (1 - position.value / 100)}%`)
+
+watch(() => props.params.position, () => {
+  position.value = resolvedPosition()
+})
 </script>

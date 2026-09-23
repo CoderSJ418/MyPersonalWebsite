@@ -7,16 +7,17 @@
 
 - Featured Motion Scene 从“按 Renderer 抽象的 12 个通用场景”改为 24 个直接对应 MotionSites 公开案例的原创复刻；当前包括 Digital Epoch、Impressive Hero、Future 3D Portfolio、Nival Cyberspace、Cast and Render、Alethia、Particle Field、React Vision、Codeveil、ConSentinel、Orbit Stickers、Liquid Glass Agency、Playful Idea、Ancient Oath、Space planet、Aetheris Voyage、Frozen Cave、Heart Health Dashboard、Digital Persona、Cosmic Mapping、Future Machine、Mind AI、Axle Journey、Bionova Biotech。
 - 每个复刻均为独立 Vue SFC，不再用同一 Renderer 组件换参数冒充不同效果；运行实现分布为 Three.js × 8、Canvas × 4、GLSL Shader × 5、DOM Motion × 7，并包含滚动驱动、指针视差、拖拽比较、轨道拖拽、Shader mask / raymarch 等不同交互方式。
-- 新增独立详情入口 `/lab/scenes/:id`，可实时运行、调场景参数、查看 MotionSites 公开参考信息并展开/复制该复刻本身的真实源码。64 条中文 Prompt Recipe 继续保留，并且 64/64 唯一映射到一个命名复刻，不再主导首页视觉。
+- 独立详情入口 `/lab/scenes/:id` 以大尺寸实时效果为主角，场景参数改为 scene-specific 控件，并提供交互提示、沉浸预览、MotionSites 公开参考与真实源码。64 条中文 Prompt Recipe 继续保留，但按 24 个 Scene 聚合为配件；Prompt 详情同样 Preview-first，参数/Prompt/设计目标/源码默认收起。
 - 移动端、低性能设备与 `prefers-reduced-motion` 使用由真实运行场景生成的 24 张独立 WebP 代表帧，而不是按 Renderer 共用的占位图；静态代表帧总量约 290 KB。
 - 2026-09-23 本地发布门：`npx tsc --noEmit` 通过；ESLint 0 error（28 条既有 warning）；Vitest 171/171；production build 通过；Lab validator 14/14；24 个场景全部进入 manifest 且均有独立 raw source chunk；Sitemap 含 24 个 `/lab/scenes/` 路径；真实 Chrome 桌面、390px 移动端与 reduced-motion 场景验收 201/201，无 `pageerror` / console error。Three.js 保持独立 chunk，首页 HTML 不 preload 该 chunk。
+- 2026-09-23 Effect-first 重构：Prompt 详情旧版常见为 805×448 外框内仅 803×256 实际效果，参数区约 508px、Prompt/设计目标各约 670px；新版详情实际效果提升到 1374×678 并完整填满舞台，参数/Prompt/设计目标/源码默认收起。Featured 卡片首个基线 804×516，其中效果区 802×358，视觉占比约 69%。64 条 Recipe 从 44 条参考错配收敛到 64/64 与实际 Scene reference 一致；Renderer 通用假参数改为 scene-specific 控件，并新增 raw-source 防回归测试，当前对外参数无未消费项。真实 Chrome 场景/Prompt/移动端验收 73/73，通过 Playful Idea 对比分界真实联动；Vitest 更新为 175/175。
 - 所有复刻仅依据 MotionSites 的公开预览、公开分类和公开教程中的视觉/交互方法重新实现，不保存其付费 Prompt 原文，也不复制第三方站点源码。
 
 ## 2026-09-22 Motion Lab 增量状态
 
 - Interaction Lab 已从首发 12 个扩展为 14 个正式实验，新增 `shader-ribbon` 与 `agent-flow`；原 12 项仍保留，历史 Phase 0–4 证据继续作为当时快照，不回写其数量口径。
 - Lab 列表由静态缩略图升级为可见区实时预览；移动端、低性能设备与 `prefers-reduced-motion` 自动降级到静态代表帧。
-- 64 条原创 Motion Design Prompt Recipe 不再铺成 64 张同质化预览卡，而是收敛为可搜索索引；12 个 Featured Motion Scene 分别由 Three.js、Canvas 2D、GLSL Shader、DOM Motion 驱动，并将全部 64 条配方一一映射到场景。进入 `/lab/prompts/:id` 后可调 Renderer 场景参数、同步生成中文提示词，并查看/复制真实 Renderer 源码；内容仅提炼 MotionSites 公开案例的方法论和分类，不保存或复刻其付费 Prompt 原文。
+- 64 条原创 Motion Design Prompt Recipe 不再作为 64 个等价作品展示，而是聚合到 24 个 Motion Scene 下作为创作 preset。主浏览层只展示 24 个有独立视觉与交互的体验卡；`/lab/prompts/:id` 只是 Scene 的配件视图，不再通过轻微 seed 参数差异冒充新作品。
 - 首页新增脱敏农业机械产品场景、AI 工程工作流与真实 WebGL Shader 展示；农业机械公开案例仅使用重构视觉与演示态数据，不公开客户生产接口、账号、设备编号或业务数据。
 - 2026-09-22 Renderer 重构验证：`npx tsc --noEmit` 通过；ESLint 0 error（28 条既有 warning）；Vitest 170/170；生产构建通过；Lab validator 14/14；新增 Motion Scene registry 专项测试 3/3；桌面、390px 移动端与 reduced-motion 浏览器检查 31/31，通过 Three/Canvas/Shader/DOM 四条运行路径、Studio 参数→中文 Prompt 同步、真实 Three.js 源码读取以及无 `pageerror` / console error；Three.js 独立构建 chunk，首页 HTML 不 preload 该 chunk。
 - 正式站点 `https://my-personal-website-eta-murex.vercel.app` 已出现新版首页、`/lab` Prompt Library 与 `/projects/6`，生产路由浏览器冒烟通过。

@@ -81,20 +81,8 @@ export const createPromptRecipeSceneParams = (
   recipe: PromptRecipe,
   scene: MotionSceneRuntime
 ): LabParams => {
-  const params = createMotionSceneParams(scene)
-  if (scene.recipeIds[0] === recipe.id) return params
-
-  const seedText = recipe.id.split('-').pop() ?? '1'
-  const seed = Number.parseInt(seedText, 10) || 1
-  scene.params.forEach((param, index) => {
-    const value = params[param.key]
-    if (typeof value !== 'number' || param.type !== 'range') return
-    const step = param.step ?? 0.05
-    const direction = ((seed + index * 3) % 5) - 2
-    const next = value + direction * step * 2
-    params[param.key] = Math.min(param.max ?? next, Math.max(param.min ?? next, next))
-  })
-  return params
+  void recipe
+  return createMotionSceneParams(scene)
 }
 
 export const buildPromptRecipeSceneText = (

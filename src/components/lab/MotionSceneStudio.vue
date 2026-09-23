@@ -35,6 +35,7 @@
         </div>
         <div ref="stageRef" :class="stageClass" tabindex="-1" @keydown.esc="exitImmersive" @fullscreenchange="handleFullscreenChange">
           <MotionScenePreview :scene="scene" :params="params" />
+          <span class="pointer-events-none absolute bottom-4 left-4 z-10 rounded-full border border-white/20 bg-slate-950/55 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur sm:text-xs">{{ presentation.interactionHint }}</span>
           <button v-if="isImmersive" type="button" class="absolute right-4 top-4 z-20 inline-flex min-h-11 items-center rounded-xl border border-white/30 bg-slate-950/70 px-4 text-sm font-semibold text-white backdrop-blur hover:bg-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white" @click="exitImmersive">
             退出沉浸
           </button>
@@ -56,6 +57,13 @@
           <a :href="scene.referenceUrl" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-blue-600 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">查看 MotionSites 公开参考 ↗</a>
           <p class="mt-3 border-t border-slate-200 pt-3 text-xs leading-5 text-slate-500">依据公开预览与教程中的视觉/交互特征原创实现，不复制付费 Prompt 或站点源码。</p>
         </div>
+        <details v-if="recipes.length" class="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+          <summary class="cursor-pointer text-sm font-semibold text-slate-900">Prompt 配件 · {{ recipes.length }}</summary>
+          <p class="mt-2 text-xs leading-5 text-slate-500">配方只改变创作目标与可调预设，不再冒充新的视觉作品。</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <RouterLink v-for="recipe in recipes" :key="recipe.id" :to="`/lab/prompts/${recipe.id}`" class="rounded-full bg-blue-50 px-2.5 py-1.5 text-xs font-medium text-blue-700 hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">{{ recipe.title }}</RouterLink>
+          </div>
+        </details>
       </aside>
     </section>
 
@@ -71,8 +79,9 @@ import { RouterLink } from 'vue-router'
 import LabCodePanel from '@/components/lab/LabCodePanel.vue'
 import LabParamPanel from '@/components/lab/LabParamPanel.vue'
 import MotionScenePreview from '@/components/lab/MotionScenePreview.vue'
+import { getScenePresentation } from '@/config/motionSceneExperience'
 import { createMotionSceneParams } from '@/config/motionSceneRegistry'
-import { findPromptRecipe } from '@/config/promptRecipeRegistry'
+import { findPromptRecipe, promptRecipeRegistry } from '@/config/promptRecipeRegistry'
 import type { LabEffectId, LabParams, LabValue } from '@/types/lab'
 import type { MotionSceneRuntime } from '@/types/motionScene'
 
@@ -91,6 +100,8 @@ const defaults=computed(()=>createMotionSceneParams(props.scene))
 const hasChanges=computed(()=>props.scene.params.some(param=>params.value[param.key]!==defaults.value[param.key]))
 const updateParam=(key:string,value:LabValue)=>{params.value={...params.value,[key]:value}}
 const usage = computed(() => props.scene.createUsage(params.value))
+const presentation = computed(() => getScenePresentation(props.scene.id))
+const recipes = computed(() => promptRecipeRegistry.filter((recipe) => props.scene.recipeIds.includes(recipe.id)))
 const analyticsEffectId = computed<LabEffectId>(
   () => findPromptRecipe(props.scene.recipeIds[0] ?? '')?.effectId ?? 'aurora'
 )

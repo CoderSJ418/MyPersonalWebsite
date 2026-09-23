@@ -6,7 +6,7 @@
     :robots="recipe && scene ? 'index,follow' : 'noindex,nofollow'"
     :structured-data="structuredData"
   />
-  <PromptRecipeStudio v-if="recipe && scene" :recipe="recipe" :scene="scene" />
+  <PromptRecipeExperience v-if="recipe && scene" :recipe="recipe" :scene="scene" />
   <PromptRecipeNotFound v-else :id="id" />
 </template>
 
@@ -15,7 +15,7 @@ import { computed, onMounted } from 'vue'
 
 import SEOHead from '@/components/common/SEOHead.vue'
 import PromptRecipeNotFound from '@/components/lab/PromptRecipeNotFound.vue'
-import PromptRecipeStudio from '@/components/lab/PromptRecipeStudio.vue'
+import PromptRecipeExperience from '@/components/lab/PromptRecipeExperience.vue'
 import {
   findPromptRecipe,
   resolvePromptRecipeScene

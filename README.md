@@ -20,7 +20,7 @@
 - 技术博客：18 篇工程文章、年度时间线、搜索筛选、长文按需展开
 - 联系方式：联系表单、社交媒体
 - 单一亮色视觉：统一品牌蓝与可访问性基线
-- 交互实验室：24 个基于 MotionSites 公开成品预览原创复刻的独立 Motion Scene，覆盖 Three.js、Canvas、GLSL Shader 与 DOM Motion；14 个底层 Demo 保留工程证据，64 条中文配方保留为可搜索索引；每个复刻可进入独立工作台调参、查看参考信息与真实源码
+- 交互实验室：24 个基于 MotionSites 公开成品预览原创复刻的独立 Motion Experience 是第一层作品，覆盖 Three.js、Canvas、GLSL Shader 与 DOM Motion；64 条中文 Prompt 按 Scene 聚合作为可选配件，参数/设计目标/源码默认收起，14 个底层 Demo 仅保留工程证据
 - 响应式设计：移动端优先
 
 ## 快速开始

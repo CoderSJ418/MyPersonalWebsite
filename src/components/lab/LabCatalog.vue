@@ -22,13 +22,17 @@
 
     <MotionSceneGallery />
 
-    <div class="mt-24 border-t border-slate-200 pt-16">
-      <div class="mb-6 max-w-2xl">
-        <p class="text-sm font-semibold tracking-widest text-blue-600">基础交互引擎</p>
-        <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-950">14 个可拆解的底层 Demo</h2>
-        <p class="mt-3 text-sm leading-6 text-slate-600">这些是 Renderer Studio 的基础能力与源码证据，不再承担 64 条配方的视觉展示职责。</p>
-      </div>
-    </div>
+    <details class="group mt-24 border-t border-slate-200 pt-10">
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-6 rounded-2xl bg-slate-50 p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold tracking-widest text-blue-600">ENGINEERING ACCESSORY</p>
+          <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-950">14 个底层 Demo · 默认收起</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">用于拆解实现与源码证据，不再和 24 个主场景争夺视觉注意力。</p>
+        </div>
+        <span class="shrink-0 text-sm font-semibold text-blue-600 group-open:hidden">展开工程细节 ↓</span>
+        <span class="hidden shrink-0 text-sm font-semibold text-blue-600 group-open:inline">收起工程细节 ↑</span>
+      </summary>
+      <div class="pt-6">
     <div class="mb-8 space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
       <label class="block max-w-xl">
         <span class="sr-only">搜索交互效果</span>
@@ -81,8 +85,10 @@
         清空搜索与筛选
       </button>
     </div>
+      </div>
+    </details>
 
-    <PromptRecipeIndex />
+    <PromptScenePresetIndex />
   </section>
 </template>
 
@@ -92,7 +98,7 @@ import { useRoute } from 'vue-router'
 
 import LabEffectCard from '@/components/lab/LabEffectCard.vue'
 import MotionSceneGallery from '@/components/lab/MotionSceneGallery.vue'
-import PromptRecipeIndex from '@/components/lab/PromptRecipeIndex.vue'
+import PromptScenePresetIndex from '@/components/lab/PromptScenePresetIndex.vue'
 import { labRegistry } from '@/config/labRegistry'
 import { analyticsConsent, trackLabAnalytics } from '@/services/privacyAnalytics'
 import type { LabCategory } from '@/types/lab'

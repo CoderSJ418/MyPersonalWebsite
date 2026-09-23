@@ -97,7 +97,7 @@ export function labCollectionStructuredData(effects: LabEffectMetadata[]) {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: '交互实验室',
-    description: '24 个基于 MotionSites 公开案例原创复刻的 Motion Scene、14 个可拆解交互 Demo 与 64 条中文 Motion Design Prompt Recipe。',
+    description: '24 个基于 MotionSites 公开案例原创复刻的 Motion Experience 为主作品，64 条中文 Prompt 按 Scene 聚合作为配件，14 个底层 Demo 作为工程证据。',
     hasPart: effects.map(effect => ({
       '@type': 'SoftwareSourceCode',
       name: effect.name,
